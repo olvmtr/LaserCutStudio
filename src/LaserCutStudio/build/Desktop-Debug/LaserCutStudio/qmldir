@@ -1,0 +1,5 @@
+module LaserCutStudio
+typeinfo appLaserCutStudio.qmltypes
+prefer :/LaserCutStudio/
+Main 1.0 Main.qml
+

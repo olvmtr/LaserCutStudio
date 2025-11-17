@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/LaserCutStudio/">
+    <file alias="Main.qml">/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/Main.qml</file>
+  </qresource>
+</RCC>
+

@@ -1,0 +1,14 @@
+-rootPath
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio
+-cmake-output
+-output-file
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_appLaserCutStudio.cmake
+-importPath
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/LaserCutStudio
+-importPath
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug
+-importPath
+/usr/lib/x86_64-linux-gnu/qt6/qml
+-qrcFiles
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmake_LaserCutStudio.qrc
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/appLaserCutStudio_raw_qml_0.qrc
