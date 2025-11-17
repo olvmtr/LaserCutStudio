@@ -16,3 +16,12 @@
 /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/CMakeFiles/install/strip.dir
 /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/CMakeFiles/appLaserCutStudio_autogen_timestamp_deps.dir
 /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/CMakeFiles/appLaserCutStudio_autogen.dir
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/CMakeFiles/LaserCutStudioTests.dir
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/CMakeFiles/edit_cache.dir
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/CMakeFiles/rebuild_cache.dir
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/CMakeFiles/list_install_components.dir
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/CMakeFiles/install.dir
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/CMakeFiles/install/local.dir
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/CMakeFiles/install/strip.dir
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps.dir
+/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/CMakeFiles/LaserCutStudioTests_autogen.dir

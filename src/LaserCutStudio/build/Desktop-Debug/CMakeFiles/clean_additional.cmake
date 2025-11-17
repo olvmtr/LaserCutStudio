@@ -6,5 +6,8 @@ if("${CONFIG}" STREQUAL "" OR "${CONFIG}" STREQUAL "Debug")
   "CMakeFiles/appLaserCutStudio_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/appLaserCutStudio_autogen.dir/ParseCache.txt"
   "appLaserCutStudio_autogen"
+  "tests/CMakeFiles/LaserCutStudioTests_autogen.dir/AutogenUsed.txt"
+  "tests/CMakeFiles/LaserCutStudioTests_autogen.dir/ParseCache.txt"
+  "tests/LaserCutStudioTests_autogen"
   )
 endif()

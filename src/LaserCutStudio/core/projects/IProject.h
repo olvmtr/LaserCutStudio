@@ -1,0 +1,134 @@
+#ifndef IPROJECT_H
+#define IPROJECT_H
+
+#include "../interface/Interface.h"
+#include "../parts/IPart.h"
+#include <QString>
+#include <QList>
+#include <QDateTime>
+
+namespace LaserCutStudio {
+namespace Core {
+
+/**
+ * @brief Métadonnées d'un projet
+ */
+struct ProjectMetadata
+{
+    QString author;                  ///< Auteur du projet
+    QString description;             ///< Description
+    QDateTime creationDate;          ///< Date de création
+    QDateTime lastModifiedDate;      ///< Date de dernière modification
+    QString version;                 ///< Version du projet
+
+    ProjectMetadata()
+        : author("Unknown")
+        , description("")
+        , creationDate(QDateTime::currentDateTime())
+        , lastModifiedDate(QDateTime::currentDateTime())
+        , version("1.0")
+    {}
+};
+
+/**
+ * @brief Interface pour un projet complet
+ *
+ * Un projet contient toutes les pièces et les informations
+ * nécessaires pour un assemblage complet.
+ */
+class IProject : public Interface
+{
+public:
+    IProject();
+    IProject(const QString& name);
+    IProject(const IProject& other);
+    virtual ~IProject();
+
+    /**
+     * @brief Clone le projet
+     */
+    virtual IProject* clone() const override = 0;
+
+    /**
+     * @brief Obtient le nom du projet
+     */
+    QString getName() const { return m_name; }
+
+    /**
+     * @brief Définit le nom du projet
+     */
+    void setName(const QString& name) { m_name = name; }
+
+    /**
+     * @brief Obtient les métadonnées
+     */
+    ProjectMetadata getMetadata() const { return m_metadata; }
+
+    /**
+     * @brief Définit les métadonnées
+     */
+    void setMetadata(const ProjectMetadata& metadata) { m_metadata = metadata; }
+
+    /**
+     * @brief Ajoute une pièce au projet
+     */
+    void addPart(IPart* part);
+
+    /**
+     * @brief Retire une pièce du projet
+     */
+    void removePart(IPart* part);
+
+    /**
+     * @brief Obtient toutes les pièces du projet
+     */
+    QList<IPart*> getParts() const { return m_parts; }
+
+    /**
+     * @brief Vérifie si le projet est vide
+     */
+    bool isEmpty() const { return m_parts.isEmpty(); }
+
+    /**
+     * @brief Obtient le nombre de pièces
+     */
+    int getPartCount() const { return m_parts.count(); }
+
+    /**
+     * @brief Calcule le volume total du projet
+     */
+    double getTotalVolume() const;
+
+    /**
+     * @brief Calcule la masse totale du projet
+     */
+    double getTotalMass() const;
+
+    /**
+     * @brief Sauvegarde le projet
+     */
+    virtual bool save(const QString& filePath) const;
+
+    /**
+     * @brief Charge le projet
+     */
+    virtual bool load(const QString& filePath);
+
+    // Gestion de la liste statique
+    static QList<IProject*> getAllProjects() { return s_projects; }
+    static void addProject(IProject* project);
+    static void removeProject(IProject* project);
+    static void clearAllProjects();
+
+protected:
+    QString m_name;              ///< Nom du projet
+    ProjectMetadata m_metadata;  ///< Métadonnées
+    QList<IPart*> m_parts;       ///< Liste des pièces
+
+    static QList<IProject*> s_projects; ///< Liste statique de tous les projets
+};
+
+} // namespace Core
+} // namespace LaserCutStudio
+
+#endif // IPROJECT_H
