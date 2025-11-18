@@ -20,6 +20,83 @@ LaserCutStudio est une application desktop pour concevoir des projets de découp
 - Qt3D ou Qt Quick 3D (prévu) pour la visualisation 3D
 - QPainter/QGraphicsView (prévu) pour l'édition 2D
 
+## Factory Pattern avec FactoryMixin (CRTP)
+
+Le projet utilise un **mixin template basé sur CRTP** (Curiously Recurring Template Pattern) pour fournir le Factory Pattern automatiquement à toutes les interfaces, éliminant ainsi la duplication de code.
+
+### Principe
+
+Au lieu de copier-coller le code du Factory Pattern dans chaque interface (IShape, IPart, IJoint, IProject), le mixin `FactoryMixin<Base>` fournit automatiquement :
+- `registerFactory<T>()` - Enregistre une classe concrète
+- `create(config)` - Crée une instance depuis QVariantMap
+- `availableTypes()` - Liste les types enregistrés
+
+### Utilisation dans une interface
+
+```cpp
+// core/shapes/IShape.h
+#include "../patterns/FactoryMixin.h"
+
+class IShape : public Interface, protected Patterns::FactoryMixin<IShape>
+{
+    Q_OBJECT
+public:
+    // Expose les méthodes du Factory Pattern
+    using FactoryMixin<IShape>::create;
+    using FactoryMixin<IShape>::availableTypes;
+    using FactoryMixin<IShape>::registerFactory;
+
+    // Reste de l'interface...
+};
+```
+
+### Utilisation dans une classe concrète
+
+```cpp
+// core/shapes/Rectangle.h
+class Rectangle : public IShape
+{
+    Q_OBJECT
+public:
+    // Nom de type statique (requis par FactoryMixin)
+    static QString staticTypeName() { return "Rectangle"; }
+
+    // Enregistrement automatique
+    static const bool s_registered;
+};
+
+// core/shapes/Rectangle.cpp
+const bool Rectangle::s_registered = IShape::registerFactory<Rectangle>();
+```
+
+### Avantages du CRTP
+
+✅ **Zéro duplication** : Code du Factory Pattern écrit une seule fois dans `FactoryMixin.h`
+✅ **Type-safe** : Chaque interface a son propre `s_factories` statique grâce au template
+✅ **Maintenabilité** : Une seule source de vérité pour le Factory Pattern
+✅ **Performance** : Résolution à la compilation (pas de virtual calls)
+✅ **Extensibilité** : Facile d'ajouter de nouvelles méthodes au mixin
+✅ **Similaire à Q_OBJECT** : API familière pour les développeurs Qt, mais sans préprocesseur MOC
+
+### Comparaison
+
+**Avant (duplication dans 4 interfaces)** :
+- IShape.h : 27 lignes de code Factory
+- IPart.h : 27 lignes de code Factory (copier-coller)
+- IJoint.h : 27 lignes de code Factory (copier-coller)
+- IProject.h : 27 lignes de code Factory (copier-coller)
+- **Total : ~108 lignes dupliquées**
+
+**Après (CRTP avec FactoryMixin)** :
+- FactoryMixin.h : ~130 lignes (une seule fois, plus de fonctionnalités)
+- IShape.h : 3 lignes (`using` declarations)
+- IPart.h : 3 lignes (`using` declarations)
+- IJoint.h : 3 lignes (`using` declarations)
+- IProject.h : 3 lignes (`using` declarations)
+- **Total : ~140 lignes, 0 duplication, +2 méthodes bonus** (isTypeRegistered, registeredTypeCount)
+
+Le code est maintenant **similaire au système Q_OBJECT de Qt**, offrant une API familière et cohérente sans nécessiter de préprocesseur (MOC). Le Factory Pattern est maintenant aussi simple à utiliser que les Signals/Slots de Qt !
+
 ## Commandes de build
 
 Le projet utilise CMake et se compile avec Qt Creator ou en ligne de commande :

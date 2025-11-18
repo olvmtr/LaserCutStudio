@@ -3,9 +3,9 @@
 namespace LaserCutStudio {
 namespace Core {
 
-// Initialisation des listes statiques
+// Initialisation de la liste statique
 QList<IShape*> IShape::s_shapes;
-QMap<QString, IShape::FactoryFunc> IShape::s_factories;
+// Note: s_factories est maintenant dans FactoryMixin et initialisé automatiquement
 
 IShape::IShape()
     : Interface()
@@ -38,23 +38,7 @@ void IShape::clearAllShapes()
 }
 
 // ===== Factory Pattern =====
-
-IShape* IShape::create(const QVariantMap& config)
-{
-    QString type = config.value("type").toString();
-
-    if (!s_factories.contains(type)) {
-        qWarning() << "Unknown shape type:" << type;
-        return nullptr;
-    }
-
-    return s_factories[type](config);
-}
-
-QStringList IShape::availableTypes()
-{
-    return s_factories.keys();
-}
+// Note: create() et availableTypes() sont maintenant fournis par FactoryMixin
 
 QVariantMap IShape::toVariant() const
 {

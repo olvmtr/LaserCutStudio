@@ -4,9 +4,9 @@
 namespace LaserCutStudio {
 namespace Core {
 
-// Initialisation des listes statiques
+// Initialisation de la liste statique
 QList<IJoint*> IJoint::s_joints;
-QMap<QString, IJoint::FactoryFunc> IJoint::s_factories;
+// Note: s_factories est maintenant dans FactoryMixin et initialisé automatiquement
 
 IJoint::IJoint()
     : Interface()
@@ -148,23 +148,7 @@ void IJoint::clearAllJoints()
 }
 
 // ===== Factory Pattern =====
-
-IJoint* IJoint::create(const QVariantMap& config)
-{
-    QString type = config.value("type").toString();
-
-    if (!s_factories.contains(type)) {
-        qWarning() << "Unknown joint type:" << type;
-        return nullptr;
-    }
-
-    return s_factories[type](config);
-}
-
-QStringList IJoint::availableTypes()
-{
-    return s_factories.keys();
-}
+// Note: create() et availableTypes() sont maintenant fournis par FactoryMixin
 
 QVariantMap IJoint::toVariant() const
 {

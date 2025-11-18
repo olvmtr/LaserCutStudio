@@ -2,6 +2,7 @@
 #define ISHAPE_H
 
 #include "../interface/Interface.h"
+#include "../patterns/FactoryMixin.h"
 #include "../types/Point2D.h"
 #include <QList>
 #include <QRectF>
@@ -26,8 +27,9 @@ namespace Plugins {
  * Cette interface hérite du pattern Prototype et gère une liste
  * statique de toutes les formes créées.
  * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
+ * Utilise FactoryMixin pour le Factory Pattern (élimine la duplication).
  */
-class IShape : public Interface
+class IShape : public Interface, protected Patterns::FactoryMixin<IShape>
 {
     Q_OBJECT
     friend class Plugins::PluginManager;
@@ -97,18 +99,10 @@ public:
      */
     virtual void scale(double scaleX, double scaleY, const Point2D& center) = 0;
 
-    // Factory Pattern avec QVariant
-    /**
-     * @brief Crée une forme depuis une configuration QVariant
-     * @param config Configuration avec au minimum la clé "type"
-     * @return Nouvelle forme ou nullptr si type inconnu
-     */
-    static IShape* create(const QVariantMap& config);
-
-    /**
-     * @brief Liste tous les types de formes disponibles
-     */
-    static QStringList availableTypes();
+    // Factory Pattern fourni par FactoryMixin
+    using FactoryMixin<IShape>::create;
+    using FactoryMixin<IShape>::availableTypes;
+    using FactoryMixin<IShape>::registerFactory;
 
     /**
      * @brief Sérialise la forme en QVariantMap pour sauvegarde/réseau
@@ -151,34 +145,6 @@ protected:
     IShape();
 
     static QList<IShape*> s_shapes; ///< Liste statique de toutes les formes
-
-    // Factory Pattern infrastructure
-    using FactoryFunc = std::function<IShape*(const QVariantMap&)>;
-    static QMap<QString, FactoryFunc> s_factories;
-
-    /**
-     * @brief Enregistre une classe concrète dans le Factory Pattern
-     * Utilisé par les classes dérivées pour s'auto-enregistrer
-     */
-    template<typename T>
-    static bool registerFactory() {
-        s_factories[T::staticTypeName()] = [](const QVariantMap& params) {
-            auto* obj = new T();
-            // Utilise Q_PROPERTY pour configurer l'objet depuis params
-            const QMetaObject* meta = obj->metaObject();
-            for (auto it = params.constBegin(); it != params.constEnd(); ++it) {
-                int propIndex = meta->indexOfProperty(it.key().toUtf8().constData());
-                if (propIndex >= 0) {
-                    QMetaProperty prop = meta->property(propIndex);
-                    if (prop.isWritable()) {
-                        prop.write(obj, it.value());
-                    }
-                }
-            }
-            return obj;
-        };
-        return true;
-    }
 };
 
 } // namespace Core

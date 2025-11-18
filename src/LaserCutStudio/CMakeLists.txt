@@ -15,6 +15,8 @@ qt_add_executable(appLaserCutStudio
     # Core Module - Interface
     core/interface/Interface.h
     core/interface/Interface.cpp
+    # Core Module - Patterns
+    core/patterns/FactoryMixin.h
     # Core Module - Types
     core/types/Point2D.h
     core/types/Point3D.h

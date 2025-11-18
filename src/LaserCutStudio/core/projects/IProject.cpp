@@ -3,9 +3,9 @@
 namespace LaserCutStudio {
 namespace Core {
 
-// Initialisation des listes statiques
+// Initialisation de la liste statique
 QList<IProject*> IProject::s_projects;
-QMap<QString, IProject::FactoryFunc> IProject::s_factories;
+// Note: s_factories est maintenant dans FactoryMixin et initialisé automatiquement
 
 IProject::IProject()
     : Interface()
@@ -112,23 +112,7 @@ void IProject::clearAllProjects()
 }
 
 // ===== Factory Pattern =====
-
-IProject* IProject::create(const QVariantMap& config)
-{
-    QString type = config.value("type").toString();
-
-    if (!s_factories.contains(type)) {
-        qWarning() << "Unknown project type:" << type;
-        return nullptr;
-    }
-
-    return s_factories[type](config);
-}
-
-QStringList IProject::availableTypes()
-{
-    return s_factories.keys();
-}
+// Note: create() et availableTypes() sont maintenant fournis par FactoryMixin
 
 QVariantMap IProject::toVariant() const
 {

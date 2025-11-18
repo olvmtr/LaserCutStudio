@@ -30,6 +30,7 @@ add_executable(LaserCutStudioTests
     # Sources du module Core
     ../core/interface/Interface.h
     ../core/interface/Interface.cpp
+    ../core/patterns/FactoryMixin.h
     ../core/types/Point2D.h
     ../core/types/Point3D.h
     ../core/types/Material.h

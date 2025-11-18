@@ -4,9 +4,9 @@
 namespace LaserCutStudio {
 namespace Core {
 
-// Initialisation des listes statiques
+// Initialisation de la liste statique
 QList<IPart*> IPart::s_parts;
-QMap<QString, IPart::FactoryFunc> IPart::s_factories;
+// Note: s_factories est maintenant dans FactoryMixin et initialisé automatiquement
 
 IPart::IPart()
     : Interface()
@@ -97,23 +97,7 @@ void IPart::clearAllParts()
 }
 
 // ===== Factory Pattern =====
-
-IPart* IPart::create(const QVariantMap& config)
-{
-    QString type = config.value("type").toString();
-
-    if (!s_factories.contains(type)) {
-        qWarning() << "Unknown part type:" << type;
-        return nullptr;
-    }
-
-    return s_factories[type](config);
-}
-
-QStringList IPart::availableTypes()
-{
-    return s_factories.keys();
-}
+// Note: create() et availableTypes() sont maintenant fournis par FactoryMixin
 
 QVariantMap IPart::toVariant() const
 {
