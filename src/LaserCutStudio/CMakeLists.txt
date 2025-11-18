@@ -57,6 +57,9 @@ qt_add_executable(appLaserCutStudio
     core/plugins/IJointPlugin.h
     core/plugins/PluginManager.h
     core/plugins/PluginManager.cpp
+    # Core Module - Dependency Injection
+    core/di/ServiceLocator.h
+    core/di/ServiceLocator.cpp
 )
 
 qt_add_qml_module(appLaserCutStudio

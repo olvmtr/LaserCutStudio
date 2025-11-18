@@ -471,6 +471,197 @@ public:
 ./tests/LaserCutStudioTests  # Inclut TestPluginManager
 ```
 
+## Dependency Injection avec Service Locator
+
+Le projet utilise le **pattern Service Locator** pour gérer les dépendances et faciliter les tests.
+
+### Principe
+
+Le `ServiceLocator` (Singleton) permet de :
+- **Découpler** les dépendances entre composants
+- **Remplacer** les implémentations (mocks pour tests)
+- **Gérer le cycle de vie** des services (Singleton, Transient)
+- **Faciliter les tests** unitaires avec injection
+
+### Enregistrer des services
+
+**Service Singleton** (une seule instance) :
+```cpp
+#include "core/di/ServiceLocator.h"
+
+// Enregistrer avec type automatique
+ServiceLocator::instance().registerSingleton<ConfigManager>([]() {
+    return new ConfigManager();
+});
+
+// Enregistrer avec nom d'interface
+ServiceLocator::instance().registerSingleton<IConfig>(
+    []() { return new ConfigManager(); },
+    "IConfig"
+);
+```
+
+**Service Transient** (nouvelle instance à chaque fois) :
+```cpp
+ServiceLocator::instance().registerTransient<Rectangle>([]() {
+    return new Rectangle(0, 0, 100, 50);
+});
+```
+
+**Instance existante** :
+```cpp
+ConfigManager* config = new ConfigManager();
+ServiceLocator::instance().registerInstance<ConfigManager>(config);
+```
+
+### Résoudre des dépendances
+
+```cpp
+// Résoudre un service
+ConfigManager* config = ServiceLocator::instance().resolve<ConfigManager>();
+if (config) {
+    config->setDefaultUnit(ConfigManager::Unit::Millimeters);
+}
+
+// Résoudre avec nom d'interface
+IConfig* config = ServiceLocator::instance().resolve<IConfig>("IConfig");
+
+// Vérifier si enregistré
+if (ServiceLocator::instance().isRegistered<ConfigManager>()) {
+    // ...
+}
+```
+
+### Cycles de vie
+
+**Singleton** :
+- Une seule instance créée à la première résolution
+- Instance réutilisée pour toutes les résolutions suivantes
+- Détruite automatiquement avec le ServiceLocator
+
+```cpp
+ServiceLocator::instance().registerSingleton<MyService>([]() {
+    return new MyService();
+});
+
+MyService* s1 = ServiceLocator::instance().resolve<MyService>();
+MyService* s2 = ServiceLocator::instance().resolve<MyService>();
+// s1 == s2 (même instance)
+```
+
+**Transient** :
+- Nouvelle instance créée à chaque résolution
+- L'appelant prend ownership (responsable de delete)
+
+```cpp
+ServiceLocator::instance().registerTransient<MyService>([]() {
+    return new MyService();
+});
+
+MyService* s1 = ServiceLocator::instance().resolve<MyService>();
+MyService* s2 = ServiceLocator::instance().resolve<MyService>();
+// s1 != s2 (instances différentes)
+
+delete s1;  // L'appelant doit nettoyer
+delete s2;
+```
+
+### Exemple d'usage pour tests
+
+**Code production** :
+```cpp
+class MyClass {
+public:
+    MyClass() {
+        // Récupérer dépendance du ServiceLocator
+        m_config = ServiceLocator::instance().resolve<IConfig>("IConfig");
+    }
+
+    void doWork() {
+        if (m_config) {
+            auto unit = m_config->getDefaultUnit();
+            // ...
+        }
+    }
+
+private:
+    IConfig* m_config;
+};
+```
+
+**Test avec mock** :
+```cpp
+class MockConfig : public IConfig {
+public:
+    Unit getDefaultUnit() const override { return Unit::Inches; }
+    // ... autres méthodes
+};
+
+TEST_F(MyTest, testWithMock) {
+    // Enregistrer le mock
+    ServiceLocator::instance().registerInstance<IConfig>(
+        new MockConfig(),
+        "IConfig"
+    );
+
+    // Tester avec le mock
+    MyClass obj;
+    obj.doWork();
+
+    // Vérifier comportement
+    // ...
+
+    // Nettoyer
+    ServiceLocator::instance().clear();
+}
+```
+
+### API complète
+
+```cpp
+ServiceLocator& locator = ServiceLocator::instance();
+
+// Enregistrement
+locator.registerSingleton<T>(factory, name);
+locator.registerTransient<T>(factory, name);
+locator.registerInstance<T>(instance, name);
+
+// Résolution
+T* service = locator.resolve<T>(name);
+
+// État
+bool registered = locator.isRegistered<T>(name);
+int count = locator.serviceCount();
+int instances = locator.instanceCount();
+
+// Nettoyage
+locator.unregister<T>(name);
+locator.clear();  // Détruit toutes les instances
+```
+
+### Tests
+
+22 tests unitaires couvrent :
+- Singleton pattern du ServiceLocator
+- Enregistrement (Singleton, Transient, Instance)
+- Résolution avec validation de cycle de vie
+- Gestion de duplicatas et erreurs
+- Compteurs et état
+- Nettoyage et destruction
+- Résolution avec noms d'interface
+
+```bash
+./tests/LaserCutStudioTests  # Inclut TestServiceLocator
+```
+
+### Avantages
+
+✅ **Découplage** : Les classes ne dépendent pas des implémentations concrètes
+✅ **Testabilité** : Facile de remplacer par des mocks
+✅ **Flexibilité** : Changer d'implémentation sans modifier le code client
+✅ **Cycle de vie** : Gestion automatique (Singleton) ou manuelle (Transient)
+✅ **Thread-safe** : Le Singleton utilise Meyers Singleton
+
 ## Architecture
 
 Le projet suit les principes SOLID avec une architecture modulaire :
@@ -600,11 +791,11 @@ Ce projet Python sert de référence pour les patterns architecturaux et la qual
    - Intégration transparente avec Factory Pattern
    - 14 tests unitaires (découverte, chargement, signals)
 
-### ⏳ Améliorations en attente
+7. **Dependency Injection** ✅ **Implémenté**
+   - `ServiceLocator` (Singleton) pour gestion des dépendances
+   - Support Singleton et Transient lifecycle
+   - Enregistrement par type ou nom d'interface
+   - Thread-safe avec Meyers Singleton
+   - 22 tests unitaires (enregistrement, résolution, cycles de vie)
 
-7. **Dependency Injection**
-   - Créer Service Locator pattern pour découpler dépendances
-   - Faciliter tests unitaires avec mocks
-   - Remplacer construction directe par injection
-
-**Note** : Ces améliorations ne bloquent pas le développement des phases suivantes (UI, 3D, Export). Les améliorations 1-5 sont complètes et opérationnelles.
+**Note** : Toutes les améliorations (1-7) sont maintenant complètes et opérationnelles. Le projet dispose d'une architecture robuste prête pour les phases suivantes (UI, 3D, Export).

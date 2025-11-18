@@ -9,6 +9,7 @@
 #include "TestConfigManager.h"
 #include "TestLogging.h"
 #include "TestPluginManager.h"
+#include "TestServiceLocator.h"
 
 int main(int argc, char *argv[])
 {
@@ -54,6 +55,11 @@ int main(int argc, char *argv[])
     {
         TestPluginManager testPluginManager;
         status |= QTest::qExec(&testPluginManager, argc, argv);
+    }
+
+    {
+        TestServiceLocator testServiceLocator;
+        status |= QTest::qExec(&testServiceLocator, argc, argv);
     }
 
     return status;
