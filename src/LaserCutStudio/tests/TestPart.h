@@ -22,6 +22,11 @@ private slots:
     void testPartMass();
     void testPartClone();
     void testPartStaticList();
+
+    // Tests du Factory Pattern
+    void testFactoryAvailableTypes();
+    void testFactoryCreate();
+    void testFactoryToVariant();
 };
 
 #endif // TESTPART_H

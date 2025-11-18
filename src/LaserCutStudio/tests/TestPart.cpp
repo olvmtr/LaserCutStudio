@@ -106,3 +106,55 @@ void TestPart::testPartStaticList()
     delete part2;
     QCOMPARE(IPart::getAllParts().count(), initialCount);
 }
+
+// ===== Tests du Factory Pattern =====
+
+void TestPart::testFactoryAvailableTypes()
+{
+    QStringList types = IPart::availableTypes();
+
+    // Vérifie que le type Part est enregistré
+    QVERIFY(types.contains("Part"));
+    QCOMPARE(types.size(), 1);
+}
+
+void TestPart::testFactoryCreate()
+{
+    // Teste la création d'un Part via Factory
+    QVariantMap partConfig;
+    partConfig["type"] = "Part";
+    // Note: name, thickness, material ne sont pas des Q_PROPERTY dans Part
+    // donc on teste juste la création
+
+    IPart* part = IPart::create(partConfig);
+    QVERIFY(part != nullptr);
+    QCOMPARE(part->getTypeName(), QString("Part"));
+
+    Part* partCasted = dynamic_cast<Part*>(part);
+    QVERIFY(partCasted != nullptr);
+
+    delete part;
+
+    // Teste un type inconnu
+    QVariantMap unknownConfig;
+    unknownConfig["type"] = "UnknownPart";
+
+    IPart* unknownPart = IPart::create(unknownConfig);
+    QVERIFY(unknownPart == nullptr);
+}
+
+void TestPart::testFactoryToVariant()
+{
+    // Teste la sérialisation d'un Part
+    Rectangle* rect = new Rectangle(0, 0, 100, 50);
+    Part part("TestPart", rect, 5.0, Material::Wood());
+
+    QVariantMap partMap = part.toVariant();
+
+    QCOMPARE(partMap["type"].toString(), QString("Part"));
+    // Note: name, thickness, material ne sont pas des Q_PROPERTY
+    // donc ils ne seront pas dans le QVariantMap automatiquement
+    // C'est normal car Part n'a pas de Q_PROPERTY propres
+
+    delete rect;
+}

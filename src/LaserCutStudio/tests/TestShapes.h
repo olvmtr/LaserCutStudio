@@ -35,6 +35,12 @@ private slots:
 
     // Tests pour la liste statique
     void testShapeStaticList();
+
+    // Tests du Factory Pattern
+    void testFactoryAvailableTypes();
+    void testFactoryCreate();
+    void testFactoryToVariant();
+    void testFactoryRoundtrip();
 };
 
 #endif // TESTSHAPES_H

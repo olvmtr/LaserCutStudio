@@ -157,3 +157,49 @@ void TestProject::testProjectStaticList()
     delete proj2;
     QCOMPARE(IProject::getAllProjects().count(), initialCount);
 }
+
+// ===== Tests du Factory Pattern =====
+
+void TestProject::testFactoryAvailableTypes()
+{
+    QStringList types = IProject::availableTypes();
+
+    // Vérifie que le type Project est enregistré
+    QVERIFY(types.contains("Project"));
+    QCOMPARE(types.size(), 1);
+}
+
+void TestProject::testFactoryCreate()
+{
+    // Teste la création d'un Project via Factory
+    QVariantMap projectConfig;
+    projectConfig["type"] = "Project";
+
+    IProject* project = IProject::create(projectConfig);
+    QVERIFY(project != nullptr);
+    QCOMPARE(project->getTypeName(), QString("Project"));
+
+    Project* projectCasted = dynamic_cast<Project*>(project);
+    QVERIFY(projectCasted != nullptr);
+
+    delete project;
+
+    // Teste un type inconnu
+    QVariantMap unknownConfig;
+    unknownConfig["type"] = "UnknownProject";
+
+    IProject* unknownProject = IProject::create(unknownConfig);
+    QVERIFY(unknownProject == nullptr);
+}
+
+void TestProject::testFactoryToVariant()
+{
+    // Teste la sérialisation d'un Project
+    Project project("MyProject");
+
+    QVariantMap projectMap = project.toVariant();
+
+    QCOMPARE(projectMap["type"].toString(), QString("Project"));
+    // Note: name et metadata ne sont pas des Q_PROPERTY
+    // donc ils ne seront pas dans le QVariantMap automatiquement
+}

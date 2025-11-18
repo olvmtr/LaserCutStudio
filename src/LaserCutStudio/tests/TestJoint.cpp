@@ -258,3 +258,41 @@ void TestJoint::testFactoryRoundtrip()
     delete original;
     delete restored;
 }
+
+// ===== Tests du système Signals/Slots =====
+
+void TestJoint::testSignalsAutoCleanup()
+{
+    // Teste le nettoyage automatique via Signals/Slots
+    Rectangle* shapeA = new Rectangle(0, 0, 10, 10);
+    Rectangle* shapeB = new Rectangle(0, 0, 10, 10);
+    Part* partA = new Part("PartA", shapeA, 3.0, Material::Wood());
+    Part* partB = new Part("PartB", shapeB, 3.0, Material::Wood());
+
+    TabJoint* joint = new TabJoint(partA, partB, Point3D(0, 0, 0), 90.0, 10.0, 3.0);
+
+    // Vérifie que le joint est bien connecté
+    QCOMPARE(joint->getPartA(), partA);
+    QCOMPARE(joint->getPartB(), partB);
+    QVERIFY(joint->isValid());
+
+    // Détruit partA - le signal aboutToBeDestroyed() devrait être émis
+    // et le joint devrait automatiquement mettre m_partA à nullptr
+    delete partA;
+    delete shapeA;
+
+    // Vérifie que le joint a bien été nettoyé automatiquement
+    QVERIFY(joint->getPartA() == nullptr);
+    QCOMPARE(joint->getPartB(), partB);
+    QVERIFY(!joint->isValid()); // Le joint n'est plus valide car partA est nullptr
+
+    // Détruit partB
+    delete partB;
+    delete shapeB;
+
+    // Vérifie que partB a aussi été nettoyé
+    QVERIFY(joint->getPartA() == nullptr);
+    QVERIFY(joint->getPartB() == nullptr);
+
+    delete joint;
+}

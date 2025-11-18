@@ -180,3 +180,117 @@ void TestShapes::testShapeStaticList()
     delete circle;
     QCOMPARE(IShape::getAllShapes().count(), initialCount);
 }
+
+// ===== Tests du Factory Pattern =====
+
+void TestShapes::testFactoryAvailableTypes()
+{
+    QStringList types = IShape::availableTypes();
+
+    // Vérifie que les deux types concrets sont enregistrés
+    QVERIFY(types.contains("Rectangle"));
+    QVERIFY(types.contains("Circle"));
+    QCOMPARE(types.size(), 2);
+}
+
+void TestShapes::testFactoryCreate()
+{
+    // Teste la création d'un Rectangle
+    QVariantMap rectConfig;
+    rectConfig["type"] = "Rectangle";
+    rectConfig["x"] = 10.0;
+    rectConfig["y"] = 20.0;
+    rectConfig["width"] = 30.0;
+    rectConfig["height"] = 40.0;
+
+    IShape* rectShape = IShape::create(rectConfig);
+    QVERIFY(rectShape != nullptr);
+    QCOMPARE(rectShape->getTypeName(), QString("Rectangle"));
+
+    Rectangle* rect = dynamic_cast<Rectangle*>(rectShape);
+    QVERIFY(rect != nullptr);
+    QCOMPARE(rect->getX(), 10.0);
+    QCOMPARE(rect->getY(), 20.0);
+    QCOMPARE(rect->getWidth(), 30.0);
+    QCOMPARE(rect->getHeight(), 40.0);
+
+    delete rectShape;
+
+    // Teste la création d'un Circle
+    QVariantMap circleConfig;
+    circleConfig["type"] = "Circle";
+    circleConfig["centerX"] = 15.0;
+    circleConfig["centerY"] = 25.0;
+    circleConfig["radius"] = 8.0;
+
+    IShape* circleShape = IShape::create(circleConfig);
+    QVERIFY(circleShape != nullptr);
+    QCOMPARE(circleShape->getTypeName(), QString("Circle"));
+
+    Circle* circle = dynamic_cast<Circle*>(circleShape);
+    QVERIFY(circle != nullptr);
+    QCOMPARE(circle->getCenterX(), 15.0);
+    QCOMPARE(circle->getCenterY(), 25.0);
+    QCOMPARE(circle->getRadius(), 8.0);
+
+    delete circleShape;
+
+    // Teste un type inconnu
+    QVariantMap unknownConfig;
+    unknownConfig["type"] = "UnknownShape";
+
+    IShape* unknownShape = IShape::create(unknownConfig);
+    QVERIFY(unknownShape == nullptr);
+}
+
+void TestShapes::testFactoryToVariant()
+{
+    // Teste la sérialisation d'un Rectangle
+    Rectangle rect(5.0, 10.0, 20.0, 30.0);
+
+    QVariantMap rectMap = rect.toVariant();
+
+    QCOMPARE(rectMap["type"].toString(), QString("Rectangle"));
+    QCOMPARE(rectMap["x"].toDouble(), 5.0);
+    QCOMPARE(rectMap["y"].toDouble(), 10.0);
+    QCOMPARE(rectMap["width"].toDouble(), 20.0);
+    QCOMPARE(rectMap["height"].toDouble(), 30.0);
+
+    // Teste la sérialisation d'un Circle
+    Circle circle(12.0, 18.0, 7.5);
+
+    QVariantMap circleMap = circle.toVariant();
+
+    QCOMPARE(circleMap["type"].toString(), QString("Circle"));
+    QCOMPARE(circleMap["centerX"].toDouble(), 12.0);
+    QCOMPARE(circleMap["centerY"].toDouble(), 18.0);
+    QCOMPARE(circleMap["radius"].toDouble(), 7.5);
+}
+
+void TestShapes::testFactoryRoundtrip()
+{
+    // Teste un cycle complet : création -> sérialisation -> désérialisation
+    Rectangle* original = new Rectangle(8.0, 12.0, 25.0, 35.0);
+
+    // Sérialise
+    QVariantMap serialized = original->toVariant();
+
+    // Désérialise
+    IShape* restored = IShape::create(serialized);
+    QVERIFY(restored != nullptr);
+
+    Rectangle* restoredRect = dynamic_cast<Rectangle*>(restored);
+    QVERIFY(restoredRect != nullptr);
+
+    // Vérifie que les valeurs sont restaurées
+    QCOMPARE(restoredRect->getX(), 8.0);
+    QCOMPARE(restoredRect->getY(), 12.0);
+    QCOMPARE(restoredRect->getWidth(), 25.0);
+    QCOMPARE(restoredRect->getHeight(), 35.0);
+
+    // Vérifie que ce sont deux objets différents
+    QVERIFY(original->getId() != restored->getId());
+
+    delete original;
+    delete restored;
+}
