@@ -45,6 +45,11 @@ qt_add_executable(appLaserCutStudio
     # Core Module - Config
     core/config/ConfigManager.h
     core/config/ConfigManager.cpp
+    # Core Module - Logging
+    core/logging/LogCategories.h
+    core/logging/LogCategories.cpp
+    core/logging/LogManager.h
+    core/logging/LogManager.cpp
 )
 
 qt_add_qml_module(appLaserCutStudio

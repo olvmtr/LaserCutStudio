@@ -7,6 +7,7 @@
 #include "TestJoint.h"
 #include "TestProject.h"
 #include "TestConfigManager.h"
+#include "TestLogging.h"
 
 int main(int argc, char *argv[])
 {
@@ -42,6 +43,11 @@ int main(int argc, char *argv[])
     {
         LaserCutStudio::Tests::TestConfigManager testConfigManager;
         status |= QTest::qExec(&testConfigManager, argc, argv);
+    }
+
+    {
+        LaserCutStudio::Tests::TestLogging testLogging;
+        status |= QTest::qExec(&testLogging, argc, argv);
     }
 
     return status;
