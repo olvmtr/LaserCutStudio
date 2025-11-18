@@ -34,6 +34,7 @@ public:
     IJoint* clone() const override;
 
     static QString staticTypeName() { return "FingerJoint"; }
+    QString getTypeName() const override { return staticTypeName(); }
 
     int getFingerCount() const { return m_fingerCount; }
     void setFingerCount(int count);
@@ -44,6 +45,9 @@ public:
 private:
     int m_fingerCount;      ///< Nombre de doigts
     double m_fingerWidth;   ///< Largeur de chaque doigt
+
+    // Auto-enregistrement dans le Factory Pattern
+    static const bool s_registered;
 };
 
 } // namespace Core

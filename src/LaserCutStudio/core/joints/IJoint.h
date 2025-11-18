@@ -5,6 +5,11 @@
 #include "../types/JointType.h"
 #include "../types/Point3D.h"
 #include <QList>
+#include <QMap>
+#include <QVariantMap>
+#include <QMetaObject>
+#include <QMetaProperty>
+#include <functional>
 
 namespace LaserCutStudio {
 namespace Core {
@@ -110,6 +115,29 @@ public:
      */
     virtual bool isValid() const;
 
+    // Factory Pattern avec QVariant
+    /**
+     * @brief Crée un joint depuis une configuration QVariant
+     * @param config Configuration avec au minimum la clé "type"
+     * @return Nouveau joint ou nullptr si type inconnu
+     */
+    static IJoint* create(const QVariantMap& config);
+
+    /**
+     * @brief Liste tous les types de joints disponibles
+     */
+    static QStringList availableTypes();
+
+    /**
+     * @brief Sérialise le joint en QVariantMap pour sauvegarde/réseau
+     */
+    virtual QVariantMap toVariant() const;
+
+    /**
+     * @brief Retourne le nom du type (doit être implémenté par les classes concrètes)
+     */
+    virtual QString getTypeName() const = 0;
+
     // Gestion de la liste statique
     static QList<IJoint*> getAllJoints() { return s_joints; }
     static void addJoint(IJoint* joint);
@@ -134,6 +162,34 @@ protected:
     double m_angle;         ///< Angle d'assemblage en degrés
 
     static QList<IJoint*> s_joints; ///< Liste statique de tous les joints
+
+    // Factory Pattern infrastructure
+    using FactoryFunc = std::function<IJoint*(const QVariantMap&)>;
+    static QMap<QString, FactoryFunc> s_factories;
+
+    /**
+     * @brief Enregistre une classe concrète dans le Factory Pattern
+     * Utilisé par les classes dérivées pour s'auto-enregistrer
+     */
+    template<typename T>
+    static bool registerFactory() {
+        s_factories[T::staticTypeName()] = [](const QVariantMap& params) {
+            auto* obj = new T();
+            // Utilise Q_PROPERTY pour configurer l'objet depuis params
+            const QMetaObject* meta = obj->metaObject();
+            for (auto it = params.constBegin(); it != params.constEnd(); ++it) {
+                int propIndex = meta->indexOfProperty(it.key().toUtf8().constData());
+                if (propIndex >= 0) {
+                    QMetaProperty prop = meta->property(propIndex);
+                    if (prop.isWritable()) {
+                        prop.write(obj, it.value());
+                    }
+                }
+            }
+            return obj;
+        };
+        return true;
+    }
 };
 
 } // namespace Core

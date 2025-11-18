@@ -149,3 +149,112 @@ void TestJoint::testJointStaticList()
     delete joint2;
     QCOMPARE(IJoint::getAllJoints().count(), initialCount);
 }
+
+// ===== Tests du Factory Pattern =====
+
+void TestJoint::testFactoryAvailableTypes()
+{
+    QStringList types = IJoint::availableTypes();
+
+    // Vérifie que les deux types concrets sont enregistrés
+    QVERIFY(types.contains("TabJoint"));
+    QVERIFY(types.contains("FingerJoint"));
+    QCOMPARE(types.size(), 2);
+}
+
+void TestJoint::testFactoryCreate()
+{
+    // Teste la création d'un TabJoint
+    QVariantMap tabConfig;
+    tabConfig["type"] = "TabJoint";
+    tabConfig["tabWidth"] = 12.5;
+    tabConfig["tabDepth"] = 4.0;
+
+    IJoint* tabJoint = IJoint::create(tabConfig);
+    QVERIFY(tabJoint != nullptr);
+    QCOMPARE(tabJoint->getTypeName(), QString("TabJoint"));
+
+    TabJoint* tab = dynamic_cast<TabJoint*>(tabJoint);
+    QVERIFY(tab != nullptr);
+    QCOMPARE(tab->getTabWidth(), 12.5);
+    QCOMPARE(tab->getTabDepth(), 4.0);
+
+    delete tabJoint;
+
+    // Teste la création d'un FingerJoint
+    QVariantMap fingerConfig;
+    fingerConfig["type"] = "FingerJoint";
+    fingerConfig["fingerCount"] = 8;
+    fingerConfig["fingerWidth"] = 6.0;
+
+    IJoint* fingerJoint = IJoint::create(fingerConfig);
+    QVERIFY(fingerJoint != nullptr);
+    QCOMPARE(fingerJoint->getTypeName(), QString("FingerJoint"));
+
+    FingerJoint* finger = dynamic_cast<FingerJoint*>(fingerJoint);
+    QVERIFY(finger != nullptr);
+    QCOMPARE(finger->getFingerCount(), 8);
+    QCOMPARE(finger->getFingerWidth(), 6.0);
+
+    delete fingerJoint;
+
+    // Teste un type inconnu
+    QVariantMap unknownConfig;
+    unknownConfig["type"] = "UnknownJoint";
+
+    IJoint* unknownJoint = IJoint::create(unknownConfig);
+    QVERIFY(unknownJoint == nullptr);
+}
+
+void TestJoint::testFactoryToVariant()
+{
+    // Teste la sérialisation d'un TabJoint
+    TabJoint tab;
+    tab.setTabWidth(15.0);
+    tab.setTabDepth(5.0);
+
+    QVariantMap tabMap = tab.toVariant();
+
+    QCOMPARE(tabMap["type"].toString(), QString("TabJoint"));
+    QCOMPARE(tabMap["tabWidth"].toDouble(), 15.0);
+    QCOMPARE(tabMap["tabDepth"].toDouble(), 5.0);
+
+    // Teste la sérialisation d'un FingerJoint
+    FingerJoint finger;
+    finger.setFingerCount(10);
+    finger.setFingerWidth(7.5);
+
+    QVariantMap fingerMap = finger.toVariant();
+
+    QCOMPARE(fingerMap["type"].toString(), QString("FingerJoint"));
+    QCOMPARE(fingerMap["fingerCount"].toInt(), 10);
+    QCOMPARE(fingerMap["fingerWidth"].toDouble(), 7.5);
+}
+
+void TestJoint::testFactoryRoundtrip()
+{
+    // Teste un cycle complet : création -> sérialisation -> désérialisation
+    TabJoint* original = new TabJoint();
+    original->setTabWidth(20.0);
+    original->setTabDepth(8.0);
+
+    // Sérialise
+    QVariantMap serialized = original->toVariant();
+
+    // Désérialise
+    IJoint* restored = IJoint::create(serialized);
+    QVERIFY(restored != nullptr);
+
+    TabJoint* restoredTab = dynamic_cast<TabJoint*>(restored);
+    QVERIFY(restoredTab != nullptr);
+
+    // Vérifie que les valeurs sont restaurées
+    QCOMPARE(restoredTab->getTabWidth(), 20.0);
+    QCOMPARE(restoredTab->getTabDepth(), 8.0);
+
+    // Vérifie que ce sont deux objets différents
+    QVERIFY(original->getId() != restored->getId());
+
+    delete original;
+    delete restored;
+}

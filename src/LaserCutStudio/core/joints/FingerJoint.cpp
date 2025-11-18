@@ -47,5 +47,8 @@ void FingerJoint::setFingerWidth(double width)
     }
 }
 
+// Auto-enregistrement dans le Factory Pattern
+const bool FingerJoint::s_registered = IJoint::registerFactory<FingerJoint>();
+
 } // namespace Core
 } // namespace LaserCutStudio

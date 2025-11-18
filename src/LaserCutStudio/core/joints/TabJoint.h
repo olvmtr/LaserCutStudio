@@ -53,6 +53,11 @@ public:
     static QString staticTypeName() { return "TabJoint"; }
 
     /**
+     * @brief Retourne le nom de type pour l'instance (Factory Pattern)
+     */
+    QString getTypeName() const override { return staticTypeName(); }
+
+    /**
      * @brief Obtient la largeur du tenon
      */
     double getTabWidth() const { return m_tabWidth; }
@@ -75,6 +80,9 @@ public:
 private:
     double m_tabWidth;  ///< Largeur du tenon
     double m_tabDepth;  ///< Profondeur du tenon
+
+    // Auto-enregistrement dans le Factory Pattern
+    static const bool s_registered;
 };
 
 } // namespace Core

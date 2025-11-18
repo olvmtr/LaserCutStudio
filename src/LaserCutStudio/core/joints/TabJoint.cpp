@@ -49,5 +49,8 @@ void TabJoint::setTabDepth(double depth)
     }
 }
 
+// Auto-enregistrement dans le Factory Pattern
+const bool TabJoint::s_registered = IJoint::registerFactory<TabJoint>();
+
 } // namespace Core
 } // namespace LaserCutStudio

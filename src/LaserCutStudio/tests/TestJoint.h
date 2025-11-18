@@ -26,6 +26,12 @@ private slots:
     void testFingerJointGettersSetters();
 
     void testJointStaticList();
+
+    // Tests du Factory Pattern
+    void testFactoryAvailableTypes();
+    void testFactoryCreate();
+    void testFactoryToVariant();
+    void testFactoryRoundtrip();
 };
 
 #endif // TESTJOINT_H
