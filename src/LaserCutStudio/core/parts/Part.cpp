@@ -23,5 +23,8 @@ IPart* Part::clone() const
     return new Part(*this);
 }
 
+// Auto-enregistrement dans le Factory Pattern
+const bool Part::s_registered = IPart::registerFactory<Part>();
+
 } // namespace Core
 } // namespace LaserCutStudio

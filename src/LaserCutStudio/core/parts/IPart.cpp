@@ -4,8 +4,9 @@
 namespace LaserCutStudio {
 namespace Core {
 
-// Initialisation de la liste statique
+// Initialisation des listes statiques
 QList<IPart*> IPart::s_parts;
+QMap<QString, IPart::FactoryFunc> IPart::s_factories;
 
 IPart::IPart()
     : Interface()
@@ -107,6 +108,54 @@ void IPart::removePart(IPart* part)
 void IPart::clearAllParts()
 {
     s_parts.clear();
+}
+
+// ===== Factory Pattern =====
+
+IPart* IPart::create(const QVariantMap& config)
+{
+    QString type = config.value("type").toString();
+
+    if (!s_factories.contains(type)) {
+        qWarning() << "Unknown part type:" << type;
+        return nullptr;
+    }
+
+    return s_factories[type](config);
+}
+
+QStringList IPart::availableTypes()
+{
+    return s_factories.keys();
+}
+
+QVariantMap IPart::toVariant() const
+{
+    QVariantMap map;
+
+    // Ajoute le type
+    map["type"] = getTypeName();
+
+    // Utilise le système Q_PROPERTY pour sérialiser automatiquement
+    const QMetaObject* meta = metaObject();
+
+    // Parcourt toutes les propriétés déclarées
+    for (int i = meta->propertyOffset(); i < meta->propertyCount(); ++i) {
+        QMetaProperty prop = meta->property(i);
+
+        // Ne sérialise que les propriétés stockées (pas les calculées)
+        if (prop.isStored()) {
+            QString propName = QString::fromUtf8(prop.name());
+            QVariant value = prop.read(this);
+
+            // Exclut l'id (déjà géré par Interface) et objectName (interne Qt)
+            if (propName != "id" && propName != "objectName") {
+                map[propName] = value;
+            }
+        }
+    }
+
+    return map;
 }
 
 } // namespace Core

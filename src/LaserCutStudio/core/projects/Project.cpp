@@ -23,5 +23,8 @@ IProject* Project::clone() const
     return new Project(*this);
 }
 
+// Auto-enregistrement dans le Factory Pattern
+const bool Project::s_registered = IProject::registerFactory<Project>();
+
 } // namespace Core
 } // namespace LaserCutStudio

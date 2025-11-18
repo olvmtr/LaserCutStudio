@@ -32,6 +32,15 @@ public:
      * @brief Retourne le nom de type statique pour le Factory Pattern
      */
     static QString staticTypeName() { return "Project"; }
+
+    /**
+     * @brief Retourne le nom de type pour l'instance (Factory Pattern)
+     */
+    QString getTypeName() const override { return staticTypeName(); }
+
+private:
+    // Auto-enregistrement dans le Factory Pattern
+    static const bool s_registered;
 };
 
 } // namespace Core
