@@ -3,16 +3,25 @@
 namespace LaserCutStudio {
 namespace Core {
 
-Interface::Interface()
-    : m_id(QUuid::createUuid())
+Interface::Interface(QObject* parent)
+    : QObject(parent)  // Initialise QObject avec parent
+    , m_id(QUuid::createUuid())
 {
 }
 
 Interface::Interface(const Interface& other)
-    : m_id(QUuid::createUuid()) // Génère un nouvel UUID pour le clone
+    : QObject(nullptr)  // Nouvel objet QObject indépendant (pas de copie de QObject)
+    , m_id(QUuid::createUuid())  // Génère un nouvel UUID pour le clone
 {
     // Lors du clonage, on génère un nouvel UUID unique
-    // même si on copie les autres propriétés
+    // QObject n'est pas copié car il n'est pas copiable
+    // Seules les données métier des classes dérivées seront copiées
+}
+
+Interface::~Interface()
+{
+    // Émet le signal avant destruction pour permettre le nettoyage
+    emit aboutToBeDestroyed(this);
 }
 
 } // namespace Core

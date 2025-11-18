@@ -1,6 +1,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
+#include <QObject>
 #include <QString>
 #include <QUuid>
 #include <memory>
@@ -14,26 +15,27 @@ namespace Core {
  * Cette classe implémente le pattern Prototype permettant de cloner
  * des objets sans connaître leur type concret. Toutes les interfaces
  * du système héritent de cette classe.
+ *
+ * Hérite de QObject pour bénéficier du système de Signals/Slots,
+ * des propriétés Qt (Q_PROPERTY) et du système de métadonnées (QMetaObject).
  */
-class Interface
+class Interface : public QObject
 {
+    Q_OBJECT
+    Q_PROPERTY(QUuid id READ getId CONSTANT)
+signals:
+    /**
+     * @brief Signal émis juste avant la destruction de l'objet
+     * Permet aux observateurs de se déconnecter proprement
+     */
+    void aboutToBeDestroyed(Interface* self);
+
 public:
     /**
-     * @brief Constructeur par défaut
-     * Génère automatiquement un UUID unique pour l'instance
+     * @brief Destructeur virtuel public (permet la destruction polymorphe)
+     * Émet le signal aboutToBeDestroyed avant destruction
      */
-    Interface();
-
-    /**
-     * @brief Constructeur de copie
-     * @param other Instance à copier
-     */
-    Interface(const Interface& other);
-
-    /**
-     * @brief Destructeur virtuel
-     */
-    virtual ~Interface() = default;
+    virtual ~Interface();
 
     /**
      * @brief Clone l'objet (Pattern Prototype)
@@ -54,6 +56,21 @@ public:
     QString getIdAsString() const { return m_id.toString(); }
 
 protected:
+    /**
+     * @brief Constructeur par défaut
+     * Génère automatiquement un UUID unique pour l'instance
+     * @param parent Parent QObject (nullptr par défaut pour gestion manuelle)
+     */
+    explicit Interface(QObject* parent = nullptr);
+
+    /**
+     * @brief Constructeur de copie
+     * Note: QObject n'est pas copiable, donc on crée un nouvel objet indépendant
+     * Seul l'UUID est régénéré (nouveau UUID pour le clone)
+     * @param other Instance à copier
+     */
+    Interface(const Interface& other);
+
     /**
      * @brief UUID unique de l'instance
      */
