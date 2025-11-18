@@ -27,10 +27,10 @@ Ce fichier liste les duplications de code identifiées et les refactorings à r�
 ### Phase 1 : Priorité HAUTE (1-2 jours)
 
 #### 🎯 #1 - ListManagerMixin CRTP
-- **Status** : 🔄 EN COURS
+- **Status** : ✅ COMPLÉTÉ (commit a21c557)
 - **Priorité** : HAUTE
-- **Lignes dupliquées** : ~60 lignes
-- **Effort estimé** : Moyen (2h)
+- **Lignes éliminées** : ~60 lignes
+- **Effort réel** : Moyen (1.5h)
 - **Impact** : Extensibilité +++
 
 **Duplication identifiée** :
@@ -315,21 +315,22 @@ void IJoint::connect(IPart* partA, IPart* partB) {
 | Phase | Refactorings | Lignes | Priorité | Effort | Status |
 |-------|--------------|--------|----------|--------|--------|
 | ✅ Complété | FactoryMixin + toVariant | ~208 | - | - | ✅ Done |
-| Phase 1 | ListManagerMixin | ~60 | HAUTE | 2h | 🔄 En cours |
+| ✅ Phase 1 | ListManagerMixin | ~60 | HAUTE | 1.5h | ✅ Done |
 | Phase 2 | GeometryUtils + Setters | ~82 | MOYENNE | 3h | ⏳ À faire |
 | Phase 3 | Refactorings mineurs | ~130 | BASSE | 3h | ⏳ À faire |
-| **TOTAL** | **8 refactorings** | **~480** | - | **~8h** | **43% fait** |
+| **TOTAL** | **8 refactorings** | **~480** | - | **~8h** | **56% fait** |
 
 ---
 
 ## 🎯 Objectifs
 
 - [x] **Phase 0** : Factory Pattern + Sérialisation (208 lignes) - **COMPLÉTÉ**
-- [ ] **Phase 1** : Gestion des listes (60 lignes) - **EN COURS**
+- [x] **Phase 1** : Gestion des listes (60 lignes) - **COMPLÉTÉ**
 - [ ] **Phase 2** : Utils géométriques (82 lignes)
 - [ ] **Phase 3** : Refactorings mineurs (130 lignes)
 
 **Objectif final** : Éliminer ~480 lignes de code dupliqué au total
+**Progression actuelle** : **268/480 lignes éliminées (56%)**
 
 ---
 
@@ -343,4 +344,5 @@ void IJoint::connect(IPart* partA, IPart* partB) {
 ---
 
 **Dernière mise à jour** : 2025-11-18
-**Prochaine étape** : Implémenter ListManagerMixin (Phase 1)
+**Étape complétée** : ListManagerMixin (Phase 1) ✅
+**Prochaine étape** : GeometryUtils (Phase 2)
