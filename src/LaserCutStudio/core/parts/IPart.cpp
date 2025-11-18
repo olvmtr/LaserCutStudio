@@ -40,6 +40,25 @@ IPart::IPart(const IPart& other)
 
 IPart::~IPart()
 {
+    // Notifie tous les joints connectés que ce Part va être détruit
+    // On fait une copie de la liste car removeJoint() modifie m_joints
+    QList<IJoint*> jointsCopy = m_joints;
+    for (IJoint* joint : jointsCopy) {
+        if (joint) {
+            // Déconnecte ce part du joint sans appeler removeJoint
+            // pour éviter de modifier m_joints pendant l'itération
+            if (joint->getPartA() == this) {
+                // Met le pointeur à nullptr dans le joint
+                joint->connect(nullptr, joint->getPartB());
+            }
+            if (joint->getPartB() == this) {
+                // Met le pointeur à nullptr dans le joint
+                joint->connect(joint->getPartA(), nullptr);
+            }
+        }
+    }
+    m_joints.clear();
+
     removePart(this);
 }
 

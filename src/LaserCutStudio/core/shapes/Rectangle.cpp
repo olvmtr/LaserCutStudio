@@ -121,5 +121,41 @@ void Rectangle::scale(double scaleX, double scaleY, const Point2D& center)
     m_y = centerY - m_height / 2.0;
 }
 
+void Rectangle::setX(double x)
+{
+    if (!qFuzzyCompare(m_x, x)) {
+        m_x = x;
+        emit xChanged(x);
+        emit geometryChanged();
+    }
+}
+
+void Rectangle::setY(double y)
+{
+    if (!qFuzzyCompare(m_y, y)) {
+        m_y = y;
+        emit yChanged(y);
+        emit geometryChanged();
+    }
+}
+
+void Rectangle::setWidth(double width)
+{
+    if (!qFuzzyCompare(m_width, width)) {
+        m_width = width;
+        emit widthChanged(width);
+        emit geometryChanged();
+    }
+}
+
+void Rectangle::setHeight(double height)
+{
+    if (!qFuzzyCompare(m_height, height)) {
+        m_height = height;
+        emit heightChanged(height);
+        emit geometryChanged();
+    }
+}
+
 } // namespace Core
 } // namespace LaserCutStudio

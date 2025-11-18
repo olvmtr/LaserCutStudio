@@ -106,5 +106,32 @@ void Circle::scale(double scaleX, double scaleY, const Point2D& center)
     m_radius *= (scaleX + scaleY) / 2.0;
 }
 
+void Circle::setCenterX(double x)
+{
+    if (!qFuzzyCompare(m_centerX, x)) {
+        m_centerX = x;
+        emit centerXChanged(x);
+        emit geometryChanged();
+    }
+}
+
+void Circle::setCenterY(double y)
+{
+    if (!qFuzzyCompare(m_centerY, y)) {
+        m_centerY = y;
+        emit centerYChanged(y);
+        emit geometryChanged();
+    }
+}
+
+void Circle::setRadius(double radius)
+{
+    if (!qFuzzyCompare(m_radius, radius)) {
+        m_radius = radius;
+        emit radiusChanged(radius);
+        emit geometryChanged();
+    }
+}
+
 } // namespace Core
 } // namespace LaserCutStudio

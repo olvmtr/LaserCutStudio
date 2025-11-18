@@ -11,6 +11,21 @@ namespace Core {
  */
 class Circle : public IShape
 {
+    Q_OBJECT
+
+    Q_PROPERTY(double centerX READ getCenterX WRITE setCenterX NOTIFY centerXChanged)
+    Q_PROPERTY(double centerY READ getCenterY WRITE setCenterY NOTIFY centerYChanged)
+    Q_PROPERTY(double radius READ getRadius WRITE setRadius NOTIFY radiusChanged)
+
+    Q_CLASSINFO("Version", "1.0.0")
+    Q_CLASSINFO("Category", "Shapes")
+    Q_CLASSINFO("Description", "Circular shape")
+
+signals:
+    void centerXChanged(double newX);
+    void centerYChanged(double newY);
+    void radiusChanged(double newRadius);
+
 public:
     Circle();
     Circle(double centerX, double centerY, double radius);
@@ -18,6 +33,7 @@ public:
     ~Circle() override = default;
 
     IShape* clone() const override;
+    static QString staticTypeName() { return "Circle"; }
     double getArea() const override;
     QRectF getBoundingBox() const override;
     bool containsPoint(const Point2D& point) const override;
@@ -30,9 +46,9 @@ public:
     double getCenterX() const { return m_centerX; }
     double getCenterY() const { return m_centerY; }
     double getRadius() const { return m_radius; }
-    void setCenterX(double x) { m_centerX = x; }
-    void setCenterY(double y) { m_centerY = y; }
-    void setRadius(double radius) { m_radius = radius; }
+    void setCenterX(double x);
+    void setCenterY(double y);
+    void setRadius(double radius);
 
 private:
     double m_centerX;

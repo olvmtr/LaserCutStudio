@@ -110,5 +110,17 @@ void IJoint::clearAllJoints()
     s_joints.clear();
 }
 
+void IJoint::notifyPartDestroyed(IPart* part)
+{
+    // Met à nullptr les pointeurs vers le Part détruit
+    // sans essayer de manipuler le Part
+    if (m_partA == part) {
+        m_partA = nullptr;
+    }
+    if (m_partB == part) {
+        m_partB = nullptr;
+    }
+}
+
 } // namespace Core
 } // namespace LaserCutStudio

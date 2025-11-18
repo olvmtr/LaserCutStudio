@@ -11,6 +11,23 @@ namespace Core {
  */
 class Rectangle : public IShape
 {
+    Q_OBJECT
+
+    Q_PROPERTY(double x READ getX WRITE setX NOTIFY xChanged)
+    Q_PROPERTY(double y READ getY WRITE setY NOTIFY yChanged)
+    Q_PROPERTY(double width READ getWidth WRITE setWidth NOTIFY widthChanged)
+    Q_PROPERTY(double height READ getHeight WRITE setHeight NOTIFY heightChanged)
+
+    Q_CLASSINFO("Version", "1.0.0")
+    Q_CLASSINFO("Category", "Shapes")
+    Q_CLASSINFO("Description", "Rectangular shape")
+
+signals:
+    void xChanged(double newX);
+    void yChanged(double newY);
+    void widthChanged(double newWidth);
+    void heightChanged(double newHeight);
+
 public:
     /**
      * @brief Constructeur par défaut
@@ -40,6 +57,11 @@ public:
      * @brief Clone le rectangle
      */
     IShape* clone() const override;
+
+    /**
+     * @brief Retourne le nom de type statique pour le Factory Pattern
+     */
+    static QString staticTypeName() { return "Rectangle"; }
 
     /**
      * @brief Calcule l'aire
@@ -82,11 +104,11 @@ public:
     double getWidth() const { return m_width; }
     double getHeight() const { return m_height; }
 
-    // Setters
-    void setX(double x) { m_x = x; }
-    void setY(double y) { m_y = y; }
-    void setWidth(double width) { m_width = width; }
-    void setHeight(double height) { m_height = height; }
+    // Setters avec signaux
+    void setX(double x);
+    void setY(double y);
+    void setWidth(double width);
+    void setHeight(double height);
 
 private:
     double m_x;      ///< Position X du coin supérieur gauche
