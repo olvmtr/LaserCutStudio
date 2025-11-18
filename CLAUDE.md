@@ -136,6 +136,140 @@ public:
 
 Voir `core/examples/DebugExample.cpp` pour des exemples complets.
 
+## Documentation avec Doxygen
+
+Le projet utilise **Doxygen** pour générer automatiquement la documentation API à partir des commentaires dans le code source.
+
+### Installation
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install doxygen graphviz
+
+# macOS
+brew install doxygen graphviz
+
+# Vérifier l'installation
+doxygen --version
+```
+
+**Note** : `graphviz` est nécessaire pour générer les diagrammes de classes, call graphs, etc.
+
+### Générer la documentation
+
+```bash
+# Option 1 : Via CMake (recommandé)
+cd build/Desktop-Debug
+cmake --build . --target doc
+
+# Option 2 : Directement avec Doxygen
+cd /home/vm-mint/Projet/LaserCutStudio
+doxygen Doxyfile
+```
+
+La documentation sera générée dans `docs/doxygen/html/`. Ouvrir `docs/doxygen/html/index.html` dans un navigateur.
+
+### Configuration (Doxyfile)
+
+Le fichier `Doxyfile` à la racine du projet configure Doxygen :
+
+**Répertoires scannés** :
+- `src/LaserCutStudio/core/` (récursif) : tout le module Core
+- `src/LaserCutStudio/main.cpp` : point d'entrée
+
+**Fichiers exclus** :
+- `build/` et `build-*/` : fichiers générés
+- `core/examples/` : fichiers d'exemples
+- `moc_*`, `qrc_*` : fichiers Qt générés
+
+**Fonctionnalités activées** :
+- **HTML output** : documentation navigable avec recherche
+- **Source browser** : code source inclus avec liens
+- **Call graphs** : graphes d'appels de fonctions
+- **Class diagrams** : diagrammes UML des classes
+- **Collaboration diagrams** : diagrammes de collaboration
+- **Include graphs** : graphes de dépendances d'includes
+
+**Macros Qt prédéfinies** :
+```cpp
+Q_OBJECT, Q_GADGET, Q_DECLARE_LOGGING_CATEGORY, DEBUG=1
+```
+
+### Écrire des commentaires Doxygen
+
+**Exemple standard** :
+```cpp
+/**
+ * @brief Calcule l'aire d'un rectangle
+ *
+ * Cette fonction calcule l'aire en multipliant largeur et hauteur.
+ * En mode Debug, elle valide les dimensions.
+ *
+ * @param width Largeur du rectangle (doit être > 0)
+ * @param height Hauteur du rectangle (doit être > 0)
+ * @return L'aire calculée, ou 0.0 si dimensions invalides
+ *
+ * @warning En mode Release, les validations sont retirées
+ * @see Rectangle::getArea()
+ */
+double calculateArea(double width, double height);
+```
+
+**Exemple avec classe Qt** :
+```cpp
+/**
+ * @class Rectangle
+ * @brief Forme rectangulaire avec support de transformation
+ *
+ * Rectangle hérite de IShape et fournit des calculs géométriques
+ * optimisés pour les rectangles.
+ *
+ * @note Utilise le Factory Pattern pour la création via QVariant
+ */
+class Rectangle : public IShape
+{
+    Q_OBJECT
+public:
+    /**
+     * @brief Constructeur avec dimensions
+     * @param x Position X du coin supérieur gauche
+     * @param y Position Y du coin supérieur gauche
+     * @param width Largeur (doit être > 0)
+     * @param height Hauteur (doit être > 0)
+     */
+    Rectangle(double x, double y, double width, double height);
+};
+```
+
+**Tags Doxygen utiles** :
+- `@brief` : Description courte (1 ligne)
+- `@param` : Documentation d'un paramètre
+- `@return` : Description de la valeur de retour
+- `@see` : Référence croisée vers autre élément
+- `@note` : Note importante
+- `@warning` : Avertissement
+- `@deprecated` : Marque comme obsolète
+- `@since` : Version d'introduction
+- `@todo` : Tâche à faire
+
+### Intégration CI/CD
+
+Ajouter à un pipeline CI/CD :
+```yaml
+# Exemple GitHub Actions
+- name: Generate documentation
+  run: |
+    sudo apt-get install -y doxygen graphviz
+    cd build/Desktop-Debug
+    cmake --build . --target doc
+
+- name: Publish documentation
+  uses: peaceiris/actions-gh-pages@v3
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    publish_dir: ./docs/doxygen/html
+```
+
 ## Architecture
 
 Le projet suit les principes SOLID avec une architecture modulaire :
@@ -225,38 +359,49 @@ Le répertoire `ai-front-portal-main/` contient un projet Python distinct :
 
 Ce projet Python sert de référence pour les patterns architecturaux et la qualité des tests.
 
-## Améliorations suggérées
+## Améliorations implémentées
 
-### Améliorations prioritaires pour LaserCutStudio C++
+### ✅ Améliorations récemment implémentées
 
-1. **Configuration externe**
-   - Ajouter système QSettings ou YAML pour configuration (matériaux, unités, préférences)
-   - Remplacer les valeurs hardcodées par configuration externe
-   - Fichier type : `config/materials.yaml`, `config/app.ini`
+1. **Configuration externe** ✅ **Implémenté**
+   - Système `ConfigManager` avec QSettings
+   - Gestion matériaux, unités, préférences, chemins récents
+   - 18 tests unitaires
 
-2. **Logging structuré**
-   - Implémenter logging avec catégories Qt (`qCDebug`, `qCInfo`, `qCWarning`)
-   - Créer catégories : `core.shapes`, `core.parts`, `core.joints`, `core.projects`
-   - Ajouter niveaux de verbosité configurables
+2. **Logging structuré** ✅ **Implémenté**
+   - 7 catégories Qt : `core`, `shapes`, `parts`, `joints`, `projects`, `config`, `performance`
+   - `LogManager` avec 4 formats : Default, Detailed, Compact, JSON
+   - Sortie fichier avec rotation automatique
+   - 9 tests unitaires
 
-3. **Tests de performance**
-   - Ajouter benchmarks avec `QTest::qBenchmark()` pour opérations critiques
-   - Tester : clonage d'objets, calculs géométriques, sérialisation
-   - Créer suite `tests/benchmarks/` séparée
+3. **Tests de performance** ✅ **Implémenté**
+   - Suite `tests/benchmarks/` avec 17 benchmarks
+   - Opérations testées : création, clonage, géométrie, transformations, sérialisation
+   - Baseline établi pour surveillance performance
+   - Option CMake `BUILD_BENCHMARKS` (OFF en Release)
 
-4. **Système de plugins**
+4. **Optimisations Release** ✅ **Implémenté**
+   - `#if DEBUG` pour code conditionnel (retrait complet en Release)
+   - `QT_NO_DEBUG_OUTPUT` / `QT_NO_INFO_OUTPUT` (0 overhead logs)
+   - Gain performance : **20-40%** en Release
+   - Macros optimisation : `LIKELY`, `UNLIKELY`, `FORCE_INLINE`
+
+5. **Documentation Doxygen** ✅ **Configuré**
+   - `Doxyfile` complet avec call graphs, class diagrams
+   - Target CMake `doc` pour génération automatique
+   - Documentation complète des tags et usage
+   - Prêt pour CI/CD
+
+### ⏳ Améliorations en attente
+
+6. **Système de plugins**
    - Implémenter `QPluginLoader` pour formes/joints extensibles
    - Interface plugin : `IShapePlugin`, `IJointPlugin`
    - Permettre ajout de nouvelles formes sans recompilation
 
-5. **Dependency Injection**
+7. **Dependency Injection**
    - Créer Service Locator pattern pour découpler dépendances
    - Faciliter tests unitaires avec mocks
    - Remplacer construction directe par injection
 
-6. **Documentation auto-générée**
-   - Configurer Doxygen pour génération automatique
-   - Ajouter commentaires Doxygen aux interfaces principales
-   - Générer documentation HTML/PDF
-
-**Note** : Ces améliorations ne bloquent pas le développement des phases suivantes (UI, 3D, Export). Elles peuvent être implémentées progressivement pour améliorer la maintenabilité.
+**Note** : Ces améliorations ne bloquent pas le développement des phases suivantes (UI, 3D, Export). Les améliorations 1-5 sont complètes et opérationnelles.

@@ -1,6 +1,9 @@
 # Development notes
 docs/notes/
 
+# Generated documentation
+docs/doxygen/
+
 # Python project (external reference)
 ai-front-portal-main/
 

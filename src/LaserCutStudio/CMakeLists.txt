@@ -115,5 +115,21 @@ install(TARGETS appLaserCutStudio
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
+# Documentation avec Doxygen
+find_package(Doxygen QUIET)
+if(DOXYGEN_FOUND)
+    message(STATUS "Doxygen found: ${DOXYGEN_EXECUTABLE}")
+    add_custom_target(doc
+        COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/../../Doxyfile
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/../../
+        COMMENT "Generating API documentation with Doxygen"
+        VERBATIM
+    )
+    message(STATUS "Documentation target 'doc' available (use: cmake --build . --target doc)")
+else()
+    message(STATUS "Doxygen not found. Install with: sudo apt-get install doxygen graphviz")
+    message(STATUS "Documentation target 'doc' will not be available")
+endif()
+
 # Ajoute les tests
 add_subdirectory(tests)
