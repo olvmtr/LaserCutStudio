@@ -12,6 +12,7 @@ add_executable(LaserCutStudioBenchmarks
     BenchmarkShapes.h
     BenchmarkShapes.cpp
     # Sources du module Core
+    ../../core/DebugMacros.h
     ../../core/interface/Interface.h
     ../../core/interface/Interface.cpp
     ../../core/types/Point2D.h
@@ -30,6 +31,11 @@ target_link_libraries(LaserCutStudioBenchmarks
     PRIVATE
     Qt6::Test
     Qt6::Core
+)
+
+# Définir la macro BUILD_BENCHMARKS pour le code conditionnel
+target_compile_definitions(LaserCutStudioBenchmarks PRIVATE
+    BUILD_BENCHMARKS
 )
 
 # Ajoute le benchmark à CTest

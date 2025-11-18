@@ -10,6 +10,8 @@ qt_standard_project_setup()
 
 qt_add_executable(appLaserCutStudio
     main.cpp
+    # Core Module - Debug Macros
+    core/DebugMacros.h
     # Core Module - Interface
     core/interface/Interface.h
     core/interface/Interface.cpp
