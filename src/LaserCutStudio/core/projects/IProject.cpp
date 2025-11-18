@@ -3,16 +3,14 @@
 namespace LaserCutStudio {
 namespace Core {
 
-// Initialisation de la liste statique
-QList<IProject*> IProject::s_projects;
-// Note: s_factories est maintenant dans FactoryMixin et initialisé automatiquement
+// Note: s_factories et s_instances sont maintenant dans FactoryMixin et ListManagerMixin
 
 IProject::IProject()
     : Interface()
     , m_name("Unnamed Project")
     , m_metadata()
 {
-    addProject(this);
+    registerInstance(this);
 }
 
 IProject::IProject(const QString& name)
@@ -20,7 +18,7 @@ IProject::IProject(const QString& name)
     , m_name(name)
     , m_metadata()
 {
-    addProject(this);
+    registerInstance(this);
 }
 
 IProject::IProject(const IProject& other)
@@ -35,12 +33,12 @@ IProject::IProject(const IProject& other)
         }
     }
 
-    addProject(this);
+    registerInstance(this);
 }
 
 IProject::~IProject()
 {
-    removeProject(this);
+    unregisterInstance(this);
 }
 
 void IProject::addPart(IPart* part)
@@ -94,25 +92,9 @@ bool IProject::load(const QString& filePath)
     return false;
 }
 
-void IProject::addProject(IProject* project)
-{
-    if (project && !s_projects.contains(project)) {
-        s_projects.append(project);
-    }
-}
-
-void IProject::removeProject(IProject* project)
-{
-    s_projects.removeAll(project);
-}
-
-void IProject::clearAllProjects()
-{
-    s_projects.clear();
-}
-
 // ===== Factory Pattern =====
 // Note: create(), availableTypes() et toVariant() sont maintenant fournis par FactoryMixin et Interface
+// Note: Gestion de liste (add/remove/clear) maintenant fournie par ListManagerMixin
 
 } // namespace Core
 } // namespace LaserCutStudio

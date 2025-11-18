@@ -4,9 +4,7 @@
 namespace LaserCutStudio {
 namespace Core {
 
-// Initialisation de la liste statique
-QList<IJoint*> IJoint::s_joints;
-// Note: s_factories est maintenant dans FactoryMixin et initialisé automatiquement
+// Note: s_factories et s_instances sont maintenant dans FactoryMixin et ListManagerMixin
 
 IJoint::IJoint()
     : Interface()
@@ -16,7 +14,7 @@ IJoint::IJoint()
     , m_position(Point3D())
     , m_angle(90.0)
 {
-    addJoint(this);
+    registerInstance(this);
 }
 
 IJoint::IJoint(JointType type, IPart* partA, IPart* partB, const Point3D& position, double angle)
@@ -27,7 +25,7 @@ IJoint::IJoint(JointType type, IPart* partA, IPart* partB, const Point3D& positi
     , m_position(position)
     , m_angle(angle)
 {
-    addJoint(this);
+    registerInstance(this);
 
     // Ajoute ce joint aux pièces et connecte aux signaux
     if (m_partA) {
@@ -60,13 +58,13 @@ IJoint::IJoint(const IJoint& other)
     , m_position(other.m_position)
     , m_angle(other.m_angle)
 {
-    addJoint(this);
+    registerInstance(this);
 }
 
 IJoint::~IJoint()
 {
     disconnect();
-    removeJoint(this);
+    unregisterInstance(this);
 }
 
 void IJoint::connect(IPart* partA, IPart* partB)
@@ -130,25 +128,9 @@ bool IJoint::isValid() const
     return m_partA != nullptr && m_partB != nullptr && m_partA != m_partB;
 }
 
-void IJoint::addJoint(IJoint* joint)
-{
-    if (joint && !s_joints.contains(joint)) {
-        s_joints.append(joint);
-    }
-}
-
-void IJoint::removeJoint(IJoint* joint)
-{
-    s_joints.removeAll(joint);
-}
-
-void IJoint::clearAllJoints()
-{
-    s_joints.clear();
-}
-
 // ===== Factory Pattern =====
 // Note: create(), availableTypes() et toVariant() sont maintenant fournis par FactoryMixin et Interface
+// Note: Gestion de liste (add/remove/clear) maintenant fournie par ListManagerMixin
 
 } // namespace Core
 } // namespace LaserCutStudio

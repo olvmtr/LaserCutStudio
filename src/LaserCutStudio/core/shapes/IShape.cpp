@@ -3,38 +3,20 @@
 namespace LaserCutStudio {
 namespace Core {
 
-// Initialisation de la liste statique
-QList<IShape*> IShape::s_shapes;
-// Note: s_factories est maintenant dans FactoryMixin et initialisé automatiquement
+// Note: s_factories et s_instances sont maintenant dans FactoryMixin et ListManagerMixin
+// et initialisés automatiquement
 
 IShape::IShape()
     : Interface()
 {
-    // Ajoute automatiquement cette forme à la liste
-    addShape(this);
+    // Enregistre automatiquement cette forme dans la liste via ListManagerMixin
+    registerInstance(this);
 }
 
 IShape::~IShape()
 {
-    // Retire automatiquement cette forme de la liste
-    removeShape(this);
-}
-
-void IShape::addShape(IShape* shape)
-{
-    if (shape && !s_shapes.contains(shape)) {
-        s_shapes.append(shape);
-    }
-}
-
-void IShape::removeShape(IShape* shape)
-{
-    s_shapes.removeAll(shape);
-}
-
-void IShape::clearAllShapes()
-{
-    s_shapes.clear();
+    // Désenregistre automatiquement cette forme de la liste via ListManagerMixin
+    unregisterInstance(this);
 }
 
 // ===== Factory Pattern =====

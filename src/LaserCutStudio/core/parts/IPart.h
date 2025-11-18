@@ -3,6 +3,7 @@
 
 #include "../interface/Interface.h"
 #include "../patterns/FactoryMixin.h"
+#include "../patterns/ListManagerMixin.h"
 #include "../shapes/IShape.h"
 #include "../types/Material.h"
 #include <QString>
@@ -26,8 +27,11 @@ class IJoint;
  * avec une forme 2D, une épaisseur et un matériau.
  * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
  * Utilise FactoryMixin pour le Factory Pattern (élimine la duplication).
+ * Utilise ListManagerMixin pour la gestion de la liste statique.
  */
-class IPart : public Interface, protected Patterns::FactoryMixin<IPart>
+class IPart : public Interface,
+              protected Patterns::FactoryMixin<IPart>,
+              protected Patterns::ListManagerMixin<IPart>
 {
     Q_OBJECT
 
@@ -133,11 +137,13 @@ public:
      */
     virtual QString getTypeName() const override = 0;
 
-    // Gestion de la liste statique
-    static QList<IPart*> getAllParts() { return s_parts; }
-    static void addPart(IPart* part);
-    static void removePart(IPart* part);
-    static void clearAllParts();
+    // Gestion de la liste statique (fournie par ListManagerMixin)
+    using ListManagerMixin<IPart>::getAllInstances;
+    using ListManagerMixin<IPart>::clearAllInstances;
+    using ListManagerMixin<IPart>::instanceCount;
+
+    static QList<IPart*> getAllParts() { return getAllInstances(); }
+    static void clearAllParts() { clearAllInstances(); }
 
 protected:
     IPart();
@@ -149,8 +155,6 @@ protected:
     double m_thickness;         ///< Épaisseur en mm
     Material m_material;        ///< Matériau de la pièce
     QList<IJoint*> m_joints;    ///< Joints connectés à cette pièce
-
-    static QList<IPart*> s_parts; ///< Liste statique de toutes les pièces
 };
 
 } // namespace Core

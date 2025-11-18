@@ -3,6 +3,7 @@
 
 #include "../interface/Interface.h"
 #include "../patterns/FactoryMixin.h"
+#include "../patterns/ListManagerMixin.h"
 #include "../types/JointType.h"
 #include "../types/Point3D.h"
 #include <QList>
@@ -29,8 +30,11 @@ namespace Plugins {
  * dans l'espace 3D.
  * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
  * Utilise FactoryMixin pour le Factory Pattern (élimine la duplication).
+ * Utilise ListManagerMixin pour la gestion de la liste statique.
  */
-class IJoint : public Interface, protected Patterns::FactoryMixin<IJoint>
+class IJoint : public Interface,
+               protected Patterns::FactoryMixin<IJoint>,
+               protected Patterns::ListManagerMixin<IJoint>
 {
     Q_OBJECT
     friend class Plugins::PluginManager;
@@ -132,11 +136,13 @@ public:
      */
     virtual QString getTypeName() const override = 0;
 
-    // Gestion de la liste statique
-    static QList<IJoint*> getAllJoints() { return s_joints; }
-    static void addJoint(IJoint* joint);
-    static void removeJoint(IJoint* joint);
-    static void clearAllJoints();
+    // Gestion de la liste statique (fournie par ListManagerMixin)
+    using ListManagerMixin<IJoint>::getAllInstances;
+    using ListManagerMixin<IJoint>::clearAllInstances;
+    using ListManagerMixin<IJoint>::instanceCount;
+
+    static QList<IJoint*> getAllJoints() { return getAllInstances(); }
+    static void clearAllJoints() { clearAllInstances(); }
 
 protected:
     IJoint();
@@ -148,8 +154,6 @@ protected:
     IPart* m_partB;         ///< Deuxième pièce
     Point3D m_position;     ///< Position dans l'espace 3D
     double m_angle;         ///< Angle d'assemblage en degrés
-
-    static QList<IJoint*> s_joints; ///< Liste statique de tous les joints
 };
 
 } // namespace Core

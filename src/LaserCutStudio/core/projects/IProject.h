@@ -3,6 +3,7 @@
 
 #include "../interface/Interface.h"
 #include "../patterns/FactoryMixin.h"
+#include "../patterns/ListManagerMixin.h"
 #include "../parts/IPart.h"
 #include <QString>
 #include <QList>
@@ -43,8 +44,11 @@ struct ProjectMetadata
  * nécessaires pour un assemblage complet.
  * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
  * Utilise FactoryMixin pour le Factory Pattern (élimine la duplication).
+ * Utilise ListManagerMixin pour la gestion de la liste statique.
  */
-class IProject : public Interface, protected Patterns::FactoryMixin<IProject>
+class IProject : public Interface,
+                 protected Patterns::FactoryMixin<IProject>,
+                 protected Patterns::ListManagerMixin<IProject>
 {
     Q_OBJECT
 
@@ -150,11 +154,13 @@ public:
      */
     virtual QString getTypeName() const override = 0;
 
-    // Gestion de la liste statique
-    static QList<IProject*> getAllProjects() { return s_projects; }
-    static void addProject(IProject* project);
-    static void removeProject(IProject* project);
-    static void clearAllProjects();
+    // Gestion de la liste statique (fournie par ListManagerMixin)
+    using ListManagerMixin<IProject>::getAllInstances;
+    using ListManagerMixin<IProject>::clearAllInstances;
+    using ListManagerMixin<IProject>::instanceCount;
+
+    static QList<IProject*> getAllProjects() { return getAllInstances(); }
+    static void clearAllProjects() { clearAllInstances(); }
 
 protected:
     IProject();
@@ -164,8 +170,6 @@ protected:
     QString m_name;              ///< Nom du projet
     ProjectMetadata m_metadata;  ///< Métadonnées
     QList<IPart*> m_parts;       ///< Liste des pièces
-
-    static QList<IProject*> s_projects; ///< Liste statique de tous les projets
 };
 
 } // namespace Core

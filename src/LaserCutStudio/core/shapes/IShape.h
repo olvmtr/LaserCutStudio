@@ -3,6 +3,7 @@
 
 #include "../interface/Interface.h"
 #include "../patterns/FactoryMixin.h"
+#include "../patterns/ListManagerMixin.h"
 #include "../types/Point2D.h"
 #include <QList>
 #include <QRectF>
@@ -28,8 +29,11 @@ namespace Plugins {
  * statique de toutes les formes créées.
  * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
  * Utilise FactoryMixin pour le Factory Pattern (élimine la duplication).
+ * Utilise ListManagerMixin pour la gestion de la liste statique.
  */
-class IShape : public Interface, protected Patterns::FactoryMixin<IShape>
+class IShape : public Interface,
+               protected Patterns::FactoryMixin<IShape>,
+               protected Patterns::ListManagerMixin<IShape>
 {
     Q_OBJECT
     friend class Plugins::PluginManager;
@@ -109,37 +113,27 @@ public:
      */
     virtual QString getTypeName() const override = 0;
 
-    // Gestion de la liste statique
+    // Gestion de la liste statique (fournie par ListManagerMixin)
+    using ListManagerMixin<IShape>::getAllInstances;
+    using ListManagerMixin<IShape>::clearAllInstances;
+    using ListManagerMixin<IShape>::instanceCount;
+
     /**
-     * @brief Obtient toutes les formes créées
+     * @brief Obtient toutes les formes créées (alias pour compatibilité)
      * @return Liste de toutes les formes
      */
-    static QList<IShape*> getAllShapes() { return s_shapes; }
+    static QList<IShape*> getAllShapes() { return getAllInstances(); }
 
     /**
-     * @brief Ajoute une forme à la liste
-     * @param shape Forme à ajouter
+     * @brief Vide la liste de toutes les formes (alias pour compatibilité)
      */
-    static void addShape(IShape* shape);
-
-    /**
-     * @brief Retire une forme de la liste
-     * @param shape Forme à retirer
-     */
-    static void removeShape(IShape* shape);
-
-    /**
-     * @brief Vide la liste de toutes les formes
-     */
-    static void clearAllShapes();
+    static void clearAllShapes() { clearAllInstances(); }
 
 protected:
     /**
      * @brief Constructeur
      */
     IShape();
-
-    static QList<IShape*> s_shapes; ///< Liste statique de toutes les formes
 };
 
 } // namespace Core

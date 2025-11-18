@@ -31,6 +31,7 @@ add_executable(LaserCutStudioTests
     ../core/interface/Interface.h
     ../core/interface/Interface.cpp
     ../core/patterns/FactoryMixin.h
+    ../core/patterns/ListManagerMixin.h
     ../core/types/Point2D.h
     ../core/types/Point3D.h
     ../core/types/Material.h

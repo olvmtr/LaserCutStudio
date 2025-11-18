@@ -4,9 +4,7 @@
 namespace LaserCutStudio {
 namespace Core {
 
-// Initialisation de la liste statique
-QList<IPart*> IPart::s_parts;
-// Note: s_factories est maintenant dans FactoryMixin et initialisé automatiquement
+// Note: s_factories et s_instances sont maintenant dans FactoryMixin et ListManagerMixin
 
 IPart::IPart()
     : Interface()
@@ -15,7 +13,7 @@ IPart::IPart()
     , m_thickness(3.0)
     , m_material(Material::Plywood())
 {
-    addPart(this);
+    registerInstance(this);
 }
 
 IPart::IPart(const QString& name, IShape* shape, double thickness, const Material& material)
@@ -25,7 +23,7 @@ IPart::IPart(const QString& name, IShape* shape, double thickness, const Materia
     , m_thickness(thickness)
     , m_material(material)
 {
-    addPart(this);
+    registerInstance(this);
 }
 
 IPart::IPart(const IPart& other)
@@ -34,19 +32,15 @@ IPart::IPart(const IPart& other)
     , m_shape(other.m_shape ? other.m_shape->clone() : nullptr)
     , m_thickness(other.m_thickness)
     , m_material(other.m_material)
-    , m_joints(other.m_joints) // Copie la liste de joints
+    , m_joints(other.m_joints)
 {
-    addPart(this);
+    registerInstance(this);
 }
 
 IPart::~IPart()
 {
-    // Le signal aboutToBeDestroyed() de Interface est automatiquement émis
-    // et les joints connectés via QObject::connect() reçoivent la notification
-    // et nettoient leurs pointeurs automatiquement. Plus besoin de notification manuelle!
-
     m_joints.clear();
-    removePart(this);
+    unregisterInstance(this);
 }
 
 void IPart::addJoint(IJoint* joint)
@@ -79,25 +73,9 @@ double IPart::getMass() const
     return volumeM3 * m_material.getDensity();
 }
 
-void IPart::addPart(IPart* part)
-{
-    if (part && !s_parts.contains(part)) {
-        s_parts.append(part);
-    }
-}
-
-void IPart::removePart(IPart* part)
-{
-    s_parts.removeAll(part);
-}
-
-void IPart::clearAllParts()
-{
-    s_parts.clear();
-}
-
 // ===== Factory Pattern =====
 // Note: create(), availableTypes() et toVariant() sont maintenant fournis par FactoryMixin et Interface
+// Note: Gestion de liste (add/remove/clear) maintenant fournie par ListManagerMixin
 
 } // namespace Core
 } // namespace LaserCutStudio
