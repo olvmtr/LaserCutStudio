@@ -66,6 +66,14 @@ target_link_libraries(LaserCutStudioTests
     Qt6::Gui
 )
 
+# Configuration des logs pour les tests (même que l'app principale)
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    target_compile_definitions(LaserCutStudioTests PRIVATE
+        QT_NO_DEBUG_OUTPUT
+        QT_NO_INFO_OUTPUT
+    )
+endif()
+
 # Ajoute le test à CTest
 add_test(NAME LaserCutStudioTests COMMAND LaserCutStudioTests)
 

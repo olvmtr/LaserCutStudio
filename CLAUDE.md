@@ -55,6 +55,16 @@ L'exécutable se nomme `appLaserCutStudio`.
 
 **Options CMake :**
 - `BUILD_BENCHMARKS` : Compile les tests de performance (ON en Debug, OFF en Release par défaut)
+- `ENABLE_DEBUG_LOGS_IN_RELEASE` : Active qCDebug()/qCInfo() en Release (OFF par défaut)
+
+**Niveaux de logging par build type :**
+
+| Build Type | qDebug/qCDebug | qInfo/qCInfo | qWarning/qCWarning | qCritical |
+|------------|----------------|--------------|-------------------|-----------|
+| **Debug**  | ✅ Activé      | ✅ Activé    | ✅ Activé         | ✅ Activé |
+| **Release**| ❌ Compilé out | ❌ Compilé out| ✅ Activé        | ✅ Activé |
+
+Les logs de debug/info sont **complètement retirés du binaire** en Release grâce aux macros `QT_NO_DEBUG_OUTPUT` et `QT_NO_INFO_OUTPUT` (0 impact performance).
 
 ## Architecture
 

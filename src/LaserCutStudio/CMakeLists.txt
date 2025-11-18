@@ -74,6 +74,33 @@ target_link_libraries(appLaserCutStudio
     PRIVATE Qt6::Quick
 )
 
+# Configuration des niveaux de logging selon le build type
+# En Release, désactiver debug et info par défaut (optimisation performance)
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    option(ENABLE_DEBUG_LOGS_IN_RELEASE "Enable qCDebug() in Release builds" OFF)
+
+    if(NOT ENABLE_DEBUG_LOGS_IN_RELEASE)
+        # Désactiver les logs de debug en Release
+        target_compile_definitions(appLaserCutStudio PRIVATE
+            QT_NO_DEBUG_OUTPUT      # Désactive qDebug() et qCDebug()
+            QT_NO_INFO_OUTPUT       # Désactive qInfo() et qCInfo()
+        )
+        message(STATUS "Release build: Debug and Info logging disabled")
+        message(STATUS "  - qDebug()/qCDebug() will be compiled out")
+        message(STATUS "  - qInfo()/qCInfo() will be compiled out")
+        message(STATUS "  - qWarning()/qCWarning() remain active")
+        message(STATUS "  - qCritical() remains active")
+    else()
+        message(STATUS "Release build: Debug logging ENABLED (ENABLE_DEBUG_LOGS_IN_RELEASE=ON)")
+    endif()
+elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(STATUS "Debug build: All logging levels enabled")
+    message(STATUS "  - qDebug()/qCDebug() active")
+    message(STATUS "  - qInfo()/qCInfo() active")
+    message(STATUS "  - qWarning()/qCWarning() active")
+    message(STATUS "  - qCritical() active")
+endif()
+
 include(GNUInstallDirs)
 install(TARGETS appLaserCutStudio
     BUNDLE DESTINATION .
