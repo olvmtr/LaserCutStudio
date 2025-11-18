@@ -18,13 +18,32 @@ class IJoint;
  *
  * Une pièce représente un élément physique à découper,
  * avec une forme 2D, une épaisseur et un matériau.
+ * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
  */
 class IPart : public Interface
 {
+    Q_OBJECT
+
+signals:
+    /**
+     * @brief Signal émis lorsque la forme de la pièce change
+     */
+    void shapeChanged(IShape* newShape);
+
+    /**
+     * @brief Signal émis lorsque le matériau change
+     */
+    void materialChanged(const Material& newMaterial);
+
+    /**
+     * @brief Signal émis lorsque l'épaisseur change
+     */
+    void thicknessChanged(double newThickness);
+
 public:
-    IPart();
-    IPart(const QString& name, IShape* shape, double thickness, const Material& material);
-    IPart(const IPart& other);
+    /**
+     * @brief Destructeur virtuel public (permet la destruction polymorphe)
+     */
     virtual ~IPart();
 
     /**
@@ -104,6 +123,10 @@ public:
     static void clearAllParts();
 
 protected:
+    IPart();
+    IPart(const QString& name, IShape* shape, double thickness, const Material& material);
+    IPart(const IPart& other);
+
     QString m_name;             ///< Nom de la pièce
     IShape* m_shape;            ///< Forme 2D de la pièce
     double m_thickness;         ///< Épaisseur en mm

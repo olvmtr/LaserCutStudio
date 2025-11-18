@@ -15,17 +15,21 @@ namespace Core {
  *
  * Cette interface hérite du pattern Prototype et gère une liste
  * statique de toutes les formes créées.
+ * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
  */
 class IShape : public Interface
 {
+    Q_OBJECT
+
+signals:
+    /**
+     * @brief Signal émis lorsque la géométrie de la forme change
+     */
+    void geometryChanged();
+
 public:
     /**
-     * @brief Constructeur
-     */
-    IShape();
-
-    /**
-     * @brief Destructeur virtuel
+     * @brief Destructeur virtuel public (permet la destruction polymorphe)
      */
     virtual ~IShape();
 
@@ -107,6 +111,11 @@ public:
     static void clearAllShapes();
 
 protected:
+    /**
+     * @brief Constructeur
+     */
+    IShape();
+
     static QList<IShape*> s_shapes; ///< Liste statique de toutes les formes
 };
 

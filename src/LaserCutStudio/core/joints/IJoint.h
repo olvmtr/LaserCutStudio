@@ -17,13 +17,37 @@ class IPart;
  *
  * Un joint définit comment deux pièces s'assemblent entre elles
  * dans l'espace 3D.
+ * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
  */
 class IJoint : public Interface
 {
+    Q_OBJECT
+
+signals:
+    /**
+     * @brief Signal émis lorsque partA change
+     */
+    void partAChanged(IPart* newPart);
+
+    /**
+     * @brief Signal émis lorsque partB change
+     */
+    void partBChanged(IPart* newPart);
+
+    /**
+     * @brief Signal émis lorsque la position change
+     */
+    void positionChanged(const Point3D& newPosition);
+
+    /**
+     * @brief Signal émis lorsque l'angle change
+     */
+    void angleChanged(double newAngle);
+
 public:
-    IJoint();
-    IJoint(JointType type, IPart* partA, IPart* partB, const Point3D& position, double angle);
-    IJoint(const IJoint& other);
+    /**
+     * @brief Destructeur virtuel public (permet la destruction polymorphe)
+     */
     virtual ~IJoint();
 
     /**
@@ -92,7 +116,17 @@ public:
     static void removeJoint(IJoint* joint);
     static void clearAllJoints();
 
+    /**
+     * @brief Notification qu'un Part va être détruit
+     * Appelé par le destructeur de IPart
+     */
+    void notifyPartDestroyed(IPart* part);
+
 protected:
+    IJoint();
+    IJoint(JointType type, IPart* partA, IPart* partB, const Point3D& position, double angle);
+    IJoint(const IJoint& other);
+
     JointType m_type;       ///< Type de joint
     IPart* m_partA;         ///< Première pièce
     IPart* m_partB;         ///< Deuxième pièce

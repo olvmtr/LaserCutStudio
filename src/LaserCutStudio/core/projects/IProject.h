@@ -35,13 +35,32 @@ struct ProjectMetadata
  *
  * Un projet contient toutes les pièces et les informations
  * nécessaires pour un assemblage complet.
+ * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
  */
 class IProject : public Interface
 {
+    Q_OBJECT
+
+signals:
+    /**
+     * @brief Signal émis lorsqu'une pièce est ajoutée au projet
+     */
+    void partAdded(IPart* part);
+
+    /**
+     * @brief Signal émis lorsqu'une pièce est retirée du projet
+     */
+    void partRemoved(IPart* part);
+
+    /**
+     * @brief Signal émis lorsque les métadonnées changent
+     */
+    void metadataChanged();
+
 public:
-    IProject();
-    IProject(const QString& name);
-    IProject(const IProject& other);
+    /**
+     * @brief Destructeur virtuel public (permet la destruction polymorphe)
+     */
     virtual ~IProject();
 
     /**
@@ -121,6 +140,10 @@ public:
     static void clearAllProjects();
 
 protected:
+    IProject();
+    IProject(const QString& name);
+    IProject(const IProject& other);
+
     QString m_name;              ///< Nom du projet
     ProjectMetadata m_metadata;  ///< Métadonnées
     QList<IPart*> m_parts;       ///< Liste des pièces
