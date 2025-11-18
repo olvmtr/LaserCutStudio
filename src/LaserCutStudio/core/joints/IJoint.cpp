@@ -29,12 +29,26 @@ IJoint::IJoint(JointType type, IPart* partA, IPart* partB, const Point3D& positi
 {
     addJoint(this);
 
-    // Ajoute ce joint aux pièces
+    // Ajoute ce joint aux pièces et connecte aux signaux
     if (m_partA) {
         m_partA->addJoint(this);
+        // Connecte au signal aboutToBeDestroyed pour nettoyage automatique
+        QObject::connect(m_partA, &Interface::aboutToBeDestroyed,
+                        this, [this](Interface* destroyedPart) {
+            if (m_partA == destroyedPart) {
+                m_partA = nullptr;
+            }
+        });
     }
     if (m_partB) {
         m_partB->addJoint(this);
+        // Connecte au signal aboutToBeDestroyed pour nettoyage automatique
+        QObject::connect(m_partB, &Interface::aboutToBeDestroyed,
+                        this, [this](Interface* destroyedPart) {
+            if (m_partB == destroyedPart) {
+                m_partB = nullptr;
+            }
+        });
     }
 }
 
@@ -57,12 +71,16 @@ IJoint::~IJoint()
 
 void IJoint::connect(IPart* partA, IPart* partB)
 {
-    // Retire le joint des anciennes pièces
+    // Retire le joint des anciennes pièces et déconnecte les signaux
     if (m_partA) {
         m_partA->removeJoint(this);
+        // Déconnecte tous les signaux de l'ancienne pièce vers ce joint
+        QObject::disconnect(m_partA, nullptr, this, nullptr);
     }
     if (m_partB) {
         m_partB->removeJoint(this);
+        // Déconnecte tous les signaux de l'ancienne pièce vers ce joint
+        QObject::disconnect(m_partB, nullptr, this, nullptr);
     }
 
     // Connecte aux nouvelles pièces
@@ -71,9 +89,23 @@ void IJoint::connect(IPart* partA, IPart* partB)
 
     if (m_partA) {
         m_partA->addJoint(this);
+        // Connecte au signal aboutToBeDestroyed pour nettoyage automatique
+        QObject::connect(m_partA, &Interface::aboutToBeDestroyed,
+                        this, [this](Interface* destroyedPart) {
+            if (m_partA == destroyedPart) {
+                m_partA = nullptr;
+            }
+        });
     }
     if (m_partB) {
         m_partB->addJoint(this);
+        // Connecte au signal aboutToBeDestroyed pour nettoyage automatique
+        QObject::connect(m_partB, &Interface::aboutToBeDestroyed,
+                        this, [this](Interface* destroyedPart) {
+            if (m_partB == destroyedPart) {
+                m_partB = nullptr;
+            }
+        });
     }
 }
 
@@ -81,10 +113,14 @@ void IJoint::disconnect()
 {
     if (m_partA) {
         m_partA->removeJoint(this);
+        // Déconnecte les signaux
+        QObject::disconnect(m_partA, nullptr, this, nullptr);
         m_partA = nullptr;
     }
     if (m_partB) {
         m_partB->removeJoint(this);
+        // Déconnecte les signaux
+        QObject::disconnect(m_partB, nullptr, this, nullptr);
         m_partB = nullptr;
     }
 }
@@ -109,18 +145,6 @@ void IJoint::removeJoint(IJoint* joint)
 void IJoint::clearAllJoints()
 {
     s_joints.clear();
-}
-
-void IJoint::notifyPartDestroyed(IPart* part)
-{
-    // Met à nullptr les pointeurs vers le Part détruit
-    // sans essayer de manipuler le Part
-    if (m_partA == part) {
-        m_partA = nullptr;
-    }
-    if (m_partB == part) {
-        m_partB = nullptr;
-    }
 }
 
 // ===== Factory Pattern =====

@@ -144,12 +144,6 @@ public:
     static void removeJoint(IJoint* joint);
     static void clearAllJoints();
 
-    /**
-     * @brief Notification qu'un Part va être détruit
-     * Appelé par le destructeur de IPart
-     */
-    void notifyPartDestroyed(IPart* part);
-
 protected:
     IJoint();
     IJoint(JointType type, IPart* partA, IPart* partB, const Point3D& position, double angle);
