@@ -296,3 +296,87 @@ void TestJoint::testSignalsAutoCleanup()
 
     delete joint;
 }
+
+void TestJoint::testSignalsDisconnect()
+{
+    // Teste que disconnect() déconnecte bien les signaux
+    Rectangle* shapeA = new Rectangle(0, 0, 10, 10);
+    Rectangle* shapeB = new Rectangle(0, 0, 10, 10);
+    Part* partA = new Part("PartA", shapeA, 3.0, Material::Wood());
+    Part* partB = new Part("PartB", shapeB, 3.0, Material::Wood());
+
+    TabJoint* joint = new TabJoint(partA, partB, Point3D(0, 0, 0), 90.0, 10.0, 3.0);
+
+    // Vérifie la connexion initiale
+    QCOMPARE(joint->getPartA(), partA);
+    QCOMPARE(joint->getPartB(), partB);
+
+    // Appelle disconnect()
+    joint->disconnect();
+
+    // Vérifie que les pointeurs sont à nullptr
+    QVERIFY(joint->getPartA() == nullptr);
+    QVERIFY(joint->getPartB() == nullptr);
+
+    // Maintenant, détruire les parts ne devrait pas causer de problème
+    // car les signaux ont été déconnectés
+    delete partA;
+    delete partB;
+    delete shapeA;
+    delete shapeB;
+
+    // Le joint devrait toujours être OK (pointeurs déjà à nullptr)
+    QVERIFY(joint->getPartA() == nullptr);
+    QVERIFY(joint->getPartB() == nullptr);
+
+    delete joint;
+}
+
+void TestJoint::testSignalsReconnect()
+{
+    // Teste la reconnexion à de nouveaux Parts
+    Rectangle* shapeA = new Rectangle(0, 0, 10, 10);
+    Rectangle* shapeB = new Rectangle(0, 0, 10, 10);
+    Rectangle* shapeC = new Rectangle(0, 0, 15, 15);
+    Rectangle* shapeD = new Rectangle(0, 0, 20, 20);
+
+    Part* partA = new Part("PartA", shapeA, 3.0, Material::Wood());
+    Part* partB = new Part("PartB", shapeB, 3.0, Material::Wood());
+    Part* partC = new Part("PartC", shapeC, 3.0, Material::Wood());
+    Part* partD = new Part("PartD", shapeD, 3.0, Material::Wood());
+
+    TabJoint* joint = new TabJoint(partA, partB, Point3D(0, 0, 0), 90.0, 10.0, 3.0);
+
+    // Vérifie la connexion initiale
+    QCOMPARE(joint->getPartA(), partA);
+    QCOMPARE(joint->getPartB(), partB);
+
+    // Reconnecte à de nouveaux parts
+    joint->connect(partC, partD);
+
+    // Vérifie la nouvelle connexion
+    QCOMPARE(joint->getPartA(), partC);
+    QCOMPARE(joint->getPartB(), partD);
+
+    // Détruit les anciens parts - ne devrait pas affecter le joint
+    // car les signaux ont été déconnectés lors du connect()
+    delete partA;
+    delete partB;
+    delete shapeA;
+    delete shapeB;
+
+    // Le joint devrait toujours pointer vers C et D
+    QCOMPARE(joint->getPartA(), partC);
+    QCOMPARE(joint->getPartB(), partD);
+
+    // Détruit les nouveaux parts - devrait déclencher le cleanup
+    delete partC;
+    delete shapeC;
+
+    QVERIFY(joint->getPartA() == nullptr);
+    QCOMPARE(joint->getPartB(), partD);
+
+    delete partD;
+    delete shapeD;
+    delete joint;
+}

@@ -33,8 +33,10 @@ private slots:
     void testFactoryToVariant();
     void testFactoryRoundtrip();
 
-    // Tests du système Signals/Slots
+    // Tests du système Signals/Slots (logique métier uniquement)
     void testSignalsAutoCleanup();
+    void testSignalsDisconnect();
+    void testSignalsReconnect();
 };
 
 #endif // TESTJOINT_H
