@@ -25,17 +25,36 @@ LaserCutStudio est une application desktop pour concevoir des projets de découp
 Le projet utilise CMake et se compile avec Qt Creator ou en ligne de commande :
 
 ```bash
-# Depuis le répertoire src/LaserCutStudio
+# Build Debug (avec benchmarks)
 mkdir -p build/Desktop-Debug
 cd build/Desktop-Debug
-cmake ../..
+cmake ../.. -DCMAKE_BUILD_TYPE=Debug
+cmake --build .
+
+# Build Release (sans benchmarks par défaut)
+mkdir -p build/Desktop-Release
+cd build/Desktop-Release
+cmake ../.. -DCMAKE_BUILD_TYPE=Release
+cmake --build .
+
+# Forcer les benchmarks en Release (optionnel)
+cmake ../.. -DCMAKE_BUILD_TYPE=Release -DBUILD_BENCHMARKS=ON
 cmake --build .
 
 # Exécuter l'application
 ./appLaserCutStudio
+
+# Exécuter les tests
+./tests/LaserCutStudioTests
+
+# Exécuter les benchmarks (si compilés)
+./tests/benchmarks/LaserCutStudioBenchmarks
 ```
 
 L'exécutable se nomme `appLaserCutStudio`.
+
+**Options CMake :**
+- `BUILD_BENCHMARKS` : Compile les tests de performance (ON en Debug, OFF en Release par défaut)
 
 ## Architecture
 

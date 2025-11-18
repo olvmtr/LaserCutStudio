@@ -74,5 +74,17 @@ set_target_properties(LaserCutStudioTests PROPERTIES
     AUTOMOC ON
 )
 
-# Ajoute les benchmarks
-add_subdirectory(benchmarks)
+# Option pour compiler les benchmarks (activée par défaut en Debug uniquement)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    option(BUILD_BENCHMARKS "Build performance benchmarks" ON)
+else()
+    option(BUILD_BENCHMARKS "Build performance benchmarks" OFF)
+endif()
+
+# Ajoute les benchmarks si l'option est activée
+if(BUILD_BENCHMARKS)
+    message(STATUS "Building benchmarks (BUILD_BENCHMARKS=ON)")
+    add_subdirectory(benchmarks)
+else()
+    message(STATUS "Skipping benchmarks (BUILD_BENCHMARKS=OFF)")
+endif()
