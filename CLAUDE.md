@@ -66,61 +66,75 @@ L'exécutable se nomme `appLaserCutStudio`.
 
 Les logs de debug/info sont **complètement retirés du binaire** en Release grâce aux macros `QT_NO_DEBUG_OUTPUT` et `QT_NO_INFO_OUTPUT` (0 impact performance).
 
-## Macros de debug conditionnelles
+## Code debug conditionnel avec #if DEBUG
 
-Le fichier `core/DebugMacros.h` fournit des macros pour écrire du code qui s'optimise automatiquement en Release :
+Le fichier `core/DebugMacros.h` garantit que `DEBUG` est défini en mode Debug, permettant d'utiliser `#if DEBUG` partout dans le code.
 
-### Macros disponibles
-
-| Macro | Description | Exemple |
-|-------|-------------|---------|
-| `DEBUG_ONLY(code)` | Exécute du code uniquement en Debug | `DEBUG_ONLY(qDebug() << x;)` |
-| `DEBUG_ASSERT(cond, msg)` | Assertion retirée en Release | `DEBUG_ASSERT(ptr != nullptr, "Null ptr")` |
-| `DEBUG_VALIDATE(code)` | Validation étendue en Debug | `DEBUG_VALIDATE({ if (!valid()) return; })` |
-| `DEBUG_MEASURE_TIME(label)` | Mesure temps d'exécution en Debug | `DEBUG_MEASURE_TIME("Calc") { calc(); }` |
-| `BENCHMARK_ONLY(code)` | Code de benchmark conditionnel | `BENCHMARK_ONLY(runBench();)` |
-| `LIKELY(x)` / `UNLIKELY(x)` | Hints d'optimisation compilateur | `if (LIKELY(ptr)) { ... }` |
-| `FORCE_INLINE` | Force l'inlining d'une fonction | `FORCE_INLINE void fast() { }` |
-
-### Exemple d'utilisation
+### Utilisation standard
 
 ```cpp
 #include "core/DebugMacros.h"
 
 double calculateArea(double width, double height)
 {
-    // Assertions retirées en Release (0 overhead)
-    DEBUG_ASSERT(width > 0, "Width must be positive");
-    DEBUG_ASSERT(height > 0, "Height must be positive");
-
-    // Validation étendue uniquement en Debug
-    DEBUG_VALIDATE({
-        if (width > 10000) {
-            qWarning() << "Unusually large width:" << width;
+    #if DEBUG
+        // Validations en Debug uniquement
+        if (width <= 0 || height <= 0) {
+            qCritical() << "Invalid dimensions:" << width << "x" << height;
+            return 0.0;
         }
-    })
+    #endif
 
     double area = width * height;
 
-    // Log retiré en Release
-    DEBUG_ONLY(qDebug() << "Area:" << area;)
+    #if DEBUG
+        qDebug() << "Calculated area:" << area;
+    #endif
 
     return area;
 }
 ```
 
+### Classes et méthodes debug
+
+```cpp
+class MyClass
+{
+public:
+    void process() {
+        doWork();
+
+        #if DEBUG
+            validateState();
+        #endif
+    }
+
+    // Méthodes disponibles uniquement en Debug
+    #if DEBUG
+        void validateState() {
+            qDebug() << "Validating...";
+        }
+    #endif
+};
+```
+
+### Macros d'optimisation disponibles
+
+| Macro | Usage | Description |
+|-------|-------|-------------|
+| `LIKELY(x)` | `if (LIKELY(ptr)) { }` | Indique au compilateur que la condition est probable |
+| `UNLIKELY(x)` | `if (UNLIKELY(err)) { }` | Indique que la condition est rare |
+| `FORCE_INLINE` | `FORCE_INLINE void f() { }` | Force l'inlining d'une fonction |
+| `UNUSED(x)` | `UNUSED(param);` | Évite warning variable inutilisée |
+
 ### Impact performance
 
-**Sans macros (Release)** :
-- Assertions exécutées : ~5-10% overhead
-- Logs compilés : ~10-20% overhead
-- Code validation : +5-15% taille binaire
+**Code Debug avec #if DEBUG** :
+- Code entre `#if DEBUG/#endif` : **COMPLÈTEMENT RETIRÉ** en Release
+- 0 overhead en Release (pas dans le binaire)
+- Gain : **20-40% amélioration performance** vs code sans conditions
 
-**Avec macros (Release)** :
-- Tout retiré : **0% overhead**
-- Gain total : **20-40% amélioration performance**
-
-Voir `core/examples/DebugMacrosExample.cpp` pour plus d'exemples.
+Voir `core/examples/DebugExample.cpp` pour des exemples complets.
 
 ## Architecture
 

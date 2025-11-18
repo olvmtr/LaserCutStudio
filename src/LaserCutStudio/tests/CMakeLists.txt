@@ -66,6 +66,11 @@ target_link_libraries(LaserCutStudioTests
     Qt6::Gui
 )
 
+# Définir la macro DEBUG en mode Debug
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions(LaserCutStudioTests PRIVATE DEBUG)
+endif()
+
 # Configuration des logs pour les tests (même que l'app principale)
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     target_compile_definitions(LaserCutStudioTests PRIVATE

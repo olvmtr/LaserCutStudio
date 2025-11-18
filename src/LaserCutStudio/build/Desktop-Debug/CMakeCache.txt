@@ -14,13 +14,17 @@
 # EXTERNAL cache entries
 ########################
 
+//Build performance benchmarks
+BUILD_BENCHMARKS:BOOL=ON
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/llvm-addr2line-18
 
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/llvm-ar-18
 
-//No help, variable specified on the command line.
+//Choose the type of build, options are: None Debug Release RelWithDebInfo
+// MinSizeRel ...
 CMAKE_BUILD_TYPE:STRING=Debug
 
 //Enable colored diagnostics throughout.
@@ -271,6 +275,15 @@ CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Enable qCDebug() output
+ENABLE_DEBUG_LOGGING:BOOL=ON
+
+//Enable qCInfo() output
+ENABLE_INFO_LOGGING:BOOL=ON
+
+//Enable qCWarning() output
+ENABLE_WARNING_LOGGING:BOOL=ON
+
 //Value Computed by CMake
 LaserCutStudio_BINARY_DIR:STATIC=/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug
 
@@ -520,7 +533,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

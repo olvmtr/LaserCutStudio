@@ -76,6 +76,11 @@ target_link_libraries(appLaserCutStudio
     PRIVATE Qt6::Quick
 )
 
+# Définir la macro DEBUG en mode Debug (pour #if DEBUG dans le code)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions(appLaserCutStudio PRIVATE DEBUG)
+endif()
+
 # Configuration des niveaux de logging selon le build type
 # En Release, désactiver debug et info par défaut (optimisation performance)
 if(CMAKE_BUILD_TYPE STREQUAL "Release")

@@ -1,0 +1,798 @@
+[
+    {
+        "classes": [
+            {
+                "className": "Interface",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": true,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "id",
+                        "read": "getId",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QUuid",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Interface",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "self",
+                                "type": "Interface*"
+                            }
+                        ],
+                        "name": "aboutToBeDestroyed",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "Interface.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "LogManager",
+                "enums": [
+                    {
+                        "isClass": true,
+                        "isFlag": false,
+                        "name": "Format",
+                        "values": [
+                            "Default",
+                            "Detailed",
+                            "Compact",
+                            "Json"
+                        ]
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::LogManager",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "loggingConfigChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "LogManager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Shapes"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Circular shape"
+                    }
+                ],
+                "className": "Circle",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "centerX",
+                        "notify": "centerXChanged",
+                        "read": "getCenterX",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setCenterX"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "centerY",
+                        "notify": "centerYChanged",
+                        "read": "getCenterY",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setCenterY"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "radius",
+                        "notify": "radiusChanged",
+                        "read": "getRadius",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setRadius"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Circle",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newX",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "centerXChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newY",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "centerYChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newRadius",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "radiusChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IShape"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "Circle.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "IShape",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::IShape",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "geometryChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "IShape.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Shapes"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Rectangular shape"
+                    }
+                ],
+                "className": "Rectangle",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "x",
+                        "notify": "xChanged",
+                        "read": "getX",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setX"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "y",
+                        "notify": "yChanged",
+                        "read": "getY",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setY"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "width",
+                        "notify": "widthChanged",
+                        "read": "getWidth",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setWidth"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "height",
+                        "notify": "heightChanged",
+                        "read": "getHeight",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setHeight"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Rectangle",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newX",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "xChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newY",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "yChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newWidth",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "widthChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newHeight",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "heightChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IShape"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "Rectangle.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "IProject",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::IProject",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "part",
+                                "type": "IPart*"
+                            }
+                        ],
+                        "name": "partAdded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "part",
+                                "type": "IPart*"
+                            }
+                        ],
+                        "name": "partRemoved",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "metadataChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "IProject.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Projects"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Complete laser cutting project with parts and metadata"
+                    }
+                ],
+                "className": "Project",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Project",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IProject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "Project.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "IPart",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::IPart",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newShape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "shapeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newMaterial",
+                                "type": "Material"
+                            }
+                        ],
+                        "name": "materialChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newThickness",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "thicknessChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "IPart.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Parts"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Basic part with shape, thickness and material"
+                    }
+                ],
+                "className": "Part",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Part",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IPart"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "Part.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Joints"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Finger joint (box joint) for corner assembly"
+                    }
+                ],
+                "className": "FingerJoint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "fingerCount",
+                        "notify": "fingerCountChanged",
+                        "read": "getFingerCount",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false,
+                        "write": "setFingerCount"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "fingerWidth",
+                        "notify": "fingerWidthChanged",
+                        "read": "getFingerWidth",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setFingerWidth"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::FingerJoint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newCount",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "fingerCountChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newWidth",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "fingerWidthChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IJoint"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "FingerJoint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "IJoint",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::IJoint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newPart",
+                                "type": "IPart*"
+                            }
+                        ],
+                        "name": "partAChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newPart",
+                                "type": "IPart*"
+                            }
+                        ],
+                        "name": "partBChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newPosition",
+                                "type": "Point3D"
+                            }
+                        ],
+                        "name": "positionChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newAngle",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "angleChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "IJoint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Joints"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Tab and slot joint for perpendicular assembly"
+                    }
+                ],
+                "className": "TabJoint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "tabWidth",
+                        "notify": "tabWidthChanged",
+                        "read": "getTabWidth",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setTabWidth"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "tabDepth",
+                        "notify": "tabDepthChanged",
+                        "read": "getTabDepth",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setTabDepth"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::TabJoint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newWidth",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "tabWidthChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newDepth",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "tabDepthChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IJoint"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "TabJoint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "ConfigManager",
+                "enums": [
+                    {
+                        "isClass": true,
+                        "isFlag": false,
+                        "name": "Unit",
+                        "values": [
+                            "Millimeters",
+                            "Centimeters",
+                            "Inches"
+                        ]
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::ConfigManager",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "configurationChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "materialsChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ConfigManager.h",
+        "outputRevision": 68
+    }
+]

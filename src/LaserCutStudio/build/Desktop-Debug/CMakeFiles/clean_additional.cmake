@@ -9,5 +9,8 @@ if("${CONFIG}" STREQUAL "" OR "${CONFIG}" STREQUAL "Debug")
   "tests/CMakeFiles/LaserCutStudioTests_autogen.dir/AutogenUsed.txt"
   "tests/CMakeFiles/LaserCutStudioTests_autogen.dir/ParseCache.txt"
   "tests/LaserCutStudioTests_autogen"
+  "tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen.dir/AutogenUsed.txt"
+  "tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen.dir/ParseCache.txt"
+  "tests/benchmarks/LaserCutStudioBenchmarks_autogen"
   )
 endif()

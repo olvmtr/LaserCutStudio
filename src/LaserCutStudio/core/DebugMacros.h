@@ -5,148 +5,51 @@
  * @file DebugMacros.h
  * @brief Macros de debug conditionnelles pour optimiser les builds Release
  *
- * Ces macros permettent de retirer complètement du code de debug/validation
- * en mode Release pour optimiser les performances.
+ * Ce fichier garantit que la macro DEBUG est définie en mode Debug
+ * pour permettre l'utilisation de #if DEBUG dans tout le code.
  */
 
+#include <QLoggingCategory>
+
+// ============================================================================
+// DÉTECTION ET DÉFINITION DE DEBUG
+// ============================================================================
+
 // Détection automatique du mode Debug/Release
-#if defined(QT_DEBUG) || defined(_DEBUG) || !defined(NDEBUG)
+// Ordre de priorité : DEBUG (défini par CMake) > QT_DEBUG > _DEBUG > !NDEBUG
+#if defined(DEBUG) || defined(QT_DEBUG) || defined(_DEBUG) || !defined(NDEBUG)
     #define LASERCUTSTUDIO_DEBUG 1
 #else
     #define LASERCUTSTUDIO_DEBUG 0
 #endif
 
+// S'assurer que DEBUG est défini en mode Debug
+#ifndef DEBUG
+    #if LASERCUTSTUDIO_DEBUG
+        #define DEBUG 1
+    #endif
+#endif
+
 // ============================================================================
-// MACROS DE DEBUG
+// UTILISATION
 // ============================================================================
 
 /**
- * @brief Exécute du code uniquement en Debug
+ * Usage dans le code :
  *
- * Exemple:
  * @code
- * DEBUG_ONLY(
- *     qDebug() << "Variable x =" << x;
+ * #if DEBUG
+ *     qDebug() << "Debug message";
  *     validateInternalState();
- * )
+ * #endif
  * @endcode
- */
-#if LASERCUTSTUDIO_DEBUG
-    #define DEBUG_ONLY(code) code
-#else
-    #define DEBUG_ONLY(code)
-#endif
-
-/**
- * @brief Assertion qui ne s'exécute qu'en Debug
  *
- * Plus performant que Q_ASSERT car complètement retiré en Release.
- *
- * Exemple:
- * @code
- * DEBUG_ASSERT(pointer != nullptr, "Pointer must not be null");
- * DEBUG_ASSERT(width > 0 && height > 0, "Dimensions must be positive");
- * @endcode
+ * En Release : Le code entre #if DEBUG/#endif est COMPLÈTEMENT RETIRÉ
+ *              par le préprocesseur (0 overhead, pas dans le binaire)
  */
-#if LASERCUTSTUDIO_DEBUG
-    #define DEBUG_ASSERT(condition, message) \
-        do { \
-            if (!(condition)) { \
-                qCritical() << "ASSERTION FAILED:" << message \
-                           << "\n  File:" << __FILE__ \
-                           << "\n  Line:" << __LINE__ \
-                           << "\n  Function:" << Q_FUNC_INFO; \
-                Q_ASSERT(condition); \
-            } \
-        } while(0)
-#else
-    #define DEBUG_ASSERT(condition, message) ((void)0)
-#endif
-
-/**
- * @brief Validation étendue uniquement en Debug
- *
- * Exemple:
- * @code
- * DEBUG_VALIDATE({
- *     if (!isInternalStateValid()) {
- *         qWarning() << "Invalid internal state detected";
- *         return false;
- *     }
- * })
- * @endcode
- */
-#if LASERCUTSTUDIO_DEBUG
-    #define DEBUG_VALIDATE(code) code
-#else
-    #define DEBUG_VALIDATE(code)
-#endif
-
-/**
- * @brief Mesure de performance uniquement en Debug
- *
- * Exemple:
- * @code
- * DEBUG_MEASURE_TIME("Complex calculation") {
- *     // Code à mesurer
- *     complexCalculation();
- * }
- * @endcode
- */
-#if LASERCUTSTUDIO_DEBUG
-    #include <QElapsedTimer>
-    #define DEBUG_MEASURE_TIME(label) \
-        QElapsedTimer _debugTimer_##__LINE__; \
-        _debugTimer_##__LINE__.start(); \
-        auto _debugTimerGuard_##__LINE__ = qScopeGuard([&]() { \
-            qDebug() << "[PERF]" << label << "took" \
-                     << _debugTimer_##__LINE__.elapsed() << "ms"; \
-        }); \
-        if (true)
-#else
-    #define DEBUG_MEASURE_TIME(label) if (false)
-#endif
 
 // ============================================================================
-// MACROS DE BENCHMARK
-// ============================================================================
-
-/**
- * @brief Exécute du code uniquement si les benchmarks sont activés
- *
- * Exemple:
- * @code
- * BENCHMARK_ONLY(
- *     BenchmarkShapes bench;
- *     bench.runAll();
- * )
- * @endcode
- */
-#ifdef BUILD_BENCHMARKS
-    #define BENCHMARK_ONLY(code) code
-#else
-    #define BENCHMARK_ONLY(code)
-#endif
-
-/**
- * @brief Fonction ou méthode disponible uniquement avec benchmarks
- *
- * Exemple:
- * @code
- * class MyClass {
- * public:
- *     BENCHMARK_METHOD void runBenchmark();
- * };
- * @endcode
- */
-#ifdef BUILD_BENCHMARKS
-    #define BENCHMARK_METHOD
-#else
-    #define BENCHMARK_METHOD [[maybe_unused]]
-#endif
-
-// ============================================================================
-// MACROS D'OPTIMISATION
+// MACROS D'OPTIMISATION (indépendantes de DEBUG)
 // ============================================================================
 
 /**
@@ -155,7 +58,7 @@
  * Exemple:
  * @code
  * if (LIKELY(pointer != nullptr)) {
- *     // Cas normal
+ *     // Cas normal (optimisé par le compilateur)
  * } else {
  *     // Cas rare
  * }
