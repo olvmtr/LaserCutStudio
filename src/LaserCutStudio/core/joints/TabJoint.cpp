@@ -31,5 +31,23 @@ IJoint* TabJoint::clone() const
     return new TabJoint(*this);
 }
 
+void TabJoint::setTabWidth(double width)
+{
+    // Utilise qFuzzyCompare pour comparaison de doubles
+    if (!qFuzzyCompare(m_tabWidth, width)) {
+        m_tabWidth = width;
+        emit tabWidthChanged(width);
+    }
+}
+
+void TabJoint::setTabDepth(double depth)
+{
+    // Utilise qFuzzyCompare pour comparaison de doubles
+    if (!qFuzzyCompare(m_tabDepth, depth)) {
+        m_tabDepth = depth;
+        emit tabDepthChanged(depth);
+    }
+}
+
 } // namespace Core
 } // namespace LaserCutStudio

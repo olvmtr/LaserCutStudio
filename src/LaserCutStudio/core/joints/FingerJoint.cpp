@@ -31,5 +31,21 @@ IJoint* FingerJoint::clone() const
     return new FingerJoint(*this);
 }
 
+void FingerJoint::setFingerCount(int count)
+{
+    if (m_fingerCount != count) {
+        m_fingerCount = count;
+        emit fingerCountChanged(count);
+    }
+}
+
+void FingerJoint::setFingerWidth(double width)
+{
+    if (!qFuzzyCompare(m_fingerWidth, width)) {
+        m_fingerWidth = width;
+        emit fingerWidthChanged(width);
+    }
+}
+
 } // namespace Core
 } // namespace LaserCutStudio
