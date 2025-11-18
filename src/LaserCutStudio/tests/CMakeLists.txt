@@ -73,3 +73,6 @@ add_test(NAME LaserCutStudioTests COMMAND LaserCutStudioTests)
 set_target_properties(LaserCutStudioTests PROPERTIES
     AUTOMOC ON
 )
+
+# Ajoute les benchmarks
+add_subdirectory(benchmarks)
