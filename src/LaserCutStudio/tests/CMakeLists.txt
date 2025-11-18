@@ -23,6 +23,8 @@ add_executable(LaserCutStudioTests
     TestConfigManager.cpp
     TestLogging.h
     TestLogging.cpp
+    TestPluginManager.h
+    TestPluginManager.cpp
     # Sources du module Core
     ../core/interface/Interface.h
     ../core/interface/Interface.cpp
@@ -56,6 +58,10 @@ add_executable(LaserCutStudioTests
     ../core/logging/LogCategories.cpp
     ../core/logging/LogManager.h
     ../core/logging/LogManager.cpp
+    ../core/plugins/IShapePlugin.h
+    ../core/plugins/IJointPlugin.h
+    ../core/plugins/PluginManager.h
+    ../core/plugins/PluginManager.cpp
 )
 
 # Lie les bibliothèques Qt

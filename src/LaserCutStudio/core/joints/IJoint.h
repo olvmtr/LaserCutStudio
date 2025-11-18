@@ -14,8 +14,12 @@
 namespace LaserCutStudio {
 namespace Core {
 
-// Forward declaration
+// Forward declarations
 class IPart;
+
+namespace Plugins {
+    class PluginManager;
+}
 
 /**
  * @brief Interface pour les assemblages entre pièces
@@ -27,6 +31,7 @@ class IPart;
 class IJoint : public Interface
 {
     Q_OBJECT
+    friend class Plugins::PluginManager;
 
 signals:
     /**

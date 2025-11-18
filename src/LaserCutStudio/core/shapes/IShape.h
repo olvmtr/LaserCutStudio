@@ -15,6 +15,11 @@
 namespace LaserCutStudio {
 namespace Core {
 
+// Forward declarations
+namespace Plugins {
+    class PluginManager;
+}
+
 /**
  * @brief Interface pour les formes géométriques 2D
  *
@@ -25,6 +30,7 @@ namespace Core {
 class IShape : public Interface
 {
     Q_OBJECT
+    friend class Plugins::PluginManager;
 
 signals:
     /**

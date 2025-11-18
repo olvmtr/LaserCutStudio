@@ -52,6 +52,11 @@ qt_add_executable(appLaserCutStudio
     core/logging/LogCategories.cpp
     core/logging/LogManager.h
     core/logging/LogManager.cpp
+    # Core Module - Plugins
+    core/plugins/IShapePlugin.h
+    core/plugins/IJointPlugin.h
+    core/plugins/PluginManager.h
+    core/plugins/PluginManager.cpp
 )
 
 qt_add_qml_module(appLaserCutStudio

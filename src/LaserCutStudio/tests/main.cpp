@@ -8,6 +8,7 @@
 #include "TestProject.h"
 #include "TestConfigManager.h"
 #include "TestLogging.h"
+#include "TestPluginManager.h"
 
 int main(int argc, char *argv[])
 {
@@ -48,6 +49,11 @@ int main(int argc, char *argv[])
     {
         LaserCutStudio::Tests::TestLogging testLogging;
         status |= QTest::qExec(&testLogging, argc, argv);
+    }
+
+    {
+        TestPluginManager testPluginManager;
+        status |= QTest::qExec(&testPluginManager, argc, argv);
     }
 
     return status;

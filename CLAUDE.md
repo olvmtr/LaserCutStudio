@@ -270,6 +270,207 @@ Ajouter à un pipeline CI/CD :
     publish_dir: ./docs/doxygen/html
 ```
 
+## Système de plugins Qt
+
+Le projet supporte les **plugins dynamiques** via `QPluginLoader`, permettant d'ajouter de nouvelles formes et joints sans recompiler l'application.
+
+### Architecture des plugins
+
+**Interfaces disponibles** :
+- `IShapePlugin` : Ajouter de nouvelles formes géométriques (polygones, étoiles, engrenages, etc.)
+- `IJointPlugin` : Ajouter de nouveaux types de connexions d'assemblage
+
+**Mécanisme** :
+1. Les plugins implémentent une interface (`IShapePlugin` ou `IJointPlugin`)
+2. Le `PluginManager` (Singleton) découvre et charge les plugins au démarrage
+3. Les plugins sont enregistrés automatiquement dans le Factory Pattern
+4. Les formes/joints de plugins sont utilisables exactement comme les types built-in
+
+### Créer un plugin de forme
+
+**Exemple : Plugin Polygon**
+
+```cpp
+// PolygonPlugin.h
+class PolygonPlugin : public QObject, public IShapePlugin
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "com.lasercutstudio.IShapePlugin" FILE "polygon.json")
+    Q_INTERFACES(LaserCutStudio::Core::Plugins::IShapePlugin)
+
+public:
+    QString shapeName() const override { return "Polygon"; }
+    QString shapeDescription() const override {
+        return "Polygone régulier à N côtés";
+    }
+    QString version() const override { return "1.0.0"; }
+    QString author() const override { return "Votre Nom"; }
+
+    IShape* createShape(const QVariant& params) const override {
+        QVariantMap map = params.toMap();
+        double centerX = map["centerX"].toDouble();
+        double centerY = map["centerY"].toDouble();
+        double radius = map["radius"].toDouble();
+        int sides = map["sides"].toInt();
+
+        if (sides < 3 || sides > 100) return nullptr;
+        return new Polygon(centerX, centerY, radius, sides);
+    }
+
+    QVariant defaultParameters() const override {
+        QVariantMap params;
+        params["centerX"] = 0.0;
+        params["centerY"] = 0.0;
+        params["radius"] = 50.0;
+        params["sides"] = 6;  // Hexagone
+        return params;
+    }
+
+    QVariant parameterSchema() const override {
+        // Définir les types et contraintes des paramètres
+        QVariantMap schema;
+        schema["sides"] = QVariantMap{
+            {"type", "int"},
+            {"min", 3},
+            {"max", 100}
+        };
+        return schema;
+    }
+};
+```
+
+**Fichier metadata `polygon.json`** :
+```json
+{
+    "IID": "com.lasercutstudio.IShapePlugin",
+    "className": "PolygonPlugin",
+    "MetaData": {
+        "name": "Polygon",
+        "version": "1.0.0",
+        "author": "LaserCutStudio Team"
+    }
+}
+```
+
+**CMakeLists.txt du plugin** :
+```cmake
+add_library(PolygonPlugin SHARED
+    PolygonPlugin.h
+    Polygon.h
+    polygon.json
+)
+
+target_link_libraries(PolygonPlugin PRIVATE Qt6::Core)
+
+# Installer dans répertoire plugins/
+install(TARGETS PolygonPlugin
+    LIBRARY DESTINATION plugins
+)
+```
+
+### Utiliser le PluginManager
+
+```cpp
+#include "core/plugins/PluginManager.h"
+
+// Charger tous les plugins disponibles
+PluginManager& manager = PluginManager::instance();
+int loadedCount = manager.loadAllPlugins();
+
+qDebug() << "Loaded" << loadedCount << "plugins";
+qDebug() << "  -" << manager.shapePluginCount() << "shape plugins";
+qDebug() << "  -" << manager.jointPluginCount() << "joint plugins";
+
+// Utiliser une forme de plugin (même API que types built-in)
+QVariantMap params;
+params["centerX"] = 100.0;
+params["centerY"] = 100.0;
+params["radius"] = 50.0;
+params["sides"] = 8;  // Octogone
+
+IShape* octagon = IShape::create("Polygon", params);
+if (octagon) {
+    qDebug() << "Created octagon with area:" << octagon->getArea();
+}
+
+// Lister les plugins chargés
+QVector<PluginInfo> plugins = manager.loadedPlugins();
+for (const auto& info : plugins) {
+    qDebug() << info.pluginName << "v" << info.version
+             << "by" << info.author;
+}
+
+// Signaux disponibles
+connect(&manager, &PluginManager::pluginLoaded, [](const PluginInfo& info) {
+    qDebug() << "Plugin loaded:" << info.pluginName;
+});
+
+connect(&manager, &PluginManager::pluginLoadFailed,
+        [](const QString& path, const QString& error) {
+    qWarning() << "Failed to load" << path << ":" << error;
+});
+```
+
+### Répertoires de plugins
+
+**Par défaut, le PluginManager cherche dans** :
+- `./plugins/` (relatif à l'exécutable)
+- `~/.config/LaserCutStudio/plugins/` (Linux)
+- `~/Library/Application Support/LaserCutStudio/plugins/` (macOS)
+- `%APPDATA%/LaserCutStudio/plugins/` (Windows)
+
+**Ajouter un répertoire personnalisé** :
+```cpp
+manager.addPluginPath("/custom/path/to/plugins");
+manager.loadAllPlugins();
+```
+
+### Interface IJointPlugin
+
+Similaire à `IShapePlugin` mais pour les connexions d'assemblage :
+
+```cpp
+class IJointPlugin {
+public:
+    virtual QString jointName() const = 0;
+    virtual QString jointDescription() const = 0;
+    virtual QString version() const = 0;
+    virtual QString author() const = 0;
+
+    virtual IJoint* createJoint(const QVariant& params) const = 0;
+    virtual QVariant defaultParameters() const = 0;
+    virtual QVariant parameterSchema() const = 0;
+
+    // Méthodes spécifiques aux joints
+    virtual bool isCompatibleWithMaterial(const QString& material) const = 0;
+    virtual double estimatedStrength() const = 0;  // 0.0 - 1.0
+};
+```
+
+### Sécurité et validation
+
+**Le PluginManager valide** :
+- Que les plugins implémentent bien l'interface requise
+- Que les noms de plugins sont uniques
+- Que les plugins peuvent être chargés (bibliothèques dynamiques valides)
+
+**Les plugins doivent** :
+- Valider leurs paramètres d'entrée
+- Retourner `nullptr` si création impossible
+- Ne pas crasher (gestion d'erreurs robuste)
+
+### Tests
+
+14 tests unitaires couvrent :
+- Découverte et chargement de plugins
+- Gestion des erreurs (fichiers invalides, plugins incompatibles)
+- Signaux (pluginLoaded, pluginLoadFailed, pluginUnloaded)
+- État du manager (compteurs, listes, info)
+
+```bash
+./tests/LaserCutStudioTests  # Inclut TestPluginManager
+```
+
 ## Architecture
 
 Le projet suit les principes SOLID avec une architecture modulaire :
@@ -392,12 +593,14 @@ Ce projet Python sert de référence pour les patterns architecturaux et la qual
    - Documentation complète des tags et usage
    - Prêt pour CI/CD
 
-### ⏳ Améliorations en attente
+6. **Système de plugins Qt** ✅ **Implémenté**
+   - Interfaces `IShapePlugin` et `IJointPlugin` pour extensibilité
+   - `PluginManager` avec `QPluginLoader` pour chargement dynamique
+   - Découverte automatique dans répertoires configurables
+   - Intégration transparente avec Factory Pattern
+   - 14 tests unitaires (découverte, chargement, signals)
 
-6. **Système de plugins**
-   - Implémenter `QPluginLoader` pour formes/joints extensibles
-   - Interface plugin : `IShapePlugin`, `IJointPlugin`
-   - Permettre ajout de nouvelles formes sans recompilation
+### ⏳ Améliorations en attente
 
 7. **Dependency Injection**
    - Créer Service Locator pattern pour découpler dépendances
