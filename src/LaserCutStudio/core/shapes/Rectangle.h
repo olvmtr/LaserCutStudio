@@ -64,6 +64,11 @@ public:
     static QString staticTypeName() { return "Rectangle"; }
 
     /**
+     * @brief Retourne le nom de type pour l'instance (Factory Pattern)
+     */
+    QString getTypeName() const override { return staticTypeName(); }
+
+    /**
      * @brief Calcule l'aire
      */
     double getArea() const override;
@@ -115,6 +120,9 @@ private:
     double m_y;      ///< Position Y du coin supérieur gauche
     double m_width;  ///< Largeur
     double m_height; ///< Hauteur
+
+    // Auto-enregistrement dans le Factory Pattern
+    static const bool s_registered;
 };
 
 } // namespace Core

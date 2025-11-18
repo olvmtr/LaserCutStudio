@@ -157,5 +157,8 @@ void Rectangle::setHeight(double height)
     }
 }
 
+// Auto-enregistrement dans le Factory Pattern
+const bool Rectangle::s_registered = IShape::registerFactory<Rectangle>();
+
 } // namespace Core
 } // namespace LaserCutStudio

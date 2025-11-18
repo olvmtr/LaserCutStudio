@@ -133,5 +133,8 @@ void Circle::setRadius(double radius)
     }
 }
 
+// Auto-enregistrement dans le Factory Pattern
+const bool Circle::s_registered = IShape::registerFactory<Circle>();
+
 } // namespace Core
 } // namespace LaserCutStudio

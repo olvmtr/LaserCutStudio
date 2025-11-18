@@ -34,6 +34,7 @@ public:
 
     IShape* clone() const override;
     static QString staticTypeName() { return "Circle"; }
+    QString getTypeName() const override { return staticTypeName(); }
     double getArea() const override;
     QRectF getBoundingBox() const override;
     bool containsPoint(const Point2D& point) const override;
@@ -54,6 +55,9 @@ private:
     double m_centerX;
     double m_centerY;
     double m_radius;
+
+    // Auto-enregistrement dans le Factory Pattern
+    static const bool s_registered;
 };
 
 } // namespace Core
