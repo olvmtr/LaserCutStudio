@@ -128,14 +128,9 @@ public:
     using FactoryMixin<IJoint>::registerFactory;
 
     /**
-     * @brief Sérialise le joint en QVariantMap pour sauvegarde/réseau
-     */
-    virtual QVariantMap toVariant() const;
-
-    /**
      * @brief Retourne le nom du type (doit être implémenté par les classes concrètes)
      */
-    virtual QString getTypeName() const = 0;
+    virtual QString getTypeName() const override = 0;
 
     // Gestion de la liste statique
     static QList<IJoint*> getAllJoints() { return s_joints; }

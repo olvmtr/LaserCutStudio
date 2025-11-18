@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <QUuid>
+#include <QVariantMap>
 #include <memory>
 
 namespace LaserCutStudio {
@@ -54,6 +55,30 @@ public:
      * @return UUID formaté en QString
      */
     QString getIdAsString() const { return m_id.toString(); }
+
+    /**
+     * @brief Retourne le nom du type de l'objet
+     *
+     * Cette méthode doit être implémentée par toutes les classes dérivées
+     * pour retourner leur nom de type (ex: "Rectangle", "Circle", "TabJoint", etc.)
+     *
+     * @return Nom du type de l'objet
+     */
+    virtual QString getTypeName() const = 0;
+
+    /**
+     * @brief Sérialise l'objet en QVariantMap
+     *
+     * Utilise le système Q_PROPERTY de Qt pour sérialiser automatiquement
+     * toutes les propriétés de l'objet. Les propriétés "id" et "objectName"
+     * sont exclues de la sérialisation.
+     *
+     * @return QVariantMap contenant le type et toutes les propriétés
+     *
+     * @note Les classes dérivées peuvent surcharger cette méthode pour
+     *       ajouter une sérialisation personnalisée
+     */
+    virtual QVariantMap toVariant() const;
 
 protected:
     /**

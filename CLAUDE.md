@@ -97,6 +97,41 @@ const bool Rectangle::s_registered = IShape::registerFactory<Rectangle>();
 
 Le code est maintenant **similaire au système Q_OBJECT de Qt**, offrant une API familière et cohérente sans nécessiter de préprocesseur (MOC). Le Factory Pattern est maintenant aussi simple à utiliser que les Signals/Slots de Qt !
 
+### Sérialisation automatique avec toVariant()
+
+La méthode `toVariant()` est maintenant fournie par la classe de base `Interface`, éliminant encore plus de duplication :
+
+```cpp
+// Interface.h
+class Interface : public QObject
+{
+    Q_OBJECT
+public:
+    // Toutes les interfaces doivent implémenter getTypeName()
+    virtual QString getTypeName() const = 0;
+
+    // Sérialisation automatique fournie par Interface
+    virtual QVariantMap toVariant() const;
+};
+```
+
+**Implémentation automatique** :
+- Ajoute automatiquement le champ `"type"` avec `getTypeName()`
+- Parcourt toutes les `Q_PROPERTY` et les sérialise automatiquement
+- Exclut `"id"` et `"objectName"` (gérés séparément)
+
+**Utilisation** :
+```cpp
+Rectangle* rect = new Rectangle(0, 0, 100, 50);
+QVariantMap data = rect->toVariant();
+// => { "type": "Rectangle", "x": 0, "y": 0, "width": 100, "height": 50 }
+
+// Round-trip: sérialiser puis désérialiser
+IShape* clone = IShape::create(data);  // Crée un Rectangle identique !
+```
+
+**Avantage** : La sérialisation/désérialisation est maintenant complètement automatique et symétrique grâce à `QMetaObject` + `Q_PROPERTY` !
+
 ## Commandes de build
 
 Le projet utilise CMake et se compile avec Qt Creator ou en ligne de commande :
