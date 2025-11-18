@@ -19,6 +19,8 @@ add_executable(LaserCutStudioTests
     TestJoint.cpp
     TestProject.h
     TestProject.cpp
+    TestConfigManager.h
+    TestConfigManager.cpp
     # Sources du module Core
     ../core/interface/Interface.h
     ../core/interface/Interface.cpp
@@ -46,6 +48,8 @@ add_executable(LaserCutStudioTests
     ../core/projects/IProject.cpp
     ../core/projects/Project.h
     ../core/projects/Project.cpp
+    ../core/config/ConfigManager.h
+    ../core/config/ConfigManager.cpp
 )
 
 # Lie les bibliothèques Qt

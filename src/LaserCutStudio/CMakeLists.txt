@@ -42,6 +42,9 @@ qt_add_executable(appLaserCutStudio
     core/projects/IProject.cpp
     core/projects/Project.h
     core/projects/Project.cpp
+    # Core Module - Config
+    core/config/ConfigManager.h
+    core/config/ConfigManager.cpp
 )
 
 qt_add_qml_module(appLaserCutStudio
