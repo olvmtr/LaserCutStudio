@@ -98,10 +98,66 @@ LaserCutStudio/
 
 ## État du développement
 
-Le projet est en phase initiale de configuration. État actuel :
-- Le squelette de base de l'application Qt Quick est en place
-- La fenêtre principale s'affiche mais avec une fonctionnalité minimale
-- Les classes du module Core (Shape, Part, Joint, Project) sont prévues mais pas encore implémentées
-- L'éditeur 2D, la visionneuse 3D et les fonctionnalités d'export sont tous prévus
+Le projet est en **Phase 2 largement complète**. État actuel :
+- **Module Core implémenté** avec toutes les interfaces (IShape, IPart, IJoint, IProject)
+- **Pattern Prototype** : classe `Interface` avec `clone()` + UUID unique
+- **Factory Pattern** : `registerFactory<T>()` avec QVariant et QMetaObject
+- **Signals/Slots Qt** : découplage complet (remplace relations bidirectionnelles)
+- **Implémentations concrètes** : Rectangle, Circle, Part, TabJoint, FingerJoint, Project
+- **Tests complets** : 1412 lignes de tests Qt couvrant tous les composants
+- **Types utilitaires** : Point2D, Point3D, Material, JointType
+
+**Phases suivantes à implémenter** :
+- Phase 3 : Module 2D Editor (édition graphique)
+- Phase 4 : Module 2D Viewer (plan de découpe)
+- Phase 5 : Module 3D Viewer (visualisation assemblage)
+- Phase 6 : Module Export (SVG/DXF)
+- Phase 7+ : IO, Undo/Redo, optimisation
 
 Consulter `docs/notes/development-plan.md` pour la feuille de route complète du développement par phases.
+
+## Projet Python intégré
+
+Le répertoire `ai-front-portal-main/` contient un projet Python distinct :
+- **Framework UltraNova** : Architecture SOLID inspirée de Qt (Signals/Slots)
+- **API FastAPI** : Module ALPIE (agent de qualification de leads)
+- **287 tests** avec ~95% de couverture (unitaires, intégration, E2E, sécurité, benchmarks)
+- **Knowledge Base réutilisable** : base de connaissance structurée
+
+Ce projet Python sert de référence pour les patterns architecturaux et la qualité des tests.
+
+## Améliorations suggérées
+
+### Améliorations prioritaires pour LaserCutStudio C++
+
+1. **Configuration externe**
+   - Ajouter système QSettings ou YAML pour configuration (matériaux, unités, préférences)
+   - Remplacer les valeurs hardcodées par configuration externe
+   - Fichier type : `config/materials.yaml`, `config/app.ini`
+
+2. **Logging structuré**
+   - Implémenter logging avec catégories Qt (`qCDebug`, `qCInfo`, `qCWarning`)
+   - Créer catégories : `core.shapes`, `core.parts`, `core.joints`, `core.projects`
+   - Ajouter niveaux de verbosité configurables
+
+3. **Tests de performance**
+   - Ajouter benchmarks avec `QTest::qBenchmark()` pour opérations critiques
+   - Tester : clonage d'objets, calculs géométriques, sérialisation
+   - Créer suite `tests/benchmarks/` séparée
+
+4. **Système de plugins**
+   - Implémenter `QPluginLoader` pour formes/joints extensibles
+   - Interface plugin : `IShapePlugin`, `IJointPlugin`
+   - Permettre ajout de nouvelles formes sans recompilation
+
+5. **Dependency Injection**
+   - Créer Service Locator pattern pour découpler dépendances
+   - Faciliter tests unitaires avec mocks
+   - Remplacer construction directe par injection
+
+6. **Documentation auto-générée**
+   - Configurer Doxygen pour génération automatique
+   - Ajouter commentaires Doxygen aux interfaces principales
+   - Générer documentation HTML/PDF
+
+**Note** : Ces améliorations ne bloquent pas le développement des phases suivantes (UI, 3D, Export). Elles peuvent être implémentées progressivement pour améliorer la maintenabilité.
