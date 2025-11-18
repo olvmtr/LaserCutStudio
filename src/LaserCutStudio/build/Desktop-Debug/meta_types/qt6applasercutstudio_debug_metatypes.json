@@ -47,6 +47,62 @@
     {
         "classes": [
             {
+                "className": "PluginManager",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Plugins::PluginManager",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "info",
+                                "type": "PluginInfo"
+                            }
+                        ],
+                        "name": "pluginLoaded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "filePath",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "errorString",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "pluginLoadFailed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "pluginName",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "pluginUnloaded",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "PluginManager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
                 "className": "LogManager",
                 "enums": [
                     {

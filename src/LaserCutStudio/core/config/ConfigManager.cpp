@@ -65,7 +65,7 @@ void ConfigManager::save()
 
 void ConfigManager::resetToDefaults()
 {
-    m_settings.clear();
+    // Réinitialiser seulement les valeurs en mémoire, pas le fichier QSettings
     loadDefaults();
     emit configurationChanged();
     emit materialsChanged();

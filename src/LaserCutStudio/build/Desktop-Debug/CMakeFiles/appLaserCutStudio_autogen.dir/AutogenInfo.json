@@ -270,6 +270,9 @@
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
 		"/usr/share/cmake-3.28/Modules/GNUInstallDirs.cmake",
+		"/usr/share/cmake-3.28/Modules/FindDoxygen.cmake",
+		"/usr/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake",
+		"/usr/share/cmake-3.28/Modules/FindPackageMessage.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt6Qml/Qt6qmldirTemplate.cmake.in"
 	],
 	"CMAKE_SOURCE_DIR" : "/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio",
@@ -335,6 +338,24 @@
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/parts/Part.h",
 			"MU",
 			"VTS7S5PMBD/moc_Part.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/plugins/IJointPlugin.h",
+			"MU",
+			"ATD7POCTAI/moc_IJointPlugin.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/plugins/IShapePlugin.h",
+			"MU",
+			"ATD7POCTAI/moc_IShapePlugin.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/plugins/PluginManager.h",
+			"MU",
+			"ATD7POCTAI/moc_PluginManager.cpp",
 			null
 		],
 		[
@@ -523,6 +544,11 @@
 		],
 		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/parts/Part.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/plugins/PluginManager.cpp",
 			"MU",
 			null
 		],
