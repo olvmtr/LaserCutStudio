@@ -8,62 +8,9 @@
 	[
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/CMakeLists.txt",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.qtc/package-manager/auto-setup.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeSystem.cmake.in",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/CMakeFiles/3.28.3/CMakeSystem.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeNinjaFindMake.cmake",
 		"/usr/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake",
 		"/usr/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeDetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Platform/Linux-Determine-CXX.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeCompilerIdDetection.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/ADSP-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/ARMCC-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/ARMClang-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/AppleClang-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompilerInternal.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Borland-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Clang-DetermineCompilerInternal.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Cray-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/CrayClang-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Embarcadero-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Fujitsu-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/GHS-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/HP-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/IAR-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Intel-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/MSVC-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/NVHPC-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/NVIDIA-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/OrangeC-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/PGI-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/PathScale-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/SCO-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/TI-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Tasking-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Watcom-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/XL-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeFindBinUtils.cmake",
-		"/usr/share/cmake-3.28/Modules/Compiler/Clang-FindBinUtils.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeCXXCompiler.cmake.in",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/CMakeFiles/3.28.3/CMakeCXXCompiler.cmake",
 		"/usr/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake",
 		"/usr/share/cmake-3.28/Modules/CMakeGenericSystem.cmake",
@@ -81,18 +28,6 @@
 		"/usr/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake",
 		"/usr/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake",
 		"/usr/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeTestCompilerCommon.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeParseImplicitIncludeInfo.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeParseImplicitLinkInfo.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeParseLibraryArchitecture.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeTestCompilerCommon.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp",
-		"/usr/share/cmake-3.28/Modules/CMakeDetermineCompileFeatures.cmake",
-		"/usr/share/cmake-3.28/Modules/Internal/FeatureTesting.cmake",
-		"/usr/share/cmake-3.28/Modules/CMakeCXXCompiler.cmake.in",
-		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/CMakeFiles/3.28.3/CMakeCXXCompiler.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt6/Qt6ConfigVersion.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt6/Qt6ConfigVersionImpl.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt6/Qt6Config.cmake",
@@ -335,17 +270,155 @@
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
 		"/usr/share/cmake-3.28/Modules/GNUInstallDirs.cmake",
+		"/usr/share/cmake-3.28/Modules/FindDoxygen.cmake",
+		"/usr/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake",
+		"/usr/share/cmake-3.28/Modules/FindPackageMessage.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/Qt6Qml/Qt6qmldirTemplate.cmake.in"
 	],
 	"CMAKE_SOURCE_DIR" : "/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio",
 	"DEP_FILE" : "/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "appLaserCutStudio_autogen/timestamp",
-	"HEADERS" : [],
+	"HEADERS" : 
+	[
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/config/ConfigManager.h",
+			"MU",
+			"NPAKKLQEK3/moc_ConfigManager.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/di/ServiceLocator.h",
+			"MU",
+			"6L563ZOCWF/moc_ServiceLocator.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogCategories.h",
+			"MU",
+			"XRZGZBVEYH/moc_LogCategories.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogManager.h",
+			"MU",
+			"XRZGZBVEYH/moc_LogManager.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/plugins/core/PluginManager.h",
+			"MU",
+			"QNXUQAGNON/moc_PluginManager.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/plugins/interfaces/IJointPlugin.h",
+			"MU",
+			"ZIQ5MHJU2A/moc_IJointPlugin.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/plugins/interfaces/IShapePlugin.h",
+			"MU",
+			"ZIQ5MHJU2A/moc_IShapePlugin.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/Interface.h",
+			"MU",
+			"ENW26LNFXU/moc_Interface.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/types/JointType.h",
+			"MU",
+			"XYCFV6I66L/moc_JointType.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/types/Material.h",
+			"MU",
+			"XYCFV6I66L/moc_Material.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/types/Point2D.h",
+			"MU",
+			"XYCFV6I66L/moc_Point2D.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/types/Point3D.h",
+			"MU",
+			"XYCFV6I66L/moc_Point3D.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/FingerJoint.h",
+			"MU",
+			"AEQVSPXJ77/moc_FingerJoint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/TabJoint.h",
+			"MU",
+			"AEQVSPXJ77/moc_TabJoint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/interfaces/IJoint.h",
+			"MU",
+			"5D7EEHS4CR/moc_IJoint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/implementations/Part.h",
+			"MU",
+			"CX2IQZOJ6X/moc_Part.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/interfaces/IPart.h",
+			"MU",
+			"QXQDT57II4/moc_IPart.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/implementations/Project.h",
+			"MU",
+			"EIENIRQ553/moc_Project.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/interfaces/IProject.h",
+			"MU",
+			"4TYWVJDV7E/moc_IProject.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Circle.h",
+			"MU",
+			"PJEH2QOMA2/moc_Circle.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Rectangle.h",
+			"MU",
+			"PJEH2QOMA2/moc_Rectangle.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.h",
+			"MU",
+			"GFWMSFW4MY/moc_IShape.cpp",
+			null
+		]
+	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include",
 	"MOC_COMPILATION_FILE" : "/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
+		"DEBUG",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
 		"QT_NETWORK_LIB",
@@ -365,6 +438,7 @@
 	"MOC_INCLUDES" : 
 	[
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio",
+		"/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include",
 		"/usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2",
 		"/usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml",
 		"/usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2",
@@ -426,6 +500,86 @@
 	[
 		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_qmlcache_loader.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/config/ConfigManager.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/di/ServiceLocator.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogCategories.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogManager.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/plugins/core/PluginManager.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/Interface.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/FingerJoint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/TabJoint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/interfaces/IJoint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/implementations/Part.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/interfaces/IPart.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/implementations/Project.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/interfaces/IProject.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Circle.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Rectangle.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.cpp",
 			"MU",
 			null
 		],

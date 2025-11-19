@@ -1,2 +1,42 @@
 # Development notes
 docs/notes/
+
+# Generated documentation
+docs/doxygen/
+
+# Python project (external reference)
+ai-front-portal-main/
+
+# Build directories
+build/
+build-*/
+*.pro.user*
+*.autosave
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Qt
+*.qmlc
+*.jsc
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+
+# IDE
+.vscode/
+.idea/
+*.creator.user*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated reports and artifacts
+generated/
+
+# Python virtual environment
+venv/

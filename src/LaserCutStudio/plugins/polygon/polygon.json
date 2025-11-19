@@ -1,0 +1,10 @@
+{
+    "IID": "com.lasercutstudio.IShapePlugin",
+    "className": "PolygonPlugin",
+    "MetaData": {
+        "name": "Polygon",
+        "version": "1.0.0",
+        "author": "LaserCutStudio Team",
+        "description": "Regular polygon shape with configurable number of sides"
+    }
+}

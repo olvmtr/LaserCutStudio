@@ -1,0 +1,44 @@
+# Configuration clang-tidy pour LaserCutStudio
+# Vérification de l'architecture et des principes SOLID
+
+Checks: >
+  -*,
+  cppcoreguidelines-*,
+  modernize-*,
+  readability-*,
+  performance-*,
+  bugprone-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-owning-memory
+
+WarningsAsErrors: ''
+
+HeaderFilterRegex: 'src/LaserCutStudio/core/.*'
+
+CheckOptions:
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.VariableCase
+    value: camelBack
+  - key: readability-identifier-naming.MemberCase
+    value: camelBack
+  - key: readability-identifier-naming.PrivateMemberPrefix
+    value: m_
+  - key: readability-identifier-naming.ConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.NamespaceCase
+    value: CamelCase
+
+# Pour LaserCutStudio :
+# - Les interfaces commencent par 'I' (IShape, IPart, IJoint, IProject)
+# - Les implémentations ne doivent PAS inclure d'autres implémentations
+# - Seules les interfaces peuvent être utilisées entre classes concrètes

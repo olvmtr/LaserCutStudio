@@ -1,0 +1,259 @@
+@startuml LaserCutStudio Architecture
+
+title Architecture LaserCutStudio - Pattern Prototype
+
+package "Core - Pattern Prototype" {
+  abstract class Interface {
+    # id: UUID
+    + {abstract} clone(): Interface*
+    + getId(): UUID
+  }
+
+  abstract class IShape {
+    # points: List<Point2D>
+    # properties: ShapeProperties
+    + {abstract} clone(): IShape*
+    + getArea(): double
+    + getBoundingBox(): Rectangle
+    + transform(matrix: Matrix): void
+    + containsPoint(point: Point2D): bool
+    --
+    {static} - shapes: List<IShape*>
+    {static} + getAllShapes(): List<IShape*>
+    {static} + addShape(shape: IShape*): void
+  }
+
+  abstract class IPart {
+    # name: string
+    # shape: IShape*
+    # thickness: double
+    # material: Material
+    # joints: List<IJoint*>
+    + {abstract} clone(): IPart*
+    + addJoint(joint: IJoint*): void
+    + removeJoint(joint: IJoint*): void
+    + getJoints(): List<IJoint*>
+    + setThickness(thickness: double): void
+    --
+    {static} - parts: List<IPart*>
+    {static} + getAllParts(): List<IPart*>
+    {static} + addPart(part: IPart*): void
+  }
+
+  abstract class IJoint {
+    # type: JointType
+    # partA: IPart*
+    # partB: IPart*
+    # position: Point3D
+    # angle: double
+    + {abstract} clone(): IJoint*
+    + connect(partA: IPart*, partB: IPart*): void
+    + getTransformMatrix(): Matrix4x4
+    + isValid(): bool
+    --
+    {static} - joints: List<IJoint*>
+    {static} + getAllJoints(): List<IJoint*>
+    {static} + addJoint(joint: IJoint*): void
+  }
+
+  abstract class IProject {
+    # name: string
+    # parts: List<IPart*>
+    # metadata: ProjectMetadata
+    + {abstract} clone(): IProject*
+    + addPart(part: IPart*): void
+    + removePart(part: IPart*): void
+    + getAllParts(): List<IPart*>
+    + save(path: string): bool
+    + load(path: string): bool
+    --
+    {static} - projects: List<IProject*>
+    {static} + getAllProjects(): List<IProject*>
+    {static} + addProject(project: IProject*): void
+  }
+
+  Interface <|-- IShape
+  Interface <|-- IPart
+  Interface <|-- IJoint
+  Interface <|-- IProject
+}
+
+package "Core - Implémentations concrètes" {
+  class Rectangle {
+    - width: double
+    - height: double
+    + clone(): IShape*
+  }
+
+  class Circle {
+    - radius: double
+    + clone(): IShape*
+  }
+
+  class Polygon {
+    - vertices: List<Point2D>
+    + clone(): IShape*
+  }
+
+  class Part {
+    + clone(): IPart*
+  }
+
+  class TabJoint {
+    - tabWidth: double
+    - tabDepth: double
+    + clone(): IJoint*
+  }
+
+  class FingerJoint {
+    - fingerCount: int
+    - fingerWidth: double
+    + clone(): IJoint*
+  }
+
+  class Project {
+    + clone(): IProject*
+  }
+
+  IShape <|-- Rectangle
+  IShape <|-- Circle
+  IShape <|-- Polygon
+  IPart <|-- Part
+  IJoint <|-- TabJoint
+  IJoint <|-- FingerJoint
+  IProject <|-- Project
+}
+
+package "Core - Types de support" {
+  class Point2D {
+    + x: double
+    + y: double
+    + distance(other: Point2D): double
+  }
+
+  class Point3D {
+    + x: double
+    + y: double
+    + z: double
+    + distance(other: Point3D): double
+  }
+
+  class Material {
+    + name: string
+    + density: double
+    + color: Color
+  }
+
+  enum JointType {
+    TAB
+    FINGER
+    MORTISE_TENON
+    EDGE_TO_EDGE
+  }
+}
+
+package "Module 2D Editor" {
+  class Editor2D {
+    - currentShape: IShape*
+    - tools: List<Tool*>
+    + drawShape(type: ShapeType): void
+    + selectShape(shape: IShape*): void
+    + transformShape(transform: Matrix): void
+    + addSnapPoint(point: Point2D): void
+  }
+
+  class Tool {
+    + {abstract} onMouseDown(pos: Point2D): void
+    + {abstract} onMouseMove(pos: Point2D): void
+    + {abstract} onMouseUp(pos: Point2D): void
+  }
+
+  class SelectTool
+  class DrawTool
+  class TransformTool
+
+  Tool <|-- SelectTool
+  Tool <|-- DrawTool
+  Tool <|-- TransformTool
+}
+
+package "Module 2D Viewer" {
+  class CuttingPlanView {
+    - parts: List<IPart*>
+    - materialSize: Size
+    + optimizeLayout(): void
+    + calculateMaterialUsage(): double
+    + exportToSVG(path: string): bool
+  }
+}
+
+package "Module 3D Viewer" {
+  class Viewer3D {
+    - scene: Scene3D
+    - camera: Camera
+    + buildAssembly(project: IProject*): void
+    + extrudePart(part: IPart*): Mesh3D
+    + positionPart(part: IPart*, transform: Matrix4x4): void
+  }
+
+  class Scene3D {
+    - meshes: List<Mesh3D>
+    + addMesh(mesh: Mesh3D): void
+    + render(): void
+  }
+}
+
+package "Module Export" {
+  class SVGExporter {
+    + exportPart(part: IPart*, path: string): bool
+    + exportProject(project: IProject*, path: string): bool
+  }
+
+  class DXFExporter {
+    + exportPart(part: IPart*, path: string): bool
+    + exportProject(project: IProject*, path: string): bool
+  }
+}
+
+package "Module IO" {
+  class ProjectSerializer {
+    + serialize(project: IProject*): string
+    + deserialize(data: string): IProject*
+    + saveToFile(project: IProject*, path: string): bool
+    + loadFromFile(path: string): IProject*
+  }
+}
+
+' Relations entre modules
+IPart --> IShape : contient
+IPart --> IJoint : possède
+IJoint --> IPart : connecte
+IProject --> IPart : contient
+
+Editor2D --> IShape : crée/édite
+CuttingPlanView --> IPart : visualise
+Viewer3D --> IProject : visualise
+Viewer3D --> IPart : extrude
+SVGExporter --> IPart : exporte
+SVGExporter --> IProject : exporte
+DXFExporter --> IPart : exporte
+ProjectSerializer --> IProject : sérialise
+
+note right of Interface
+  Pattern Prototype:
+  - Toutes les interfaces héritent de Interface
+  - Chaque interface a une méthode clone()
+  - Chaque interface gère sa liste statique d'instances
+  - Facilite la duplication d'objets complexes
+end note
+
+note right of IProject
+  Architecture SOLID:
+  - Single Responsibility
+  - Open/Closed
+  - Liskov Substitution
+  - Interface Segregation
+  - Dependency Inversion
+end note
+
+@enduml
