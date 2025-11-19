@@ -353,6 +353,12 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/SelectionManager.h",
+			"MU",
+			"CW2ANGJCE4/moc_SelectionManager.cpp",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/ShapeCreationTool.h",
 			"MU",
 			"CW2ANGJCE4/moc_ShapeCreationTool.cpp",
@@ -560,6 +566,11 @@
 		],
 		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/Interface.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/SelectionManager.cpp",
 			"MU",
 			null
 		],

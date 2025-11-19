@@ -663,6 +663,27 @@
     {
         "classes": [
             {
+                "className": "SelectionManager",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::SelectionManager",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "ISelection"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<SelectionManager>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "SelectionManager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
                 "className": "ShapeCreationTool",
                 "enums": [
                     {
