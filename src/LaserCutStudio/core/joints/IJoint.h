@@ -154,6 +154,27 @@ protected:
     IPart* m_partB;         ///< Deuxième pièce
     Point3D m_position;     ///< Position dans l'espace 3D
     double m_angle;         ///< Angle d'assemblage en degrés
+
+private:
+    /**
+     * @brief Helper pour connecter une pièce et écouter sa destruction
+     *
+     * Enregistre le joint dans la pièce et connecte au signal aboutToBeDestroyed
+     * pour nettoyage automatique quand la pièce est détruite.
+     *
+     * @param partMember Référence au membre (m_partA ou m_partB)
+     * @param newPart Nouvelle pièce à connecter (peut être nullptr)
+     */
+    void connectToPart(IPart*& partMember, IPart* newPart);
+
+    /**
+     * @brief Helper pour déconnecter une pièce
+     *
+     * Retire le joint de la pièce et déconnecte tous les signaux.
+     *
+     * @param partMember Référence au membre (m_partA ou m_partB)
+     */
+    void disconnectFromPart(IPart*& partMember);
 };
 
 } // namespace Core

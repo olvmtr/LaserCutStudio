@@ -122,6 +122,37 @@ public:
     static void clearFactories() {
         s_factories.clear();
     }
+
+    /**
+     * @brief Helper pour auto-enregistrement au démarrage
+     *
+     * Cette classe template permet d'enregistrer automatiquement
+     * une classe concrète dans le Factory Pattern via une variable
+     * globale statique.
+     *
+     * Usage :
+     * @code
+     * // Dans Rectangle.cpp (au niveau namespace)
+     * namespace {
+     *     FactoryMixin<IShape>::AutoRegister<Rectangle> g_rectangleReg;
+     * }
+     * @endcode
+     *
+     * Cela remplace le pattern manuel :
+     * @code
+     * // Ancien pattern (plus verbeux)
+     * static const bool s_registered;
+     * const bool Rectangle::s_registered = IShape::registerFactory<Rectangle>();
+     * @endcode
+     *
+     * @tparam T Type concret à enregistrer
+     */
+    template<typename T>
+    struct AutoRegister {
+        AutoRegister() {
+            FactoryMixin<Base>::registerFactory<T>();
+        }
+    };
 };
 
 /**

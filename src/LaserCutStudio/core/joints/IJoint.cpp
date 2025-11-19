@@ -27,27 +27,14 @@ IJoint::IJoint(JointType type, IPart* partA, IPart* partB, const Point3D& positi
 {
     registerInstance(this);
 
-    // Ajoute ce joint aux pièces et connecte aux signaux
-    if (m_partA) {
-        m_partA->addJoint(this);
-        // Connecte au signal aboutToBeDestroyed pour nettoyage automatique
-        QObject::connect(m_partA, &Interface::aboutToBeDestroyed,
-                        this, [this](Interface* destroyedPart) {
-            if (m_partA == destroyedPart) {
-                m_partA = nullptr;
-            }
-        });
-    }
-    if (m_partB) {
-        m_partB->addJoint(this);
-        // Connecte au signal aboutToBeDestroyed pour nettoyage automatique
-        QObject::connect(m_partB, &Interface::aboutToBeDestroyed,
-                        this, [this](Interface* destroyedPart) {
-            if (m_partB == destroyedPart) {
-                m_partB = nullptr;
-            }
-        });
-    }
+    // Utilise les helpers pour connexion avec gestion aboutToBeDestroyed
+    // Note: m_partA et m_partB sont initialisés dans la liste d'initialisation
+    IPart* tempA = m_partA;
+    IPart* tempB = m_partB;
+    m_partA = nullptr;
+    m_partB = nullptr;
+    connectToPart(m_partA, tempA);
+    connectToPart(m_partB, tempB);
 }
 
 IJoint::IJoint(const IJoint& other)
@@ -69,58 +56,43 @@ IJoint::~IJoint()
 
 void IJoint::connect(IPart* partA, IPart* partB)
 {
-    // Retire le joint des anciennes pièces et déconnecte les signaux
-    if (m_partA) {
-        m_partA->removeJoint(this);
-        // Déconnecte tous les signaux de l'ancienne pièce vers ce joint
-        QObject::disconnect(m_partA, nullptr, this, nullptr);
-    }
-    if (m_partB) {
-        m_partB->removeJoint(this);
-        // Déconnecte tous les signaux de l'ancienne pièce vers ce joint
-        QObject::disconnect(m_partB, nullptr, this, nullptr);
-    }
+    // Déconnecte des anciennes pièces (si présentes)
+    disconnectFromPart(m_partA);
+    disconnectFromPart(m_partB);
 
-    // Connecte aux nouvelles pièces
-    m_partA = partA;
-    m_partB = partB;
+    // Connecte aux nouvelles pièces avec gestion aboutToBeDestroyed
+    connectToPart(m_partA, partA);
+    connectToPart(m_partB, partB);
+}
 
-    if (m_partA) {
-        m_partA->addJoint(this);
+void IJoint::connectToPart(IPart*& partMember, IPart* newPart)
+{
+    if (newPart) {
+        newPart->addJoint(this);
         // Connecte au signal aboutToBeDestroyed pour nettoyage automatique
-        QObject::connect(m_partA, &Interface::aboutToBeDestroyed,
-                        this, [this](Interface* destroyedPart) {
-            if (m_partA == destroyedPart) {
-                m_partA = nullptr;
-            }
-        });
-    }
-    if (m_partB) {
-        m_partB->addJoint(this);
-        // Connecte au signal aboutToBeDestroyed pour nettoyage automatique
-        QObject::connect(m_partB, &Interface::aboutToBeDestroyed,
-                        this, [this](Interface* destroyedPart) {
-            if (m_partB == destroyedPart) {
-                m_partB = nullptr;
+        QObject::connect(newPart, &Interface::aboutToBeDestroyed,
+                        this, [this, &partMember](Interface* destroyedPart) {
+            if (partMember == destroyedPart) {
+                partMember = nullptr;
             }
         });
     }
 }
 
+void IJoint::disconnectFromPart(IPart*& partMember)
+{
+    if (partMember) {
+        partMember->removeJoint(this);
+        // Déconnecte tous les signaux de cette pièce vers ce joint
+        QObject::disconnect(partMember, nullptr, this, nullptr);
+        partMember = nullptr;
+    }
+}
+
 void IJoint::disconnect()
 {
-    if (m_partA) {
-        m_partA->removeJoint(this);
-        // Déconnecte les signaux
-        QObject::disconnect(m_partA, nullptr, this, nullptr);
-        m_partA = nullptr;
-    }
-    if (m_partB) {
-        m_partB->removeJoint(this);
-        // Déconnecte les signaux
-        QObject::disconnect(m_partB, nullptr, this, nullptr);
-        m_partB = nullptr;
-    }
+    disconnectFromPart(m_partA);
+    disconnectFromPart(m_partB);
 }
 
 bool IJoint::isValid() const
