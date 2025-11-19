@@ -1,6 +1,6 @@
 #include "TestConfigManager.h"
-#include "../core/config/ConfigManager.h"
-#include "../core/types/Material.h"
+#include "core/infrastructure/config/ConfigManager.h"
+#include "core/models/base/types/Material.h"
 #include <QSignalSpy>
 #include <QSettings>
 

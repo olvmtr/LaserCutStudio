@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QtTest>
-#include "../core/di/ServiceLocator.h"
+#include "core/infrastructure/di/ServiceLocator.h"
 
 using namespace LibInterface::DI;
 

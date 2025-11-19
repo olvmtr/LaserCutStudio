@@ -28,40 +28,40 @@ add_executable(LaserCutStudioTests
     TestServiceLocator.h
     TestServiceLocator.cpp
     # Sources du module Core (seulement ceux qui ne sont pas dans LibInterface)
-    ../core/types/Point2D.h
-    ../core/types/Point3D.h
-    ../core/types/Material.h
-    ../core/types/JointType.h
-    ../core/shapes/IShape.h
-    ../core/shapes/IShape.cpp
-    ../core/shapes/Rectangle.h
-    ../core/shapes/Rectangle.cpp
-    ../core/shapes/Circle.h
-    ../core/shapes/Circle.cpp
-    ../core/parts/IPart.h
-    ../core/parts/IPart.cpp
-    ../core/parts/Part.h
-    ../core/parts/Part.cpp
-    ../core/joints/IJoint.h
-    ../core/joints/IJoint.cpp
-    ../core/joints/TabJoint.h
-    ../core/joints/TabJoint.cpp
-    ../core/joints/FingerJoint.h
-    ../core/joints/FingerJoint.cpp
-    ../core/projects/IProject.h
-    ../core/projects/IProject.cpp
-    ../core/projects/Project.h
-    ../core/projects/Project.cpp
-    ../core/config/ConfigManager.h
-    ../core/config/ConfigManager.cpp
-    ../core/logging/LogCategories.h
-    ../core/logging/LogCategories.cpp
-    ../core/logging/LogManager.h
-    ../core/logging/LogManager.cpp
-    ../core/plugins/IShapePlugin.h
-    ../core/plugins/IJointPlugin.h
-    ../core/plugins/PluginManager.h
-    ../core/plugins/PluginManager.cpp
+    ../core/models/base/types/Point2D.h
+    ../core/models/base/types/Point3D.h
+    ../core/models/base/types/Material.h
+    ../core/models/base/types/JointType.h
+    ../core/models/shapes/interfaces/IShape.h
+    ../core/models/shapes/interfaces/IShape.cpp
+    ../core/models/shapes/implementations/Rectangle.h
+    ../core/models/shapes/implementations/Rectangle.cpp
+    ../core/models/shapes/implementations/Circle.h
+    ../core/models/shapes/implementations/Circle.cpp
+    ../core/models/parts/interfaces/IPart.h
+    ../core/models/parts/interfaces/IPart.cpp
+    ../core/models/parts/implementations/Part.h
+    ../core/models/parts/implementations/Part.cpp
+    ../core/models/joints/interfaces/IJoint.h
+    ../core/models/joints/interfaces/IJoint.cpp
+    ../core/models/joints/implementations/TabJoint.h
+    ../core/models/joints/implementations/TabJoint.cpp
+    ../core/models/joints/implementations/FingerJoint.h
+    ../core/models/joints/implementations/FingerJoint.cpp
+    ../core/models/projects/interfaces/IProject.h
+    ../core/models/projects/interfaces/IProject.cpp
+    ../core/models/projects/implementations/Project.h
+    ../core/models/projects/implementations/Project.cpp
+    ../core/infrastructure/config/ConfigManager.h
+    ../core/infrastructure/config/ConfigManager.cpp
+    ../core/infrastructure/logging/LogCategories.h
+    ../core/infrastructure/logging/LogCategories.cpp
+    ../core/infrastructure/logging/LogManager.h
+    ../core/infrastructure/logging/LogManager.cpp
+    ../core/infrastructure/plugins/interfaces/IShapePlugin.h
+    ../core/infrastructure/plugins/interfaces/IJointPlugin.h
+    ../core/infrastructure/plugins/core/PluginManager.h
+    ../core/infrastructure/plugins/core/PluginManager.cpp
 )
 
 # Lie les bibliothèques Qt et LibInterface
@@ -71,6 +71,11 @@ target_link_libraries(LaserCutStudioTests
     Qt6::Core
     Qt6::Gui
     LibInterface::LibInterface
+)
+
+# Include directories pour accès avec "core/..."
+target_include_directories(LaserCutStudioTests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/..
 )
 
 # Définir la macro DEBUG en mode Debug

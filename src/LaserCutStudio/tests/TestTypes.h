@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <QTest>
-#include "../core/types/Point2D.h"
-#include "../core/types/Point3D.h"
-#include "../core/types/Material.h"
+#include "core/models/base/types/Point2D.h"
+#include "core/models/base/types/Point3D.h"
+#include "core/models/base/types/Material.h"
 
 using namespace LaserCutStudio::Core;
 

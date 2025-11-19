@@ -65,117 +65,133 @@ build CMakeFiles/appLaserCutStudio.dir/main.cpp.o: CXX_COMPILER__appLaserCutStud
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
   OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir
 
-build CMakeFiles/appLaserCutStudio.dir/core/shapes/IShape.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/IShape.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/base/Interface.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/Interface.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/shapes/IShape.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/base/Interface.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/shapes
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/base
 
-build CMakeFiles/appLaserCutStudio.dir/core/shapes/Rectangle.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/Rectangle.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/shapes/interfaces/IShape.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/shapes/Rectangle.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/shapes/interfaces/IShape.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/shapes
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/shapes/interfaces
 
-build CMakeFiles/appLaserCutStudio.dir/core/shapes/Circle.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/Circle.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/shapes/implementations/Rectangle.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Rectangle.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/shapes/Circle.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/shapes/implementations/Rectangle.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/shapes
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/shapes/implementations
 
-build CMakeFiles/appLaserCutStudio.dir/core/parts/IPart.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/parts/IPart.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/shapes/implementations/Circle.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Circle.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/parts/IPart.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/shapes/implementations/Circle.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/parts
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/shapes/implementations
 
-build CMakeFiles/appLaserCutStudio.dir/core/parts/Part.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/parts/Part.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/parts/interfaces/IPart.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/interfaces/IPart.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/parts/Part.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/parts/interfaces/IPart.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/parts
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/parts/interfaces
 
-build CMakeFiles/appLaserCutStudio.dir/core/joints/IJoint.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/IJoint.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/parts/implementations/Part.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/implementations/Part.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/joints/IJoint.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/parts/implementations/Part.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/joints
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/parts/implementations
 
-build CMakeFiles/appLaserCutStudio.dir/core/joints/TabJoint.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/TabJoint.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/joints/interfaces/IJoint.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/interfaces/IJoint.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/joints/TabJoint.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/joints/interfaces/IJoint.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/joints
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/joints/interfaces
 
-build CMakeFiles/appLaserCutStudio.dir/core/joints/FingerJoint.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/FingerJoint.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/joints/implementations/TabJoint.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/TabJoint.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/joints/FingerJoint.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/joints/implementations/TabJoint.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/joints
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/joints/implementations
 
-build CMakeFiles/appLaserCutStudio.dir/core/projects/IProject.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/projects/IProject.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/joints/implementations/FingerJoint.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/FingerJoint.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/projects/IProject.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/joints/implementations/FingerJoint.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/projects
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/joints/implementations
 
-build CMakeFiles/appLaserCutStudio.dir/core/projects/Project.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/projects/Project.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/projects/interfaces/IProject.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/interfaces/IProject.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/projects/Project.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/projects/interfaces/IProject.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/projects
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/projects/interfaces
 
-build CMakeFiles/appLaserCutStudio.dir/core/config/ConfigManager.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/config/ConfigManager.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/models/projects/implementations/Project.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/implementations/Project.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/config/ConfigManager.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/models/projects/implementations/Project.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/config
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/models/projects/implementations
 
-build CMakeFiles/appLaserCutStudio.dir/core/logging/LogCategories.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/logging/LogCategories.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/infrastructure/config/ConfigManager.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/config/ConfigManager.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/logging/LogCategories.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/infrastructure/config/ConfigManager.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/logging
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/infrastructure/config
 
-build CMakeFiles/appLaserCutStudio.dir/core/logging/LogManager.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/logging/LogManager.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/infrastructure/logging/LogCategories.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogCategories.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/logging/LogManager.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/infrastructure/logging/LogCategories.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/logging
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/infrastructure/logging
 
-build CMakeFiles/appLaserCutStudio.dir/core/plugins/PluginManager.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/plugins/PluginManager.cpp || cmake_object_order_depends_target_appLaserCutStudio
+build CMakeFiles/appLaserCutStudio.dir/core/infrastructure/logging/LogManager.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogManager.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
-  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/plugins/PluginManager.cpp.o.d
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/infrastructure/logging/LogManager.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
   INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
-  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/plugins
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/infrastructure/logging
+
+build CMakeFiles/appLaserCutStudio.dir/core/infrastructure/plugins/core/PluginManager.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/plugins/core/PluginManager.cpp || cmake_object_order_depends_target_appLaserCutStudio
+  DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/infrastructure/plugins/core/PluginManager.cpp.o.d
+  FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
+  OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/infrastructure/plugins/core
+
+build CMakeFiles/appLaserCutStudio.dir/core/infrastructure/di/ServiceLocator.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/di/ServiceLocator.cpp || cmake_object_order_depends_target_appLaserCutStudio
+  DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
+  DEP_FILE = CMakeFiles/appLaserCutStudio.dir/core/infrastructure/di/ServiceLocator.cpp.o.d
+  FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/appLaserCutStudio_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL
+  OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
+  OBJECT_FILE_DIR = CMakeFiles/appLaserCutStudio.dir/core/infrastructure/di
 
 build CMakeFiles/appLaserCutStudio.dir/applasercutstudio_qmltyperegistrations.cpp.o: CXX_COMPILER__appLaserCutStudio_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/applasercutstudio_qmltyperegistrations.cpp || cmake_object_order_depends_target_appLaserCutStudio
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB
@@ -225,7 +241,7 @@ build CMakeFiles/appLaserCutStudio.dir/build/Desktop-Debug/.rcc/qrc_appLaserCutS
 #############################################
 # Link the executable appLaserCutStudio
 
-build appLaserCutStudio: CXX_EXECUTABLE_LINKER__appLaserCutStudio_Debug CMakeFiles/appLaserCutStudio.dir/appLaserCutStudio_autogen/mocs_compilation.cpp.o CMakeFiles/appLaserCutStudio.dir/main.cpp.o CMakeFiles/appLaserCutStudio.dir/core/shapes/IShape.cpp.o CMakeFiles/appLaserCutStudio.dir/core/shapes/Rectangle.cpp.o CMakeFiles/appLaserCutStudio.dir/core/shapes/Circle.cpp.o CMakeFiles/appLaserCutStudio.dir/core/parts/IPart.cpp.o CMakeFiles/appLaserCutStudio.dir/core/parts/Part.cpp.o CMakeFiles/appLaserCutStudio.dir/core/joints/IJoint.cpp.o CMakeFiles/appLaserCutStudio.dir/core/joints/TabJoint.cpp.o CMakeFiles/appLaserCutStudio.dir/core/joints/FingerJoint.cpp.o CMakeFiles/appLaserCutStudio.dir/core/projects/IProject.cpp.o CMakeFiles/appLaserCutStudio.dir/core/projects/Project.cpp.o CMakeFiles/appLaserCutStudio.dir/core/config/ConfigManager.cpp.o CMakeFiles/appLaserCutStudio.dir/core/logging/LogCategories.cpp.o CMakeFiles/appLaserCutStudio.dir/core/logging/LogManager.cpp.o CMakeFiles/appLaserCutStudio.dir/core/plugins/PluginManager.cpp.o CMakeFiles/appLaserCutStudio.dir/applasercutstudio_qmltyperegistrations.cpp.o CMakeFiles/appLaserCutStudio.dir/build/Desktop-Debug/.rcc/qrc_qmake_LaserCutStudio.cpp.o CMakeFiles/appLaserCutStudio.dir/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_qmlcache_loader.cpp.o CMakeFiles/appLaserCutStudio.dir/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_Main_qml.cpp.o CMakeFiles/appLaserCutStudio.dir/build/Desktop-Debug/.rcc/qrc_appLaserCutStudio_raw_qml_0.cpp.o | /usr/lib/x86_64-linux-gnu/libQt6Quick.so.6.4.2 LibInterface/libLibInterface.a /usr/lib/x86_64-linux-gnu/libQt6QmlModels.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Qml.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6OpenGL.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2 /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 || LibInterface/libLibInterface.a appLaserCutStudio_autogen appLaserCutStudio_autogen_timestamp_deps appLaserCutStudio_qmlimportscan appLaserCutStudio_tooling
+build appLaserCutStudio: CXX_EXECUTABLE_LINKER__appLaserCutStudio_Debug CMakeFiles/appLaserCutStudio.dir/appLaserCutStudio_autogen/mocs_compilation.cpp.o CMakeFiles/appLaserCutStudio.dir/main.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/base/Interface.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/shapes/interfaces/IShape.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/shapes/implementations/Rectangle.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/shapes/implementations/Circle.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/parts/interfaces/IPart.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/parts/implementations/Part.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/joints/interfaces/IJoint.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/joints/implementations/TabJoint.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/joints/implementations/FingerJoint.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/projects/interfaces/IProject.cpp.o CMakeFiles/appLaserCutStudio.dir/core/models/projects/implementations/Project.cpp.o CMakeFiles/appLaserCutStudio.dir/core/infrastructure/config/ConfigManager.cpp.o CMakeFiles/appLaserCutStudio.dir/core/infrastructure/logging/LogCategories.cpp.o CMakeFiles/appLaserCutStudio.dir/core/infrastructure/logging/LogManager.cpp.o CMakeFiles/appLaserCutStudio.dir/core/infrastructure/plugins/core/PluginManager.cpp.o CMakeFiles/appLaserCutStudio.dir/core/infrastructure/di/ServiceLocator.cpp.o CMakeFiles/appLaserCutStudio.dir/applasercutstudio_qmltyperegistrations.cpp.o CMakeFiles/appLaserCutStudio.dir/build/Desktop-Debug/.rcc/qrc_qmake_LaserCutStudio.cpp.o CMakeFiles/appLaserCutStudio.dir/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_qmlcache_loader.cpp.o CMakeFiles/appLaserCutStudio.dir/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_Main_qml.cpp.o CMakeFiles/appLaserCutStudio.dir/build/Desktop-Debug/.rcc/qrc_appLaserCutStudio_raw_qml_0.cpp.o | /usr/lib/x86_64-linux-gnu/libQt6Quick.so.6.4.2 LibInterface/libLibInterface.a /usr/lib/x86_64-linux-gnu/libQt6QmlModels.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Qml.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6OpenGL.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2 /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 || LibInterface/libLibInterface.a appLaserCutStudio_autogen appLaserCutStudio_autogen_timestamp_deps appLaserCutStudio_qmlimportscan appLaserCutStudio_tooling
   FLAGS = -DQT_QML_DEBUG -g
   LINK_LIBRARIES = -Wl,-rpath,::::::::::::::::::::::  /usr/lib/x86_64-linux-gnu/libQt6Quick.so.6.4.2  LibInterface/libLibInterface.a  /usr/lib/x86_64-linux-gnu/libQt6QmlModels.so.6.4.2  /usr/lib/x86_64-linux-gnu/libQt6Qml.so.6.4.2  /usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2  /usr/lib/x86_64-linux-gnu/libQt6OpenGL.so.6.4.2  /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2  /usr/lib/x86_64-linux-gnu/libGLX.so  /usr/lib/x86_64-linux-gnu/libOpenGL.so  /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
   OBJECT_DIR = CMakeFiles/appLaserCutStudio.dir
@@ -486,7 +502,7 @@ build .qt_plugins/Qt6_QmlPlugins_Imports_appLaserCutStudio.cmake | ${cmake_ninja
 #############################################
 # Phony custom command for CMakeFiles/appLaserCutStudio_autogen_timestamp_deps
 
-build CMakeFiles/appLaserCutStudio_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/appLaserCutStudio_autogen_timestamp_deps: phony .rcc/qmlcache/appLaserCutStudio_qmlcache_loader.cpp /usr/lib/x86_64-linux-gnu/libQt6Quick.so.6.4.2 /usr/lib/qt6/libexec/moc /usr/lib/x86_64-linux-gnu/libQt6Qml.so.6.4.2 LibInterface/libLibInterface.a || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
+build CMakeFiles/appLaserCutStudio_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/appLaserCutStudio_autogen_timestamp_deps: phony .rcc/qmlcache/appLaserCutStudio_qmlcache_loader.cpp /usr/lib/qt6/libexec/moc /usr/lib/x86_64-linux-gnu/libQt6Quick.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Qml.so.6.4.2 LibInterface/libLibInterface.a || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
 
 
 #############################################
@@ -665,7 +681,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/LaserCutStudioTests_autogen/mocs_
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/LaserCutStudioTests_autogen/mocs_compilation.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/LaserCutStudioTests_autogen
 
@@ -673,7 +689,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/main.cpp.o: CXX_COMPILER__LaserCu
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/main.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
 
@@ -681,7 +697,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/TestTypes.cpp.o: CXX_COMPILER__La
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/TestTypes.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
 
@@ -689,7 +705,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/TestShapes.cpp.o: CXX_COMPILER__L
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/TestShapes.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
 
@@ -697,7 +713,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/TestPart.cpp.o: CXX_COMPILER__Las
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/TestPart.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
 
@@ -705,7 +721,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/TestJoint.cpp.o: CXX_COMPILER__La
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/TestJoint.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
 
@@ -713,7 +729,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/TestProject.cpp.o: CXX_COMPILER__
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/TestProject.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
 
@@ -721,7 +737,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/TestConfigManager.cpp.o: CXX_COMP
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/TestConfigManager.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
 
@@ -729,7 +745,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/TestLogging.cpp.o: CXX_COMPILER__
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/TestLogging.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
 
@@ -737,7 +753,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/TestPluginManager.cpp.o: CXX_COMP
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/TestPluginManager.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
 
@@ -745,121 +761,121 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/TestServiceLocator.cpp.o: CXX_COM
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/TestServiceLocator.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes/IShape.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/IShape.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/interfaces/IShape.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes/IShape.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/interfaces/IShape.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/interfaces
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes/Rectangle.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/Rectangle.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/implementations/Rectangle.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Rectangle.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes/Rectangle.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/implementations/Rectangle.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/implementations
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes/Circle.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/Circle.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/implementations/Circle.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Circle.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes/Circle.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/implementations/Circle.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/implementations
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/parts/IPart.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/parts/IPart.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/parts/interfaces/IPart.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/interfaces/IPart.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/parts/IPart.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/parts/interfaces/IPart.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/parts
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/parts/interfaces
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/parts/Part.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/parts/Part.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/parts/implementations/Part.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/implementations/Part.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/parts/Part.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/parts/implementations/Part.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/parts
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/parts/implementations
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints/IJoint.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/IJoint.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/interfaces/IJoint.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/interfaces/IJoint.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints/IJoint.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/interfaces/IJoint.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/interfaces
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints/TabJoint.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/TabJoint.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/implementations/TabJoint.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/TabJoint.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints/TabJoint.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/implementations/TabJoint.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/implementations
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints/FingerJoint.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/FingerJoint.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/implementations/FingerJoint.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/FingerJoint.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints/FingerJoint.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/implementations/FingerJoint.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/implementations
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/projects/IProject.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/projects/IProject.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/projects/interfaces/IProject.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/interfaces/IProject.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/projects/IProject.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/projects/interfaces/IProject.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/projects
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/projects/interfaces
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/projects/Project.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/projects/Project.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/projects/implementations/Project.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/implementations/Project.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/projects/Project.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/projects/implementations/Project.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/projects
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/projects/implementations
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/config/ConfigManager.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/config/ConfigManager.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/config/ConfigManager.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/config/ConfigManager.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/config/ConfigManager.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/config/ConfigManager.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/config
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/config
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/logging/LogCategories.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/logging/LogCategories.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/logging/LogCategories.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogCategories.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/logging/LogCategories.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/logging/LogCategories.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/logging
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/logging
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/logging/LogManager.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/logging/LogManager.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/logging/LogManager.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogManager.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/logging/LogManager.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/logging/LogManager.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/logging
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/logging
 
-build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/plugins/PluginManager.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/plugins/PluginManager.cpp || cmake_object_order_depends_target_LaserCutStudioTests
+build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/plugins/core/PluginManager.cpp.o: CXX_COMPILER__LaserCutStudioTests_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/plugins/core/PluginManager.cpp || cmake_object_order_depends_target_LaserCutStudioTests
   DEFINES = -DDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/plugins/PluginManager.cpp.o.d
+  DEP_FILE = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/plugins/core/PluginManager.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/LaserCutStudioTests_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
-  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/plugins
+  OBJECT_FILE_DIR = tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/plugins/core
 
 
 # =============================================================================
@@ -869,7 +885,7 @@ build tests/CMakeFiles/LaserCutStudioTests.dir/__/core/plugins/PluginManager.cpp
 #############################################
 # Link the executable tests/LaserCutStudioTests
 
-build tests/LaserCutStudioTests: CXX_EXECUTABLE_LINKER__LaserCutStudioTests_Debug tests/CMakeFiles/LaserCutStudioTests.dir/LaserCutStudioTests_autogen/mocs_compilation.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/main.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestTypes.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestShapes.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestPart.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestJoint.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestProject.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestConfigManager.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestLogging.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestPluginManager.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestServiceLocator.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes/IShape.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes/Rectangle.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/shapes/Circle.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/parts/IPart.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/parts/Part.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints/IJoint.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints/TabJoint.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/joints/FingerJoint.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/projects/IProject.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/projects/Project.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/config/ConfigManager.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/logging/LogCategories.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/logging/LogManager.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/plugins/PluginManager.cpp.o | /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2 LibInterface/libLibInterface.a /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 || LibInterface/libLibInterface.a tests/LaserCutStudioTests_autogen tests/LaserCutStudioTests_autogen_timestamp_deps
+build tests/LaserCutStudioTests: CXX_EXECUTABLE_LINKER__LaserCutStudioTests_Debug tests/CMakeFiles/LaserCutStudioTests.dir/LaserCutStudioTests_autogen/mocs_compilation.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/main.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestTypes.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestShapes.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestPart.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestJoint.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestProject.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestConfigManager.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestLogging.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestPluginManager.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/TestServiceLocator.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/interfaces/IShape.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/implementations/Rectangle.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/shapes/implementations/Circle.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/parts/interfaces/IPart.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/parts/implementations/Part.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/interfaces/IJoint.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/implementations/TabJoint.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/joints/implementations/FingerJoint.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/projects/interfaces/IProject.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/models/projects/implementations/Project.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/config/ConfigManager.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/logging/LogCategories.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/logging/LogManager.cpp.o tests/CMakeFiles/LaserCutStudioTests.dir/__/core/infrastructure/plugins/core/PluginManager.cpp.o | /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2 LibInterface/libLibInterface.a /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 || LibInterface/libLibInterface.a tests/LaserCutStudioTests_autogen tests/LaserCutStudioTests_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2  /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2  LibInterface/libLibInterface.a  /usr/lib/x86_64-linux-gnu/libGLX.so  /usr/lib/x86_64-linux-gnu/libOpenGL.so  /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
   OBJECT_DIR = tests/CMakeFiles/LaserCutStudioTests.dir
@@ -969,7 +985,7 @@ build tests/LaserCutStudioTests_autogen/timestamp tests/LaserCutStudioTests_auto
 #############################################
 # Phony custom command for tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps
 
-build tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps | ${cmake_ninja_workdir}tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps: phony /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 /usr/lib/qt6/libexec/moc /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2 LibInterface/libLibInterface.a /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
+build tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps | ${cmake_ninja_workdir}tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps: phony /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 /usr/lib/qt6/libexec/moc /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2 LibInterface/libLibInterface.a || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
 
 
 #############################################
@@ -995,7 +1011,7 @@ build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/LaserCutStudioBen
   DEFINES = -DBUILD_BENCHMARKS -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/LaserCutStudioBenchmarks_autogen/mocs_compilation.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/../.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
   OBJECT_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir
   OBJECT_FILE_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/LaserCutStudioBenchmarks_autogen
 
@@ -1003,7 +1019,7 @@ build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/main_benchmarks.c
   DEFINES = -DBUILD_BENCHMARKS -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/main_benchmarks.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/../.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
   OBJECT_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir
   OBJECT_FILE_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir
 
@@ -1011,33 +1027,33 @@ build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/BenchmarkShapes.c
   DEFINES = -DBUILD_BENCHMARKS -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks\" -DQT_TESTLIB_LIB
   DEP_FILE = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/BenchmarkShapes.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/../.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
   OBJECT_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir
   OBJECT_FILE_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir
 
-build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes/IShape.cpp.o: CXX_COMPILER__LaserCutStudioBenchmarks_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/IShape.cpp || cmake_object_order_depends_target_LaserCutStudioBenchmarks
+build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/interfaces/IShape.cpp.o: CXX_COMPILER__LaserCutStudioBenchmarks_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.cpp || cmake_object_order_depends_target_LaserCutStudioBenchmarks
   DEFINES = -DBUILD_BENCHMARKS -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes/IShape.cpp.o.d
+  DEP_FILE = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/interfaces/IShape.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/../.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
   OBJECT_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir
-  OBJECT_FILE_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes
+  OBJECT_FILE_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/interfaces
 
-build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes/Rectangle.cpp.o: CXX_COMPILER__LaserCutStudioBenchmarks_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/Rectangle.cpp || cmake_object_order_depends_target_LaserCutStudioBenchmarks
+build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/implementations/Rectangle.cpp.o: CXX_COMPILER__LaserCutStudioBenchmarks_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Rectangle.cpp || cmake_object_order_depends_target_LaserCutStudioBenchmarks
   DEFINES = -DBUILD_BENCHMARKS -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes/Rectangle.cpp.o.d
+  DEP_FILE = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/implementations/Rectangle.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/../.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
   OBJECT_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir
-  OBJECT_FILE_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes
+  OBJECT_FILE_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/implementations
 
-build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes/Circle.cpp.o: CXX_COMPILER__LaserCutStudioBenchmarks_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/Circle.cpp || cmake_object_order_depends_target_LaserCutStudioBenchmarks
+build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/implementations/Circle.cpp.o: CXX_COMPILER__LaserCutStudioBenchmarks_unscanned_Debug /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Circle.cpp || cmake_object_order_depends_target_LaserCutStudioBenchmarks
   DEFINES = -DBUILD_BENCHMARKS -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks\" -DQT_TESTCASE_SOURCEDIR=\"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks\" -DQT_TESTLIB_LIB
-  DEP_FILE = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes/Circle.cpp.o.d
+  DEP_FILE = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/implementations/Circle.cpp.o.d
   FLAGS = -DQT_QML_DEBUG -g -fcolor-diagnostics -fPIC
-  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
+  INCLUDES = -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/tests/benchmarks/LaserCutStudioBenchmarks_autogen/include -I/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/../.. -I/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtTest -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
   OBJECT_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir
-  OBJECT_FILE_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes
+  OBJECT_FILE_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/implementations
 
 
 # =============================================================================
@@ -1047,7 +1063,7 @@ build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes
 #############################################
 # Link the executable tests/benchmarks/LaserCutStudioBenchmarks
 
-build tests/benchmarks/LaserCutStudioBenchmarks: CXX_EXECUTABLE_LINKER__LaserCutStudioBenchmarks_Debug tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/LaserCutStudioBenchmarks_autogen/mocs_compilation.cpp.o tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/main_benchmarks.cpp.o tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/BenchmarkShapes.cpp.o tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes/IShape.cpp.o tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes/Rectangle.cpp.o tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/shapes/Circle.cpp.o | /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 LibInterface/libLibInterface.a /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 || LibInterface/libLibInterface.a tests/benchmarks/LaserCutStudioBenchmarks_autogen tests/benchmarks/LaserCutStudioBenchmarks_autogen_timestamp_deps
+build tests/benchmarks/LaserCutStudioBenchmarks: CXX_EXECUTABLE_LINKER__LaserCutStudioBenchmarks_Debug tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/LaserCutStudioBenchmarks_autogen/mocs_compilation.cpp.o tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/main_benchmarks.cpp.o tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/BenchmarkShapes.cpp.o tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/interfaces/IShape.cpp.o tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/implementations/Rectangle.cpp.o tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir/__/__/core/models/shapes/implementations/Circle.cpp.o | /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 LibInterface/libLibInterface.a /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 || LibInterface/libLibInterface.a tests/benchmarks/LaserCutStudioBenchmarks_autogen tests/benchmarks/LaserCutStudioBenchmarks_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2  LibInterface/libLibInterface.a  /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2
   OBJECT_DIR = tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks.dir
@@ -1147,7 +1163,7 @@ build tests/benchmarks/LaserCutStudioBenchmarks_autogen/timestamp tests/benchmar
 #############################################
 # Phony custom command for tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen_timestamp_deps
 
-build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen_timestamp_deps | ${cmake_ninja_workdir}tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen_timestamp_deps: phony /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 /usr/lib/qt6/libexec/moc LibInterface/libLibInterface.a /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
+build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen_timestamp_deps | ${cmake_ninja_workdir}tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen_timestamp_deps: phony /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 /usr/lib/qt6/libexec/moc LibInterface/libLibInterface.a || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
 
 
 #############################################

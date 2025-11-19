@@ -13,48 +13,54 @@ qt_standard_project_setup()
 
 qt_add_executable(appLaserCutStudio
     main.cpp
-    # Core Module - Types
-    core/types/Point2D.h
-    core/types/Point3D.h
-    core/types/Material.h
-    core/types/JointType.h
-    # Core Module - Shapes
-    core/shapes/IShape.h
-    core/shapes/IShape.cpp
-    core/shapes/Rectangle.h
-    core/shapes/Rectangle.cpp
-    core/shapes/Circle.h
-    core/shapes/Circle.cpp
-    # Core Module - Parts
-    core/parts/IPart.h
-    core/parts/IPart.cpp
-    core/parts/Part.h
-    core/parts/Part.cpp
-    # Core Module - Joints
-    core/joints/IJoint.h
-    core/joints/IJoint.cpp
-    core/joints/TabJoint.h
-    core/joints/TabJoint.cpp
-    core/joints/FingerJoint.h
-    core/joints/FingerJoint.cpp
-    # Core Module - Projects
-    core/projects/IProject.h
-    core/projects/IProject.cpp
-    core/projects/Project.h
-    core/projects/Project.cpp
-    # Core Module - Config
-    core/config/ConfigManager.h
-    core/config/ConfigManager.cpp
-    # Core Module - Logging
-    core/logging/LogCategories.h
-    core/logging/LogCategories.cpp
-    core/logging/LogManager.h
-    core/logging/LogManager.cpp
-    # Core Module - Plugins
-    core/plugins/IShapePlugin.h
-    core/plugins/IJointPlugin.h
-    core/plugins/PluginManager.h
-    core/plugins/PluginManager.cpp
+    # Core Module - Models Base
+    core/models/base/Interface.h
+    core/models/base/Interface.cpp
+    # Core Module - Models Base
+    core/models/base/types/Point2D.h
+    core/models/base/types/Point3D.h
+    core/models/base/types/Material.h
+    core/models/base/types/JointType.h
+    # Core Module - Models Shapes
+    core/models/shapes/interfaces/IShape.h
+    core/models/shapes/interfaces/IShape.cpp
+    core/models/shapes/implementations/Rectangle.h
+    core/models/shapes/implementations/Rectangle.cpp
+    core/models/shapes/implementations/Circle.h
+    core/models/shapes/implementations/Circle.cpp
+    # Core Module - Models Parts
+    core/models/parts/interfaces/IPart.h
+    core/models/parts/interfaces/IPart.cpp
+    core/models/parts/implementations/Part.h
+    core/models/parts/implementations/Part.cpp
+    # Core Module - Models Joints
+    core/models/joints/interfaces/IJoint.h
+    core/models/joints/interfaces/IJoint.cpp
+    core/models/joints/implementations/TabJoint.h
+    core/models/joints/implementations/TabJoint.cpp
+    core/models/joints/implementations/FingerJoint.h
+    core/models/joints/implementations/FingerJoint.cpp
+    # Core Module - Models Projects
+    core/models/projects/interfaces/IProject.h
+    core/models/projects/interfaces/IProject.cpp
+    core/models/projects/implementations/Project.h
+    core/models/projects/implementations/Project.cpp
+    # Core Module - Infrastructure Config
+    core/infrastructure/config/ConfigManager.h
+    core/infrastructure/config/ConfigManager.cpp
+    # Core Module - Infrastructure Logging
+    core/infrastructure/logging/LogCategories.h
+    core/infrastructure/logging/LogCategories.cpp
+    core/infrastructure/logging/LogManager.h
+    core/infrastructure/logging/LogManager.cpp
+    # Core Module - Infrastructure Plugins
+    core/infrastructure/plugins/interfaces/IShapePlugin.h
+    core/infrastructure/plugins/interfaces/IJointPlugin.h
+    core/infrastructure/plugins/core/PluginManager.h
+    core/infrastructure/plugins/core/PluginManager.cpp
+    # Core Module - Infrastructure DI
+    core/infrastructure/di/ServiceLocator.h
+    core/infrastructure/di/ServiceLocator.cpp
 )
 
 qt_add_qml_module(appLaserCutStudio
@@ -79,6 +85,11 @@ target_link_libraries(appLaserCutStudio
     PRIVATE
         Qt6::Quick
         LibInterface::LibInterface
+)
+
+# Include directories pour accès avec "core/..."
+target_include_directories(appLaserCutStudio PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 # Définir la macro DEBUG en mode Debug (pour #if DEBUG dans le code)

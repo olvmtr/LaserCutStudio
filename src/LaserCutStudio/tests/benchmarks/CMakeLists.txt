@@ -12,15 +12,15 @@ add_executable(LaserCutStudioBenchmarks
     BenchmarkShapes.h
     BenchmarkShapes.cpp
     # Sources du module Core (seulement ceux qui ne sont pas dans LibInterface)
-    ../../core/types/Point2D.h
-    ../../core/types/Point3D.h
-    ../../core/types/Material.h
-    ../../core/shapes/IShape.h
-    ../../core/shapes/IShape.cpp
-    ../../core/shapes/Rectangle.h
-    ../../core/shapes/Rectangle.cpp
-    ../../core/shapes/Circle.h
-    ../../core/shapes/Circle.cpp
+    ../../core/models/base/types/Point2D.h
+    ../../core/models/base/types/Point3D.h
+    ../../core/models/base/types/Material.h
+    ../../core/models/shapes/interfaces/IShape.h
+    ../../core/models/shapes/interfaces/IShape.cpp
+    ../../core/models/shapes/implementations/Rectangle.h
+    ../../core/models/shapes/implementations/Rectangle.cpp
+    ../../core/models/shapes/implementations/Circle.h
+    ../../core/models/shapes/implementations/Circle.cpp
 )
 
 # Lie les bibliothèques Qt et LibInterface
@@ -29,6 +29,11 @@ target_link_libraries(LaserCutStudioBenchmarks
     Qt6::Test
     Qt6::Core
     LibInterface::LibInterface
+)
+
+# Include directories pour accès avec "core/..."
+target_include_directories(LaserCutStudioBenchmarks PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../..
 )
 
 # Définir la macro BUILD_BENCHMARKS pour le code conditionnel

@@ -281,123 +281,135 @@
 	"HEADERS" : 
 	[
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/config/ConfigManager.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/config/ConfigManager.h",
 			"MU",
-			"ZCC6LKUHCO/moc_ConfigManager.cpp",
+			"NPAKKLQEK3/moc_ConfigManager.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/FingerJoint.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/di/ServiceLocator.h",
 			"MU",
-			"YNFJ2M7EVL/moc_FingerJoint.cpp",
+			"6L563ZOCWF/moc_ServiceLocator.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/IJoint.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogCategories.h",
 			"MU",
-			"YNFJ2M7EVL/moc_IJoint.cpp",
+			"XRZGZBVEYH/moc_LogCategories.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/TabJoint.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogManager.h",
 			"MU",
-			"YNFJ2M7EVL/moc_TabJoint.cpp",
+			"XRZGZBVEYH/moc_LogManager.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/logging/LogCategories.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/plugins/core/PluginManager.h",
 			"MU",
-			"K3XCKQA3IO/moc_LogCategories.cpp",
+			"QNXUQAGNON/moc_PluginManager.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/logging/LogManager.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/plugins/interfaces/IJointPlugin.h",
 			"MU",
-			"K3XCKQA3IO/moc_LogManager.cpp",
+			"ZIQ5MHJU2A/moc_IJointPlugin.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/parts/IPart.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/plugins/interfaces/IShapePlugin.h",
 			"MU",
-			"VTS7S5PMBD/moc_IPart.cpp",
+			"ZIQ5MHJU2A/moc_IShapePlugin.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/parts/Part.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/Interface.h",
 			"MU",
-			"VTS7S5PMBD/moc_Part.cpp",
+			"ENW26LNFXU/moc_Interface.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/plugins/IJointPlugin.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/types/JointType.h",
 			"MU",
-			"ATD7POCTAI/moc_IJointPlugin.cpp",
+			"XYCFV6I66L/moc_JointType.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/plugins/IShapePlugin.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/types/Material.h",
 			"MU",
-			"ATD7POCTAI/moc_IShapePlugin.cpp",
+			"XYCFV6I66L/moc_Material.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/plugins/PluginManager.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/types/Point2D.h",
 			"MU",
-			"ATD7POCTAI/moc_PluginManager.cpp",
+			"XYCFV6I66L/moc_Point2D.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/projects/IProject.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/types/Point3D.h",
 			"MU",
-			"NG47CMZUHL/moc_IProject.cpp",
+			"XYCFV6I66L/moc_Point3D.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/projects/Project.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/FingerJoint.h",
 			"MU",
-			"NG47CMZUHL/moc_Project.cpp",
+			"AEQVSPXJ77/moc_FingerJoint.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/Circle.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/TabJoint.h",
 			"MU",
-			"KB7LTO7UL2/moc_Circle.cpp",
+			"AEQVSPXJ77/moc_TabJoint.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/IShape.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/interfaces/IJoint.h",
 			"MU",
-			"KB7LTO7UL2/moc_IShape.cpp",
+			"5D7EEHS4CR/moc_IJoint.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/Rectangle.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/implementations/Part.h",
 			"MU",
-			"KB7LTO7UL2/moc_Rectangle.cpp",
+			"CX2IQZOJ6X/moc_Part.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/types/JointType.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/interfaces/IPart.h",
 			"MU",
-			"3SP2ATCFQ7/moc_JointType.cpp",
+			"QXQDT57II4/moc_IPart.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/types/Material.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/implementations/Project.h",
 			"MU",
-			"3SP2ATCFQ7/moc_Material.cpp",
+			"EIENIRQ553/moc_Project.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/types/Point2D.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/interfaces/IProject.h",
 			"MU",
-			"3SP2ATCFQ7/moc_Point2D.cpp",
+			"4TYWVJDV7E/moc_IProject.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/types/Point3D.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Circle.h",
 			"MU",
-			"3SP2ATCFQ7/moc_Point3D.cpp",
+			"PJEH2QOMA2/moc_Circle.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Rectangle.h",
+			"MU",
+			"PJEH2QOMA2/moc_Rectangle.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.h",
+			"MU",
+			"GFWMSFW4MY/moc_IShape.cpp",
 			null
 		]
 	],
@@ -492,72 +504,82 @@
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/config/ConfigManager.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/config/ConfigManager.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/FingerJoint.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/di/ServiceLocator.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/IJoint.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogCategories.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/joints/TabJoint.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/logging/LogManager.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/logging/LogCategories.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/infrastructure/plugins/core/PluginManager.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/logging/LogManager.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/base/Interface.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/parts/IPart.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/FingerJoint.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/parts/Part.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/TabJoint.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/plugins/PluginManager.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/interfaces/IJoint.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/projects/IProject.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/implementations/Part.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/projects/Project.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/interfaces/IPart.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/Circle.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/implementations/Project.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/IShape.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/interfaces/IProject.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/shapes/Rectangle.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Circle.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Rectangle.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.cpp",
 			"MU",
 			null
 		],

@@ -3,11 +3,11 @@
 
 #include <QObject>
 #include <QtTest>
-#include "../core/plugins/PluginManager.h"
-#include "../core/plugins/IShapePlugin.h"
-#include "../core/plugins/IJointPlugin.h"
-#include "../core/shapes/IShape.h"
-#include "../core/joints/IJoint.h"
+#include "core/infrastructure/plugins/core/PluginManager.h"
+#include "core/infrastructure/plugins/interfaces/IShapePlugin.h"
+#include "core/infrastructure/plugins/interfaces/IJointPlugin.h"
+#include "core/models/shapes/interfaces/IShape.h"
+#include "core/models/joints/interfaces/IJoint.h"
 
 using namespace LaserCutStudio::Core;
 using namespace LaserCutStudio::Core::Plugins;

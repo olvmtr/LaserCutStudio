@@ -1,6 +1,6 @@
 #include "TestLogging.h"
-#include "../core/logging/LogManager.h"
-#include "../core/logging/LogCategories.h"
+#include "core/infrastructure/logging/LogManager.h"
+#include "core/infrastructure/logging/LogCategories.h"
 #include <QTemporaryDir>
 #include <QFile>
 #include <QTextStream>
