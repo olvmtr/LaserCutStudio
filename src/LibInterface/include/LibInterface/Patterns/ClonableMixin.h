@@ -1,5 +1,5 @@
-#ifndef CLONABLEMIXIN_H
-#define CLONABLEMIXIN_H
+#ifndef LIBINTERFACE_CLONABLEMIXIN_H
+#define LIBINTERFACE_CLONABLEMIXIN_H
 
 namespace LibInterface {
 
@@ -71,4 +71,4 @@ namespace Patterns {
 
 } // namespace LibInterface
 
-#endif // CLONABLEMIXIN_H
+#endif // LIBINTERFACE_CLONABLEMIXIN_H

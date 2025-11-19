@@ -1,5 +1,5 @@
-#ifndef INTERFACE_H
-#define INTERFACE_H
+#ifndef LIBINTERFACE_INTERFACE_H
+#define LIBINTERFACE_INTERFACE_H
 
 #include <QObject>
 #include <QString>
@@ -134,4 +134,4 @@ protected:
 
 } // namespace LibInterface
 
-#endif // INTERFACE_H
+#endif // LIBINTERFACE_INTERFACE_H

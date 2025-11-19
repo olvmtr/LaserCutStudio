@@ -1,5 +1,5 @@
-#ifndef DEBUGMACROS_H
-#define DEBUGMACROS_H
+#ifndef LIBINTERFACE_DEBUGMACROS_H
+#define LIBINTERFACE_DEBUGMACROS_H
 
 /**
  * @file DebugMacros.h
@@ -88,4 +88,4 @@
  */
 #define UNUSED(x) (void)(x)
 
-#endif // DEBUGMACROS_H
+#endif // LIBINTERFACE_DEBUGMACROS_H

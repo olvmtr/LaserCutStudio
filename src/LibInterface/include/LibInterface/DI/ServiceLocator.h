@@ -1,5 +1,5 @@
-#ifndef SERVICELOCATOR_H
-#define SERVICELOCATOR_H
+#ifndef LIBINTERFACE_SERVICELOCATOR_H
+#define LIBINTERFACE_SERVICELOCATOR_H
 
 #include <QObject>
 #include <QString>
@@ -316,4 +316,4 @@ private:
 
 } // namespace LibInterface
 
-#endif // SERVICELOCATOR_H
+#endif // LIBINTERFACE_SERVICELOCATOR_H

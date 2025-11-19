@@ -44,11 +44,12 @@ target_link_libraries(LibInterface
         Qt6::Core
 )
 
-# Propriétés
+# Propriétés additionnelles
 set_target_properties(LibInterface PROPERTIES
     VERSION ${PROJECT_VERSION}
     SOVERSION 1
     PUBLIC_HEADER "${PUBLIC_HEADERS}"
+    AUTOMOC ON
 )
 
 # Installation

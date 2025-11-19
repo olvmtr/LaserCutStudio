@@ -5,7 +5,7 @@
 #include <QtTest>
 #include "../core/di/ServiceLocator.h"
 
-using namespace LaserCutStudio::Core::DI;
+using namespace LibInterface::DI;
 
 // Classes de test
 

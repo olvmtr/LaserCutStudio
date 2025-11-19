@@ -1,5 +1,5 @@
-#ifndef PROPERTYMIXIN_H
-#define PROPERTYMIXIN_H
+#ifndef LIBINTERFACE_PROPERTYMIXIN_H
+#define LIBINTERFACE_PROPERTYMIXIN_H
 
 #include <QtCore/qglobal.h>
 
@@ -174,4 +174,4 @@ protected:
 
 } // namespace LibInterface
 
-#endif // PROPERTYMIXIN_H
+#endif // LIBINTERFACE_PROPERTYMIXIN_H

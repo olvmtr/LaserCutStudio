@@ -1,5 +1,5 @@
-#ifndef FACTORYMIXIN_H
-#define FACTORYMIXIN_H
+#ifndef LIBINTERFACE_FACTORYMIXIN_H
+#define LIBINTERFACE_FACTORYMIXIN_H
 
 #include <QMap>
 #include <QString>
@@ -169,4 +169,4 @@ QMap<QString, typename FactoryMixin<Base>::FactoryFunc> FactoryMixin<Base>::s_fa
 
 } // namespace LibInterface
 
-#endif // FACTORYMIXIN_H
+#endif // LIBINTERFACE_FACTORYMIXIN_H

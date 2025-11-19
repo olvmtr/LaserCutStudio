@@ -1,5 +1,5 @@
-#ifndef LISTMANAGERMIXIN_H
-#define LISTMANAGERMIXIN_H
+#ifndef LIBINTERFACE_LISTMANAGERMIXIN_H
+#define LIBINTERFACE_LISTMANAGERMIXIN_H
 
 #include <QList>
 
@@ -130,4 +130,4 @@ QList<T*> ListManagerMixin<T>::s_instances;
 
 } // namespace LibInterface
 
-#endif // LISTMANAGERMIXIN_H
+#endif // LIBINTERFACE_LISTMANAGERMIXIN_H

@@ -6,18 +6,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
 
+# Ajouter LibInterface (bibliothèque réutilisable)
+add_subdirectory(../LibInterface ${CMAKE_CURRENT_BINARY_DIR}/LibInterface)
+
 qt_standard_project_setup()
 
 qt_add_executable(appLaserCutStudio
     main.cpp
-    # Core Module - Debug Macros
-    core/DebugMacros.h
-    # Core Module - Interface
-    core/interface/Interface.h
-    core/interface/Interface.cpp
-    # Core Module - Patterns
-    core/patterns/FactoryMixin.h
-    core/patterns/ListManagerMixin.h
     # Core Module - Types
     core/types/Point2D.h
     core/types/Point3D.h
@@ -60,9 +55,6 @@ qt_add_executable(appLaserCutStudio
     core/plugins/IJointPlugin.h
     core/plugins/PluginManager.h
     core/plugins/PluginManager.cpp
-    # Core Module - Dependency Injection
-    core/di/ServiceLocator.h
-    core/di/ServiceLocator.cpp
 )
 
 qt_add_qml_module(appLaserCutStudio
@@ -84,7 +76,9 @@ set_target_properties(appLaserCutStudio PROPERTIES
 )
 
 target_link_libraries(appLaserCutStudio
-    PRIVATE Qt6::Quick
+    PRIVATE
+        Qt6::Quick
+        LibInterface::LibInterface
 )
 
 # Définir la macro DEBUG en mode Debug (pour #if DEBUG dans le code)

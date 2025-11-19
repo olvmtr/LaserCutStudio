@@ -27,11 +27,7 @@ add_executable(LaserCutStudioTests
     TestPluginManager.cpp
     TestServiceLocator.h
     TestServiceLocator.cpp
-    # Sources du module Core
-    ../core/interface/Interface.h
-    ../core/interface/Interface.cpp
-    ../core/patterns/FactoryMixin.h
-    ../core/patterns/ListManagerMixin.h
+    # Sources du module Core (seulement ceux qui ne sont pas dans LibInterface)
     ../core/types/Point2D.h
     ../core/types/Point3D.h
     ../core/types/Material.h
@@ -66,16 +62,15 @@ add_executable(LaserCutStudioTests
     ../core/plugins/IJointPlugin.h
     ../core/plugins/PluginManager.h
     ../core/plugins/PluginManager.cpp
-    ../core/di/ServiceLocator.h
-    ../core/di/ServiceLocator.cpp
 )
 
-# Lie les bibliothèques Qt
+# Lie les bibliothèques Qt et LibInterface
 target_link_libraries(LaserCutStudioTests
     PRIVATE
     Qt6::Test
     Qt6::Core
     Qt6::Gui
+    LibInterface::LibInterface
 )
 
 # Définir la macro DEBUG en mode Debug

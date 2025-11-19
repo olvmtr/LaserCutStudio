@@ -11,10 +11,7 @@ add_executable(LaserCutStudioBenchmarks
     main_benchmarks.cpp
     BenchmarkShapes.h
     BenchmarkShapes.cpp
-    # Sources du module Core
-    ../../core/DebugMacros.h
-    ../../core/interface/Interface.h
-    ../../core/interface/Interface.cpp
+    # Sources du module Core (seulement ceux qui ne sont pas dans LibInterface)
     ../../core/types/Point2D.h
     ../../core/types/Point3D.h
     ../../core/types/Material.h
@@ -26,11 +23,12 @@ add_executable(LaserCutStudioBenchmarks
     ../../core/shapes/Circle.cpp
 )
 
-# Lie les bibliothèques Qt
+# Lie les bibliothèques Qt et LibInterface
 target_link_libraries(LaserCutStudioBenchmarks
     PRIVATE
     Qt6::Test
     Qt6::Core
+    LibInterface::LibInterface
 )
 
 # Définir la macro BUILD_BENCHMARKS pour le code conditionnel
