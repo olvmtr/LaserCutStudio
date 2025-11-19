@@ -48,6 +48,13 @@ qt_add_executable(appLaserCutStudio
     core/models/projects/interfaces/IProject.cpp
     core/models/projects/implementations/Project.h
     core/models/projects/implementations/Project.cpp
+    # Core Module - Models Editor
+    core/models/editor/interfaces/ITool.h
+    core/models/editor/interfaces/ITool.cpp
+    core/models/editor/interfaces/IEditorCommand.h
+    core/models/editor/interfaces/IEditorCommand.cpp
+    core/models/editor/interfaces/ISelection.h
+    core/models/editor/interfaces/ISelection.cpp
     # Core Module - Infrastructure Config
     core/infrastructure/config/ConfigManager.h
     core/infrastructure/config/ConfigManager.cpp
