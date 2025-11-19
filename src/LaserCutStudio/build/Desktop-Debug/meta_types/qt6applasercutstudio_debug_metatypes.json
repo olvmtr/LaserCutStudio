@@ -663,6 +663,23 @@
     {
         "classes": [
             {
+                "className": "CreateShapeCommand",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::CreateShapeCommand",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IEditorCommand"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "CreateShapeCommand.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
                 "className": "SelectionManager",
                 "object": true,
                 "qualifiedClassName": "LaserCutStudio::Core::Editor::SelectionManager",
