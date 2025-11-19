@@ -12,10 +12,10 @@
 
 #include <QObject>
 #include <QVector>
-#include <QStack>
 #include "core/models/editor/interfaces/ITool.h"
 #include "core/models/editor/interfaces/ISelection.h"
 #include "core/models/editor/interfaces/IEditorCommand.h"
+#include "core/models/editor/implementations/CommandStack.h"
 #include "core/models/shapes/interfaces/IShape.h"
 
 namespace LaserCutStudio {
@@ -148,12 +148,12 @@ public:
     /**
      * @brief Taille de la pile Undo
      */
-    int getUndoStackSize() const { return m_undoStack.size(); }
+    int getUndoStackSize() const;
 
     /**
      * @brief Taille de la pile Redo
      */
-    int getRedoStackSize() const { return m_redoStack.size(); }
+    int getRedoStackSize() const;
 
     /**
      * @brief Annule la dernière commande
@@ -179,7 +179,7 @@ public:
     /**
      * @brief Limite maximale de commandes dans le stack
      */
-    int getUndoLimit() const { return m_undoLimit; }
+    int getUndoLimit() const;
     void setUndoLimit(int limit);
 
 signals:
@@ -223,6 +223,11 @@ signals:
      */
     void statusMessage(const QString& message);
 
+    /**
+     * @brief Émis quand la sélection change
+     */
+    void selectionChanged();
+
 private:
     // Outil actif
     Editor::ITool* m_activeTool = nullptr;
@@ -236,13 +241,8 @@ private:
     // Formes dans l'éditeur
     QVector<IShape*> m_shapes;
 
-    // Stacks Undo/Redo
-    QStack<Editor::IEditorCommand*> m_undoStack;
-    QStack<Editor::IEditorCommand*> m_redoStack;
-    int m_undoLimit = 100;  // Limite du stack Undo
-
-    // Nettoie les commandes obsolètes du stack
-    void cleanObsoleteCommands();
+    // Stack Undo/Redo (remplace QStack manuel par CommandStack)
+    Editor::CommandStack* m_commandStack = nullptr;
 };
 
 } // namespace Services

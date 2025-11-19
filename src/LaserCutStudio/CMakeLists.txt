@@ -61,9 +61,14 @@ qt_add_executable(appLaserCutStudio
     core/models/editor/implementations/SelectionManager.cpp
     core/models/editor/implementations/CreateShapeCommand.h
     core/models/editor/implementations/CreateShapeCommand.cpp
+    core/models/editor/implementations/CommandStack.h
+    core/models/editor/implementations/CommandStack.cpp
     # Core Module - Services Editor
     core/services/editor/EditorService.h
     core/services/editor/EditorService.cpp
+    # Core Module - UI Canvas
+    core/ui/canvas/Canvas2DView.h
+    core/ui/canvas/Canvas2DView.cpp
     # Core Module - Infrastructure Config
     core/infrastructure/config/ConfigManager.h
     core/infrastructure/config/ConfigManager.cpp

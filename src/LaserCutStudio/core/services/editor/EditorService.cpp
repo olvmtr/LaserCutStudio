@@ -4,6 +4,7 @@
  */
 
 #include "core/services/editor/EditorService.h"
+#include "core/models/editor/implementations/SelectionManager.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include <QDebug>
 
@@ -15,22 +16,39 @@ EditorService::EditorService(QObject* parent)
     : QObject(parent)
     , m_activeTool(nullptr)
     , m_selection(nullptr)
+    , m_commandStack(nullptr)
 {
     qCInfo(logCore()) << "EditorService created";
 
-    // TODO: Créer une implémentation concrète de ISelection
-    // m_selection = new SelectionManager(this);
+    // Créer le gestionnaire de sélection
+    m_selection = new Editor::SelectionManager(this);
+
+    // Créer le CommandStack
+    m_commandStack = new Editor::CommandStack(this);
+    m_commandStack->setUndoLimit(100);  // Limite par défaut
+
+    // Connecter les signaux du CommandStack
+    connect(m_commandStack, &Editor::CommandStack::canUndoChanged,
+            this, &EditorService::undoStackChanged);
+    connect(m_commandStack, &Editor::CommandStack::canRedoChanged,
+            this, &EditorService::undoStackChanged);
+    connect(m_commandStack, &Editor::CommandStack::undoCountChanged,
+            this, &EditorService::undoStackChanged);
+    connect(m_commandStack, &Editor::CommandStack::redoCountChanged,
+            this, &EditorService::undoStackChanged);
+    connect(m_commandStack, &Editor::CommandStack::commandUndone,
+            this, &EditorService::undone);
+    connect(m_commandStack, &Editor::CommandStack::commandRedone,
+            this, &EditorService::redone);
+
+    qCInfo(logCore()) << "EditorService initialized with CommandStack and SelectionManager";
 }
 
 EditorService::~EditorService()
 {
     qCInfo(logCore()) << "EditorService destroyed";
 
-    // Nettoyer les stacks Undo/Redo
-    clearUndoStack();
-
-    // Les formes sont gérées par leur parent Qt
-    // Les outils sont gérés par leur parent Qt
+    // CommandStack et SelectionManager sont détruits automatiquement (parents Qt)
 }
 
 // ===== Gestion des outils =====
@@ -135,72 +153,32 @@ void EditorService::clear()
 
 bool EditorService::canUndo() const
 {
-    return !m_undoStack.isEmpty();
+    return m_commandStack ? m_commandStack->canUndo() : false;
 }
 
 bool EditorService::canRedo() const
 {
-    return !m_redoStack.isEmpty();
+    return m_commandStack ? m_commandStack->canRedo() : false;
 }
 
 void EditorService::undo()
 {
-    if (!canUndo()) {
-        qCWarning(logCore()) << "Cannot undo: stack is empty";
+    if (!m_commandStack) {
+        qCWarning(logCore()) << "CommandStack is null, cannot undo";
         return;
     }
 
-    Editor::IEditorCommand* command = m_undoStack.pop();
-
-    if (command->isObsolete()) {
-        qCWarning(logCore()) << "Command is obsolete, skipping:" << command->getText();
-        delete command;
-
-        // Nettoyer les commandes obsolètes et réessayer
-        cleanObsoleteCommands();
-        if (canUndo()) {
-            undo();  // Récursion pour trouver une commande valide
-        }
-        return;
-    }
-
-    command->undo();
-    m_redoStack.push(command);
-
-    qCInfo(logCore()) << "Undo:" << command->getText();
-
-    emit undone();
-    emit undoStackChanged();
+    m_commandStack->undo();
 }
 
 void EditorService::redo()
 {
-    if (!canRedo()) {
-        qCWarning(logCore()) << "Cannot redo: stack is empty";
+    if (!m_commandStack) {
+        qCWarning(logCore()) << "CommandStack is null, cannot redo";
         return;
     }
 
-    Editor::IEditorCommand* command = m_redoStack.pop();
-
-    if (command->isObsolete()) {
-        qCWarning(logCore()) << "Command is obsolete, skipping:" << command->getText();
-        delete command;
-
-        // Nettoyer et réessayer
-        cleanObsoleteCommands();
-        if (canRedo()) {
-            redo();  // Récursion
-        }
-        return;
-    }
-
-    command->redo();
-    m_undoStack.push(command);
-
-    qCInfo(logCore()) << "Redo:" << command->getText();
-
-    emit redone();
-    emit undoStackChanged();
+    m_commandStack->redo();
 }
 
 void EditorService::pushCommand(Editor::IEditorCommand* command)
@@ -210,93 +188,49 @@ void EditorService::pushCommand(Editor::IEditorCommand* command)
         return;
     }
 
-    // Exécuter la commande
-    command->execute();
-
-    // Vider la pile Redo (nouvelle branche d'historique)
-    qDeleteAll(m_redoStack);
-    m_redoStack.clear();
-
-    // Tentative de fusion avec la dernière commande
-    if (!m_undoStack.isEmpty()) {
-        Editor::IEditorCommand* lastCommand = m_undoStack.top();
-
-        if (lastCommand->canMerge() && command->canMerge() &&
-            lastCommand->getCommandId() == command->getCommandId()) {
-
-            if (lastCommand->mergeWith(command)) {
-                qCInfo(logCore()) << "Command merged with previous:" << command->getText();
-                delete command;  // Fusion réussie, supprimer la commande
-                emit undoStackChanged();
-                return;
-            }
-        }
+    if (!m_commandStack) {
+        qCWarning(logCore()) << "CommandStack is null, cannot push command";
+        delete command;
+        return;
     }
 
-    // Ajouter au stack
-    m_undoStack.push(command);
-    qCInfo(logCore()) << "Command pushed:" << command->getText();
-
-    // Limiter la taille du stack
-    while (m_undoStack.size() > m_undoLimit) {
-        Editor::IEditorCommand* oldest = m_undoStack.first();
-        m_undoStack.removeFirst();
-        delete oldest;
-    }
-
-    emit undoStackChanged();
+    m_commandStack->push(command);
 }
 
 void EditorService::clearUndoStack()
 {
-    qDeleteAll(m_undoStack);
-    m_undoStack.clear();
+    if (!m_commandStack) {
+        qCWarning(logCore()) << "CommandStack is null, cannot clear";
+        return;
+    }
 
-    qDeleteAll(m_redoStack);
-    m_redoStack.clear();
-
-    qCInfo(logCore()) << "Undo/Redo stacks cleared";
-    emit undoStackChanged();
+    m_commandStack->clear();
 }
 
 void EditorService::setUndoLimit(int limit)
 {
-    if (limit < 0) {
-        qCWarning(logCore()) << "Invalid undo limit:" << limit;
+    if (!m_commandStack) {
+        qCWarning(logCore()) << "CommandStack is null, cannot set limit";
         return;
     }
 
-    m_undoLimit = limit;
-
-    // Nettoyer si nécessaire
-    while (m_undoStack.size() > m_undoLimit) {
-        Editor::IEditorCommand* oldest = m_undoStack.first();
-        m_undoStack.removeFirst();
-        delete oldest;
-    }
+    m_commandStack->setUndoLimit(limit);
+    qCInfo(logCore()) << "Undo limit set to:" << limit;
 }
 
-void EditorService::cleanObsoleteCommands()
+int EditorService::getUndoStackSize() const
 {
-    // Nettoyer le stack Undo
-    for (int i = m_undoStack.size() - 1; i >= 0; --i) {
-        if (m_undoStack[i]->isObsolete()) {
-            qCInfo(logCore()) << "Removing obsolete command from undo stack:"
-                              << m_undoStack[i]->getText();
-            delete m_undoStack[i];
-            m_undoStack.removeAt(i);
-        }
-    }
+    return m_commandStack ? m_commandStack->undoCount() : 0;
+}
 
-    // Nettoyer le stack Redo
-    for (int i = m_redoStack.size() - 1; i >= 0; --i) {
-        if (m_redoStack[i]->isObsolete()) {
-            qCInfo(logCore()) << "Removing obsolete command from redo stack:"
-                              << m_redoStack[i]->getText();
-            delete m_redoStack[i];
-            m_redoStack.removeAt(i);
-        }
-    }
+int EditorService::getRedoStackSize() const
+{
+    return m_commandStack ? m_commandStack->redoCount() : 0;
+}
+
+int EditorService::getUndoLimit() const
+{
+    return m_commandStack ? m_commandStack->undoLimit() : 0;
 }
 
 } // namespace Services
