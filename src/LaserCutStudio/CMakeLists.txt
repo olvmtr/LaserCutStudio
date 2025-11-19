@@ -4,6 +4,9 @@ project(LaserCutStudio VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Générer compile_commands.json pour clang-tidy et autres outils d'analyse
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 find_package(Qt6 6.4 REQUIRED COMPONENTS Quick)
 
 # Ajouter LibInterface (bibliothèque réutilisable)

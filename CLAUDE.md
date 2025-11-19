@@ -397,6 +397,72 @@ void IJoint::connect(IPart* partA, IPart* partB) {
 
 **Économie** : ~40 lignes dans IJoint.cpp (constructeur, connect, disconnect)
 
+## Tests d'architecture SOLID
+
+Le projet utilise des **tests automatisés** pour vérifier que l'architecture respecte les principes SOLID. Ces tests sont inspirés du projet Python `ai-front-portal-main`.
+
+### Exécuter les tests d'architecture
+
+```bash
+# Option 1 : Via commande Claude (recommandé)
+/test-arch
+
+# Option 2 : Script complet (Python + clang-tidy)
+./DevTools/architecture/test_architecture.sh
+
+# Option 3 : Seulement les tests Python (rapide)
+python3 DevTools/architecture/test_architecture_solid.py
+```
+
+**Commandes Claude disponibles** :
+- `/test-arch` - Exécute les tests d'architecture SOLID (rapide, ~1-2s)
+- `/fix-arch` - Analyse et corrige les violations détectées
+
+**Workflow recommandé** :
+```bash
+/test-arch              # Vérifier l'architecture
+/fix-arch               # Si violations détectées
+/test-arch              # Re-vérifier après corrections
+```
+
+### Règles SOLID testées
+
+**RÈGLE 1** : Pas de dépendances entre classes concrètes
+- Rectangle ne doit PAS inclure Circle
+- Seules les interfaces (I*) sont autorisées entre classes
+
+**RÈGLE 2** : Seules les interfaces peuvent être utilisées
+- Les dépendances doivent utiliser `IShape*`, pas `Rectangle*`
+
+**RÈGLE 3** : Toutes les implémentations héritent d'une interface
+- `class Rectangle : public IShape` (obligatoire)
+
+**RÈGLE 4** : Tous les patterns sont utilisés
+- `DECLARE_TYPE_NAME(ClassName)` dans les headers
+- `IMPLEMENT_CLONE(ClassName, BaseClass)` dans les .cpp
+- FactoryMixin, PropertyMixin utilisés correctement
+
+**RÈGLE 5** : Hiérarchie des packages respectée
+- `models/` (base, pas de dépendances)
+- `services/` → peut dépendre de `models/`
+- `infrastructure/` → peut dépendre de `models/` et `services/`
+
+**RÈGLE 6** : Pas de dépendances circulaires
+- Détection de cycles avec algorithme DFS
+
+**RÈGLE 7** : Mixins totalement indépendants
+- FactoryMixin, PropertyMixin ne dépendent pas du code projet
+- Seulement Qt et stdlib autorisés
+
+**Documentation complète** : `docs/architecture/TESTS_ARCHITECTURE_SOLID.md`
+
+### Intégration Qt Creator
+
+Le fichier `.clang-tidy` est configuré pour Qt Creator :
+1. `Tools` → `Options` → `C++` → `Code Model`
+2. Activer "Use Clang Code Model"
+3. Les violations apparaissent dans "Issues"
+
 ## Commandes de build
 
 Le projet utilise CMake et se compile avec Qt Creator ou en ligne de commande :

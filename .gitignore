@@ -34,3 +34,9 @@ ui_*.h
 # OS
 .DS_Store
 Thumbs.db
+
+# Generated reports and artifacts
+generated/
+
+# Python virtual environment
+venv/
