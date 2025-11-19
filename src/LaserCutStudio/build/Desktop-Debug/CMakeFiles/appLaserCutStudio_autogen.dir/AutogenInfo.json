@@ -281,21 +281,9 @@
 	"HEADERS" : 
 	[
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/DebugMacros.h",
-			"MU",
-			"TAC5DWH4SE/moc_DebugMacros.cpp",
-			null
-		],
-		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/config/ConfigManager.h",
 			"MU",
 			"ZCC6LKUHCO/moc_ConfigManager.cpp",
-			null
-		],
-		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/interface/Interface.h",
-			"MU",
-			"5CX2H5FZD3/moc_Interface.cpp",
 			null
 		],
 		[
@@ -438,6 +426,7 @@
 	"MOC_INCLUDES" : 
 	[
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio",
+		"/home/vm-mint/Projet/LaserCutStudio/src/LibInterface/include",
 		"/usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2",
 		"/usr/include/x86_64-linux-gnu/qt6/QtQml/6.4.2/QtQml",
 		"/usr/include/x86_64-linux-gnu/qt6/QtCore/6.4.2",
@@ -504,11 +493,6 @@
 		],
 		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/config/ConfigManager.cpp",
-			"MU",
-			null
-		],
-		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/interface/Interface.cpp",
 			"MU",
 			null
 		],

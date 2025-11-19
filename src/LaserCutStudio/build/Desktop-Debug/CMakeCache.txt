@@ -299,6 +299,15 @@ LaserCutStudio_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 LaserCutStudio_SOURCE_DIR:STATIC=/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio
 
+//Value Computed by CMake
+LibInterface_BINARY_DIR:STATIC=/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/LibInterface
+
+//Value Computed by CMake
+LibInterface_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+LibInterface_SOURCE_DIR:STATIC=/home/vm-mint/Projet/LaserCutStudio/src/LibInterface
+
 //Path to a file.
 OPENGL_EGL_INCLUDE_DIR:PATH=OPENGL_EGL_INCLUDE_DIR-NOTFOUND
 
@@ -539,7 +548,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

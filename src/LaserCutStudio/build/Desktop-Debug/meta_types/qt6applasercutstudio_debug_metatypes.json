@@ -2,51 +2,6 @@
     {
         "classes": [
             {
-                "className": "Interface",
-                "object": true,
-                "properties": [
-                    {
-                        "constant": true,
-                        "designable": true,
-                        "final": false,
-                        "index": 0,
-                        "name": "id",
-                        "read": "getId",
-                        "required": false,
-                        "scriptable": true,
-                        "stored": true,
-                        "type": "QUuid",
-                        "user": false
-                    }
-                ],
-                "qualifiedClassName": "LaserCutStudio::Core::Interface",
-                "signals": [
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "self",
-                                "type": "Interface*"
-                            }
-                        ],
-                        "name": "aboutToBeDestroyed",
-                        "returnType": "void"
-                    }
-                ],
-                "superClasses": [
-                    {
-                        "access": "public",
-                        "name": "QObject"
-                    }
-                ]
-            }
-        ],
-        "inputFile": "Interface.h",
-        "outputRevision": 68
-    },
-    {
-        "classes": [
-            {
                 "className": "PluginManager",
                 "object": true,
                 "qualifiedClassName": "LaserCutStudio::Core::Plugins::PluginManager",
@@ -243,6 +198,10 @@
                     {
                         "access": "public",
                         "name": "IShape"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<Circle>"
                     }
                 ]
             }
@@ -267,6 +226,14 @@
                     {
                         "access": "public",
                         "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<IShape>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<IShape>"
                     }
                 ]
             }
@@ -406,6 +373,10 @@
                     {
                         "access": "public",
                         "name": "IShape"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<Rectangle>"
                     }
                 ]
             }
@@ -452,6 +423,14 @@
                     {
                         "access": "public",
                         "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<IProject>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<IProject>"
                     }
                 ]
             }
@@ -535,6 +514,14 @@
                     {
                         "access": "public",
                         "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<IPart>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<IPart>"
                     }
                 ]
             }
@@ -716,6 +703,14 @@
                     {
                         "access": "public",
                         "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<IJoint>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<IJoint>"
                     }
                 ]
             }
