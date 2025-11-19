@@ -43,6 +43,12 @@ python3 DevTools/architecture/test_architecture_solid.py
 - Configuration : `.clang-tidy`
 - CLAUDE.md : Instructions pour Claude
 
+### État actuel (2025-11-19)
+
+✅ **Tous les tests passent** : 7/7 règles SOLID respectées
+✅ **Tests unitaires** : 134/134 tests réussis
+✅ **Corrections récentes** : Bug IJoint::connectToPart() corrigé
+
 ## Commandes Claude
 
 | Commande | Description |

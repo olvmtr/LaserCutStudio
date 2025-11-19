@@ -67,6 +67,7 @@ void IJoint::connect(IPart* partA, IPart* partB)
 
 void IJoint::connectToPart(IPart*& partMember, IPart* newPart)
 {
+    partMember = newPart;  // Assigne le pointeur de membre
     if (newPart) {
         newPart->addJoint(this);
         // Connecte au signal aboutToBeDestroyed pour nettoyage automatique

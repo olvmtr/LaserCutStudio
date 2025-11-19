@@ -284,6 +284,55 @@ class Rectangle : public IShape
 ✅ **Prévention** : Empêche les violations avant le commit
 ✅ **Intégré Qt Creator** : Utilise les outils natifs Qt
 
+## État actuel
+
+**Dernière vérification** : 2025-11-19
+
+### Résultats des tests d'architecture
+
+```
+✅ RÈGLE 1: Aucune dépendance entre classes concrètes détectée
+✅ RÈGLE 2: Toutes les dépendances utilisent les interfaces
+✅ RÈGLE 3: Toutes les implémentations héritent de leur interface
+✅ RÈGLE 4: Tous les patterns sont correctement utilisés
+✅ RÈGLE 5: Hiérarchie des packages respectée
+✅ RÈGLE 6: Aucune dépendance circulaire détectée
+✅ RÈGLE 7: Tous les mixins sont indépendants
+
+Tous les tests SOLID passés avec succès !
+```
+
+### Tests unitaires C++
+
+```
+✅ TestTypes:          11/11 tests
+✅ TestShapes:         20/20 tests
+✅ TestPart:           11/11 tests
+✅ TestJoint:          16/16 tests
+✅ TestProject:        12/12 tests
+✅ TestConfigManager:  19/19 tests
+✅ TestLogging:         9/9 tests
+✅ TestPluginManager:  14/14 tests
+✅ TestServiceLocator: 22/22 tests
+
+Total: 134/134 tests réussis (100%)
+```
+
+### Corrections récentes
+
+**Bug IJoint corrigé (2025-11-19)** :
+- **Problème** : La fonction `connectToPart()` oubliait d'assigner le pointeur de membre `partMember = newPart`
+- **Impact** : 3 tests échouaient dans `TestJoint` (m_partA et m_partB restaient à nullptr)
+- **Solution** : Ajout de l'assignation manquante au début de `connectToPart()`
+- **Fichier modifié** : `core/models/joints/interfaces/IJoint.cpp:70`
+
+### Statut global
+
+**Architecture** : ✅ 100% conforme aux principes SOLID
+**Tests unitaires** : ✅ 134/134 passés (100%)
+**Couverture de code** : ✅ Complète pour le module Core
+**Documentation** : ✅ À jour avec Doxygen
+
 ## Références
 
 - Projet Python inspirant : `ai-front-portal-main/tests/unit/test_dependency_constraints.py`

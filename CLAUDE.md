@@ -388,6 +388,29 @@ void IJoint::connect(IPart* partA, IPart* partB) {
 }
 ```
 
+### Implémentation correcte de connectToPart()
+
+⚠️ **Important** : La fonction `connectToPart()` doit **toujours assigner le pointeur** avant de faire les connexions :
+
+```cpp
+void IJoint::connectToPart(IPart*& partMember, IPart* newPart)
+{
+    partMember = newPart;  // ⚠️ CRITIQUE : Assigne le pointeur de membre
+    if (newPart) {
+        newPart->addJoint(this);
+        // Connecte au signal aboutToBeDestroyed pour nettoyage automatique
+        QObject::connect(newPart, &Interface::aboutToBeDestroyed,
+                        this, [this, &partMember](Interface* destroyedPart) {
+            if (partMember == destroyedPart) {
+                partMember = nullptr;
+            }
+        });
+    }
+}
+```
+
+**Bug corrigé (2025-11-19)** : L'implémentation initiale oubliait l'assignation `partMember = newPart`, laissant `m_partA` et `m_partB` à `nullptr` après connexion. Ce bug causait 3 échecs de tests dans `TestJoint`.
+
 ### Avantages
 
 ✅ **DRY** : Pattern répété 4 fois → 2 helpers réutilisables
