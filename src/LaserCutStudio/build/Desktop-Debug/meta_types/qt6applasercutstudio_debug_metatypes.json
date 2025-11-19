@@ -127,6 +127,368 @@
     {
         "classes": [
             {
+                "className": "IEditorCommand",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "text",
+                        "notify": "textChanged",
+                        "read": "getText",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "isObsolete",
+                        "notify": "obsoleteChanged",
+                        "read": "isObsolete",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": true,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "canMerge",
+                        "read": "canMerge",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::IEditorCommand",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "text",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "textChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "obsolete",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "obsoleteChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "executed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "undone",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "redone",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<IEditorCommand>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "IEditorCommand.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "ISelection",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "count",
+                        "notify": "countChanged",
+                        "read": "getCount",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "isEmpty",
+                        "notify": "countChanged",
+                        "read": "isEmpty",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "boundingRect",
+                        "notify": "boundingRectChanged",
+                        "read": "getBoundingRect",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QRectF",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::ISelection",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "count",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "countChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "shapeAdded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "shapeRemoved",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "cleared",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "rect",
+                                "type": "QRectF"
+                            }
+                        ],
+                        "name": "boundingRectChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "transformed",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<ISelection>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ISelection.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "ITool",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "name",
+                        "notify": "nameChanged",
+                        "read": "getName",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "description",
+                        "notify": "descriptionChanged",
+                        "read": "getDescription",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "isActive",
+                        "notify": "activeChanged",
+                        "read": "isActive",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setActive"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::ITool",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "nameChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "description",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "descriptionChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "active",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "activeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "shapeCreated",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "shapeModified",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "message",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "statusMessage",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<ITool>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<ITool>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ITool.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
                 "classInfos": [
                     {
                         "name": "Version",
@@ -296,6 +658,131 @@
             }
         ],
         "inputFile": "TabJoint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "ShapeCreationTool",
+                "enums": [
+                    {
+                        "isClass": true,
+                        "isFlag": false,
+                        "name": "CreationMode",
+                        "values": [
+                            "ClickAndDrag",
+                            "TwoClicks",
+                            "Parametric"
+                        ]
+                    }
+                ],
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "shapeType",
+                        "notify": "shapeTypeChanged",
+                        "read": "getShapeType",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false,
+                        "write": "setShapeType"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "creationMode",
+                        "notify": "creationModeChanged",
+                        "read": "getCreationMode",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "CreationMode",
+                        "user": false,
+                        "write": "setCreationMode"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "isDrawing",
+                        "notify": "drawingStateChanged",
+                        "read": "isDrawing",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::ShapeCreationTool",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "type",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "shapeTypeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "mode",
+                                "type": "CreationMode"
+                            }
+                        ],
+                        "name": "creationModeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "drawing",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "drawingStateChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "previewShape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "shapePreview",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "ITool"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<ShapeCreationTool>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ShapeCreationTool.h",
         "outputRevision": 68
     },
     {
@@ -807,6 +1294,180 @@
             }
         ],
         "inputFile": "IPart.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "EditorService",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "activeTool",
+                        "notify": "activeToolChanged",
+                        "read": "getActiveTool",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "LaserCutStudio::Core::Editor::ITool*",
+                        "user": false
+                    },
+                    {
+                        "constant": true,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "selection",
+                        "read": "getSelection",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "LaserCutStudio::Core::Editor::ISelection*",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "shapeCount",
+                        "notify": "shapeCountChanged",
+                        "read": "getShapeCount",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "canUndo",
+                        "notify": "undoStackChanged",
+                        "read": "canUndo",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 4,
+                        "name": "canRedo",
+                        "notify": "undoStackChanged",
+                        "read": "canRedo",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 5,
+                        "name": "undoStackSize",
+                        "notify": "undoStackChanged",
+                        "read": "getUndoStackSize",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Services::EditorService",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "tool",
+                                "type": "LaserCutStudio::Core::Editor::ITool*"
+                            }
+                        ],
+                        "name": "activeToolChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "LaserCutStudio::Core::IShape*"
+                            }
+                        ],
+                        "name": "shapeAdded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "LaserCutStudio::Core::IShape*"
+                            }
+                        ],
+                        "name": "shapeRemoved",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "count",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "shapeCountChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "undoStackChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "undone",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "redone",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "message",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "statusMessage",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "EditorService.h",
         "outputRevision": 68
     },
     {

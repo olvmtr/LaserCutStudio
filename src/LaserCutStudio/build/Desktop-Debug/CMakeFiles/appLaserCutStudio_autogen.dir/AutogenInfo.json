@@ -353,6 +353,30 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/ShapeCreationTool.h",
+			"MU",
+			"CW2ANGJCE4/moc_ShapeCreationTool.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/IEditorCommand.h",
+			"MU",
+			"7EZKYDU2OR/moc_IEditorCommand.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/ISelection.h",
+			"MU",
+			"7EZKYDU2OR/moc_ISelection.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/ITool.h",
+			"MU",
+			"7EZKYDU2OR/moc_ITool.cpp",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/FingerJoint.h",
 			"MU",
 			"AEQVSPXJ77/moc_FingerJoint.cpp",
@@ -410,6 +434,12 @@
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.h",
 			"MU",
 			"GFWMSFW4MY/moc_IShape.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/services/editor/EditorService.h",
+			"MU",
+			"TKFLVDXYVW/moc_EditorService.cpp",
 			null
 		]
 	],
@@ -534,6 +564,26 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/ShapeCreationTool.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/IEditorCommand.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/ISelection.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/ITool.cpp",
+			"MU",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/FingerJoint.cpp",
 			"MU",
 			null
@@ -580,6 +630,11 @@
 		],
 		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/services/editor/EditorService.cpp",
 			"MU",
 			null
 		],
