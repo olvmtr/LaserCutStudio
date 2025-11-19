@@ -4,6 +4,7 @@
 #include "../interface/Interface.h"
 #include "../patterns/FactoryMixin.h"
 #include "../patterns/ListManagerMixin.h"
+#include "../patterns/PropertyMixin.h"
 #include "../types/Point2D.h"
 #include <QList>
 #include <QRectF>

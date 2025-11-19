@@ -1,4 +1,6 @@
 #include "Rectangle.h"
+#include "../utils/GeometryUtils.h"
+#include "../patterns/ClonableMixin.h"
 #include <cmath>
 
 namespace LaserCutStudio {
@@ -31,10 +33,7 @@ Rectangle::Rectangle(const Rectangle& other)
 {
 }
 
-IShape* Rectangle::clone() const
-{
-    return new Rectangle(*this);
-}
+IMPLEMENT_CLONE(Rectangle, IShape)
 
 double Rectangle::getArea() const
 {
@@ -70,91 +69,53 @@ void Rectangle::translate(double dx, double dy)
 
 void Rectangle::rotate(double angle, const Point2D& center)
 {
-    // Conversion de l'angle en radians
-    double rad = angle * M_PI / 180.0;
-    double cosAngle = std::cos(rad);
-    double sinAngle = std::sin(rad);
+    // Calcul du centre du rectangle
+    Point2D rectCenter(m_x + m_width / 2.0, m_y + m_height / 2.0);
 
-    // Pour un rectangle, on fait pivoter le centre
-    double centerX = m_x + m_width / 2.0;
-    double centerY = m_y + m_height / 2.0;
-
-    // Translation vers l'origine
-    double tx = centerX - center.x;
-    double ty = centerY - center.y;
-
-    // Rotation
-    double rotatedX = tx * cosAngle - ty * sinAngle;
-    double rotatedY = tx * sinAngle + ty * cosAngle;
-
-    // Translation retour
-    centerX = rotatedX + center.x;
-    centerY = rotatedY + center.y;
+    // Rotation du centre avec GeometryUtils
+    Utils::RotationMatrix rotation = Utils::RotationMatrix::fromDegrees(angle);
+    Point2D rotatedCenter = Utils::rotatePoint(rectCenter, center, rotation);
 
     // Mise à jour de la position (coin supérieur gauche)
-    m_x = centerX - m_width / 2.0;
-    m_y = centerY - m_height / 2.0;
+    m_x = rotatedCenter.x - m_width / 2.0;
+    m_y = rotatedCenter.y - m_height / 2.0;
 }
 
 void Rectangle::scale(double scaleX, double scaleY, const Point2D& center)
 {
     // Calcul du centre du rectangle
-    double centerX = m_x + m_width / 2.0;
-    double centerY = m_y + m_height / 2.0;
+    Point2D rectCenter(m_x + m_width / 2.0, m_y + m_height / 2.0);
 
-    // Translation vers l'origine
-    double tx = centerX - center.x;
-    double ty = centerY - center.y;
+    // Mise à l'échelle du centre avec GeometryUtils
+    Point2D scaledCenter = Utils::scalePoint(rectCenter, center, scaleX, scaleY);
 
-    // Mise à l'échelle
-    tx *= scaleX;
-    ty *= scaleY;
+    // Mise à l'échelle des dimensions
     m_width *= scaleX;
     m_height *= scaleY;
 
-    // Translation retour
-    centerX = tx + center.x;
-    centerY = ty + center.y;
-
-    // Mise à jour de la position
-    m_x = centerX - m_width / 2.0;
-    m_y = centerY - m_height / 2.0;
+    // Mise à jour de la position (coin supérieur gauche)
+    m_x = scaledCenter.x - m_width / 2.0;
+    m_y = scaledCenter.y - m_height / 2.0;
 }
 
 void Rectangle::setX(double x)
 {
-    if (!qFuzzyCompare(m_x, x)) {
-        m_x = x;
-        emit xChanged(x);
-        emit geometryChanged();
-    }
+    updateProperty(m_x, x, &Rectangle::xChanged, &Rectangle::geometryChanged);
 }
 
 void Rectangle::setY(double y)
 {
-    if (!qFuzzyCompare(m_y, y)) {
-        m_y = y;
-        emit yChanged(y);
-        emit geometryChanged();
-    }
+    updateProperty(m_y, y, &Rectangle::yChanged, &Rectangle::geometryChanged);
 }
 
 void Rectangle::setWidth(double width)
 {
-    if (!qFuzzyCompare(m_width, width)) {
-        m_width = width;
-        emit widthChanged(width);
-        emit geometryChanged();
-    }
+    updateProperty(m_width, width, &Rectangle::widthChanged, &Rectangle::geometryChanged);
 }
 
 void Rectangle::setHeight(double height)
 {
-    if (!qFuzzyCompare(m_height, height)) {
-        m_height = height;
-        emit heightChanged(height);
-        emit geometryChanged();
-    }
+    updateProperty(m_height, height, &Rectangle::heightChanged, &Rectangle::geometryChanged);
 }
 
 // Auto-enregistrement dans le Factory Pattern

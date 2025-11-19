@@ -1,4 +1,6 @@
 #include "Circle.h"
+#include "../utils/GeometryUtils.h"
+#include "../patterns/ClonableMixin.h"
 #include <cmath>
 
 #ifndef M_PI
@@ -32,10 +34,7 @@ Circle::Circle(const Circle& other)
 {
 }
 
-IShape* Circle::clone() const
-{
-    return new Circle(*this);
-}
+IMPLEMENT_CLONE(Circle, IShape)
 
 double Circle::getArea() const
 {
@@ -78,29 +77,23 @@ void Circle::translate(double dx, double dy)
 
 void Circle::rotate(double angle, const Point2D& center)
 {
-    // Rotation du centre du cercle autour du point
-    double rad = angle * M_PI / 180.0;
-    double cosAngle = std::cos(rad);
-    double sinAngle = std::sin(rad);
+    // Rotation du centre du cercle avec GeometryUtils
+    Point2D circleCenter(m_centerX, m_centerY);
+    Utils::RotationMatrix rotation = Utils::RotationMatrix::fromDegrees(angle);
+    Point2D rotatedCenter = Utils::rotatePoint(circleCenter, center, rotation);
 
-    double tx = m_centerX - center.x;
-    double ty = m_centerY - center.y;
-
-    m_centerX = tx * cosAngle - ty * sinAngle + center.x;
-    m_centerY = tx * sinAngle + ty * cosAngle + center.y;
+    m_centerX = rotatedCenter.x;
+    m_centerY = rotatedCenter.y;
 }
 
 void Circle::scale(double scaleX, double scaleY, const Point2D& center)
 {
-    // Translation du centre
-    double tx = m_centerX - center.x;
-    double ty = m_centerY - center.y;
+    // Mise à l'échelle du centre avec GeometryUtils
+    Point2D circleCenter(m_centerX, m_centerY);
+    Point2D scaledCenter = Utils::scalePoint(circleCenter, center, scaleX, scaleY);
 
-    // Mise à l'échelle
-    tx *= scaleX;
-    ty *= scaleY;
-    m_centerX = tx + center.x;
-    m_centerY = ty + center.y;
+    m_centerX = scaledCenter.x;
+    m_centerY = scaledCenter.y;
 
     // Mise à l'échelle du rayon (moyenne des deux échelles)
     m_radius *= (scaleX + scaleY) / 2.0;
@@ -108,29 +101,17 @@ void Circle::scale(double scaleX, double scaleY, const Point2D& center)
 
 void Circle::setCenterX(double x)
 {
-    if (!qFuzzyCompare(m_centerX, x)) {
-        m_centerX = x;
-        emit centerXChanged(x);
-        emit geometryChanged();
-    }
+    updateProperty(m_centerX, x, &Circle::centerXChanged, &Circle::geometryChanged);
 }
 
 void Circle::setCenterY(double y)
 {
-    if (!qFuzzyCompare(m_centerY, y)) {
-        m_centerY = y;
-        emit centerYChanged(y);
-        emit geometryChanged();
-    }
+    updateProperty(m_centerY, y, &Circle::centerYChanged, &Circle::geometryChanged);
 }
 
 void Circle::setRadius(double radius)
 {
-    if (!qFuzzyCompare(m_radius, radius)) {
-        m_radius = radius;
-        emit radiusChanged(radius);
-        emit geometryChanged();
-    }
+    updateProperty(m_radius, radius, &Circle::radiusChanged, &Circle::geometryChanged);
 }
 
 // Auto-enregistrement dans le Factory Pattern

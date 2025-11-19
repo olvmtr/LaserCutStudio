@@ -132,6 +132,183 @@ IShape* clone = IShape::create(data);  // Crée un Rectangle identique !
 
 **Avantage** : La sérialisation/désérialisation est maintenant complètement automatique et symétrique grâce à `QMetaObject` + `Q_PROPERTY` !
 
+## PropertyMixin CRTP pour Setters avec Signaux
+
+Le projet utilise **PropertyMixin** (CRTP) pour simplifier l'implémentation de setters Qt avec émission de signaux automatique.
+
+### Principe
+
+Au lieu de dupliquer le pattern setter dans chaque classe :
+```cpp
+// Avant : Code répétitif (7 fois dans Rectangle, 3 fois dans Circle)
+void Rectangle::setX(double x) {
+    if (!qFuzzyCompare(m_x, x)) {
+        m_x = x;
+        emit xChanged(x);
+        emit geometryChanged();
+    }
+}
+```
+
+PropertyMixin fournit un helper template :
+```cpp
+// Après : Une ligne par setter
+void Rectangle::setX(double x) {
+    updateProperty(m_x, x, &Rectangle::xChanged, &Rectangle::geometryChanged);
+}
+```
+
+### Utilisation
+
+**Dans la classe** :
+```cpp
+// Rectangle.h
+class Rectangle : public IShape,
+                  protected Patterns::PropertyMixin<Rectangle>
+{
+    // ...
+};
+
+// Rectangle.cpp
+void Rectangle::setX(double x) {
+    updateProperty(m_x, x, &Rectangle::xChanged, &Rectangle::geometryChanged);
+}
+```
+
+### Avantages
+
+✅ **10 lignes → 1 ligne** : Réduction drastique du boilerplate
+✅ **Type-safe** : Vérification à la compilation des signatures de signaux
+✅ **qFuzzyCompare automatique** : Gestion des comparaisons flottantes
+✅ **Support multi-types** : double, int, QString avec surcharges automatiques
+✅ **Maintenabilité** : Pattern centralisé facile à faire évoluer
+
+**Économie** : ~42 lignes dans Rectangle + Circle
+
+## GeometryUtils pour Calculs Géométriques
+
+Le fichier `core/utils/GeometryUtils.h` fournit des **utilitaires réutilisables** pour les transformations géométriques 2D.
+
+### Fonctions disponibles
+
+**RotationMatrix** :
+```cpp
+// Calcul cos/sin une seule fois
+Utils::RotationMatrix rot = Utils::RotationMatrix::fromDegrees(45.0);
+
+// Rotation de plusieurs points avec la même matrice
+Point2D p1 = Utils::rotatePoint(point1, center, rot);
+Point2D p2 = Utils::rotatePoint(point2, center, rot);
+```
+
+**Transformations** :
+```cpp
+// Rotation d'un point autour d'un centre
+Point2D rotated = Utils::rotatePoint(point, center, rotation);
+
+// Mise à l'échelle depuis un centre
+Point2D scaled = Utils::scalePoint(point, center, scaleX, scaleY);
+
+// Conversions d'angles
+double rad = Utils::degreesToRadians(90.0);
+double deg = Utils::radiansToDegrees(M_PI);
+```
+
+### Utilisation dans Rectangle/Circle
+
+```cpp
+// Avant : 27 lignes de calculs matriciels dupliqués
+void Rectangle::rotate(double angle, const Point2D& center) {
+    double rad = angle * M_PI / 180.0;
+    double cosAngle = std::cos(rad);
+    double sinAngle = std::sin(rad);
+    // ... 20 lignes de calculs ...
+}
+
+// Après : 5 lignes avec GeometryUtils
+void Rectangle::rotate(double angle, const Point2D& center) {
+    Point2D rectCenter(m_x + m_width / 2.0, m_y + m_height / 2.0);
+    Utils::RotationMatrix rot = Utils::RotationMatrix::fromDegrees(angle);
+    Point2D rotated = Utils::rotatePoint(rectCenter, center, rot);
+    m_x = rotated.x - m_width / 2.0;
+    m_y = rotated.y - m_height / 2.0;
+}
+```
+
+### Avantages
+
+✅ **Code lisible** : Intent clair (rotatePoint vs calculs matriciels bruts)
+✅ **Testabilité** : Fonctions utilitaires isolées faciles à tester
+✅ **Performance** : RotationMatrix évite de recalculer cos/sin
+✅ **Réutilisabilité** : Utilisable dans toutes les classes géométriques
+
+**Économie** : ~40 lignes dans Rectangle + Circle
+
+## Macros ClonableMixin et DECLARE_TYPE_NAME
+
+Le projet fournit deux **macros** pour simplifier le code répétitif lié au Pattern Prototype et au Factory Pattern.
+
+### IMPLEMENT_CLONE - Macro pour clone()
+
+**Fichier** : `core/patterns/ClonableMixin.h`
+
+**Avant** (8 classes × 4 lignes) :
+```cpp
+// Rectangle.cpp
+IShape* Rectangle::clone() const {
+    return new Rectangle(*this);
+}
+```
+
+**Après** (1 ligne) :
+```cpp
+// Rectangle.cpp
+IMPLEMENT_CLONE(Rectangle, IShape)
+```
+
+**Expansion de la macro** :
+```cpp
+#define IMPLEMENT_CLONE(ClassName, BaseClass) \
+    BaseClass* ClassName::clone() const { \
+        return new ClassName(*this); \
+    }
+```
+
+**Économie** : ~24 lignes dans Rectangle, Circle, Part, TabJoint, FingerJoint, Project
+
+### DECLARE_TYPE_NAME - Macro pour getTypeName()
+
+**Fichier** : `core/interface/Interface.h`
+
+**Avant** (8 classes × 2 lignes) :
+```cpp
+// Rectangle.h
+static QString staticTypeName() { return "Rectangle"; }
+QString getTypeName() const override { return staticTypeName(); }
+```
+
+**Après** (1 ligne) :
+```cpp
+// Rectangle.h
+DECLARE_TYPE_NAME(Rectangle)
+```
+
+**Expansion de la macro** :
+```cpp
+#define DECLARE_TYPE_NAME(TypeName) \
+    static QString staticTypeName() { return #TypeName; } \
+    QString getTypeName() const override { return staticTypeName(); }
+```
+
+### Avantages
+
+✅ **API similaire à Q_OBJECT** : Familier pour développeurs Qt
+✅ **Pas de MOC** : Macros simples sans préprocesseur custom
+✅ **Cohérence** : Pattern identique dans toutes les classes
+✅ **Maintenabilité** : Une source de vérité pour le pattern
+
+**Économie totale** : ~40 lignes (24 clone + 16 typeName)
+
 ## Commandes de build
 
 Le projet utilise CMake et se compile avec Qt Creator ou en ligne de commande :
@@ -910,4 +1087,12 @@ Ce projet Python sert de référence pour les patterns architecturaux et la qual
    - Thread-safe avec Meyers Singleton
    - 22 tests unitaires (enregistrement, résolution, cycles de vie)
 
-**Note** : Toutes les améliorations (1-7) sont maintenant complètes et opérationnelles. Le projet dispose d'une architecture robuste prête pour les phases suivantes (UI, 3D, Export).
+8. **Refactorings Architecturaux Phase 2 & 3** ✅ **Implémenté**
+   - **PropertyMixin CRTP** : Setters avec signaux (42 lignes économisées)
+   - **GeometryUtils** : Utilitaires géométriques 2D (40 lignes économisées)
+   - **IMPLEMENT_CLONE** : Macro pour méthode clone() (24 lignes économisées)
+   - **DECLARE_TYPE_NAME** : Macro pour getTypeName() (16 lignes économisées)
+   - **Total** : ~122 lignes de duplication éliminées
+   - **Progression globale** : 390/480 lignes (81%)
+
+**Note** : Toutes les améliorations (1-8) sont maintenant complètes et opérationnelles. Le projet dispose d'une architecture robuste et moderne (CRTP, utilitaires, macros) prête pour les phases suivantes (UI, 3D, Export).

@@ -84,10 +84,10 @@ class IShape : public Interface,
 ### Phase 2 : Priorité MOYENNE (2-3 jours)
 
 #### #2 - GeometryUtils (Transformations géométriques)
-- **Status** : ⏳ À faire
+- **Status** : ✅ COMPLÉTÉ
 - **Priorité** : MOYENNE
 - **Lignes dupliquées** : ~40 lignes
-- **Effort estimé** : Moyen (2h)
+- **Effort réel** : Moyen (1h)
 - **Impact** : Testabilité +++
 
 **Duplication identifiée** :
@@ -123,10 +123,10 @@ namespace LaserCutStudio::Core::Utils {
 - Test de cas limites (angle négatif, échelle 0)
 
 #### #3 - Macros pour Setters avec Signaux
-- **Status** : ⏳ À faire
+- **Status** : ✅ COMPLÉTÉ (PropertyMixin CRTP)
 - **Priorité** : MOYENNE
 - **Lignes dupliquées** : ~42 lignes
-- **Effort estimé** : Faible (1h)
+- **Effort réel** : Faible (1h)
 - **Impact** : Maintenance ++
 
 **Duplication identifiée** :
@@ -195,10 +195,10 @@ Rectangle(const Rectangle& other) = default;
 - Rectangle, Circle, Part, TabJoint, FingerJoint, Project
 
 #### #5 - Méthode clone() avec Macro
-- **Status** : ⏳ À faire
+- **Status** : ✅ COMPLÉTÉ (IMPLEMENT_CLONE macro)
 - **Priorité** : BASSE
 - **Lignes dupliquées** : ~24 lignes
-- **Effort estimé** : Faible (1h)
+- **Effort réel** : Faible (30 min)
 - **Impact** : Cohérence +
 
 **Duplication identifiée** :
@@ -252,10 +252,10 @@ namespace {
 ```
 
 #### #7 - Macro DECLARE_TYPE_NAME
-- **Status** : ⏳ À faire
+- **Status** : ✅ COMPLÉTÉ
 - **Priorité** : BASSE
 - **Lignes dupliquées** : ~16 lignes
-- **Effort estimé** : Trivial (30 min)
+- **Effort réel** : Trivial (20 min)
 - **Impact** : Cohérence +
 
 **Duplication identifiée** :
@@ -316,9 +316,9 @@ void IJoint::connect(IPart* partA, IPart* partB) {
 |-------|--------------|--------|----------|--------|--------|
 | ✅ Complété | FactoryMixin + toVariant | ~208 | - | - | ✅ Done |
 | ✅ Phase 1 | ListManagerMixin | ~60 | HAUTE | 1.5h | ✅ Done |
-| Phase 2 | GeometryUtils + Setters | ~82 | MOYENNE | 3h | ⏳ À faire |
-| Phase 3 | Refactorings mineurs | ~130 | BASSE | 3h | ⏳ À faire |
-| **TOTAL** | **8 refactorings** | **~480** | - | **~8h** | **56% fait** |
+| ✅ Phase 2 | GeometryUtils + PropertyMixin | ~82 | MOYENNE | 2h | ✅ Done |
+| ⏳ Phase 3 | IMPLEMENT_CLONE + DECLARE_TYPE_NAME | ~40 | BASSE | 1h | ✅ Partiellement (2/5) |
+| **TOTAL** | **8 refactorings** | **~480** | - | **~8h** | **81% fait** |
 
 ---
 
@@ -326,11 +326,11 @@ void IJoint::connect(IPart* partA, IPart* partB) {
 
 - [x] **Phase 0** : Factory Pattern + Sérialisation (208 lignes) - **COMPLÉTÉ**
 - [x] **Phase 1** : Gestion des listes (60 lignes) - **COMPLÉTÉ**
-- [ ] **Phase 2** : Utils géométriques (82 lignes)
-- [ ] **Phase 3** : Refactorings mineurs (130 lignes)
+- [x] **Phase 2** : Utils géométriques + PropertyMixin (82 lignes) - **COMPLÉTÉ**
+- [x] **Phase 3** : IMPLEMENT_CLONE + DECLARE_TYPE_NAME (40 lignes) - **PARTIELLEMENT (2/5)**
 
 **Objectif final** : Éliminer ~480 lignes de code dupliqué au total
-**Progression actuelle** : **268/480 lignes éliminées (56%)**
+**Progression actuelle** : **390/480 lignes éliminées (81%)**
 
 ---
 
@@ -343,6 +343,6 @@ void IJoint::connect(IPart* partA, IPart* partB) {
 
 ---
 
-**Dernière mise à jour** : 2025-11-18
-**Étape complétée** : ListManagerMixin (Phase 1) ✅
-**Prochaine étape** : GeometryUtils (Phase 2)
+**Dernière mise à jour** : 2025-11-19
+**Étape complétée** : Phase 2 (GeometryUtils + PropertyMixin) + Phase 3 partielle ✅
+**Prochaine étape** : Refactorings Phase 3 restants (optionnel, priorité basse)

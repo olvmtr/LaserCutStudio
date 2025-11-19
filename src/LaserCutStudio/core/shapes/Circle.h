@@ -2,6 +2,7 @@
 #define CIRCLE_H
 
 #include "IShape.h"
+#include "../patterns/PropertyMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {
@@ -9,7 +10,8 @@ namespace Core {
 /**
  * @brief Représente un cercle
  */
-class Circle : public IShape
+class Circle : public IShape,
+               protected Patterns::PropertyMixin<Circle>
 {
     Q_OBJECT
 
@@ -33,8 +35,7 @@ public:
     ~Circle() override = default;
 
     IShape* clone() const override;
-    static QString staticTypeName() { return "Circle"; }
-    QString getTypeName() const override { return staticTypeName(); }
+    DECLARE_TYPE_NAME(Circle)
     double getArea() const override;
     QRectF getBoundingBox() const override;
     bool containsPoint(const Point2D& point) const override;

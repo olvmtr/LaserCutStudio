@@ -2,6 +2,7 @@
 #define RECTANGLE_H
 
 #include "IShape.h"
+#include "../patterns/PropertyMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {
@@ -9,7 +10,8 @@ namespace Core {
 /**
  * @brief Représente un rectangle
  */
-class Rectangle : public IShape
+class Rectangle : public IShape,
+                  protected Patterns::PropertyMixin<Rectangle>
 {
     Q_OBJECT
 
@@ -59,14 +61,9 @@ public:
     IShape* clone() const override;
 
     /**
-     * @brief Retourne le nom de type statique pour le Factory Pattern
+     * @brief Déclare automatiquement staticTypeName() et getTypeName()
      */
-    static QString staticTypeName() { return "Rectangle"; }
-
-    /**
-     * @brief Retourne le nom de type pour l'instance (Factory Pattern)
-     */
-    QString getTypeName() const override { return staticTypeName(); }
+    DECLARE_TYPE_NAME(Rectangle)
 
     /**
      * @brief Calcule l'aire

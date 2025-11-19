@@ -102,6 +102,37 @@ protected:
     QUuid m_id;
 };
 
+/**
+ * @brief Macro pour déclarer automatiquement staticTypeName() et getTypeName()
+ *
+ * Cette macro génère les deux méthodes requises pour le Factory Pattern :
+ * - staticTypeName() : retourne le nom de type en tant que méthode statique
+ * - getTypeName() : retourne le nom de type pour l'instance (appelle staticTypeName())
+ *
+ * Usage :
+ * @code
+ * class Rectangle : public IShape {
+ * public:
+ *     DECLARE_TYPE_NAME(Rectangle)
+ *     // ... reste de la classe
+ * };
+ * @endcode
+ *
+ * Cette macro génère :
+ * @code
+ * static QString staticTypeName() { return "Rectangle"; }
+ * QString getTypeName() const override { return staticTypeName(); }
+ * @endcode
+ *
+ * @param TypeName Nom du type (sans guillemets)
+ *
+ * @note La macro doit être placée dans la partie publique de la classe
+ * @note Similaire au système Q_OBJECT de Qt
+ */
+#define DECLARE_TYPE_NAME(TypeName) \
+    static QString staticTypeName() { return #TypeName; } \
+    QString getTypeName() const override { return staticTypeName(); }
+
 } // namespace Core
 } // namespace LaserCutStudio
 
