@@ -38,13 +38,125 @@ struct ProjectMetadata
 };
 
 /**
- * @brief Interface pour un projet complet
+ * @brief Interface pour un projet complet de découpe laser
  *
- * Un projet contient toutes les pièces et les informations
- * nécessaires pour un assemblage complet.
- * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
- * Utilise FactoryMixin pour le Factory Pattern (élimine la duplication).
- * Utilise ListManagerMixin pour la gestion de la liste statique.
+ * Un projet (Project) représente un assemblage complet contenant :
+ * - Une collection de pièces (IPart) à découper
+ * - Des métadonnées (auteur, description, dates, version)
+ * - Un nom de projet
+ *
+ * Le projet est l'unité de sauvegarde/chargement de l'application.
+ *
+ * ## Caractéristiques
+ *
+ * - **Agrégation de pièces** : Contient 0..N IPart
+ * - **Métadonnées** : ProjectMetadata avec auteur, description, dates
+ * - **Sérialisation** : Support JSON/XML pour sauvegarde projet
+ * - **Statistiques** : Calcul automatique volume, masse, nombre de pièces
+ *
+ * ## Patterns Architecturaux
+ *
+ * - **Aggregate Pattern** : Contient et gère une collection d'IPart
+ * - **Prototype Pattern** : Hérite de Interface pour clonage polymorphe
+ * - **Factory Pattern** : Utilise FactoryMixin pour création depuis QVariantMap
+ * - **Signals/Slots** : Notifications lors ajout/retrait pièces
+ *
+ * ## Factory Pattern - Utilisation
+ *
+ * ### Création depuis QVariantMap
+ *
+ * @code
+ * // Créer un projet complet avec plusieurs pièces
+ * QVariantMap projectData;
+ * projectData["type"] = "Project";
+ * projectData["name"] = "Boîte à Outils";
+ *
+ * // Métadonnées
+ * QVariantMap metaData;
+ * metaData["author"] = "Jean Dupont";
+ * metaData["description"] = "Boîte de rangement avec compartiments";
+ * metaData["version"] = "2.1";
+ * projectData["metadata"] = metaData;
+ *
+ * // Liste des pièces (array)
+ * QVariantList partsList;
+ *
+ * // Pièce 1 : Fond
+ * QVariantMap part1Data;
+ * part1Data["type"] = "Part";
+ * part1Data["name"] = "Fond";
+ * part1Data["shape"] = rectangleShapeData;  // QVariantMap
+ * part1Data["thickness"] = 6.0;
+ * partsList.append(part1Data);
+ *
+ * // Pièce 2 : Côté gauche
+ * QVariantMap part2Data;
+ * // ... similaire
+ * partsList.append(part2Data);
+ *
+ * projectData["parts"] = partsList;
+ *
+ * IProject* project = IProject::create(projectData);
+ * if (project) {
+ *     qDebug() << "Projet:" << project->getName();
+ *     qDebug() << "Pièces:" << project->getPartCount();
+ *     qDebug() << "Volume total:" << project->getTotalVolume() << "mm³";
+ * }
+ * @endcode
+ *
+ * ### Gestion de Collection
+ *
+ * @code
+ * IProject* project = new Project("My Box");
+ *
+ * // Ajouter des pièces
+ * IPart* bottom = new Part("Bottom", shape1, 6.0, Material::Plywood());
+ * IPart* side = new Part("Side", shape2, 6.0, Material::Plywood());
+ * project->addPart(bottom);
+ * project->addPart(side);
+ *
+ * // Itérer sur les pièces
+ * for (IPart* part : project->getParts()) {
+ *     qDebug() << part->getName() << ":" << part->calculateVolume() << "mm³";
+ * }
+ *
+ * // Statistiques agrégées
+ * qDebug() << "Total volume:" << project->getTotalVolume();
+ * qDebug() << "Total mass:" << project->getTotalMass();
+ * @endcode
+ *
+ * ### Sauvegarde/Chargement
+ *
+ * @code
+ * // Sauvegarder projet en JSON
+ * IProject* project = /* ... */;
+ * QVariantMap data = project->toVariant();
+ * QJsonDocument doc = QJsonDocument::fromVariant(data);
+ * QFile file("project.json");
+ * file.open(QIODevice::WriteOnly);
+ * file.write(doc.toJson());
+ * file.close();
+ *
+ * // Charger projet depuis JSON
+ * QFile loadFile("project.json");
+ * loadFile.open(QIODevice::ReadOnly);
+ * QJsonDocument loadDoc = QJsonDocument::fromJson(loadFile.readAll());
+ * QVariantMap loadedData = loadDoc.toVariant().toMap();
+ * IProject* loaded = IProject::create(loadedData);
+ * @endcode
+ *
+ * ### Lister Types Disponibles
+ *
+ * @code
+ * QStringList projectTypes = IProject::availableTypes();
+ * // => ["Project"] (actuellement 1 type, extensible via plugins)
+ * @endcode
+ *
+ * @note Ownership : IProject possède ses IPart (destructeur nettoie automatiquement)
+ * @note Sérialisation : toVariant() sérialise récursivement toutes les pièces
+ * @note Performance : getTotalVolume() et getTotalMass() calculent à la demande
+ *
+ * @see FactoryMixin, IPart, ProjectMetadata, Interface::toVariant()
  */
 class IProject : public Interface,
                  protected Patterns::FactoryMixin<IProject>,

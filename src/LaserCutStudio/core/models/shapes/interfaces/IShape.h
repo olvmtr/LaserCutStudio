@@ -26,11 +26,97 @@ namespace Plugins {
 /**
  * @brief Interface pour les formes géométriques 2D
  *
- * Cette interface hérite du pattern Prototype et gère une liste
- * statique de toutes les formes créées.
- * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
- * Utilise FactoryMixin pour le Factory Pattern (élimine la duplication).
- * Utilise ListManagerMixin pour la gestion de la liste statique.
+ * Cette interface définit le contrat pour toutes les formes géométriques
+ * 2D du système (Rectangle, Circle, Triangle, etc.).
+ *
+ * ## Patterns Architecturaux
+ *
+ * - **Prototype Pattern** : Hérite de Interface pour clonage polymorphe
+ * - **Factory Pattern** : Utilise FactoryMixin pour création depuis QVariantMap
+ * - **List Manager** : Utilise ListManagerMixin pour liste statique de toutes les instances
+ * - **Signals/Slots** : Hérite de QObject pour notifications de changements
+ *
+ * ## Factory Pattern - Utilisation
+ *
+ * IShape utilise le Factory Pattern via FactoryMixin pour créer des instances
+ * depuis des données sérialisées (QVariantMap).
+ *
+ * ### Enregistrement Automatique
+ *
+ * Chaque classe concrète s'enregistre automatiquement au démarrage :
+ *
+ * @code
+ * // Rectangle.h
+ * class Rectangle : public IShape {
+ *     Q_OBJECT
+ *     DECLARE_TYPE_NAME(Rectangle)  // Déclare staticTypeName() et getTypeName()
+ * private:
+ *     static const bool s_registered;  // Déclaration
+ * };
+ *
+ * // Rectangle.cpp
+ * const bool Rectangle::s_registered = IShape::registerFactory<Rectangle>();
+ * @endcode
+ *
+ * ### Création depuis QVariantMap
+ *
+ * @code
+ * // Créer un rectangle
+ * QVariantMap rectData;
+ * rectData["type"] = "Rectangle";
+ * rectData["x"] = 10.0;
+ * rectData["y"] = 20.0;
+ * rectData["width"] = 100.0;
+ * rectData["height"] = 50.0;
+ *
+ * IShape* rect = IShape::create(rectData);
+ * if (rect) {
+ *     qDebug() << "Created:" << rect->getTypeName();
+ *     qDebug() << "Area:" << rect->getArea();  // 5000.0
+ * }
+ *
+ * // Créer un cercle
+ * QVariantMap circleData;
+ * circleData["type"] = "Circle";
+ * circleData["centerX"] = 50.0;
+ * circleData["centerY"] = 50.0;
+ * circleData["radius"] = 25.0;
+ *
+ * IShape* circle = IShape::create(circleData);
+ * @endcode
+ *
+ * ### Lister Types Disponibles
+ *
+ * @code
+ * // Obtenir tous les types enregistrés
+ * QStringList types = IShape::availableTypes();
+ * // => ["Rectangle", "Circle", "Triangle"]
+ *
+ * // Créer dynamiquement depuis UI
+ * QString selectedType = ui->shapeComboBox->currentText();
+ * QVariantMap defaultData;
+ * defaultData["type"] = selectedType;
+ * IShape* shape = IShape::create(defaultData);
+ * @endcode
+ *
+ * ### Round-Trip Sérialisation
+ *
+ * @code
+ * // Objet → QVariantMap → Objet (clone exact)
+ * Rectangle* original = new Rectangle(10, 20, 100, 50);
+ * QVariantMap data = original->toVariant();  // Sérialisation automatique
+ * IShape* clone = IShape::create(data);      // Désérialisation
+ *
+ * // clone est une copie exacte de original !
+ * assert(clone->getTypeName() == "Rectangle");
+ * assert(clone->getArea() == original->getArea());
+ * @endcode
+ *
+ * @note Zéro duplication : Le Factory Pattern est fourni par FactoryMixin (CRTP)
+ * @note Type-safe : Vérification à la compilation via template
+ * @note Extensible : Nouveaux types via plugins sans recompilation
+ *
+ * @see FactoryMixin, DECLARE_TYPE_NAME, Interface::toVariant()
  */
 class IShape : public Interface,
                protected Patterns::FactoryMixin<IShape>,

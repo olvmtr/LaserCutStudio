@@ -38,7 +38,9 @@ public:
     }
 
     /**
-     * @brief Opérateur d'égalité
+     * @brief Opérateur d'égalité avec tolérance epsilon
+     * @param other Point à comparer
+     * @return true si les deux points sont égaux à epsilon près (1e-9)
      */
     bool operator==(const Point3D& other) const {
         const double epsilon = 1e-9;
@@ -48,14 +50,18 @@ public:
     }
 
     /**
-     * @brief Opérateur d'addition
+     * @brief Opérateur d'addition vectorielle
+     * @param other Vecteur à additionner
+     * @return Nouveau point résultat de l'addition (x+other.x, y+other.y, z+other.z)
      */
     Point3D operator+(const Point3D& other) const {
         return Point3D(x + other.x, y + other.y, z + other.z);
     }
 
     /**
-     * @brief Opérateur de soustraction
+     * @brief Opérateur de soustraction vectorielle
+     * @param other Vecteur à soustraire
+     * @return Nouveau point résultat de la soustraction (x-other.x, y-other.y, z-other.z)
      */
     Point3D operator-(const Point3D& other) const {
         return Point3D(x - other.x, y - other.y, z - other.z);
@@ -63,6 +69,8 @@ public:
 
     /**
      * @brief Opérateur de multiplication par un scalaire
+     * @param scalar Facteur de multiplication
+     * @return Nouveau point avec coordonnées multipliées (x*scalar, y*scalar, z*scalar)
      */
     Point3D operator*(double scalar) const {
         return Point3D(x * scalar, y * scalar, z * scalar);

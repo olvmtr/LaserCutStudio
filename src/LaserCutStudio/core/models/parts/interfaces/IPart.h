@@ -21,13 +21,87 @@ namespace Core {
 class IJoint;
 
 /**
- * @brief Interface pour les pièces à découper
+ * @brief Interface pour les pièces physiques à découper au laser
  *
- * Une pièce représente un élément physique à découper,
- * avec une forme 2D, une épaisseur et un matériau.
- * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
- * Utilise FactoryMixin pour le Factory Pattern (élimine la duplication).
- * Utilise ListManagerMixin pour la gestion de la liste statique.
+ * Une pièce (Part) représente un élément physique 2D à découper, composé de :
+ * - Une forme géométrique 2D (IShape) - Le contour de découpe
+ * - Un matériau (Material) - Bois, acrylique, MDF, etc.
+ * - Une épaisseur (thickness) - en mm
+ * - Des joints (IJoint) - Connexions avec d'autres pièces
+ *
+ * ## Patterns Architecturaux
+ *
+ * - **Composite Pattern** : Une IPart contient UNE IShape (relation de composition)
+ * - **Prototype Pattern** : Hérite de Interface pour clonage polymorphe
+ * - **Factory Pattern** : Utilise FactoryMixin pour création depuis QVariantMap
+ * - **Signals/Slots** : Hérite de QObject pour notifications de changements
+ *
+ * ## Factory Pattern - Utilisation
+ *
+ * ### Création depuis QVariantMap
+ *
+ * @code
+ * // Créer une pièce rectangulaire en bois
+ * QVariantMap partData;
+ * partData["type"] = "Part";
+ * partData["name"] = "Façade Boîte";
+ *
+ * // Forme de la pièce (imbriquée)
+ * QVariantMap shapeData;
+ * shapeData["type"] = "Rectangle";
+ * shapeData["x"] = 0.0;
+ * shapeData["y"] = 0.0;
+ * shapeData["width"] = 200.0;
+ * shapeData["height"] = 150.0;
+ * partData["shape"] = shapeData;
+ *
+ * // Propriétés physiques
+ * partData["thickness"] = 3.0;          // 3mm
+ * partData["material_name"] = "Plywood";
+ * partData["material_density"] = 550.0;
+ *
+ * IPart* part = IPart::create(partData);
+ * if (part) {
+ *     qDebug() << "Volume:" << part->calculateVolume() << "mm³";
+ *     qDebug() << "Masse:" << part->getMass() << "g";
+ * }
+ * @endcode
+ *
+ * ### Composition avec IShape
+ *
+ * @code
+ * // ⚠️ Architecture : UNE shape par part
+ * IPart* part = IPart::create(data);
+ * IShape* shape = part->getShape();  // UNE shape (singular)
+ *
+ * // ❌ INCORRECT : getShapes() n'existe pas !
+ * // for (IShape* s : part->getShapes()) { }  // Ne compile pas
+ * @endcode
+ *
+ * ### Lister Types Disponibles
+ *
+ * @code
+ * QStringList partTypes = IPart::availableTypes();
+ * // => ["Part"] (actuellement 1 type, extensible via plugins)
+ * @endcode
+ *
+ * ### Round-Trip Sérialisation
+ *
+ * @code
+ * // Créer, sérialiser, désérialiser
+ * Part* original = new Part("Box Side", rectangleShape, 3.0, Material::Wood());
+ * QVariantMap data = original->toVariant();  // Sérialisation automatique
+ * IPart* clone = IPart::create(data);        // Désérialisation
+ *
+ * // clone contient une copie de la shape originale
+ * assert(clone->getShape()->getArea() == original->getShape()->getArea());
+ * @endcode
+ *
+ * @note Architecture : Chaque IPart contient **UNE** IShape via getShape() (pas getShapes au pluriel)
+ * @note Ownership : IPart possède sa IShape (destructeur nettoie automatiquement)
+ * @note Joints : Les IJoint référencent les IPart mais ne les possèdent pas
+ *
+ * @see FactoryMixin, IShape, IJoint, Material, Interface::toVariant()
  */
 class IPart : public Interface,
               protected Patterns::FactoryMixin<IPart>,

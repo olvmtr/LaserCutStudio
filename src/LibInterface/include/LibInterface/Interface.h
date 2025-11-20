@@ -66,16 +66,74 @@ public:
     virtual QString getTypeName() const = 0;
 
     /**
-     * @brief Sérialise l'objet en QVariantMap
+     * @brief Sérialise l'objet en QVariantMap via introspection Qt
      *
      * Utilise le système Q_PROPERTY de Qt pour sérialiser automatiquement
      * toutes les propriétés de l'objet. Les propriétés "id" et "objectName"
      * sont exclues de la sérialisation.
      *
-     * @return QVariantMap contenant le type et toutes les propriétés
+     * @details
+     * ## Fonctionnement Automatique
      *
-     * @note Les classes dérivées peuvent surcharger cette méthode pour
-     *       ajouter une sérialisation personnalisée
+     * Cette méthode utilise le système de réflexion Qt (QMetaObject) pour
+     * parcourir automatiquement toutes les Q_PROPERTY et les sérialiser :
+     *
+     * 1. **Ajoute le champ "type"** : Appelle getTypeName() pour identifier le type concret
+     * 2. **Parcourt toutes les Q_PROPERTY** : Via metaObject()->propertyCount()
+     * 3. **Exclut propriétés système** : Ignore "id" et "objectName" (gérés séparément)
+     * 4. **Sérialise chaque propriété** : Utilise property.read(this) pour obtenir la valeur
+     * 5. **Support types Qt natifs** : int, double, QString, QColor, QRectF, etc.
+     *
+     * ## Exemple Automatique
+     *
+     * @code
+     * // Classe avec Q_PROPERTY (définition)
+     * class Rectangle : public IShape {
+     *     Q_OBJECT
+     *     Q_PROPERTY(double x READ getX WRITE setX)
+     *     Q_PROPERTY(double width READ getWidth WRITE setWidth)
+     * public:
+     *     DECLARE_TYPE_NAME(Rectangle)
+     *     // getX, setX, getWidth, setWidth...
+     * };
+     *
+     * // Utilisation (sérialisation automatique)
+     * Rectangle* rect = new Rectangle(10.0, 20.0, 100.0, 50.0);
+     * QVariantMap data = rect->toVariant();
+     * // => { "type": "Rectangle", "x": 10.0, "y": 20.0, "width": 100.0, "height": 50.0 }
+     *
+     * // Round-trip : désérialisation via Factory Pattern
+     * IShape* clone = IShape::create(data);  // Recrée un Rectangle identique !
+     * @endcode
+     *
+     * ## Symétrie avec Factory Pattern
+     *
+     * Cette méthode est **symétrique** avec FactoryMixin::create(QVariantMap) :
+     * - toVariant() : Object → QVariantMap (sérialisation)
+     * - create(map) : QVariantMap → Object (désérialisation)
+     *
+     * Cela permet le round-trip complet : clone == original
+     *
+     * ## Sérialisation Personnalisée
+     *
+     * Les classes dérivées peuvent surcharger pour ajouter des propriétés calculées :
+     *
+     * @code
+     * QVariantMap Rectangle::toVariant() const {
+     *     QVariantMap data = IShape::toVariant();  // Appel parent
+     *     data["area"] = getArea();                // Propriété calculée
+     *     data["perimeter"] = 2 * (width + height);
+     *     return data;
+     * }
+     * @endcode
+     *
+     * @return QVariantMap contenant le type et toutes les propriétés Q_PROPERTY
+     *
+     * @note Zéro duplication : Pas besoin d'implémenter toVariant() dans chaque classe !
+     * @note Performance : Introspection Qt est optimisée (cache métadonnées)
+     * @note Limitation : Seuls les types supportés par QVariant sont sérialisables
+     *
+     * @see FactoryMixin::create(), DECLARE_TYPE_NAME, QMetaObject, Q_PROPERTY
      */
     virtual QVariantMap toVariant() const;
 

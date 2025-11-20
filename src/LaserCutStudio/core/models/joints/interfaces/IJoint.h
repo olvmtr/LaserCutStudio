@@ -24,13 +24,94 @@ namespace Plugins {
 }
 
 /**
- * @brief Interface pour les assemblages entre pièces
+ * @brief Interface pour les connexions d'assemblage entre pièces
  *
- * Un joint définit comment deux pièces s'assemblent entre elles
- * dans l'espace 3D.
- * Hérite de Interface (donc QObject) pour bénéficier des Signals/Slots.
- * Utilise FactoryMixin pour le Factory Pattern (élimine la duplication).
- * Utilise ListManagerMixin pour la gestion de la liste statique.
+ * Un joint (Joint) définit comment deux pièces (IPart) s'assemblent entre elles
+ * dans l'espace 3D. Types disponibles : Tab, Finger, Mortise-Tenon, Edge-to-Edge.
+ *
+ * ## Caractéristiques
+ *
+ * - **Connexion bi-directionnelle** : Connecte partA et partB
+ * - **Position 3D** : Coordonnées (x, y, z) du point d'assemblage
+ * - **Angle** : Rotation en degrés pour orientation relative
+ * - **Type** : JointType (TAB, FINGER, MORTISE_TENON, EDGE_TO_EDGE)
+ * - **Gestion lifecycle** : Écoute aboutToBeDestroyed pour nettoyage automatique
+ *
+ * ## Patterns Architecturaux
+ *
+ * - **Observer Pattern** : Écoute les signaux aboutToBeDestroyed des pièces
+ * - **Prototype Pattern** : Hérite de Interface pour clonage polymorphe
+ * - **Factory Pattern** : Utilise FactoryMixin pour création depuis QVariantMap
+ * - **Bidirectional Association** : Les pièces référencent leurs joints
+ *
+ * ## Factory Pattern - Utilisation
+ *
+ * ### Création depuis QVariantMap
+ *
+ * @code
+ * // Créer un finger joint entre deux pièces
+ * QVariantMap jointData;
+ * jointData["type"] = "FingerJoint";
+ *
+ * // Position 3D du joint
+ * QVariantMap posData;
+ * posData["x"] = 100.0;
+ * posData["y"] = 0.0;
+ * posData["z"] = 0.0;
+ * jointData["position"] = posData;
+ *
+ * // Paramètres du finger joint
+ * jointData["angle"] = 90.0;           // Perpendiculaire
+ * jointData["fingerCount"] = 5;        // 5 doigts
+ * jointData["fingerWidth"] = 10.0;     // 10mm de large
+ *
+ * IJoint* joint = IJoint::create(jointData);
+ *
+ * // Connecter aux pièces (après création)
+ * joint->connect(partA, partB);
+ * @endcode
+ *
+ * ### Connexion Bidirectionnelle
+ *
+ * @code
+ * // Connecter joint ↔ pièces (relation bidirectionnelle)
+ * IJoint* joint = new FingerJoint();
+ * joint->connect(partA, partB);
+ *
+ * // Les pièces connaissent maintenant leurs joints
+ * QList<IJoint*> jointsA = partA->getJoints();
+ * assert(jointsA.contains(joint));  // true
+ *
+ * // Si une pièce est détruite, le joint se déconnecte automatiquement
+ * delete partA;  // Émet aboutToBeDestroyed
+ * // → joint->getPartA() == nullptr (nettoyage automatique)
+ * @endcode
+ *
+ * ### Lister Types Disponibles
+ *
+ * @code
+ * QStringList jointTypes = IJoint::availableTypes();
+ * // => ["TabJoint", "FingerJoint"]
+ * // (Extensible via plugins pour Mortise-Tenon, Dovetail, etc.)
+ * @endcode
+ *
+ * ### Round-Trip Sérialisation
+ *
+ * @code
+ * FingerJoint* original = new FingerJoint(partA, partB, pos, 90.0, 5, 10.0);
+ * QVariantMap data = original->toVariant();
+ * IJoint* clone = IJoint::create(data);
+ *
+ * // clone a les mêmes propriétés (sauf connexions pièces)
+ * assert(clone->getTypeName() == "FingerJoint");
+ * assert(clone->getAngle() == 90.0);
+ * @endcode
+ *
+ * @warning Ownership : IJoint ne possède PAS les IPart (pointeurs non-owning)
+ * @note Lifecycle : Utilise aboutToBeDestroyed pour éviter dangling pointers
+ * @note Thread-safety : Connexion/déconnexion doivent être faites dans le thread Qt
+ *
+ * @see FactoryMixin, IPart, JointType, Point3D, Interface::toVariant()
  */
 class IJoint : public Interface,
                protected Patterns::FactoryMixin<IJoint>,
@@ -159,20 +240,43 @@ private:
     /**
      * @brief Helper pour connecter une pièce et écouter sa destruction
      *
-     * Enregistre le joint dans la pièce et connecte au signal aboutToBeDestroyed
-     * pour nettoyage automatique quand la pièce est détruite.
+     * Cette méthode réalise trois opérations critiques dans l'ordre :
+     * 1. **Assigne partMember = newPart** (CRITIQUE : doit être fait en premier)
+     * 2. Enregistre le joint dans la pièce via newPart->addJoint(this)
+     * 3. Connecte au signal aboutToBeDestroyed pour nettoyage automatique
      *
      * @param partMember Référence au membre (m_partA ou m_partB)
      * @param newPart Nouvelle pièce à connecter (peut être nullptr)
+     *
+     * @warning Bug corrigé 2025-11-19 : L'implémentation initiale oubliait
+     * l'assignation `partMember = newPart`, laissant m_partA et m_partB à
+     * nullptr après connexion. Cela causait 3 échecs de tests dans TestJoint.
+     *
+     * @note La lambda capturée par référence `[this, &partMember]` permet
+     * de mettre à nullptr le bon membre (m_partA ou m_partB) lors de la
+     * destruction de la pièce, évitant ainsi les dangling pointers.
+     *
+     * @see disconnectFromPart(), connect(), disconnect()
      */
     void connectToPart(IPart*& partMember, IPart* newPart);
 
     /**
-     * @brief Helper pour déconnecter une pièce
+     * @brief Helper pour déconnecter une pièce et nettoyer les connexions
      *
-     * Retire le joint de la pièce et déconnecte tous les signaux.
+     * Cette méthode réalise trois opérations dans l'ordre :
+     * 1. Retire le joint de la pièce via partMember->removeJoint(this)
+     * 2. Déconnecte tous les signaux Qt de cette pièce
+     * 3. Met partMember à nullptr
      *
      * @param partMember Référence au membre (m_partA ou m_partB)
+     *
+     * @note Utilise QObject::disconnect(partMember, nullptr, this, nullptr)
+     * pour déconnecter TOUS les signaux de la pièce vers ce joint, garantissant
+     * qu'aucune connexion résiduelle ne subsiste.
+     *
+     * @note Gère correctement le cas où partMember est déjà nullptr (no-op).
+     *
+     * @see connectToPart(), connect(), disconnect()
      */
     void disconnectFromPart(IPart*& partMember);
 };

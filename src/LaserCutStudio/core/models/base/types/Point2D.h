@@ -36,7 +36,9 @@ public:
     }
 
     /**
-     * @brief Opérateur d'égalité
+     * @brief Opérateur d'égalité avec tolérance epsilon
+     * @param other Point à comparer
+     * @return true si les deux points sont égaux à epsilon près (1e-9)
      */
     bool operator==(const Point2D& other) const {
         const double epsilon = 1e-9;
@@ -44,14 +46,18 @@ public:
     }
 
     /**
-     * @brief Opérateur d'addition
+     * @brief Opérateur d'addition vectorielle
+     * @param other Vecteur à additionner
+     * @return Nouveau point résultat de l'addition (x+other.x, y+other.y)
      */
     Point2D operator+(const Point2D& other) const {
         return Point2D(x + other.x, y + other.y);
     }
 
     /**
-     * @brief Opérateur de soustraction
+     * @brief Opérateur de soustraction vectorielle
+     * @param other Vecteur à soustraire
+     * @return Nouveau point résultat de la soustraction (x-other.x, y-other.y)
      */
     Point2D operator-(const Point2D& other) const {
         return Point2D(x - other.x, y - other.y);
@@ -59,6 +65,8 @@ public:
 
     /**
      * @brief Opérateur de multiplication par un scalaire
+     * @param scalar Facteur de multiplication
+     * @return Nouveau point avec coordonnées multipliées (x*scalar, y*scalar)
      */
     Point2D operator*(double scalar) const {
         return Point2D(x * scalar, y * scalar);
