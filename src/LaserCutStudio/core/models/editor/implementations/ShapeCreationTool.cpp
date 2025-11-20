@@ -217,7 +217,7 @@ bool ShapeCreationTool::handleMouseRelease(const Point2D& scenePos, Qt::MouseBut
     if (shape) {
         // Ajouter la forme à EditorService
         if (auto* editorService = qobject_cast<Services::EditorService*>(parent())) {
-            editorService->addShape(shape, false);  // false = pas de commande undo/redo pour l'instant
+            editorService->addShape(shape, true);  // true = créer commande Undo/Redo
         }
 
         emit shapeCreated(shape);
