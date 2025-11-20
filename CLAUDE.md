@@ -17,7 +17,7 @@ LaserCutStudio est une application desktop pour concevoir des projets de découp
 - **C++17** standard
 - **CMake 3.16+** pour la configuration de build
 - Qt Quick pour une interface déclarative moderne
-- Qt3D ou Qt Quick 3D (prévu) pour la visualisation 3D
+- **Qt Quick 3D** (Qt 6+) pour la visualisation 3D (Phase 5)
 - QPainter/QGraphicsView (prévu) pour l'édition 2D
 
 ## Factory Pattern avec FactoryMixin (CRTP)
