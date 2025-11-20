@@ -36,10 +36,32 @@ signals:
     void tabDepthChanged(double newDepth);
 
 public:
+    /**
+     * @brief Constructeur par défaut
+     *
+     * Crée un tab joint avec largeur 20mm et profondeur 10mm
+     */
     TabJoint();
+
+    /**
+     * @brief Constructeur avec paramètres
+     * @param partA Première pièce à assembler
+     * @param partB Seconde pièce à assembler
+     * @param position Position 3D du joint dans l'espace
+     * @param angle Angle de rotation du joint en degrés
+     * @param tabWidth Largeur du tenon en mm (doit être > 0)
+     * @param tabDepth Profondeur du tenon en mm (doit être > 0)
+     */
     TabJoint(IPart* partA, IPart* partB, const Point3D& position, double angle,
              double tabWidth, double tabDepth);
+
+    /**
+     * @brief Constructeur de copie
+     * @param other Tab joint à copier
+     * @note Les pointeurs vers les pièces sont copiés (shallow copy)
+     */
     TabJoint(const TabJoint& other);
+
     ~TabJoint() override = default;
 
     /**
@@ -64,6 +86,7 @@ public:
 
     /**
      * @brief Définit la largeur du tenon et émet le signal si la valeur change
+     * @param width Nouvelle largeur du tenon en mm (doit être > 0)
      */
     void setTabWidth(double width);
 
@@ -74,6 +97,7 @@ public:
 
     /**
      * @brief Définit la profondeur du tenon et émet le signal si la valeur change
+     * @param depth Nouvelle profondeur du tenon en mm (doit être > 0)
      */
     void setTabDepth(double depth);
 

@@ -103,8 +103,22 @@ public:
     double getSize() const { return m_size; }
 
     // Setters
+    /**
+     * @brief Définit la position X du centre
+     * @param centerX Nouvelle coordonnée X du centre
+     */
     void setCenterX(double centerX);
+
+    /**
+     * @brief Définit la position Y du centre
+     * @param centerY Nouvelle coordonnée Y du centre
+     */
     void setCenterY(double centerY);
+
+    /**
+     * @brief Définit la longueur du côté
+     * @param size Nouvelle longueur du côté (doit être > 0)
+     */
     void setSize(double size);
 
 private:

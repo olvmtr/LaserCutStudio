@@ -107,9 +107,28 @@ public:
     double getHeight() const { return m_height; }
 
     // Setters avec signaux
+    /**
+     * @brief Définit la position X
+     * @param x Nouvelle coordonnée X du coin supérieur gauche
+     */
     void setX(double x);
+
+    /**
+     * @brief Définit la position Y
+     * @param y Nouvelle coordonnée Y du coin supérieur gauche
+     */
     void setY(double y);
+
+    /**
+     * @brief Définit la largeur
+     * @param width Nouvelle largeur (doit être > 0)
+     */
     void setWidth(double width);
+
+    /**
+     * @brief Définit la hauteur
+     * @param height Nouvelle hauteur (doit être > 0)
+     */
     void setHeight(double height);
 
 private:
