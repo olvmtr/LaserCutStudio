@@ -39,6 +39,12 @@ void ConfigManager::load()
         QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)
     ).toString();
 
+    // Charger préférences de l'éditeur 2D
+    m_editorGridSize = m_settings.value("editor/gridSize", 10.0).toDouble();
+    m_editorGridVisible = m_settings.value("editor/gridVisible", true).toBool();
+    m_editorSnapToGrid = m_settings.value("editor/snapToGrid", false).toBool();
+    m_editorDefaultZoom = m_settings.value("editor/defaultZoom", 1.0).toDouble();
+
     // Charger matériaux
     loadMaterials();
 
@@ -57,6 +63,12 @@ void ConfigManager::save()
     m_settings.setValue("paths/lastExportDirectory", m_lastExportDirectory);
     m_settings.setValue("paths/lastProjectDirectory", m_lastProjectDirectory);
 
+    // Sauvegarder préférences de l'éditeur 2D
+    m_settings.setValue("editor/gridSize", m_editorGridSize);
+    m_settings.setValue("editor/gridVisible", m_editorGridVisible);
+    m_settings.setValue("editor/snapToGrid", m_editorSnapToGrid);
+    m_settings.setValue("editor/defaultZoom", m_editorDefaultZoom);
+
     // Sauvegarder matériaux
     saveMaterials();
 
@@ -73,11 +85,17 @@ void ConfigManager::resetToDefaults()
 
 void ConfigManager::loadDefaults()
 {
-    // Valeurs par défaut
+    // Valeurs par défaut générales
     m_defaultUnit = Unit::Millimeters;
     m_displayPrecision = 2;
     m_defaultThickness = 3.0;
     m_defaultMaterial = "Plywood";
+
+    // Valeurs par défaut de l'éditeur 2D
+    m_editorGridSize = 10.0;          // 10mm
+    m_editorGridVisible = true;       // Grille visible
+    m_editorSnapToGrid = false;       // Magnétisme désactivé par défaut
+    m_editorDefaultZoom = 1.0;        // Zoom 100%
 
     m_lastExportDirectory = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
     m_lastProjectDirectory = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
@@ -222,6 +240,40 @@ void ConfigManager::setLastProjectDirectory(const QString& dir)
 {
     if (m_lastProjectDirectory != dir) {
         m_lastProjectDirectory = dir;
+    }
+}
+
+// === Préférences de l'éditeur 2D ===
+
+void ConfigManager::setEditorGridSize(double size)
+{
+    if (!qFuzzyCompare(m_editorGridSize, size)) {
+        m_editorGridSize = size;
+        emit configurationChanged();
+    }
+}
+
+void ConfigManager::setEditorGridVisible(bool visible)
+{
+    if (m_editorGridVisible != visible) {
+        m_editorGridVisible = visible;
+        emit configurationChanged();
+    }
+}
+
+void ConfigManager::setEditorSnapToGrid(bool snap)
+{
+    if (m_editorSnapToGrid != snap) {
+        m_editorSnapToGrid = snap;
+        emit configurationChanged();
+    }
+}
+
+void ConfigManager::setEditorDefaultZoom(double zoom)
+{
+    if (!qFuzzyCompare(m_editorDefaultZoom, zoom)) {
+        m_editorDefaultZoom = zoom;
+        emit configurationChanged();
     }
 }
 

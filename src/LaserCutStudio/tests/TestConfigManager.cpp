@@ -274,5 +274,113 @@ void TestConfigManager::testMaterialsChangedSignal()
     QCOMPARE(spy.count(), 2);
 }
 
+// ===== Tests préférences éditeur 2D =====
+
+void TestConfigManager::testEditorGridSize()
+{
+    ConfigManager& config = ConfigManager::instance();
+
+    // Vérifier valeur par défaut
+    QCOMPARE(config.getEditorGridSize(), 10.0);
+
+    // Modifier et vérifier
+    config.setEditorGridSize(20.0);
+    QCOMPARE(config.getEditorGridSize(), 20.0);
+
+    // Signal doit être émis
+    QSignalSpy spy(&config, &ConfigManager::configurationChanged);
+    config.setEditorGridSize(15.0);
+    QCOMPARE(spy.count(), 1);
+
+    // Pas de signal si même valeur
+    config.setEditorGridSize(15.0);
+    QCOMPARE(spy.count(), 1);
+}
+
+void TestConfigManager::testEditorGridVisible()
+{
+    ConfigManager& config = ConfigManager::instance();
+
+    // Vérifier valeur par défaut
+    QCOMPARE(config.getEditorGridVisible(), true);
+
+    // Modifier et vérifier
+    config.setEditorGridVisible(false);
+    QCOMPARE(config.getEditorGridVisible(), false);
+
+    // Signal doit être émis
+    QSignalSpy spy(&config, &ConfigManager::configurationChanged);
+    config.setEditorGridVisible(true);
+    QCOMPARE(spy.count(), 1);
+}
+
+void TestConfigManager::testEditorSnapToGrid()
+{
+    ConfigManager& config = ConfigManager::instance();
+
+    // Vérifier valeur par défaut
+    QCOMPARE(config.getEditorSnapToGrid(), false);
+
+    // Modifier et vérifier
+    config.setEditorSnapToGrid(true);
+    QCOMPARE(config.getEditorSnapToGrid(), true);
+
+    // Signal doit être émis
+    QSignalSpy spy(&config, &ConfigManager::configurationChanged);
+    config.setEditorSnapToGrid(false);
+    QCOMPARE(spy.count(), 1);
+}
+
+void TestConfigManager::testEditorDefaultZoom()
+{
+    ConfigManager& config = ConfigManager::instance();
+
+    // Vérifier valeur par défaut
+    QCOMPARE(config.getEditorDefaultZoom(), 1.0);
+
+    // Modifier et vérifier
+    config.setEditorDefaultZoom(1.5);
+    QCOMPARE(config.getEditorDefaultZoom(), 1.5);
+
+    // Signal doit être émis
+    QSignalSpy spy(&config, &ConfigManager::configurationChanged);
+    config.setEditorDefaultZoom(2.0);
+    QCOMPARE(spy.count(), 1);
+
+    // Pas de signal si même valeur
+    config.setEditorDefaultZoom(2.0);
+    QCOMPARE(spy.count(), 1);
+}
+
+void TestConfigManager::testEditorPreferencesLoadSave()
+{
+    ConfigManager& config = ConfigManager::instance();
+
+    // Modifier toutes les préférences de l'éditeur
+    config.setEditorGridSize(25.0);
+    config.setEditorGridVisible(false);
+    config.setEditorSnapToGrid(true);
+    config.setEditorDefaultZoom(1.8);
+
+    // Sauvegarder
+    config.save();
+
+    // Réinitialiser
+    config.resetToDefaults();
+    QCOMPARE(config.getEditorGridSize(), 10.0);
+    QCOMPARE(config.getEditorGridVisible(), true);
+    QCOMPARE(config.getEditorSnapToGrid(), false);
+    QCOMPARE(config.getEditorDefaultZoom(), 1.0);
+
+    // Charger
+    config.load();
+
+    // Vérifier que les valeurs sont restaurées
+    QCOMPARE(config.getEditorGridSize(), 25.0);
+    QCOMPARE(config.getEditorGridVisible(), false);
+    QCOMPARE(config.getEditorSnapToGrid(), true);
+    QCOMPARE(config.getEditorDefaultZoom(), 1.8);
+}
+
 } // namespace Tests
 } // namespace LaserCutStudio

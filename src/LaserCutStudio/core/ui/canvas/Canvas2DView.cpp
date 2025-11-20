@@ -5,6 +5,7 @@
 
 #include "core/ui/canvas/Canvas2DView.h"
 #include "core/infrastructure/logging/LogCategories.h"
+#include "core/infrastructure/config/ConfigManager.h"
 #include "core/models/editor/interfaces/ITool.h"
 #include "core/models/shapes/interfaces/IShape.h"
 #include <QMouseEvent>
@@ -23,13 +24,33 @@ Canvas2DView::Canvas2DView(QQuickItem* parent)
     setAcceptHoverEvents(true);
     setAntialiasing(true);
 
-    qCInfo(logCore()) << "Canvas2DView created";
+    // Charger les préférences depuis ConfigManager
+    ConfigManager& config = ConfigManager::instance();
+    config.load();  // S'assurer que les préférences sont chargées
+
+    m_gridSize = config.getEditorGridSize();
+    m_gridVisible = config.getEditorGridVisible();
+    m_snapToGrid = config.getEditorSnapToGrid();
+    m_zoomLevel = config.getEditorDefaultZoom();
+
+    qCInfo(logCore()) << "Canvas2DView created (grid:" << m_gridSize
+                      << "mm, visible:" << m_gridVisible
+                      << ", snap:" << m_snapToGrid
+                      << ", zoom:" << (m_zoomLevel * 100) << "%)";
 }
 
 Canvas2DView::~Canvas2DView()
 {
+    // Sauvegarder les préférences actuelles avant destruction
+    ConfigManager& config = ConfigManager::instance();
+    config.setEditorGridSize(m_gridSize);
+    config.setEditorGridVisible(m_gridVisible);
+    config.setEditorSnapToGrid(m_snapToGrid);
+    config.setEditorDefaultZoom(m_zoomLevel);
+    config.save();
+
     disconnectEditorServiceSignals();
-    qCInfo(logCore()) << "Canvas2DView destroyed";
+    qCInfo(logCore()) << "Canvas2DView destroyed (preferences saved)";
 }
 
 // ===== QQuickPaintedItem interface =====

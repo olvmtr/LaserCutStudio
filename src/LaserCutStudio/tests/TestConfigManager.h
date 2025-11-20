@@ -43,6 +43,13 @@ private slots:
     void testLastExportDirectory();
     void testLastProjectDirectory();
 
+    // Tests préférences éditeur 2D
+    void testEditorGridSize();
+    void testEditorGridVisible();
+    void testEditorSnapToGrid();
+    void testEditorDefaultZoom();
+    void testEditorPreferencesLoadSave();
+
     // Tests signaux
     void testConfigurationChangedSignal();
     void testMaterialsChangedSignal();

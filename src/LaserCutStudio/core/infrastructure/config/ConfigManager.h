@@ -138,6 +138,48 @@ public:
      */
     void setLastProjectDirectory(const QString& dir);
 
+    // === Préférences de l'éditeur 2D ===
+
+    /**
+     * @brief Obtient la taille de la grille par défaut (mm)
+     */
+    double getEditorGridSize() const { return m_editorGridSize; }
+
+    /**
+     * @brief Définit la taille de la grille par défaut
+     */
+    void setEditorGridSize(double size);
+
+    /**
+     * @brief Obtient si la grille est visible par défaut
+     */
+    bool getEditorGridVisible() const { return m_editorGridVisible; }
+
+    /**
+     * @brief Définit si la grille est visible par défaut
+     */
+    void setEditorGridVisible(bool visible);
+
+    /**
+     * @brief Obtient si le magnétisme est actif par défaut
+     */
+    bool getEditorSnapToGrid() const { return m_editorSnapToGrid; }
+
+    /**
+     * @brief Définit si le magnétisme est actif par défaut
+     */
+    void setEditorSnapToGrid(bool snap);
+
+    /**
+     * @brief Obtient le zoom par défaut (1.0 = 100%)
+     */
+    double getEditorDefaultZoom() const { return m_editorDefaultZoom; }
+
+    /**
+     * @brief Définit le zoom par défaut
+     */
+    void setEditorDefaultZoom(double zoom);
+
 signals:
     /**
      * @brief Émis quand la configuration change
@@ -164,13 +206,19 @@ private:
     QSettings m_settings;
     QList<Material> m_materials;
 
-    // Préférences
+    // Préférences générales
     Unit m_defaultUnit;
     int m_displayPrecision;
     double m_defaultThickness;
     QString m_defaultMaterial;
     QString m_lastExportDirectory;
     QString m_lastProjectDirectory;
+
+    // Préférences de l'éditeur 2D
+    double m_editorGridSize;
+    bool m_editorGridVisible;
+    bool m_editorSnapToGrid;
+    double m_editorDefaultZoom;
 };
 
 } // namespace Core
