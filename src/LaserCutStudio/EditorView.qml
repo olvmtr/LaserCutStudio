@@ -120,11 +120,42 @@ Item {
         }
     }
 
+    // ===== Palette d'outils à gauche =====
+    ToolPalette {
+        id: toolPalette
+        anchors.top: toolbar.bottom
+        anchors.left: parent.left
+        anchors.bottom: statusBar.top
+
+        editorService: editor
+
+        activeTool: {
+            if (!editor.activeTool) return "Rectangle"
+            return editor.activeTool.name.replace("Create ", "")
+        }
+
+        onToolSelected: function(toolName) {
+            console.log("Outil sélectionné:", toolName)
+
+            // Les outils de forme sont gérés automatiquement via Factory Pattern
+            if (toolName === "Select" || toolName === "Pan" || toolName === "Zoom") {
+                console.log("TODO: Implémenter outil de navigation:", toolName)
+            } else {
+                // Activer l'outil de création de forme correspondant
+                if (editor.activateToolByShapeType(toolName)) {
+                    console.log("Outil activé:", toolName)
+                } else {
+                    console.warn("Impossible d'activer l'outil:", toolName)
+                }
+            }
+        }
+    }
+
     // ===== Canvas principal =====
     Canvas2DView {
         id: canvas
         anchors.top: toolbar.bottom
-        anchors.left: parent.left
+        anchors.left: toolPalette.right
         anchors.right: propertiesPanel.left
         anchors.bottom: statusBar.top
 

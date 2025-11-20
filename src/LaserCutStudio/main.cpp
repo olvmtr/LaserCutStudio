@@ -4,6 +4,7 @@
 #include "core/ui/canvas/Canvas2DView.h"
 #include "core/services/editor/EditorService.h"
 #include "core/models/editor/implementations/ShapeCreationTool.h"
+#include "core/models/shapes/interfaces/IShape.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,11 +21,25 @@ int main(int argc, char *argv[])
     // Créer EditorService et outils
     auto* editorService = new LaserCutStudio::Core::Services::EditorService(&app);
 
-    // Créer un outil Rectangle par défaut
-    auto* rectangleTool = new LaserCutStudio::Core::Editor::ShapeCreationTool("Rectangle", editorService);
-    rectangleTool->setCreationMode(LaserCutStudio::Core::Editor::ShapeCreationTool::CreationMode::ClickAndDrag);
-    editorService->registerTool(rectangleTool);
-    editorService->setActiveTool(rectangleTool);
+    // Créer automatiquement un outil pour chaque type de forme enregistré dans le Factory
+    QVector<QString> availableShapeTypes = LaserCutStudio::Core::IShape::availableTypes();
+    LaserCutStudio::Core::Editor::ITool* firstTool = nullptr;
+
+    for (const QString& shapeType : availableShapeTypes) {
+        auto* tool = new LaserCutStudio::Core::Editor::ShapeCreationTool(shapeType, editorService);
+        tool->setCreationMode(LaserCutStudio::Core::Editor::ShapeCreationTool::CreationMode::ClickAndDrag);
+        editorService->registerTool(tool);
+
+        // Garder le premier outil pour l'activer
+        if (!firstTool) {
+            firstTool = tool;
+        }
+    }
+
+    // Activer le premier outil disponible
+    if (firstTool) {
+        editorService->setActiveTool(firstTool);
+    }
 
     QQmlApplicationEngine engine;
 

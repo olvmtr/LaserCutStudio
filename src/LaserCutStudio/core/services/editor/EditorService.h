@@ -67,6 +67,7 @@ class EditorService : public QObject
     Q_PROPERTY(bool canUndo READ canUndo NOTIFY undoStackChanged)
     Q_PROPERTY(bool canRedo READ canRedo NOTIFY undoStackChanged)
     Q_PROPERTY(int undoStackSize READ getUndoStackSize NOTIFY undoStackChanged)
+    Q_PROPERTY(QStringList availableShapeTypes READ getAvailableShapeTypes CONSTANT)
 
 public:
     explicit EditorService(QObject* parent = nullptr);
@@ -95,6 +96,13 @@ public:
      */
     void registerTool(Editor::ITool* tool);
 
+    /**
+     * @brief Active un outil par son nom de forme
+     * @param shapeType Nom du type de forme (ex: "Rectangle", "Circle")
+     * @return true si l'outil a été trouvé et activé, false sinon
+     */
+    Q_INVOKABLE bool activateToolByShapeType(const QString& shapeType);
+
     // ===== Gestion de la sélection =====
 
     /**
@@ -113,6 +121,12 @@ public:
      * @brief Nombre de formes
      */
     int getShapeCount() const { return m_shapes.size(); }
+
+    /**
+     * @brief Types de formes disponibles (enregistrés dans le Factory)
+     * @return Liste des noms de types (ex: "Rectangle", "Circle")
+     */
+    QStringList getAvailableShapeTypes() const;
 
     /**
      * @brief Ajoute une forme à l'éditeur

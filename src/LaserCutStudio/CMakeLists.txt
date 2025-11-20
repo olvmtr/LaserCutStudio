@@ -31,6 +31,8 @@ qt_add_executable(appLaserCutStudio
     core/models/shapes/implementations/Rectangle.cpp
     core/models/shapes/implementations/Circle.h
     core/models/shapes/implementations/Circle.cpp
+    core/models/shapes/implementations/Triangle.h
+    core/models/shapes/implementations/Triangle.cpp
     # Core Module - Models Parts
     core/models/parts/interfaces/IPart.h
     core/models/parts/interfaces/IPart.cpp
@@ -93,6 +95,7 @@ qt_add_qml_module(appLaserCutStudio
     QML_FILES
         Main.qml
         EditorView.qml
+        ToolPalette.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

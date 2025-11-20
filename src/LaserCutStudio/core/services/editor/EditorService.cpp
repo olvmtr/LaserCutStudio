@@ -95,6 +95,22 @@ void EditorService::registerTool(Editor::ITool* tool)
     qCInfo(logCore()) << "Tool registered:" << tool->getName();
 }
 
+bool EditorService::activateToolByShapeType(const QString& shapeType)
+{
+    // Chercher un outil dont le nom contient le type de forme
+    // Ex: "Create Rectangle" pour shapeType "Rectangle"
+    for (Editor::ITool* tool : m_availableTools) {
+        if (tool && tool->getName().contains(shapeType, Qt::CaseInsensitive)) {
+            setActiveTool(tool);
+            qCInfo(logCore()) << "Activated tool:" << tool->getName() << "for shape type:" << shapeType;
+            return true;
+        }
+    }
+
+    qCWarning(logCore()) << "No tool found for shape type:" << shapeType;
+    return false;
+}
+
 // ===== Gestion des formes =====
 
 void EditorService::addShape(IShape* shape, bool createCommand)
@@ -231,6 +247,21 @@ int EditorService::getRedoStackSize() const
 int EditorService::getUndoLimit() const
 {
     return m_commandStack ? m_commandStack->undoLimit() : 0;
+}
+
+QStringList EditorService::getAvailableShapeTypes() const
+{
+    // Récupérer les types enregistrés depuis le Factory Pattern d'IShape
+    QVector<QString> types = IShape::availableTypes();
+
+    // Convertir en QStringList pour QML
+    QStringList result;
+    for (const QString& type : types) {
+        result.append(type);
+    }
+
+    qCDebug(logCore()) << "Available shape types:" << result;
+    return result;
 }
 
 } // namespace Services
