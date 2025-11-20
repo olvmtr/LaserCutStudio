@@ -370,17 +370,37 @@ void Canvas2DView::drawShapes(QPainter* painter)
     for (IShape* shape : shapes) {
         if (!shape) continue;
 
-        // Dessiner la forme (implémentation simplifiée - à étendre)
-        QRectF bounds = shape->getBoundingBox();
-
         QPen pen(Qt::black, 2.0 / m_zoomLevel);
         QBrush brush(QColor(200, 220, 255, 128));
         painter->setPen(pen);
         painter->setBrush(brush);
 
-        // Pour l'instant, dessiner juste le bounding box
-        // TODO: Utiliser un visitor pattern ou shape->draw(painter)
-        painter->drawRect(bounds);
+        // Dessiner selon le type de forme
+        QString typeName = shape->getTypeName();
+
+        if (typeName == "Rectangle") {
+            QRectF bounds = shape->getBoundingBox();
+            painter->drawRect(bounds);
+        }
+        else if (typeName == "Circle") {
+            QRectF bounds = shape->getBoundingBox();
+            painter->drawEllipse(bounds);
+        }
+        else if (typeName == "Triangle") {
+            QList<Point2D> points = shape->getPoints();
+            if (points.size() >= 3) {
+                QPolygonF polygon;
+                for (const Point2D& pt : points) {
+                    polygon << QPointF(pt.x, pt.y);
+                }
+                painter->drawPolygon(polygon);
+            }
+        }
+        else {
+            // Type inconnu : dessiner le bounding box par défaut
+            QRectF bounds = shape->getBoundingBox();
+            painter->drawRect(bounds);
+        }
     }
 
     painter->restore();

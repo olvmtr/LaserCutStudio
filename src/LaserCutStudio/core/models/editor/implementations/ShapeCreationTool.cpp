@@ -4,6 +4,7 @@
  */
 
 #include "core/models/editor/implementations/ShapeCreationTool.h"
+#include "core/services/editor/EditorService.h"
 #include "core/infrastructure/patterns/prototype/ClonableMixin.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include <QDebug>
@@ -133,6 +134,11 @@ bool ShapeCreationTool::handleMousePress(const Point2D& scenePos, Qt::MouseButto
             IShape* shape = createFinalShape();
 
             if (shape) {
+                // Ajouter la forme à EditorService
+                if (auto* editorService = qobject_cast<Services::EditorService*>(parent())) {
+                    editorService->addShape(shape, false);  // false = pas de commande undo/redo pour l'instant
+                }
+
                 emit shapeCreated(shape);
                 qCInfo(logShapes()) << "Shape created:" << shape->getTypeName();
             }
@@ -155,6 +161,11 @@ bool ShapeCreationTool::handleMousePress(const Point2D& scenePos, Qt::MouseButto
 
         IShape* shape = IShape::create(params);
         if (shape) {
+            // Ajouter la forme à EditorService
+            if (auto* editorService = qobject_cast<Services::EditorService*>(parent())) {
+                editorService->addShape(shape, false);  // false = pas de commande undo/redo pour l'instant
+            }
+
             emit shapeCreated(shape);
             emit statusMessage(QString("%1 created at position").arg(m_shapeType));
             qCInfo(logShapes()) << "Shape created (parametric):" << shape->getTypeName();
@@ -204,6 +215,11 @@ bool ShapeCreationTool::handleMouseRelease(const Point2D& scenePos, Qt::MouseBut
 
     IShape* shape = createFinalShape();
     if (shape) {
+        // Ajouter la forme à EditorService
+        if (auto* editorService = qobject_cast<Services::EditorService*>(parent())) {
+            editorService->addShape(shape, false);  // false = pas de commande undo/redo pour l'instant
+        }
+
         emit shapeCreated(shape);
         emit statusMessage(QString("%1 created").arg(m_shapeType));
         qCInfo(logShapes()) << "Shape created:" << shape->getTypeName()
@@ -283,6 +299,13 @@ QVariantMap ShapeCreationTool::calculateShapeParams(const Point2D& p1, const Poi
         params["centerX"] = x + width / 2.0;
         params["centerY"] = y + height / 2.0;
         params["radius"] = radius;
+    }
+    else if (m_shapeType == "Triangle") {
+        // Pour un triangle équilatéral, utiliser la dimension moyenne comme taille
+        double size = (width + height) / 2.0;
+        params["centerX"] = x + width / 2.0;
+        params["centerY"] = y + height / 2.0;
+        params["size"] = size;
     }
 
     // Fusionner avec les paramètres par défaut
