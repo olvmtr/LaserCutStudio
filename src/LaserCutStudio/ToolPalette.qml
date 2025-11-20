@@ -54,14 +54,14 @@ Rectangle {
             font.pixelSize: 20
 
             checkable: true
-            checked: root.activeTool === "Select"
+            checked: root.activeTool === "Selection"
 
             onClicked: {
-                root.toolSelected("Select")
-                root.activeTool = "Select"
+                root.toolSelected("Selection")
+                root.activeTool = "Selection"
             }
 
-            ToolTip.text: "Outil de sélection (S)\nCliquer pour sélectionner des formes"
+            ToolTip.text: "Outil de sélection (S)\nCliquer pour sélectionner\nGlisser pour déplacer"
             ToolTip.visible: hovered
             ToolTip.delay: 500
         }
@@ -110,53 +110,6 @@ Rectangle {
                     }
                 }
             }
-        }
-
-        // ===== Outils de navigation (fixes) =====
-        Rectangle {
-            Layout.fillWidth: true
-            height: 1
-            color: "#3a3a3a"
-        }
-
-        ToolButton {
-            Layout.fillWidth: true
-            Layout.preferredHeight: 60
-
-            text: "✋\nPan"
-            font.pixelSize: 20
-
-            checkable: true
-            checked: root.activeTool === "Pan"
-
-            onClicked: {
-                root.toolSelected("Pan")
-                root.activeTool = "Pan"
-            }
-
-            ToolTip.text: "Pan (H)\nDéplacer la vue\n(ou clic milieu)"
-            ToolTip.visible: hovered
-            ToolTip.delay: 500
-        }
-
-        ToolButton {
-            Layout.fillWidth: true
-            Layout.preferredHeight: 60
-
-            text: "🔍\nZoom"
-            font.pixelSize: 20
-
-            checkable: true
-            checked: root.activeTool === "Zoom"
-
-            onClicked: {
-                root.toolSelected("Zoom")
-                root.activeTool = "Zoom"
-            }
-
-            ToolTip.text: "Zoom (Z)\nCliquer pour zoomer\n(ou molette)"
-            ToolTip.visible: hovered
-            ToolTip.delay: 500
         }
 
         // Spacer pour pousser vers le haut

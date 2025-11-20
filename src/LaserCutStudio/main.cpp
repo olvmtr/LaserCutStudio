@@ -4,6 +4,7 @@
 #include "core/ui/canvas/Canvas2DView.h"
 #include "core/services/editor/EditorService.h"
 #include "core/models/editor/implementations/ShapeCreationTool.h"
+#include "core/models/editor/implementations/SelectionTool.h"
 #include "core/models/shapes/interfaces/IShape.h"
 
 int main(int argc, char *argv[])
@@ -36,10 +37,12 @@ int main(int argc, char *argv[])
         }
     }
 
-    // Activer le premier outil disponible
-    if (firstTool) {
-        editorService->setActiveTool(firstTool);
-    }
+    // Créer et enregistrer SelectionTool
+    auto* selectionTool = new LaserCutStudio::Core::Editor::SelectionTool(editorService);
+    editorService->registerTool(selectionTool);
+
+    // Activer SelectionTool par défaut
+    editorService->setActiveTool(selectionTool);
 
     QQmlApplicationEngine engine;
 

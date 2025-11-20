@@ -78,8 +78,8 @@ void CreateShapeCommand::execute()
         return;
     }
 
-    // Ajouter à l'éditeur (sans créer de commande pour éviter récursion)
-    m_editorService->addShape(m_shape, false);
+    // Ajouter à l'éditeur directement (pas de commande pour éviter récursion)
+    m_editorService->addShapeDirect(m_shape);
 
     m_executed = true;
 
@@ -104,8 +104,8 @@ void CreateShapeCommand::undo()
         return;
     }
 
-    // Retirer la forme de l'éditeur (sans créer de commande)
-    m_editorService->removeShape(m_shape, false);
+    // Retirer la forme de l'éditeur directement (pas de commande)
+    m_editorService->removeShapeDirect(m_shape);
 
     // On garde la forme en vie mais on prend ownership
     // (elle n'est plus dans l'éditeur mais existe encore en mémoire)
@@ -132,8 +132,8 @@ void CreateShapeCommand::redo()
         return;
     }
 
-    // Remettre la forme dans l'éditeur (sans créer de commande)
-    m_editorService->addShape(m_shape, false);
+    // Remettre la forme dans l'éditeur directement (pas de commande)
+    m_editorService->addShapeDirect(m_shape);
 
     m_executed = true;
 

@@ -59,10 +59,18 @@ qt_add_executable(appLaserCutStudio
     core/models/editor/interfaces/ISelection.cpp
     core/models/editor/implementations/ShapeCreationTool.h
     core/models/editor/implementations/ShapeCreationTool.cpp
+    core/models/editor/implementations/PanTool.h
+    core/models/editor/implementations/PanTool.cpp
+    core/models/editor/implementations/ZoomTool.h
+    core/models/editor/implementations/ZoomTool.cpp
+    core/models/editor/implementations/SelectionTool.h
+    core/models/editor/implementations/SelectionTool.cpp
     core/models/editor/implementations/SelectionManager.h
     core/models/editor/implementations/SelectionManager.cpp
     core/models/editor/implementations/CreateShapeCommand.h
     core/models/editor/implementations/CreateShapeCommand.cpp
+    core/models/editor/implementations/MoveCommand.h
+    core/models/editor/implementations/MoveCommand.cpp
     core/models/editor/implementations/CommandStack.h
     core/models/editor/implementations/CommandStack.cpp
     # Core Module - Services Editor

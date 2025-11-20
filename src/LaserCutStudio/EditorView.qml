@@ -137,16 +137,11 @@ Item {
         onToolSelected: function(toolName) {
             console.log("Outil sélectionné:", toolName)
 
-            // Les outils de forme sont gérés automatiquement via Factory Pattern
-            if (toolName === "Select" || toolName === "Pan" || toolName === "Zoom") {
-                console.log("TODO: Implémenter outil de navigation:", toolName)
+            // Tous les outils sont gérés via activateToolByShapeType
+            if (editor.activateToolByShapeType(toolName)) {
+                console.log("Outil activé:", toolName)
             } else {
-                // Activer l'outil de création de forme correspondant
-                if (editor.activateToolByShapeType(toolName)) {
-                    console.log("Outil activé:", toolName)
-                } else {
-                    console.warn("Impossible d'activer l'outil:", toolName)
-                }
+                console.warn("Impossible d'activer l'outil:", toolName)
             }
         }
     }

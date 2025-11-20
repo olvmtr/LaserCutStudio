@@ -136,11 +136,25 @@ public:
     void addShape(IShape* shape, bool createCommand = true);
 
     /**
+     * @brief Ajoute une forme directement sans créer de commande
+     * @param shape Forme à ajouter
+     * @note Utilisé par les commandes Undo/Redo
+     */
+    void addShapeDirect(IShape* shape);
+
+    /**
      * @brief Retire une forme de l'éditeur
      * @param shape Forme à retirer
      * @param createCommand Si true, crée une commande Undo/Redo
      */
     void removeShape(IShape* shape, bool createCommand = true);
+
+    /**
+     * @brief Retire une forme directement sans créer de commande
+     * @param shape Forme à retirer
+     * @note Utilisé par les commandes Undo/Redo
+     */
+    void removeShapeDirect(IShape* shape);
 
     /**
      * @brief Supprime toutes les formes
@@ -172,12 +186,12 @@ public:
     /**
      * @brief Annule la dernière commande
      */
-    void undo();
+    Q_INVOKABLE void undo();
 
     /**
      * @brief Refait la dernière commande annulée
      */
-    void redo();
+    Q_INVOKABLE void redo();
 
     /**
      * @brief Ajoute une commande au stack

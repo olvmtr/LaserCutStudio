@@ -27,6 +27,8 @@ add_executable(LaserCutStudioTests
     TestPluginManager.cpp
     TestServiceLocator.h
     TestServiceLocator.cpp
+    TestEditorCommands.h
+    TestEditorCommands.cpp
     # Sources du module Core (seulement ceux qui ne sont pas dans LibInterface)
     ../core/models/base/types/Point2D.h
     ../core/models/base/types/Point3D.h
@@ -62,6 +64,24 @@ add_executable(LaserCutStudioTests
     ../core/infrastructure/plugins/interfaces/IJointPlugin.h
     ../core/infrastructure/plugins/core/PluginManager.h
     ../core/infrastructure/plugins/core/PluginManager.cpp
+    # Editor components
+    ../core/services/editor/EditorService.h
+    ../core/services/editor/EditorService.cpp
+    ../core/models/editor/interfaces/ITool.h
+    ../core/models/editor/interfaces/ISelection.h
+    ../core/models/editor/interfaces/IEditorCommand.h
+    ../core/models/editor/implementations/CommandStack.h
+    ../core/models/editor/implementations/CommandStack.cpp
+    ../core/models/editor/implementations/CreateShapeCommand.h
+    ../core/models/editor/implementations/CreateShapeCommand.cpp
+    ../core/models/editor/implementations/MoveCommand.h
+    ../core/models/editor/implementations/MoveCommand.cpp
+    ../core/models/editor/implementations/SelectionManager.h
+    ../core/models/editor/implementations/SelectionManager.cpp
+    ../core/models/editor/implementations/SelectionTool.h
+    ../core/models/editor/implementations/SelectionTool.cpp
+    ../core/models/editor/implementations/ShapeCreationTool.h
+    ../core/models/editor/implementations/ShapeCreationTool.cpp
 )
 
 # Lie les bibliothèques Qt et LibInterface

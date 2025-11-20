@@ -5,6 +5,7 @@
 
 #include "core/services/editor/EditorService.h"
 #include "core/models/editor/implementations/SelectionManager.h"
+#include "core/models/editor/implementations/CreateShapeCommand.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include <QDebug>
 
@@ -120,6 +121,28 @@ void EditorService::addShape(IShape* shape, bool createCommand)
         return;
     }
 
+    if (createCommand) {
+        // Sérialiser la forme et créer une commande Undo/Redo
+        QVariantMap shapeParams = shape->toVariant();
+        auto* command = new Editor::CreateShapeCommand(shapeParams, this);
+
+        // Supprimer la forme passée car CreateShapeCommand va en créer une nouvelle
+        delete shape;
+
+        pushCommand(command);
+    } else {
+        // Ajout direct sans commande
+        addShapeDirect(shape);
+    }
+}
+
+void EditorService::addShapeDirect(IShape* shape)
+{
+    if (!shape) {
+        qCWarning(logCore()) << "Cannot add null shape";
+        return;
+    }
+
     if (m_shapes.contains(shape)) {
         qCWarning(logCore()) << "Shape already in editor";
         return;
@@ -130,11 +153,25 @@ void EditorService::addShape(IShape* shape, bool createCommand)
 
     emit shapeAdded(shape);
     emit shapeCountChanged(m_shapes.size());
-
-    // TODO: Créer CreateShapeCommand si createCommand == true
 }
 
 void EditorService::removeShape(IShape* shape, bool createCommand)
+{
+    if (!shape) {
+        qCWarning(logCore()) << "Cannot remove null shape";
+        return;
+    }
+
+    if (createCommand) {
+        // TODO: Créer DeleteShapeCommand
+        qCWarning(logCore()) << "DeleteShapeCommand not yet implemented";
+        removeShapeDirect(shape);
+    } else {
+        removeShapeDirect(shape);
+    }
+}
+
+void EditorService::removeShapeDirect(IShape* shape)
 {
     if (!shape) {
         qCWarning(logCore()) << "Cannot remove null shape";
@@ -152,8 +189,6 @@ void EditorService::removeShape(IShape* shape, bool createCommand)
 
     emit shapeRemoved(shape);
     emit shapeCountChanged(m_shapes.size());
-
-    // TODO: Créer DeleteShapeCommand si createCommand == true
 }
 
 void EditorService::clear()

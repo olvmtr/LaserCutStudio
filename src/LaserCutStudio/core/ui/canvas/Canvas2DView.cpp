@@ -216,7 +216,33 @@ void Canvas2DView::mousePressEvent(QMouseEvent* event)
 
     // Déléguer à l'outil actif
     if (m_editorService && m_editorService->getActiveTool()) {
-        bool handled = m_editorService->getActiveTool()->handleMousePress(scenePos, event->button());
+        Editor::ITool* activeTool = m_editorService->getActiveTool();
+
+        // Si PanTool est actif, gérer le pan en coordonnées écran
+        if (activeTool->getName() == "Pan") {
+            bool handled = activeTool->handleMousePress(scenePos, event->button());
+            if (handled) {
+                m_isDrawing = true;
+                m_lastPanPos = event->position();  // Stocker position écran pour pan
+                event->accept();
+                return;
+            }
+        }
+
+        // Si ZoomTool est actif, gérer le zoom au clic
+        if (activeTool->getName() == "Zoom") {
+            bool handled = activeTool->handleMousePress(scenePos, event->button());
+            if (handled) {
+                // Zoomer au point cliqué
+                double zoomFactor = (event->button() == Qt::LeftButton) ? 1.25 : 0.8;
+                zoomAt(zoomFactor, event->position());
+                event->accept();
+                return;
+            }
+        }
+
+        // Pour les autres outils, comportement normal
+        bool handled = activeTool->handleMousePress(scenePos, event->button());
         if (handled) {
             m_isDrawing = true;
             event->accept();
@@ -246,7 +272,19 @@ void Canvas2DView::mouseMoveEvent(QMouseEvent* event)
 
     // Déléguer à l'outil actif
     if (m_editorService && m_editorService->getActiveTool()) {
-        bool handled = m_editorService->getActiveTool()->handleMouseMove(scenePos);
+        Editor::ITool* activeTool = m_editorService->getActiveTool();
+
+        // Si PanTool est actif, gérer le pan en coordonnées écran
+        if (activeTool->getName() == "Pan" && m_isDrawing) {
+            QPointF delta = event->position() - m_lastPanPos;
+            setPanOffset(m_panOffset + delta);
+            m_lastPanPos = event->position();
+            event->accept();
+            return;
+        }
+
+        // Pour les autres outils, comportement normal
+        bool handled = activeTool->handleMouseMove(scenePos);
         if (handled) {
             m_lastMousePos = scenePos;
             event->accept();
@@ -275,7 +313,18 @@ void Canvas2DView::mouseReleaseEvent(QMouseEvent* event)
 
     // Déléguer à l'outil actif
     if (m_editorService && m_editorService->getActiveTool()) {
-        bool handled = m_editorService->getActiveTool()->handleMouseRelease(scenePos, event->button());
+        Editor::ITool* activeTool = m_editorService->getActiveTool();
+
+        // Si PanTool est actif, simplement terminer le pan
+        if (activeTool->getName() == "Pan" && m_isDrawing) {
+            activeTool->handleMouseRelease(scenePos, event->button());
+            m_isDrawing = false;
+            event->accept();
+            return;
+        }
+
+        // Pour les autres outils, comportement normal
+        bool handled = activeTool->handleMouseRelease(scenePos, event->button());
         if (handled) {
             m_isDrawing = false;
             event->accept();
@@ -474,6 +523,19 @@ void Canvas2DView::connectEditorServiceSignals()
     // Redessiner quand l'outil actif change
     connect(m_editorService, &Services::EditorService::activeToolChanged,
             this, [this]() { update(); });
+
+    // Redessiner après Undo/Redo (formes changent de position)
+    connect(m_editorService, &Services::EditorService::undone,
+            this, [this]() {
+        qCDebug(logCore()) << "Canvas2DView: Undo detected, redrawing canvas";
+        update();
+    });
+
+    connect(m_editorService, &Services::EditorService::redone,
+            this, [this]() {
+        qCDebug(logCore()) << "Canvas2DView: Redo detected, redrawing canvas";
+        update();
+    });
 
     qCDebug(logCore()) << "Canvas2DView: Connected to EditorService signals";
 }
