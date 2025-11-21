@@ -113,6 +113,21 @@ bool EditorService::activateToolByShapeType(const QString& shapeType)
     return false;
 }
 
+bool EditorService::activateSelectionTool()
+{
+    // Chercher SelectionTool parmi les outils disponibles
+    for (Editor::ITool* tool : m_availableTools) {
+        if (tool && tool->getName() == "Selection") {
+            setActiveTool(tool);
+            qCInfo(logCore()) << "Activated SelectionTool";
+            return true;
+        }
+    }
+
+    qCWarning(logCore()) << "SelectionTool not found in available tools";
+    return false;
+}
+
 // ===== Gestion des formes =====
 
 void EditorService::addShape(IShape* shape, bool createCommand)

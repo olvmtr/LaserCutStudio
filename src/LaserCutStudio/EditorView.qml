@@ -130,18 +130,34 @@ Item {
         editorService: editor
 
         activeTool: {
-            if (!editor.activeTool) return "Rectangle"
+            if (!editor.activeTool) return "Selection"
+
+            // Si c'est SelectionTool, retourner "Selection"
+            if (editor.activeTool.name === "Selection") {
+                return "Selection"
+            }
+
+            // Sinon, extraire le nom de la forme (ex: "Create Rectangle" → "Rectangle")
             return editor.activeTool.name.replace("Create ", "")
         }
 
         onToolSelected: function(toolName) {
             console.log("Outil sélectionné:", toolName)
 
-            // Tous les outils sont gérés via activateToolByShapeType
-            if (editor.activateToolByShapeType(toolName)) {
-                console.log("Outil activé:", toolName)
+            if (toolName === "Selection") {
+                // Activer l'outil de sélection
+                if (editor.activateSelectionTool()) {
+                    console.log("SelectionTool activé")
+                } else {
+                    console.warn("Impossible d'activer SelectionTool")
+                }
             } else {
-                console.warn("Impossible d'activer l'outil:", toolName)
+                // Activer un outil de création de forme
+                if (editor.activateToolByShapeType(toolName)) {
+                    console.log("Outil activé:", toolName)
+                } else {
+                    console.warn("Impossible d'activer l'outil:", toolName)
+                }
             }
         }
     }

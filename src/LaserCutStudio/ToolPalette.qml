@@ -151,10 +151,7 @@ Rectangle {
     Component.onCompleted: {
         if (editorService) {
             console.log("ToolPalette: Formes disponibles:", editorService.availableShapeTypes)
-            // Activer le premier outil disponible
-            if (editorService.availableShapeTypes.length > 0) {
-                root.activeTool = editorService.availableShapeTypes[0]
-            }
+            // Ne pas auto-activer d'outil - l'état est géré par EditorService
         }
     }
 }

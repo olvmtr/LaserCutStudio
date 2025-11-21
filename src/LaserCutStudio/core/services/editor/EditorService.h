@@ -103,6 +103,12 @@ public:
      */
     Q_INVOKABLE bool activateToolByShapeType(const QString& shapeType);
 
+    /**
+     * @brief Active l'outil de sélection
+     * @return true si SelectionTool a été activé, false sinon
+     */
+    Q_INVOKABLE bool activateSelectionTool();
+
     // ===== Gestion de la sélection =====
 
     /**
