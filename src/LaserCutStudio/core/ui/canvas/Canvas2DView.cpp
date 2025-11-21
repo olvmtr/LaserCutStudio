@@ -403,7 +403,81 @@ void Canvas2DView::drawRulers(QPainter* painter)
     painter->fillRect(0, 0, rulerSize, height(), rulerColor);
     painter->drawLine(rulerSize - 1, 0, rulerSize - 1, height());
 
-    // TODO: Dessiner graduations et texte
+    // Graduations et texte
+    painter->setPen(QPen(textColor, 1));
+    QFont font = painter->font();
+    font.setPixelSize(9);
+    painter->setFont(font);
+
+    // Calculer l'espacement des graduations basé sur le zoom
+    // On veut environ une graduation tous les 50-100 pixels
+    double targetPixelSpacing = 75.0;
+    double worldSpacing = targetPixelSpacing / m_zoomLevel;
+
+    // Arrondir à une valeur "propre" (10, 20, 50, 100, 200, 500, etc.)
+    double magnitude = std::pow(10.0, std::floor(std::log10(worldSpacing)));
+    double residual = worldSpacing / magnitude;
+    if (residual > 5.0) {
+        worldSpacing = 10.0 * magnitude;
+    } else if (residual > 2.0) {
+        worldSpacing = 5.0 * magnitude;
+    } else if (residual > 1.0) {
+        worldSpacing = 2.0 * magnitude;
+    } else {
+        worldSpacing = magnitude;
+    }
+
+    // Graduations horizontales
+    double startX = std::floor(m_panOffset.x() / worldSpacing) * worldSpacing;
+    for (double x = startX; x < m_panOffset.x() + width() / m_zoomLevel; x += worldSpacing) {
+        int screenX = static_cast<int>((x - m_panOffset.x()) * m_zoomLevel);
+        if (screenX >= 0 && screenX < width()) {
+            // Grande graduation
+            painter->drawLine(screenX, rulerSize - 8, screenX, rulerSize - 1);
+
+            // Texte (tous les 2 graduations pour éviter la surcharge)
+            if (static_cast<int>(x / worldSpacing) % 2 == 0) {
+                QString label = QString::number(static_cast<int>(x));
+                QRect textRect(screenX - 20, 5, 40, rulerSize - 10);
+                painter->drawText(textRect, Qt::AlignCenter, label);
+            }
+        }
+
+        // Petites graduations intermédiaires
+        double midX = x + worldSpacing / 2.0;
+        int midScreenX = static_cast<int>((midX - m_panOffset.x()) * m_zoomLevel);
+        if (midScreenX >= 0 && midScreenX < width()) {
+            painter->drawLine(midScreenX, rulerSize - 4, midScreenX, rulerSize - 1);
+        }
+    }
+
+    // Graduations verticales
+    double startY = std::floor(m_panOffset.y() / worldSpacing) * worldSpacing;
+    for (double y = startY; y < m_panOffset.y() + height() / m_zoomLevel; y += worldSpacing) {
+        int screenY = static_cast<int>((y - m_panOffset.y()) * m_zoomLevel);
+        if (screenY >= rulerSize && screenY < height()) {
+            // Grande graduation
+            painter->drawLine(rulerSize - 8, screenY, rulerSize - 1, screenY);
+
+            // Texte (tous les 2 graduations)
+            if (static_cast<int>(y / worldSpacing) % 2 == 0) {
+                QString label = QString::number(static_cast<int>(y));
+                painter->save();
+                painter->translate(5, screenY);
+                painter->rotate(-90);
+                QRect textRect(-20, -10, 40, 20);
+                painter->drawText(textRect, Qt::AlignCenter, label);
+                painter->restore();
+            }
+        }
+
+        // Petites graduations intermédiaires
+        double midY = y + worldSpacing / 2.0;
+        int midScreenY = static_cast<int>((midY - m_panOffset.y()) * m_zoomLevel);
+        if (midScreenY >= rulerSize && midScreenY < height()) {
+            painter->drawLine(rulerSize - 4, midScreenY, rulerSize - 1, midScreenY);
+        }
+    }
 
     painter->restore();
 }

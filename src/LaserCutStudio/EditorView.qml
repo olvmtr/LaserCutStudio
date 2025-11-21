@@ -273,6 +273,16 @@ Item {
                             width: parent.width
                         }
                         Label {
+                            text: "Ctrl+C : Copier"
+                            font.pixelSize: 11
+                            width: parent.width
+                        }
+                        Label {
+                            text: "Ctrl+V : Coller"
+                            font.pixelSize: 11
+                            width: parent.width
+                        }
+                        Label {
                             text: "Échap : Désélectionner"
                             font.pixelSize: 11
                             width: parent.width
@@ -360,6 +370,24 @@ Item {
         onActivated: {
             // Utilise deleteSelectedShapes() pour avoir Undo/Redo
             editor.deleteSelectedShapes()
+        }
+    }
+
+    Shortcut {
+        sequence: "Ctrl+C"
+        enabled: editor.selection && editor.selection.count > 0
+        onActivated: {
+            var count = editor.copySelectedShapes()
+            console.log("Copied", count, "shape(s)")
+        }
+    }
+
+    Shortcut {
+        sequence: "Ctrl+V"
+        enabled: editor.hasClipboardData()
+        onActivated: {
+            var count = editor.pasteShapes()
+            console.log("Pasted", count, "shape(s)")
         }
     }
 

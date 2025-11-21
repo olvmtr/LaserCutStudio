@@ -258,6 +258,73 @@ void EditorService::deleteSelectedShapes()
     m_selection->clear();
 }
 
+int EditorService::copySelectedShapes()
+{
+    if (!m_selection) {
+        qCWarning(logCore()) << "Selection manager is null, cannot copy";
+        return 0;
+    }
+
+    QVector<IShape*> selectedShapes = m_selection->getSelectedShapes();
+
+    if (selectedShapes.isEmpty()) {
+        qCDebug(logCore()) << "No shapes selected to copy";
+        return 0;
+    }
+
+    // Vider le clipboard
+    m_clipboard.clear();
+
+    // Sérialiser toutes les formes sélectionnées
+    for (IShape* shape : selectedShapes) {
+        if (shape) {
+            m_clipboard.append(shape->toVariant());
+        }
+    }
+
+    qCInfo(logCore()) << "Copied" << m_clipboard.size() << "shape(s) to clipboard";
+    return m_clipboard.size();
+}
+
+int EditorService::pasteShapes()
+{
+    if (m_clipboard.isEmpty()) {
+        qCDebug(logCore()) << "Clipboard is empty, nothing to paste";
+        return 0;
+    }
+
+    // Désérialiser toutes les formes du clipboard
+    QVector<IShape*> newShapes;
+    for (const QVariantMap& data : m_clipboard) {
+        IShape* shape = IShape::create(data);
+        if (shape) {
+            // Décaler légèrement pour voir la nouvelle forme
+            QRectF bbox = shape->getBoundingBox();
+            shape->translate(10.0, 10.0);
+            newShapes.append(shape);
+        }
+    }
+
+    if (newShapes.isEmpty()) {
+        qCWarning(logCore()) << "Failed to create shapes from clipboard";
+        return 0;
+    }
+
+    // Ajouter toutes les formes avec une seule commande
+    // TODO: Créer PasteCommand pour gérer le batch
+    for (IShape* shape : newShapes) {
+        addShape(shape, true);
+    }
+
+    qCInfo(logCore()) << "Pasted" << newShapes.size() << "shape(s) from clipboard";
+    return newShapes.size();
+}
+
+bool EditorService::hasClipboardData() const
+{
+    return !m_clipboard.isEmpty();
+}
+
 void EditorService::pushCommand(Editor::IEditorCommand* command)
 {
     if (!command) {

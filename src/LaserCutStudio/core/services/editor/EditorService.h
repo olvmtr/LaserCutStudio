@@ -199,6 +199,23 @@ public:
     Q_INVOKABLE void deleteSelectedShapes();
 
     /**
+     * @brief Copie les formes sélectionnées dans le presse-papier
+     * @return Nombre de formes copiées
+     */
+    Q_INVOKABLE int copySelectedShapes();
+
+    /**
+     * @brief Colle les formes du presse-papier avec Undo/Redo
+     * @return Nombre de formes collées
+     */
+    Q_INVOKABLE int pasteShapes();
+
+    /**
+     * @brief Vérifie si le presse-papier contient des formes
+     */
+    Q_INVOKABLE bool hasClipboardData() const;
+
+    /**
      * @brief Ajoute une commande au stack
      * @param command Commande à ajouter (ownership transféré)
      */
@@ -276,6 +293,9 @@ private:
 
     // Stack Undo/Redo (remplace QStack manuel par CommandStack)
     Editor::CommandStack* m_commandStack = nullptr;
+
+    // Presse-papier (stocke QVariantMap pour sérialisation)
+    QVector<QVariantMap> m_clipboard;
 };
 
 } // namespace Services
