@@ -194,6 +194,11 @@ public:
     Q_INVOKABLE void redo();
 
     /**
+     * @brief Supprime les formes sélectionnées avec Undo/Redo
+     */
+    Q_INVOKABLE void deleteSelectedShapes();
+
+    /**
      * @brief Ajoute une commande au stack
      * @param command Commande à ajouter (ownership transféré)
      */

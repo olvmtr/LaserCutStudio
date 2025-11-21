@@ -6,6 +6,7 @@
 #include "core/services/editor/EditorService.h"
 #include "core/models/editor/implementations/SelectionManager.h"
 #include "core/models/editor/implementations/CreateShapeCommand.h"
+#include "core/models/editor/implementations/DeleteShapeCommand.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include <QDebug>
 
@@ -163,9 +164,10 @@ void EditorService::removeShape(IShape* shape, bool createCommand)
     }
 
     if (createCommand) {
-        // TODO: Créer DeleteShapeCommand
-        qCWarning(logCore()) << "DeleteShapeCommand not yet implemented";
-        removeShapeDirect(shape);
+        // Créer une commande de suppression avec Undo/Redo
+        QVector<IShape*> shapes = { shape };
+        auto* cmd = new Editor::DeleteShapeCommand(shapes, this);
+        pushCommand(cmd);
     } else {
         removeShapeDirect(shape);
     }
@@ -230,6 +232,30 @@ void EditorService::redo()
     }
 
     m_commandStack->redo();
+}
+
+void EditorService::deleteSelectedShapes()
+{
+    if (!m_selection) {
+        qCWarning(logCore()) << "Selection manager is null, cannot delete";
+        return;
+    }
+
+    QVector<IShape*> selectedShapes = m_selection->getSelectedShapes();
+
+    if (selectedShapes.isEmpty()) {
+        qCDebug(logCore()) << "No shapes selected to delete";
+        return;
+    }
+
+    qCInfo(logCore()) << "Deleting" << selectedShapes.size() << "selected shape(s)";
+
+    // Créer une commande de suppression avec Undo/Redo
+    auto* cmd = new Editor::DeleteShapeCommand(selectedShapes, this);
+    pushCommand(cmd);
+
+    // Désélectionner après suppression
+    m_selection->clear();
 }
 
 void EditorService::pushCommand(Editor::IEditorCommand* command)

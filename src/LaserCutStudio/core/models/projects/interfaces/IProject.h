@@ -129,7 +129,7 @@ struct ProjectMetadata
  *
  * @code
  * // Sauvegarder projet en JSON
- * IProject* project = /* ... */;
+ * IProject* project = /* ... ;
  * QVariantMap data = project->toVariant();
  * QJsonDocument doc = QJsonDocument::fromVariant(data);
  * QFile file("project.json");

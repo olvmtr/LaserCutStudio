@@ -71,6 +71,12 @@ qt_add_executable(appLaserCutStudio
     core/models/editor/implementations/CreateShapeCommand.cpp
     core/models/editor/implementations/MoveCommand.h
     core/models/editor/implementations/MoveCommand.cpp
+    core/models/editor/implementations/DeleteShapeCommand.h
+    core/models/editor/implementations/DeleteShapeCommand.cpp
+    core/models/editor/implementations/RotateCommand.h
+    core/models/editor/implementations/RotateCommand.cpp
+    core/models/editor/implementations/ScaleCommand.h
+    core/models/editor/implementations/ScaleCommand.cpp
     core/models/editor/implementations/CommandStack.h
     core/models/editor/implementations/CommandStack.cpp
     # Core Module - Services Editor

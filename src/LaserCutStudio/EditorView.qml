@@ -358,9 +358,8 @@ Item {
         sequence: "Delete"
         enabled: editor.selection && editor.selection.count > 0
         onActivated: {
-            if (editor.selection) {
-                editor.selection.deleteSelection()
-            }
+            // Utilise deleteSelectedShapes() pour avoir Undo/Redo
+            editor.deleteSelectedShapes()
         }
     }
 
