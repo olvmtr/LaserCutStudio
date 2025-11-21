@@ -216,6 +216,20 @@ public:
     Q_INVOKABLE bool hasClipboardData() const;
 
     /**
+     * @brief Récupère les propriétés de la sélection pour édition
+     * @return QVariantMap avec les propriétés (vide si sélection multiple ou vide)
+     */
+    Q_INVOKABLE QVariantMap getSelectionProperties() const;
+
+    /**
+     * @brief Modifie une propriété de la sélection avec Undo/Redo
+     * @param propertyName Nom de la propriété (ex: "x", "y", "width")
+     * @param value Nouvelle valeur
+     * @return true si la modification a réussi
+     */
+    Q_INVOKABLE bool setSelectionProperty(const QString& propertyName, const QVariant& value);
+
+    /**
      * @brief Ajoute une commande au stack
      * @param command Commande à ajouter (ownership transféré)
      */

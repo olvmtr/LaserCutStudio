@@ -325,6 +325,79 @@ bool EditorService::hasClipboardData() const
     return !m_clipboard.isEmpty();
 }
 
+QVariantMap EditorService::getSelectionProperties() const
+{
+    if (!m_selection) {
+        return QVariantMap();
+    }
+
+    QVector<IShape*> selectedShapes = m_selection->getSelectedShapes();
+
+    // Retourner les propriétés uniquement si une seule forme est sélectionnée
+    if (selectedShapes.size() != 1) {
+        return QVariantMap();
+    }
+
+    IShape* shape = selectedShapes.first();
+    if (!shape) {
+        return QVariantMap();
+    }
+
+    // Utiliser toVariant() pour obtenir toutes les propriétés
+    QVariantMap props = shape->toVariant();
+
+    // Ajouter le bounding box pour faciliter l'édition
+    QRectF bbox = shape->getBoundingBox();
+    props["x"] = bbox.x();
+    props["y"] = bbox.y();
+    props["width"] = bbox.width();
+    props["height"] = bbox.height();
+
+    return props;
+}
+
+bool EditorService::setSelectionProperty(const QString& propertyName, const QVariant& value)
+{
+    if (!m_selection) {
+        qCWarning(logCore()) << "Selection manager is null";
+        return false;
+    }
+
+    QVector<IShape*> selectedShapes = m_selection->getSelectedShapes();
+
+    // Modifier uniquement si une seule forme est sélectionnée
+    if (selectedShapes.size() != 1) {
+        qCWarning(logCore()) << "Can only edit properties of single selection";
+        return false;
+    }
+
+    IShape* shape = selectedShapes.first();
+    if (!shape) {
+        return false;
+    }
+
+    // Utiliser le système de propriétés Qt pour modifier
+    const QMetaObject* metaObj = shape->metaObject();
+    int propIndex = metaObj->indexOfProperty(propertyName.toLatin1().constData());
+
+    if (propIndex == -1) {
+        qCWarning(logCore()) << "Property not found:" << propertyName;
+        return false;
+    }
+
+    QMetaProperty metaProp = metaObj->property(propIndex);
+    bool success = metaProp.write(shape, value);
+
+    if (success) {
+        qCDebug(logCore()) << "Property" << propertyName << "set to" << value;
+        // TODO: Créer une commande Undo/Redo pour cette modification
+    } else {
+        qCWarning(logCore()) << "Failed to set property" << propertyName;
+    }
+
+    return success;
+}
+
 void EditorService::pushCommand(Editor::IEditorCommand* command)
 {
     if (!command) {

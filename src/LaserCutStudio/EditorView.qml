@@ -199,20 +199,132 @@ Item {
                 color: "#ddd"
             }
 
-            // Info sélection
+            // Info sélection et éditeur de propriétés
             GroupBox {
-                title: "Sélection"
+                title: "Propriétés"
                 Layout.fillWidth: true
 
                 ColumnLayout {
                     anchors.fill: parent
-                    spacing: 5
+                    spacing: 8
 
                     Label {
                         text: editor.selection ?
                               editor.selection.count + " forme(s) sélectionnée(s)" :
                               "Aucune sélection"
-                        font.pixelSize: 12
+                        font.pixelSize: 11
+                        font.bold: true
+                    }
+
+                    // Éditeur de propriétés (visible si une seule forme sélectionnée)
+                    Rectangle {
+                        Layout.fillWidth: true
+                        height: propsColumn.height + 10
+                        color: "#f0f0f0"
+                        radius: 4
+                        visible: editor.selection && editor.selection.count === 1
+
+                        Column {
+                            id: propsColumn
+                            anchors.fill: parent
+                            anchors.margins: 5
+                            spacing: 5
+
+                            property var props: editor.getSelectionProperties()
+
+                            // X
+                            Row {
+                                width: parent.width
+                                spacing: 5
+                                Label {
+                                    text: "X:"
+                                    width: 40
+                                    font.pixelSize: 10
+                                }
+                                SpinBox {
+                                    width: parent.width - 45
+                                    from: -10000
+                                    to: 10000
+                                    value: propsColumn.props["x"] || 0
+                                    editable: true
+                                    onValueModified: {
+                                        editor.setSelectionProperty("x", value)
+                                    }
+                                }
+                            }
+
+                            // Y
+                            Row {
+                                width: parent.width
+                                spacing: 5
+                                Label {
+                                    text: "Y:"
+                                    width: 40
+                                    font.pixelSize: 10
+                                }
+                                SpinBox {
+                                    width: parent.width - 45
+                                    from: -10000
+                                    to: 10000
+                                    value: propsColumn.props["y"] || 0
+                                    editable: true
+                                    onValueModified: {
+                                        editor.setSelectionProperty("y", value)
+                                    }
+                                }
+                            }
+
+                            // Width
+                            Row {
+                                width: parent.width
+                                spacing: 5
+                                visible: propsColumn.props["width"] !== undefined
+                                Label {
+                                    text: "W:"
+                                    width: 40
+                                    font.pixelSize: 10
+                                }
+                                SpinBox {
+                                    width: parent.width - 45
+                                    from: 1
+                                    to: 10000
+                                    value: propsColumn.props["width"] || 100
+                                    editable: true
+                                    onValueModified: {
+                                        editor.setSelectionProperty("width", value)
+                                    }
+                                }
+                            }
+
+                            // Height
+                            Row {
+                                width: parent.width
+                                spacing: 5
+                                visible: propsColumn.props["height"] !== undefined
+                                Label {
+                                    text: "H:"
+                                    width: 40
+                                    font.pixelSize: 10
+                                }
+                                SpinBox {
+                                    width: parent.width - 45
+                                    from: 1
+                                    to: 10000
+                                    value: propsColumn.props["height"] || 100
+                                    editable: true
+                                    onValueModified: {
+                                        editor.setSelectionProperty("height", value)
+                                    }
+                                }
+                            }
+
+                            // Type
+                            Label {
+                                text: "Type: " + (propsColumn.props["type"] || "")
+                                font.pixelSize: 9
+                                color: "#666"
+                            }
+                        }
                     }
                 }
             }
