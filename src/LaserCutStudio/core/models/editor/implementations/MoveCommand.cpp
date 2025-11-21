@@ -149,6 +149,14 @@ bool MoveCommand::mergeWith(IEditorCommand* other)
         }
     }
 
+    // IMPORTANT : Si THIS a déjà été exécutée (usage via CommandStack::push()),
+    // alors on doit exécuter OTHER avant de fusionner, sinon les formes
+    // ne seront pas déplacées visuellement.
+    // Si THIS n'a pas été exécutée (usage manuel de mergeWith()), on ne fait rien.
+    if (m_executed && !otherMove->m_executed) {
+        otherMove->execute();
+    }
+
     // Fusionner : additionner les deltas
     m_dx += otherMove->m_dx;
     m_dy += otherMove->m_dy;

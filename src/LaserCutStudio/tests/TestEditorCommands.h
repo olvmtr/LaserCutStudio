@@ -70,6 +70,7 @@ private slots:
     // Tests de reproduction du bug
     void testBugReproduction_UndoAfterMove();
     void testBugReproduction_MultipleUndoRedo();
+    void testBugFix_ConsecutiveDragsWithMerge();  // Test du bug de fusion MoveCommand
 
 private:
     Services::EditorService* m_editorService = nullptr;

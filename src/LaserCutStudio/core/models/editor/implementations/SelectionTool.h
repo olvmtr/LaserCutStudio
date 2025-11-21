@@ -71,9 +71,13 @@ private:
     IShape* findShapeAt(const Point2D& scenePos);
 
     bool m_isActive;
-    bool m_isDragging;  // En cours de déplacement ?
-    Point2D m_dragStartPos;  // Position de début du drag
+    bool m_potentialDrag;  // Souris pressée, peut devenir un drag si mouvement
+    bool m_isDragging;  // Drag confirmé (mouvement > threshold)
+    Point2D m_pressStartPos;  // Position initiale du clic
+    Point2D m_dragStartPos;  // Position de début du drag (après threshold)
     Point2D m_lastDragPos;  // Dernière position du drag
+
+    static constexpr double DRAG_THRESHOLD = 5.0;  // Threshold en pixels pour démarrer un drag
 };
 
 } // namespace Editor
