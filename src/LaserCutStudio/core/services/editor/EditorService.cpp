@@ -43,6 +43,16 @@ EditorService::EditorService(QObject* parent)
     connect(m_commandStack, &Editor::CommandStack::commandRedone,
             this, &EditorService::redone);
 
+    // Connecter les signaux du SelectionManager pour notifier les changements
+    connect(m_selection, &Editor::SelectionManager::countChanged,
+            this, &EditorService::selectionChanged);
+    connect(m_selection, &Editor::SelectionManager::shapeAdded,
+            this, &EditorService::selectionChanged);
+    connect(m_selection, &Editor::SelectionManager::shapeRemoved,
+            this, &EditorService::selectionChanged);
+    connect(m_selection, &Editor::SelectionManager::cleared,
+            this, &EditorService::selectionChanged);
+
     qCInfo(logCore()) << "EditorService initialized with CommandStack and SelectionManager";
 }
 

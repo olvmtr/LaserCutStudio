@@ -128,8 +128,8 @@ Rectangle {
                             text: {
                                 if (!shapeItem.shape) return "Forme " + (index + 1)
 
-                                // Récupérer le nom via property()
-                                var shapeName = shapeItem.shape.property("name")
+                                // Récupérer le nom directement (Q_PROPERTY exposée à QML)
+                                var shapeName = shapeItem.shape.name
 
                                 // Si pas de nom personnalisé, utiliser le type
                                 if (!shapeName || shapeName === "") {

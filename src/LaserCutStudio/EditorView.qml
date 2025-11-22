@@ -268,6 +268,20 @@ Item {
 
                                 property var props: editor.getSelectionProperties()
 
+                                // Rafraîchir props quand la sélection change
+                                Connections {
+                                    target: editor.selection
+                                    function onCountChanged() {
+                                        propsColumn.props = editor.getSelectionProperties()
+                                    }
+                                    function onShapeAdded() {
+                                        propsColumn.props = editor.getSelectionProperties()
+                                    }
+                                    function onShapeRemoved() {
+                                        propsColumn.props = editor.getSelectionProperties()
+                                    }
+                                }
+
                                 // Nom
                                 Row {
                                     width: parent.width
