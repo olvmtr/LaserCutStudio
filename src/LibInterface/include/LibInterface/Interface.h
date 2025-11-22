@@ -23,12 +23,18 @@ class Interface : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QUuid id READ getId CONSTANT)
+    Q_PROPERTY(QString name READ getName WRITE setName NOTIFY nameChanged)
 signals:
     /**
      * @brief Signal émis juste avant la destruction de l'objet
      * Permet aux observateurs de se déconnecter proprement
      */
     void aboutToBeDestroyed(Interface* self);
+
+    /**
+     * @brief Signal émis quand le nom change
+     */
+    void nameChanged(const QString& name);
 
 public:
     /**
@@ -63,7 +69,24 @@ public:
      *
      * @return Nom du type de l'objet
      */
-    virtual QString getTypeName() const = 0;
+    Q_INVOKABLE virtual QString getTypeName() const = 0;
+
+    /**
+     * @brief Obtient le nom de l'objet
+     * @return Nom de l'objet
+     */
+    QString getName() const { return m_name; }
+
+    /**
+     * @brief Définit le nom de l'objet
+     * @param name Nouveau nom
+     */
+    void setName(const QString& name) {
+        if (m_name != name) {
+            m_name = name;
+            emit nameChanged(m_name);
+        }
+    }
 
     /**
      * @brief Sérialise l'objet en QVariantMap via introspection Qt
@@ -135,7 +158,7 @@ public:
      *
      * @see FactoryMixin::create(), DECLARE_TYPE_NAME, QMetaObject, Q_PROPERTY
      */
-    virtual QVariantMap toVariant() const;
+    Q_INVOKABLE virtual QVariantMap toVariant() const;
 
 protected:
     /**
@@ -157,6 +180,11 @@ protected:
      * @brief UUID unique de l'instance
      */
     QUuid m_id;
+
+    /**
+     * @brief Nom de l'objet (éditable par l'utilisateur)
+     */
+    QString m_name;
 };
 
 /**

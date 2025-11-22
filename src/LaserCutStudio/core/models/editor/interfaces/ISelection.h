@@ -88,17 +88,17 @@ public:
     /**
      * @brief Ajoute une forme à la sélection
      */
-    virtual void addShape(IShape* shape) = 0;
+    Q_INVOKABLE virtual void addShape(IShape* shape) = 0;
 
     /**
      * @brief Retire une forme de la sélection
      */
-    virtual void removeShape(IShape* shape) = 0;
+    Q_INVOKABLE virtual void removeShape(IShape* shape) = 0;
 
     /**
      * @brief Bascule l'état de sélection d'une forme
      */
-    virtual void toggleShape(IShape* shape) = 0;
+    Q_INVOKABLE virtual void toggleShape(IShape* shape) = 0;
 
     /**
      * @brief Sélectionne toutes les formes
@@ -108,7 +108,7 @@ public:
     /**
      * @brief Désélectionne tout
      */
-    virtual void clear() = 0;
+    Q_INVOKABLE virtual void clear() = 0;
 
     /**
      * @brief Sélectionne les formes dans une zone rectangulaire
@@ -118,7 +118,7 @@ public:
     /**
      * @brief Vérifie si une forme est sélectionnée
      */
-    virtual bool isSelected(IShape* shape) const = 0;
+    Q_INVOKABLE virtual bool isSelected(IShape* shape) const = 0;
 
     // ===== Opérations groupées =====
 

@@ -121,7 +121,7 @@ public:
     /**
      * @brief Liste de toutes les formes dans l'éditeur
      */
-    QVector<IShape*> getShapes() const { return m_shapes; }
+    Q_INVOKABLE QVector<IShape*> getShapes() const { return m_shapes; }
 
     /**
      * @brief Nombre de formes

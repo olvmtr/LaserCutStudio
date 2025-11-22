@@ -29,6 +29,8 @@ add_executable(LaserCutStudioTests
     TestServiceLocator.cpp
     TestEditorCommands.h
     TestEditorCommands.cpp
+    TestEditorService.h
+    TestEditorService.cpp
     # Sources du module Core (seulement ceux qui ne sont pas dans LibInterface)
     ../core/models/base/types/Point2D.h
     ../core/models/base/types/Point3D.h

@@ -11,6 +11,7 @@
 #include "TestPluginManager.h"
 #include "TestServiceLocator.h"
 #include "TestEditorCommands.h"
+#include "TestEditorService.h"
 
 int main(int argc, char *argv[])
 {
@@ -66,6 +67,11 @@ int main(int argc, char *argv[])
     {
         TestEditorCommands testEditorCommands;
         status |= QTest::qExec(&testEditorCommands, argc, argv);
+    }
+
+    {
+        LaserCutStudio::Core::Tests::TestEditorService testEditorService;
+        status |= QTest::qExec(&testEditorService, argc, argv);
     }
 
     return status;

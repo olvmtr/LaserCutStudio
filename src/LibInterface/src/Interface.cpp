@@ -8,16 +8,18 @@ namespace LibInterface {
 Interface::Interface(QObject* parent)
     : QObject(parent)  // Initialise QObject avec parent
     , m_id(QUuid::createUuid())
+    , m_name("")  // Nom vide par défaut
 {
 }
 
 Interface::Interface(const Interface& other)
     : QObject(nullptr)  // Nouvel objet QObject indépendant (pas de copie de QObject)
     , m_id(QUuid::createUuid())  // Génère un nouvel UUID pour le clone
+    , m_name(other.m_name)  // Copie le nom
 {
     // Lors du clonage, on génère un nouvel UUID unique
     // QObject n'est pas copié car il n'est pas copiable
-    // Seules les données métier des classes dérivées seront copiées
+    // Le nom est copié depuis l'original
 }
 
 Interface::~Interface()
@@ -36,8 +38,8 @@ QVariantMap Interface::toVariant() const
     // Utilise le système Q_PROPERTY pour sérialiser automatiquement
     const QMetaObject* meta = metaObject();
 
-    // Parcourt toutes les propriétés déclarées
-    for (int i = meta->propertyOffset(); i < meta->propertyCount(); ++i) {
+    // Parcourt toutes les propriétés déclarées (depuis 0 pour inclure Interface::name)
+    for (int i = 0; i < meta->propertyCount(); ++i) {
         QMetaProperty prop = meta->property(i);
 
         // Ne sérialise que les propriétés stockées (pas les calculées)

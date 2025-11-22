@@ -110,6 +110,7 @@ qt_add_qml_module(appLaserCutStudio
         Main.qml
         EditorView.qml
         ToolPalette.qml
+        ShapesListPanel.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
