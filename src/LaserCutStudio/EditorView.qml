@@ -14,6 +14,14 @@ Item {
     // Propriétés exposées
     property EditorService editor: editorService
 
+    // ViewModel pour les propriétés de sélection (Pattern MVVM)
+    SelectionPropertiesViewModel {
+        id: selectionVM
+        Component.onCompleted: {
+            setSelection(editor.selection)
+        }
+    }
+
     // ===== Toolbar en haut =====
     Rectangle {
         id: toolbar
@@ -250,7 +258,7 @@ Item {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         clip: true
-                        visible: editor.selection && editor.selection.count === 1
+                        visible: selectionVM.hasSelection
 
                         Rectangle {
                             width: parent.width
@@ -266,22 +274,6 @@ Item {
                                 anchors.margins: 5
                                 spacing: 5
 
-                                property var props: editor.getSelectionProperties()
-
-                                // Rafraîchir props quand la sélection change
-                                Connections {
-                                    target: editor.selection
-                                    function onCountChanged() {
-                                        propsColumn.props = editor.getSelectionProperties()
-                                    }
-                                    function onShapeAdded() {
-                                        propsColumn.props = editor.getSelectionProperties()
-                                    }
-                                    function onShapeRemoved() {
-                                        propsColumn.props = editor.getSelectionProperties()
-                                    }
-                                }
-
                                 // Nom
                                 Row {
                                     width: parent.width
@@ -293,11 +285,11 @@ Item {
                                     }
                                     TextField {
                                         width: parent.width - 45
-                                        text: propsColumn.props["name"] || ""
+                                        text: selectionVM.name
                                         placeholderText: "Sans nom"
                                         font.pixelSize: 10
                                         onEditingFinished: {
-                                            editor.setSelectionProperty("name", text)
+                                            selectionVM.name = text
                                         }
                                     }
                                 }
@@ -315,10 +307,10 @@ Item {
                                         width: parent.width - 45
                                         from: -10000
                                         to: 10000
-                                        value: propsColumn.props["x"] || 0
+                                        value: selectionVM.x
                                         editable: true
                                         onValueModified: {
-                                            editor.setSelectionProperty("x", value)
+                                            selectionVM.x = value
                                         }
                                     }
                                 }
@@ -336,10 +328,10 @@ Item {
                                         width: parent.width - 45
                                         from: -10000
                                         to: 10000
-                                        value: propsColumn.props["y"] || 0
+                                        value: selectionVM.y
                                         editable: true
                                         onValueModified: {
-                                            editor.setSelectionProperty("y", value)
+                                            selectionVM.y = value
                                         }
                                     }
                                 }
@@ -348,7 +340,7 @@ Item {
                                 Row {
                                     width: parent.width
                                     spacing: 5
-                                    visible: propsColumn.props["width"] !== undefined
+                                    visible: selectionVM.hasWidth
                                     Label {
                                         text: "W:"
                                         width: 40
@@ -358,10 +350,10 @@ Item {
                                         width: parent.width - 45
                                         from: 1
                                         to: 10000
-                                        value: propsColumn.props["width"] || 100
+                                        value: selectionVM.width
                                         editable: true
                                         onValueModified: {
-                                            editor.setSelectionProperty("width", value)
+                                            selectionVM.width = value
                                         }
                                     }
                                 }
@@ -370,7 +362,7 @@ Item {
                                 Row {
                                     width: parent.width
                                     spacing: 5
-                                    visible: propsColumn.props["height"] !== undefined
+                                    visible: selectionVM.hasHeight
                                     Label {
                                         text: "H:"
                                         width: 40
@@ -380,17 +372,17 @@ Item {
                                         width: parent.width - 45
                                         from: 1
                                         to: 10000
-                                        value: propsColumn.props["height"] || 100
+                                        value: selectionVM.height
                                         editable: true
                                         onValueModified: {
-                                            editor.setSelectionProperty("height", value)
+                                            selectionVM.height = value
                                         }
                                     }
                                 }
 
                                 // Type
                                 Label {
-                                    text: "Type: " + (propsColumn.props["type"] || "")
+                                    text: "Type: " + selectionVM.type
                                     font.pixelSize: 9
                                     color: "#666"
                                 }

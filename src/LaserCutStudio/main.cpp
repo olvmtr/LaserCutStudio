@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "core/ui/canvas/Canvas2DView.h"
+#include "core/ui/viewmodels/SelectionPropertiesViewModel.h"
 #include "core/services/editor/EditorService.h"
 #include "core/models/editor/implementations/ShapeCreationTool.h"
 #include "core/models/editor/implementations/SelectionTool.h"
@@ -14,6 +15,9 @@ int main(int argc, char *argv[])
     // Enregistrer les types Qt pour QML
     qmlRegisterType<LaserCutStudio::Core::UI::Canvas2DView>(
         "LaserCutStudio", 1, 0, "Canvas2DView");
+
+    qmlRegisterType<LaserCutStudio::Core::UI::SelectionPropertiesViewModel>(
+        "LaserCutStudio", 1, 0, "SelectionPropertiesViewModel");
 
     qmlRegisterUncreatableType<LaserCutStudio::Core::Services::EditorService>(
         "LaserCutStudio", 1, 0, "EditorService",
