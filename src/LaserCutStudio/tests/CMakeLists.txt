@@ -31,31 +31,33 @@ add_executable(LaserCutStudioTests
     TestEditorCommands.cpp
     TestEditorService.h
     TestEditorService.cpp
+    TestArchitectureInterfaces.h
+    TestArchitectureInterfaces.cpp
     # Sources du module Core (seulement ceux qui ne sont pas dans LibInterface)
     ../core/models/base/types/Point2D.h
     ../core/models/base/types/Point3D.h
     ../core/models/base/types/Material.h
     ../core/models/base/types/JointType.h
-    ../core/models/shapes/interfaces/IShape.h
-    ../core/models/shapes/interfaces/IShape.cpp
-    ../core/models/shapes/implementations/Rectangle.h
-    ../core/models/shapes/implementations/Rectangle.cpp
-    ../core/models/shapes/implementations/Circle.h
-    ../core/models/shapes/implementations/Circle.cpp
-    ../core/models/parts/interfaces/IPart.h
-    ../core/models/parts/interfaces/IPart.cpp
-    ../core/models/parts/implementations/Part.h
-    ../core/models/parts/implementations/Part.cpp
-    ../core/models/joints/interfaces/IJoint.h
-    ../core/models/joints/interfaces/IJoint.cpp
-    ../core/models/joints/implementations/TabJoint.h
-    ../core/models/joints/implementations/TabJoint.cpp
-    ../core/models/joints/implementations/FingerJoint.h
-    ../core/models/joints/implementations/FingerJoint.cpp
-    ../core/models/projects/interfaces/IProject.h
-    ../core/models/projects/interfaces/IProject.cpp
-    ../core/models/projects/implementations/Project.h
-    ../core/models/projects/implementations/Project.cpp
+    ../core/models/shapes/IShape.h
+    ../core/models/shapes/IShape.cpp
+    ../core/models/shapes/Rectangle.h
+    ../core/models/shapes/Rectangle.cpp
+    ../core/models/shapes/Circle.h
+    ../core/models/shapes/Circle.cpp
+    ../core/models/parts/IPart.h
+    ../core/models/parts/IPart.cpp
+    ../core/models/parts/Part.h
+    ../core/models/parts/Part.cpp
+    ../core/models/joints/IJoint.h
+    ../core/models/joints/IJoint.cpp
+    ../core/models/joints/TabJoint.h
+    ../core/models/joints/TabJoint.cpp
+    ../core/models/joints/FingerJoint.h
+    ../core/models/joints/FingerJoint.cpp
+    ../core/models/projects/IProject.h
+    ../core/models/projects/IProject.cpp
+    ../core/models/projects/Project.h
+    ../core/models/projects/Project.cpp
     ../core/infrastructure/config/ConfigManager.h
     ../core/infrastructure/config/ConfigManager.cpp
     ../core/infrastructure/logging/LogCategories.h
@@ -69,27 +71,29 @@ add_executable(LaserCutStudioTests
     # Editor components
     ../core/services/editor/EditorService.h
     ../core/services/editor/EditorService.cpp
-    ../core/models/editor/interfaces/ITool.h
-    ../core/models/editor/interfaces/ISelection.h
-    ../core/models/editor/interfaces/IEditorCommand.h
-    ../core/models/editor/implementations/CommandStack.h
-    ../core/models/editor/implementations/CommandStack.cpp
-    ../core/models/editor/implementations/CreateShapeCommand.h
-    ../core/models/editor/implementations/CreateShapeCommand.cpp
-    ../core/models/editor/implementations/MoveCommand.h
-    ../core/models/editor/implementations/MoveCommand.cpp
-    ../core/models/editor/implementations/DeleteShapeCommand.h
-    ../core/models/editor/implementations/DeleteShapeCommand.cpp
-    ../core/models/editor/implementations/RotateCommand.h
-    ../core/models/editor/implementations/RotateCommand.cpp
-    ../core/models/editor/implementations/ScaleCommand.h
-    ../core/models/editor/implementations/ScaleCommand.cpp
-    ../core/models/editor/implementations/SelectionManager.h
-    ../core/models/editor/implementations/SelectionManager.cpp
-    ../core/models/editor/implementations/SelectionTool.h
-    ../core/models/editor/implementations/SelectionTool.cpp
-    ../core/models/editor/implementations/ShapeCreationTool.h
-    ../core/models/editor/implementations/ShapeCreationTool.cpp
+    ../core/models/editor/tool/ITool.h
+    ../core/models/editor/selection/ISelection.h
+    ../core/models/editor/command/IEditorCommand.h
+    ../core/models/editor/command/transformations/ITransformationCommand.h
+    ../core/models/editor/command/transformations/ITransformationCommand.cpp
+    ../core/models/editor/command/CommandStack.h
+    ../core/models/editor/command/CommandStack.cpp
+    ../core/models/editor/command/CreateShapeCommand.h
+    ../core/models/editor/command/CreateShapeCommand.cpp
+    ../core/models/editor/command/transformations/MoveCommand.h
+    ../core/models/editor/command/transformations/MoveCommand.cpp
+    ../core/models/editor/command/DeleteShapeCommand.h
+    ../core/models/editor/command/DeleteShapeCommand.cpp
+    ../core/models/editor/command/transformations/RotateCommand.h
+    ../core/models/editor/command/transformations/RotateCommand.cpp
+    ../core/models/editor/command/transformations/ScaleCommand.h
+    ../core/models/editor/command/transformations/ScaleCommand.cpp
+    ../core/models/editor/selection/SelectionManager.h
+    ../core/models/editor/selection/SelectionManager.cpp
+    ../core/models/editor/tool/SelectionTool.h
+    ../core/models/editor/tool/SelectionTool.cpp
+    ../core/models/editor/tool/ShapeCreationTool.h
+    ../core/models/editor/tool/ShapeCreationTool.cpp
 )
 
 # Lie les bibliothèques Qt et LibInterface

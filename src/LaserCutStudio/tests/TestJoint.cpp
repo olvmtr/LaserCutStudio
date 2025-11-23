@@ -1,5 +1,5 @@
 #include "TestJoint.h"
-#include "core/models/shapes/implementations/Rectangle.h"
+#include "core/models/shapes/Rectangle.h"
 
 void TestJoint::initTestCase()
 {

@@ -4,9 +4,9 @@
  */
 
 #include "core/services/editor/EditorService.h"
-#include "core/models/editor/implementations/SelectionManager.h"
-#include "core/models/editor/implementations/CreateShapeCommand.h"
-#include "core/models/editor/implementations/DeleteShapeCommand.h"
+#include "core/models/editor/selection/SelectionManager.h"
+#include "core/models/editor/command/CreateShapeCommand.h"
+#include "core/models/editor/command/DeleteShapeCommand.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include <QDebug>
 

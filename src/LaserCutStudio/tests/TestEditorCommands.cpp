@@ -4,7 +4,7 @@
  */
 
 #include "TestEditorCommands.h"
-#include "core/models/editor/implementations/CommandStack.h"
+#include "core/models/editor/command/CommandStack.h"
 
 using namespace LaserCutStudio::Core;
 

@@ -6,8 +6,8 @@
 #include "core/infrastructure/plugins/core/PluginManager.h"
 #include "core/infrastructure/plugins/interfaces/IShapePlugin.h"
 #include "core/infrastructure/plugins/interfaces/IJointPlugin.h"
-#include "core/models/shapes/interfaces/IShape.h"
-#include "core/models/joints/interfaces/IJoint.h"
+#include "core/models/shapes/IShape.h"
+#include "core/models/joints/IJoint.h"
 
 using namespace LaserCutStudio::Core;
 using namespace LaserCutStudio::Core::Plugins;

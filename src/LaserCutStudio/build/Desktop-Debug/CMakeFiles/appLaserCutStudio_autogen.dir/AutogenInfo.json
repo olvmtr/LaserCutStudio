@@ -353,105 +353,177 @@
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/CreateShapeCommand.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/CommandStack.h",
 			"MU",
-			"CW2ANGJCE4/moc_CreateShapeCommand.cpp",
+			"V5T6AIA6VA/moc_CommandStack.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/SelectionManager.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/CreateShapeCommand.h",
 			"MU",
-			"CW2ANGJCE4/moc_SelectionManager.cpp",
+			"V5T6AIA6VA/moc_CreateShapeCommand.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/ShapeCreationTool.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/DeleteShapeCommand.h",
 			"MU",
-			"CW2ANGJCE4/moc_ShapeCreationTool.cpp",
+			"V5T6AIA6VA/moc_DeleteShapeCommand.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/IEditorCommand.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/IEditorCommand.h",
 			"MU",
-			"7EZKYDU2OR/moc_IEditorCommand.cpp",
+			"V5T6AIA6VA/moc_IEditorCommand.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/ISelection.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/transformations/ITransformationCommand.h",
 			"MU",
-			"7EZKYDU2OR/moc_ISelection.cpp",
+			"QZ5FMLJS6I/moc_ITransformationCommand.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/ITool.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/transformations/MoveCommand.h",
 			"MU",
-			"7EZKYDU2OR/moc_ITool.cpp",
+			"QZ5FMLJS6I/moc_MoveCommand.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/FingerJoint.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/transformations/RotateCommand.h",
 			"MU",
-			"AEQVSPXJ77/moc_FingerJoint.cpp",
+			"QZ5FMLJS6I/moc_RotateCommand.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/TabJoint.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/transformations/ScaleCommand.h",
 			"MU",
-			"AEQVSPXJ77/moc_TabJoint.cpp",
+			"QZ5FMLJS6I/moc_ScaleCommand.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/interfaces/IJoint.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/selection/ISelection.h",
 			"MU",
-			"5D7EEHS4CR/moc_IJoint.cpp",
+			"J4DGJLLMQU/moc_ISelection.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/implementations/Part.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/selection/SelectionManager.h",
 			"MU",
-			"CX2IQZOJ6X/moc_Part.cpp",
+			"J4DGJLLMQU/moc_SelectionManager.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/interfaces/IPart.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/tool/ITool.h",
 			"MU",
-			"QXQDT57II4/moc_IPart.cpp",
+			"NATEJPVO6T/moc_ITool.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/implementations/Project.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/tool/PanTool.h",
 			"MU",
-			"EIENIRQ553/moc_Project.cpp",
+			"NATEJPVO6T/moc_PanTool.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/interfaces/IProject.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/tool/SelectionTool.h",
 			"MU",
-			"4TYWVJDV7E/moc_IProject.cpp",
+			"NATEJPVO6T/moc_SelectionTool.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Circle.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/tool/ShapeCreationTool.h",
 			"MU",
-			"PJEH2QOMA2/moc_Circle.cpp",
+			"NATEJPVO6T/moc_ShapeCreationTool.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Rectangle.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/tool/ZoomTool.h",
 			"MU",
-			"PJEH2QOMA2/moc_Rectangle.cpp",
+			"NATEJPVO6T/moc_ZoomTool.cpp",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.h",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/FingerJoint.h",
 			"MU",
-			"GFWMSFW4MY/moc_IShape.cpp",
+			"7BFAKV5J3E/moc_FingerJoint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/IJoint.h",
+			"MU",
+			"7BFAKV5J3E/moc_IJoint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/TabJoint.h",
+			"MU",
+			"7BFAKV5J3E/moc_TabJoint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/IPart.h",
+			"MU",
+			"H57S4QMFQI/moc_IPart.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/Part.h",
+			"MU",
+			"H57S4QMFQI/moc_Part.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/IProject.h",
+			"MU",
+			"XTHSNF6W6F/moc_IProject.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/Project.h",
+			"MU",
+			"XTHSNF6W6F/moc_Project.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/Circle.h",
+			"MU",
+			"YXENAAPBZT/moc_Circle.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/IShape.h",
+			"MU",
+			"YXENAAPBZT/moc_IShape.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/Rectangle.h",
+			"MU",
+			"YXENAAPBZT/moc_Rectangle.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/Triangle.h",
+			"MU",
+			"YXENAAPBZT/moc_Triangle.cpp",
 			null
 		],
 		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/services/editor/EditorService.h",
 			"MU",
 			"TKFLVDXYVW/moc_EditorService.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/ui/canvas/Canvas2DView.h",
+			"MU",
+			"226JOLOGLZ/moc_Canvas2DView.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/ui/viewmodels/GenericPropertiesViewModel.h",
+			"MU",
+			"LHAYUJDJDF/moc_GenericPropertiesViewModel.cpp",
 			null
 		]
 	],
@@ -525,7 +597,10 @@
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_EditorView_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_Main_qml.cpp",
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ShapesListPanel_qml.cpp",
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ToolPalette_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qrc_appLaserCutStudio_raw_qml_0.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qrc_qmake_LaserCutStudio.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/applasercutstudio_qmltyperegistrations.cpp"
@@ -576,87 +651,147 @@
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/CreateShapeCommand.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/CommandStack.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/SelectionManager.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/CreateShapeCommand.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/implementations/ShapeCreationTool.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/DeleteShapeCommand.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/IEditorCommand.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/IEditorCommand.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/ISelection.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/transformations/ITransformationCommand.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/interfaces/ITool.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/transformations/MoveCommand.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/FingerJoint.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/transformations/RotateCommand.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/implementations/TabJoint.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/transformations/ScaleCommand.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/interfaces/IJoint.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/selection/ISelection.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/implementations/Part.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/selection/SelectionManager.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/interfaces/IPart.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/tool/ITool.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/implementations/Project.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/tool/PanTool.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/interfaces/IProject.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/tool/SelectionTool.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Circle.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/tool/ShapeCreationTool.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/implementations/Rectangle.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/tool/ZoomTool.cpp",
 			"MU",
 			null
 		],
 		[
-			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/interfaces/IShape.cpp",
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/FingerJoint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/IJoint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/TabJoint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/IPart.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/parts/Part.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/IProject.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/projects/Project.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/Circle.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/IShape.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/Rectangle.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/Triangle.cpp",
 			"MU",
 			null
 		],
 		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/services/editor/EditorService.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/ui/canvas/Canvas2DView.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/ui/viewmodels/GenericPropertiesViewModel.cpp",
 			"MU",
 			null
 		],
@@ -670,7 +805,10 @@
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : 
 	[
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_EditorView_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_Main_qml.cpp",
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ShapesListPanel_qml.cpp",
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ToolPalette_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qrc_appLaserCutStudio_raw_qml_0.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qrc_qmake_LaserCutStudio.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/applasercutstudio_qmltyperegistrations.cpp"

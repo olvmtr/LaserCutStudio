@@ -16,12 +16,12 @@
 #include <QObject>
 #include <QtTest>
 #include "core/services/editor/EditorService.h"
-#include "core/models/editor/implementations/CreateShapeCommand.h"
-#include "core/models/editor/implementations/MoveCommand.h"
-#include "core/models/editor/implementations/SelectionTool.h"
-#include "core/models/editor/implementations/ShapeCreationTool.h"
-#include "core/models/shapes/implementations/Rectangle.h"
-#include "core/models/shapes/implementations/Circle.h"
+#include "core/models/editor/command/CreateShapeCommand.h"
+#include "core/models/editor/command/transformations/MoveCommand.h"
+#include "core/models/editor/tool/SelectionTool.h"
+#include "core/models/editor/tool/ShapeCreationTool.h"
+#include "core/models/shapes/Rectangle.h"
+#include "core/models/shapes/Circle.h"
 
 using namespace LaserCutStudio::Core;
 

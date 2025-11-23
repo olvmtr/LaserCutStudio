@@ -6,8 +6,8 @@
 #include "core/ui/canvas/Canvas2DView.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include "core/infrastructure/config/ConfigManager.h"
-#include "core/models/editor/interfaces/ITool.h"
-#include "core/models/shapes/interfaces/IShape.h"
+#include "core/models/editor/tool/ITool.h"
+#include "core/models/shapes/IShape.h"
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QPainterPath>

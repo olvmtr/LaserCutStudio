@@ -4,14 +4,14 @@
  */
 
 #include "core/ui/viewmodels/GenericPropertiesViewModel.h"
-#include "core/models/editor/interfaces/ISelection.h"
+#include "core/models/editor/selection/ISelection.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include <QDebug>
 #include <QMetaObject>
 #include <QMetaProperty>
 
 // Include IShape.h pour accès aux formes
-#include "core/models/shapes/interfaces/IShape.h"
+#include "core/models/shapes/IShape.h"
 
 namespace LaserCutStudio {
 namespace Core {

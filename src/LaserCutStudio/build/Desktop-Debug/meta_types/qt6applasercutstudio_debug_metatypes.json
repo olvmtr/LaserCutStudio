@@ -2,55 +2,366 @@
     {
         "classes": [
             {
-                "className": "IProject",
+                "className": "Canvas2DView",
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "screenPos",
+                                "type": "QPointF"
+                            }
+                        ],
+                        "name": "screenToScene",
+                        "returnType": "Point2D"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "scenePos",
+                                "type": "Point2D"
+                            }
+                        ],
+                        "name": "sceneToScreen",
+                        "returnType": "QPointF"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "pos",
+                                "type": "Point2D"
+                            }
+                        ],
+                        "name": "snapToGridIfEnabled",
+                        "returnType": "Point2D"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "zoomFactor",
+                                "type": "double"
+                            },
+                            {
+                                "name": "centerScreen",
+                                "type": "QPointF"
+                            }
+                        ],
+                        "name": "zoomAt",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "resetView",
+                        "returnType": "void"
+                    }
+                ],
                 "object": true,
-                "qualifiedClassName": "LaserCutStudio::Core::IProject",
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "editorService",
+                        "notify": "editorServiceChanged",
+                        "read": "getEditorService",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "Services::EditorService*",
+                        "user": false,
+                        "write": "setEditorService"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "gridVisible",
+                        "notify": "gridVisibleChanged",
+                        "read": "isGridVisible",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setGridVisible"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "gridSize",
+                        "notify": "gridSizeChanged",
+                        "read": "getGridSize",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setGridSize"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "snapToGrid",
+                        "notify": "snapToGridChanged",
+                        "read": "isSnapToGrid",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setSnapToGrid"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 4,
+                        "name": "zoomLevel",
+                        "notify": "zoomLevelChanged",
+                        "read": "getZoomLevel",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setZoomLevel"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 5,
+                        "name": "panOffset",
+                        "notify": "panOffsetChanged",
+                        "read": "getPanOffset",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QPointF",
+                        "user": false,
+                        "write": "setPanOffset"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 6,
+                        "name": "rulersVisible",
+                        "notify": "rulersVisibleChanged",
+                        "read": "areRulersVisible",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setRulersVisible"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::UI::Canvas2DView",
                 "signals": [
                     {
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "part",
-                                "type": "IPart*"
+                                "name": "service",
+                                "type": "Services::EditorService*"
                             }
                         ],
-                        "name": "partAdded",
+                        "name": "editorServiceChanged",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "part",
-                                "type": "IPart*"
+                                "name": "visible",
+                                "type": "bool"
                             }
                         ],
-                        "name": "partRemoved",
+                        "name": "gridVisibleChanged",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "name": "metadataChanged",
+                        "arguments": [
+                            {
+                                "name": "size",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "gridSizeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "snap",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "snapToGridChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "zoom",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "zoomLevelChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "offset",
+                                "type": "QPointF"
+                            }
+                        ],
+                        "name": "panOffsetChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "visible",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "rulersVisibleChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "shapeCreated",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "selectionChanged",
                         "returnType": "void"
                     }
                 ],
                 "superClasses": [
                     {
                         "access": "public",
-                        "name": "Interface"
-                    },
-                    {
-                        "access": "protected",
-                        "name": "Patterns::FactoryMixin<IProject>"
-                    },
-                    {
-                        "access": "protected",
-                        "name": "Patterns::ListManagerMixin<IProject>"
+                        "name": "QQuickPaintedItem"
                     }
                 ]
             }
         ],
-        "inputFile": "IProject.h",
+        "inputFile": "Canvas2DView.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Joints"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Finger joint (box joint) for corner assembly"
+                    }
+                ],
+                "className": "FingerJoint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "fingerCount",
+                        "notify": "fingerCountChanged",
+                        "read": "getFingerCount",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false,
+                        "write": "setFingerCount"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "fingerWidth",
+                        "notify": "fingerWidthChanged",
+                        "read": "getFingerWidth",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setFingerWidth"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::FingerJoint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newCount",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "fingerCountChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newWidth",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "fingerWidthChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IJoint"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<FingerJoint>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "FingerJoint.h",
         "outputRevision": 68
     },
     {
@@ -127,7 +438,21 @@
     {
         "classes": [
             {
-                "className": "IEditorCommand",
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Joints"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Tab and slot joint for perpendicular assembly"
+                    }
+                ],
+                "className": "TabJoint",
                 "object": true,
                 "properties": [
                     {
@@ -135,80 +460,110 @@
                         "designable": true,
                         "final": false,
                         "index": 0,
-                        "name": "text",
-                        "notify": "textChanged",
-                        "read": "getText",
+                        "name": "tabWidth",
+                        "notify": "tabWidthChanged",
+                        "read": "getTabWidth",
                         "required": false,
                         "scriptable": true,
                         "stored": true,
-                        "type": "QString",
-                        "user": false
+                        "type": "double",
+                        "user": false,
+                        "write": "setTabWidth"
                     },
                     {
                         "constant": false,
                         "designable": true,
                         "final": false,
                         "index": 1,
-                        "name": "isObsolete",
-                        "notify": "obsoleteChanged",
-                        "read": "isObsolete",
+                        "name": "tabDepth",
+                        "notify": "tabDepthChanged",
+                        "read": "getTabDepth",
                         "required": false,
                         "scriptable": true,
                         "stored": true,
-                        "type": "bool",
-                        "user": false
-                    },
-                    {
-                        "constant": true,
-                        "designable": true,
-                        "final": false,
-                        "index": 2,
-                        "name": "canMerge",
-                        "read": "canMerge",
-                        "required": false,
-                        "scriptable": true,
-                        "stored": true,
-                        "type": "bool",
-                        "user": false
+                        "type": "double",
+                        "user": false,
+                        "write": "setTabDepth"
                     }
                 ],
-                "qualifiedClassName": "LaserCutStudio::Core::Editor::IEditorCommand",
+                "qualifiedClassName": "LaserCutStudio::Core::TabJoint",
                 "signals": [
                     {
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "text",
-                                "type": "QString"
+                                "name": "newWidth",
+                                "type": "double"
                             }
                         ],
-                        "name": "textChanged",
+                        "name": "tabWidthChanged",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "obsolete",
-                                "type": "bool"
+                                "name": "newDepth",
+                                "type": "double"
                             }
                         ],
-                        "name": "obsoleteChanged",
+                        "name": "tabDepthChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IJoint"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<TabJoint>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "TabJoint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "IPart",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::IPart",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newShape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "shapeChanged",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "name": "executed",
+                        "arguments": [
+                            {
+                                "name": "newMaterial",
+                                "type": "Material"
+                            }
+                        ],
+                        "name": "materialChanged",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "name": "undone",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "name": "redone",
+                        "arguments": [
+                            {
+                                "name": "newThickness",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "thicknessChanged",
                         "returnType": "void"
                     }
                 ],
@@ -219,18 +574,104 @@
                     },
                     {
                         "access": "protected",
-                        "name": "Patterns::FactoryMixin<IEditorCommand>"
+                        "name": "Patterns::FactoryMixin<IPart>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<IPart>"
                     }
                 ]
             }
         ],
-        "inputFile": "IEditorCommand.h",
+        "inputFile": "IPart.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Parts"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Basic part with shape, thickness and material"
+                    }
+                ],
+                "className": "Part",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Part",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IPart"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "Part.h",
         "outputRevision": 68
     },
     {
         "classes": [
             {
                 "className": "ISelection",
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "addShape",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "removeShape",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "toggleShape",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "clear",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "IShape*"
+                            }
+                        ],
+                        "name": "isSelected",
+                        "returnType": "bool"
+                    }
+                ],
                 "object": true,
                 "properties": [
                     {
@@ -346,6 +787,121 @@
             }
         ],
         "inputFile": "ISelection.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "SelectionManager",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::SelectionManager",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "ISelection"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<SelectionManager>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "SelectionManager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "GenericPropertiesViewModel",
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "selection",
+                                "type": "Editor::ISelection*"
+                            }
+                        ],
+                        "name": "setSelection",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "value",
+                                "type": "QVariant"
+                            }
+                        ],
+                        "name": "setProperty",
+                        "returnType": "bool"
+                    }
+                ],
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "properties",
+                        "notify": "propertiesChanged",
+                        "read": "properties",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QVariantMap",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "hasSelection",
+                        "notify": "hasSelectionChanged",
+                        "read": "hasSelection",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::UI::GenericPropertiesViewModel",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "propertiesChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "hasSelectionChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "slots": [
+                    {
+                        "access": "private",
+                        "name": "onSelectionChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "GenericPropertiesViewModel.h",
         "outputRevision": 68
     },
     {
@@ -489,213 +1045,58 @@
     {
         "classes": [
             {
-                "classInfos": [
-                    {
-                        "name": "Version",
-                        "value": "1.0.0"
-                    },
-                    {
-                        "name": "Category",
-                        "value": "Joints"
-                    },
-                    {
-                        "name": "Description",
-                        "value": "Finger joint (box joint) for corner assembly"
-                    }
-                ],
-                "className": "FingerJoint",
+                "className": "PanTool",
                 "object": true,
-                "properties": [
-                    {
-                        "constant": false,
-                        "designable": true,
-                        "final": false,
-                        "index": 0,
-                        "name": "fingerCount",
-                        "notify": "fingerCountChanged",
-                        "read": "getFingerCount",
-                        "required": false,
-                        "scriptable": true,
-                        "stored": true,
-                        "type": "int",
-                        "user": false,
-                        "write": "setFingerCount"
-                    },
-                    {
-                        "constant": false,
-                        "designable": true,
-                        "final": false,
-                        "index": 1,
-                        "name": "fingerWidth",
-                        "notify": "fingerWidthChanged",
-                        "read": "getFingerWidth",
-                        "required": false,
-                        "scriptable": true,
-                        "stored": true,
-                        "type": "double",
-                        "user": false,
-                        "write": "setFingerWidth"
-                    }
-                ],
-                "qualifiedClassName": "LaserCutStudio::Core::FingerJoint",
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::PanTool",
                 "signals": [
                     {
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "newCount",
-                                "type": "int"
+                                "name": "delta",
+                                "type": "QPointF"
                             }
                         ],
-                        "name": "fingerCountChanged",
+                        "name": "panDelta",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "arguments": [
-                            {
-                                "name": "newWidth",
-                                "type": "double"
-                            }
-                        ],
-                        "name": "fingerWidthChanged",
+                        "name": "panStarted",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "panEnded",
                         "returnType": "void"
                     }
                 ],
                 "superClasses": [
                     {
                         "access": "public",
-                        "name": "IJoint"
+                        "name": "ITool"
                     }
                 ]
             }
         ],
-        "inputFile": "FingerJoint.h",
+        "inputFile": "PanTool.h",
         "outputRevision": 68
     },
     {
         "classes": [
             {
-                "classInfos": [
-                    {
-                        "name": "Version",
-                        "value": "1.0.0"
-                    },
-                    {
-                        "name": "Category",
-                        "value": "Joints"
-                    },
-                    {
-                        "name": "Description",
-                        "value": "Tab and slot joint for perpendicular assembly"
-                    }
-                ],
-                "className": "TabJoint",
+                "className": "SelectionTool",
                 "object": true,
-                "properties": [
-                    {
-                        "constant": false,
-                        "designable": true,
-                        "final": false,
-                        "index": 0,
-                        "name": "tabWidth",
-                        "notify": "tabWidthChanged",
-                        "read": "getTabWidth",
-                        "required": false,
-                        "scriptable": true,
-                        "stored": true,
-                        "type": "double",
-                        "user": false,
-                        "write": "setTabWidth"
-                    },
-                    {
-                        "constant": false,
-                        "designable": true,
-                        "final": false,
-                        "index": 1,
-                        "name": "tabDepth",
-                        "notify": "tabDepthChanged",
-                        "read": "getTabDepth",
-                        "required": false,
-                        "scriptable": true,
-                        "stored": true,
-                        "type": "double",
-                        "user": false,
-                        "write": "setTabDepth"
-                    }
-                ],
-                "qualifiedClassName": "LaserCutStudio::Core::TabJoint",
-                "signals": [
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "newWidth",
-                                "type": "double"
-                            }
-                        ],
-                        "name": "tabWidthChanged",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "newDepth",
-                                "type": "double"
-                            }
-                        ],
-                        "name": "tabDepthChanged",
-                        "returnType": "void"
-                    }
-                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::SelectionTool",
                 "superClasses": [
                     {
                         "access": "public",
-                        "name": "IJoint"
+                        "name": "ITool"
                     }
                 ]
             }
         ],
-        "inputFile": "TabJoint.h",
-        "outputRevision": 68
-    },
-    {
-        "classes": [
-            {
-                "className": "CreateShapeCommand",
-                "object": true,
-                "qualifiedClassName": "LaserCutStudio::Core::Editor::CreateShapeCommand",
-                "superClasses": [
-                    {
-                        "access": "public",
-                        "name": "IEditorCommand"
-                    }
-                ]
-            }
-        ],
-        "inputFile": "CreateShapeCommand.h",
-        "outputRevision": 68
-    },
-    {
-        "classes": [
-            {
-                "className": "SelectionManager",
-                "object": true,
-                "qualifiedClassName": "LaserCutStudio::Core::Editor::SelectionManager",
-                "superClasses": [
-                    {
-                        "access": "public",
-                        "name": "ISelection"
-                    },
-                    {
-                        "access": "protected",
-                        "name": "Patterns::PropertyMixin<SelectionManager>"
-                    }
-                ]
-            }
-        ],
-        "inputFile": "SelectionManager.h",
+        "inputFile": "SelectionTool.h",
         "outputRevision": 68
     },
     {
@@ -826,95 +1227,35 @@
     {
         "classes": [
             {
-                "classInfos": [
-                    {
-                        "name": "Version",
-                        "value": "1.0.0"
-                    },
-                    {
-                        "name": "Category",
-                        "value": "Parts"
-                    },
-                    {
-                        "name": "Description",
-                        "value": "Basic part with shape, thickness and material"
-                    }
-                ],
-                "className": "Part",
+                "className": "ZoomTool",
                 "object": true,
-                "qualifiedClassName": "LaserCutStudio::Core::Part",
-                "superClasses": [
-                    {
-                        "access": "public",
-                        "name": "IPart"
-                    }
-                ]
-            }
-        ],
-        "inputFile": "Part.h",
-        "outputRevision": 68
-    },
-    {
-        "classes": [
-            {
-                "classInfos": [
-                    {
-                        "name": "Version",
-                        "value": "1.0.0"
-                    },
-                    {
-                        "name": "Category",
-                        "value": "Projects"
-                    },
-                    {
-                        "name": "Description",
-                        "value": "Complete laser cutting project with parts and metadata"
-                    }
-                ],
-                "className": "Project",
-                "object": true,
-                "qualifiedClassName": "LaserCutStudio::Core::Project",
-                "superClasses": [
-                    {
-                        "access": "public",
-                        "name": "IProject"
-                    }
-                ]
-            }
-        ],
-        "inputFile": "Project.h",
-        "outputRevision": 68
-    },
-    {
-        "classes": [
-            {
-                "className": "IShape",
-                "object": true,
-                "qualifiedClassName": "LaserCutStudio::Core::IShape",
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::ZoomTool",
                 "signals": [
                     {
                         "access": "public",
-                        "name": "geometryChanged",
+                        "arguments": [
+                            {
+                                "name": "factor",
+                                "type": "double"
+                            },
+                            {
+                                "name": "center",
+                                "type": "QPointF"
+                            }
+                        ],
+                        "name": "zoomRequested",
                         "returnType": "void"
                     }
                 ],
                 "superClasses": [
                     {
                         "access": "public",
-                        "name": "Interface"
-                    },
-                    {
-                        "access": "protected",
-                        "name": "Patterns::FactoryMixin<IShape>"
-                    },
-                    {
-                        "access": "protected",
-                        "name": "Patterns::ListManagerMixin<IShape>"
+                        "name": "ITool"
                     }
                 ]
             }
         ],
-        "inputFile": "IShape.h",
+        "inputFile": "ZoomTool.h",
         "outputRevision": 68
     },
     {
@@ -956,6 +1297,843 @@
             }
         ],
         "inputFile": "ConfigManager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "PluginManager",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Plugins::PluginManager",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "info",
+                                "type": "PluginInfo"
+                            }
+                        ],
+                        "name": "pluginLoaded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "filePath",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "errorString",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "pluginLoadFailed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "pluginName",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "pluginUnloaded",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "PluginManager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "ITransformationCommand",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::Transformations::ITransformationCommand",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IEditorCommand"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<ITransformationCommand>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ITransformationCommand.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "MoveCommand",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::MoveCommand",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Transformations::ITransformationCommand"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "MoveCommand.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "RotateCommand",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::RotateCommand",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Transformations::ITransformationCommand"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "RotateCommand.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "ScaleCommand",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::ScaleCommand",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Transformations::ITransformationCommand"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ScaleCommand.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "EditorService",
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shapeType",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "activateToolByShapeType",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "activateSelectionTool",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getShapes",
+                        "returnType": "QList<IShape*>"
+                    },
+                    {
+                        "access": "public",
+                        "name": "undo",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "redo",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "deleteSelectedShapes",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "copySelectedShapes",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "name": "pasteShapes",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "name": "hasClipboardData",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getSelectionProperties",
+                        "returnType": "QVariantMap"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "propertyName",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "value",
+                                "type": "QVariant"
+                            }
+                        ],
+                        "name": "setSelectionProperty",
+                        "returnType": "bool"
+                    }
+                ],
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "activeTool",
+                        "notify": "activeToolChanged",
+                        "read": "getActiveTool",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "LaserCutStudio::Core::Editor::ITool*",
+                        "user": false
+                    },
+                    {
+                        "constant": true,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "selection",
+                        "read": "getSelection",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "LaserCutStudio::Core::Editor::ISelection*",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "shapeCount",
+                        "notify": "shapeCountChanged",
+                        "read": "getShapeCount",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "canUndo",
+                        "notify": "undoStackChanged",
+                        "read": "canUndo",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 4,
+                        "name": "canRedo",
+                        "notify": "undoStackChanged",
+                        "read": "canRedo",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 5,
+                        "name": "undoStackSize",
+                        "notify": "undoStackChanged",
+                        "read": "getUndoStackSize",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false
+                    },
+                    {
+                        "constant": true,
+                        "designable": true,
+                        "final": false,
+                        "index": 6,
+                        "name": "availableShapeTypes",
+                        "read": "getAvailableShapeTypes",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QStringList",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Services::EditorService",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "tool",
+                                "type": "LaserCutStudio::Core::Editor::ITool*"
+                            }
+                        ],
+                        "name": "activeToolChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "LaserCutStudio::Core::IShape*"
+                            }
+                        ],
+                        "name": "shapeAdded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "shape",
+                                "type": "LaserCutStudio::Core::IShape*"
+                            }
+                        ],
+                        "name": "shapeRemoved",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "count",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "shapeCountChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "undoStackChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "undone",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "redone",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "message",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "statusMessage",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "selectionChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "EditorService.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "CommandStack",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "canUndo",
+                        "notify": "canUndoChanged",
+                        "read": "canUndo",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "canRedo",
+                        "notify": "canRedoChanged",
+                        "read": "canRedo",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "undoCount",
+                        "notify": "undoCountChanged",
+                        "read": "undoCount",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "redoCount",
+                        "notify": "redoCountChanged",
+                        "read": "redoCount",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 4,
+                        "name": "undoLimit",
+                        "notify": "undoLimitChanged",
+                        "read": "undoLimit",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false,
+                        "write": "setUndoLimit"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::CommandStack",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "canUndo",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "canUndoChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "canRedo",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "canRedoChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "count",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "undoCountChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "count",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "redoCountChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "limit",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "undoLimitChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "command",
+                                "type": "IEditorCommand*"
+                            }
+                        ],
+                        "name": "commandPushed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "command",
+                                "type": "IEditorCommand*"
+                            }
+                        ],
+                        "name": "commandUndone",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "command",
+                                "type": "IEditorCommand*"
+                            }
+                        ],
+                        "name": "commandRedone",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "stackCleared",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "CommandStack.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "CreateShapeCommand",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::CreateShapeCommand",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IEditorCommand"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "CreateShapeCommand.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "DeleteShapeCommand",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::DeleteShapeCommand",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IEditorCommand"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "DeleteShapeCommand.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "IEditorCommand",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "text",
+                        "notify": "textChanged",
+                        "read": "getText",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "isObsolete",
+                        "notify": "obsoleteChanged",
+                        "read": "isObsolete",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": true,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "canMerge",
+                        "read": "canMerge",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::Editor::IEditorCommand",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "text",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "textChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "obsolete",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "obsoleteChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "executed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "undone",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "redone",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<IEditorCommand>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "IEditorCommand.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "LogManager",
+                "enums": [
+                    {
+                        "isClass": true,
+                        "isFlag": false,
+                        "name": "Format",
+                        "values": [
+                            "Default",
+                            "Detailed",
+                            "Compact",
+                            "Json"
+                        ]
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::LogManager",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "loggingConfigChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "LogManager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "IProject",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::IProject",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "part",
+                                "type": "IPart*"
+                            }
+                        ],
+                        "name": "partAdded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "part",
+                                "type": "IPart*"
+                            }
+                        ],
+                        "name": "partRemoved",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "metadataChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<IProject>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<IProject>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "IProject.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Projects"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Complete laser cutting project with parts and metadata"
+                    }
+                ],
+                "className": "Project",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::Project",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IProject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "Project.h",
         "outputRevision": 68
     },
     {
@@ -1073,6 +2251,38 @@
             }
         ],
         "inputFile": "Circle.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "IShape",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::IShape",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "geometryChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<IShape>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<IShape>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "IShape.h",
         "outputRevision": 68
     },
     {
@@ -1221,123 +2431,21 @@
     {
         "classes": [
             {
-                "className": "PluginManager",
-                "object": true,
-                "qualifiedClassName": "LaserCutStudio::Core::Plugins::PluginManager",
-                "signals": [
+                "classInfos": [
                     {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "info",
-                                "type": "PluginInfo"
-                            }
-                        ],
-                        "name": "pluginLoaded",
-                        "returnType": "void"
+                        "name": "Version",
+                        "value": "1.0.0"
                     },
                     {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "filePath",
-                                "type": "QString"
-                            },
-                            {
-                                "name": "errorString",
-                                "type": "QString"
-                            }
-                        ],
-                        "name": "pluginLoadFailed",
-                        "returnType": "void"
+                        "name": "Category",
+                        "value": "Shapes"
                     },
                     {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "pluginName",
-                                "type": "QString"
-                            }
-                        ],
-                        "name": "pluginUnloaded",
-                        "returnType": "void"
+                        "name": "Description",
+                        "value": "Equilateral triangle shape"
                     }
                 ],
-                "superClasses": [
-                    {
-                        "access": "public",
-                        "name": "QObject"
-                    }
-                ]
-            }
-        ],
-        "inputFile": "PluginManager.h",
-        "outputRevision": 68
-    },
-    {
-        "classes": [
-            {
-                "className": "IPart",
-                "object": true,
-                "qualifiedClassName": "LaserCutStudio::Core::IPart",
-                "signals": [
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "newShape",
-                                "type": "IShape*"
-                            }
-                        ],
-                        "name": "shapeChanged",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "newMaterial",
-                                "type": "Material"
-                            }
-                        ],
-                        "name": "materialChanged",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "newThickness",
-                                "type": "double"
-                            }
-                        ],
-                        "name": "thicknessChanged",
-                        "returnType": "void"
-                    }
-                ],
-                "superClasses": [
-                    {
-                        "access": "public",
-                        "name": "Interface"
-                    },
-                    {
-                        "access": "protected",
-                        "name": "Patterns::FactoryMixin<IPart>"
-                    },
-                    {
-                        "access": "protected",
-                        "name": "Patterns::ListManagerMixin<IPart>"
-                    }
-                ]
-            }
-        ],
-        "inputFile": "IPart.h",
-        "outputRevision": 68
-    },
-    {
-        "classes": [
-            {
-                "className": "EditorService",
+                "className": "Triangle",
                 "object": true,
                 "properties": [
                     {
@@ -1345,204 +2453,96 @@
                         "designable": true,
                         "final": false,
                         "index": 0,
-                        "name": "activeTool",
-                        "notify": "activeToolChanged",
-                        "read": "getActiveTool",
+                        "name": "centerX",
+                        "notify": "centerXChanged",
+                        "read": "getCenterX",
                         "required": false,
                         "scriptable": true,
                         "stored": true,
-                        "type": "LaserCutStudio::Core::Editor::ITool*",
-                        "user": false
+                        "type": "double",
+                        "user": false,
+                        "write": "setCenterX"
                     },
                     {
-                        "constant": true,
+                        "constant": false,
                         "designable": true,
                         "final": false,
                         "index": 1,
-                        "name": "selection",
-                        "read": "getSelection",
+                        "name": "centerY",
+                        "notify": "centerYChanged",
+                        "read": "getCenterY",
                         "required": false,
                         "scriptable": true,
                         "stored": true,
-                        "type": "LaserCutStudio::Core::Editor::ISelection*",
-                        "user": false
+                        "type": "double",
+                        "user": false,
+                        "write": "setCenterY"
                     },
                     {
                         "constant": false,
                         "designable": true,
                         "final": false,
                         "index": 2,
-                        "name": "shapeCount",
-                        "notify": "shapeCountChanged",
-                        "read": "getShapeCount",
+                        "name": "size",
+                        "notify": "sizeChanged",
+                        "read": "getSize",
                         "required": false,
                         "scriptable": true,
                         "stored": true,
-                        "type": "int",
-                        "user": false
-                    },
-                    {
-                        "constant": false,
-                        "designable": true,
-                        "final": false,
-                        "index": 3,
-                        "name": "canUndo",
-                        "notify": "undoStackChanged",
-                        "read": "canUndo",
-                        "required": false,
-                        "scriptable": true,
-                        "stored": true,
-                        "type": "bool",
-                        "user": false
-                    },
-                    {
-                        "constant": false,
-                        "designable": true,
-                        "final": false,
-                        "index": 4,
-                        "name": "canRedo",
-                        "notify": "undoStackChanged",
-                        "read": "canRedo",
-                        "required": false,
-                        "scriptable": true,
-                        "stored": true,
-                        "type": "bool",
-                        "user": false
-                    },
-                    {
-                        "constant": false,
-                        "designable": true,
-                        "final": false,
-                        "index": 5,
-                        "name": "undoStackSize",
-                        "notify": "undoStackChanged",
-                        "read": "getUndoStackSize",
-                        "required": false,
-                        "scriptable": true,
-                        "stored": true,
-                        "type": "int",
-                        "user": false
+                        "type": "double",
+                        "user": false,
+                        "write": "setSize"
                     }
                 ],
-                "qualifiedClassName": "LaserCutStudio::Core::Services::EditorService",
+                "qualifiedClassName": "LaserCutStudio::Core::Triangle",
                 "signals": [
                     {
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "tool",
-                                "type": "LaserCutStudio::Core::Editor::ITool*"
+                                "name": "newCenterX",
+                                "type": "double"
                             }
                         ],
-                        "name": "activeToolChanged",
+                        "name": "centerXChanged",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "shape",
-                                "type": "LaserCutStudio::Core::IShape*"
+                                "name": "newCenterY",
+                                "type": "double"
                             }
                         ],
-                        "name": "shapeAdded",
+                        "name": "centerYChanged",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "shape",
-                                "type": "LaserCutStudio::Core::IShape*"
+                                "name": "newSize",
+                                "type": "double"
                             }
                         ],
-                        "name": "shapeRemoved",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "count",
-                                "type": "int"
-                            }
-                        ],
-                        "name": "shapeCountChanged",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "name": "undoStackChanged",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "name": "undone",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "name": "redone",
-                        "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "message",
-                                "type": "QString"
-                            }
-                        ],
-                        "name": "statusMessage",
+                        "name": "sizeChanged",
                         "returnType": "void"
                     }
                 ],
                 "superClasses": [
                     {
                         "access": "public",
-                        "name": "QObject"
+                        "name": "IShape"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<Triangle>"
                     }
                 ]
             }
         ],
-        "inputFile": "EditorService.h",
-        "outputRevision": 68
-    },
-    {
-        "classes": [
-            {
-                "className": "LogManager",
-                "enums": [
-                    {
-                        "isClass": true,
-                        "isFlag": false,
-                        "name": "Format",
-                        "values": [
-                            "Default",
-                            "Detailed",
-                            "Compact",
-                            "Json"
-                        ]
-                    }
-                ],
-                "object": true,
-                "qualifiedClassName": "LaserCutStudio::Core::LogManager",
-                "signals": [
-                    {
-                        "access": "public",
-                        "name": "loggingConfigChanged",
-                        "returnType": "void"
-                    }
-                ],
-                "superClasses": [
-                    {
-                        "access": "public",
-                        "name": "QObject"
-                    }
-                ]
-            }
-        ],
-        "inputFile": "LogManager.h",
+        "inputFile": "Triangle.h",
         "outputRevision": 68
     }
 ]

@@ -1,7 +1,7 @@
 #include "BenchmarkShapes.h"
-#include "core/models/shapes/implementations/Rectangle.h"
-#include "core/models/shapes/implementations/Circle.h"
-#include "core/models/shapes/interfaces/IShape.h"
+#include "core/models/shapes/Rectangle.h"
+#include "core/models/shapes/Circle.h"
+#include "core/models/shapes/IShape.h"
 
 using namespace LaserCutStudio::Core;
 

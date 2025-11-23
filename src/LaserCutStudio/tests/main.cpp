@@ -12,6 +12,7 @@
 #include "TestServiceLocator.h"
 #include "TestEditorCommands.h"
 #include "TestEditorService.h"
+#include "TestArchitectureInterfaces.h"
 
 int main(int argc, char *argv[])
 {
@@ -72,6 +73,11 @@ int main(int argc, char *argv[])
     {
         LaserCutStudio::Core::Tests::TestEditorService testEditorService;
         status |= QTest::qExec(&testEditorService, argc, argv);
+    }
+
+    {
+        LaserCutStudio::Core::Tests::TestArchitectureInterfaces testArchInterfaces;
+        status |= QTest::qExec(&testArchInterfaces, argc, argv);
     }
 
     return status;

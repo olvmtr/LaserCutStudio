@@ -15,12 +15,12 @@ add_executable(LaserCutStudioBenchmarks
     ../../core/models/base/types/Point2D.h
     ../../core/models/base/types/Point3D.h
     ../../core/models/base/types/Material.h
-    ../../core/models/shapes/interfaces/IShape.h
-    ../../core/models/shapes/interfaces/IShape.cpp
-    ../../core/models/shapes/implementations/Rectangle.h
-    ../../core/models/shapes/implementations/Rectangle.cpp
-    ../../core/models/shapes/implementations/Circle.h
-    ../../core/models/shapes/implementations/Circle.cpp
+    ../../core/models/shapes/IShape.h
+    ../../core/models/shapes/IShape.cpp
+    ../../core/models/shapes/Rectangle.h
+    ../../core/models/shapes/Rectangle.cpp
+    ../../core/models/shapes/Circle.h
+    ../../core/models/shapes/Circle.cpp
 )
 
 # Lie les bibliothèques Qt et LibInterface

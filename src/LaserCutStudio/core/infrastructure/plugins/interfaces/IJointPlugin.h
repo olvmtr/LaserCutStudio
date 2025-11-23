@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <QVariant>
-#include "core/models/joints/interfaces/IJoint.h"
+#include "core/models/joints/IJoint.h"
 
 namespace LaserCutStudio {
 namespace Core {

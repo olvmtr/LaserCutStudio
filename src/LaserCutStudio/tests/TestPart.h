@@ -3,8 +3,8 @@
 
 #include <QObject>
 #include <QTest>
-#include "core/models/parts/implementations/Part.h"
-#include "core/models/shapes/implementations/Rectangle.h"
+#include "core/models/parts/Part.h"
+#include "core/models/shapes/Rectangle.h"
 
 using namespace LaserCutStudio::Core;
 

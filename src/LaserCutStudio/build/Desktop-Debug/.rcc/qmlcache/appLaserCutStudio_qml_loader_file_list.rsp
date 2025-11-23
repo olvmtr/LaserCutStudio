@@ -1,1 +1,4 @@
 /LaserCutStudio/Main.qml
+/LaserCutStudio/EditorView.qml
+/LaserCutStudio/ToolPalette.qml
+/LaserCutStudio/ShapesListPanel.qml

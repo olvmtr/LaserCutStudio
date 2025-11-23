@@ -4,8 +4,8 @@
  */
 
 #include "TestEditorService.h"
-#include "core/models/editor/implementations/ShapeCreationTool.h"
-#include "core/models/editor/implementations/SelectionTool.h"
+#include "core/models/editor/tool/ShapeCreationTool.h"
+#include "core/models/editor/tool/SelectionTool.h"
 
 using namespace LaserCutStudio::Core;
 

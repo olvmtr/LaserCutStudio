@@ -12,11 +12,11 @@
 
 #include <QObject>
 #include <QVector>
-#include "core/models/editor/interfaces/ITool.h"
-#include "core/models/editor/interfaces/ISelection.h"
-#include "core/models/editor/interfaces/IEditorCommand.h"
-#include "core/models/editor/implementations/CommandStack.h"
-#include "core/models/shapes/interfaces/IShape.h"
+#include "core/models/editor/tool/ITool.h"
+#include "core/models/editor/selection/ISelection.h"
+#include "core/models/editor/command/IEditorCommand.h"
+#include "core/models/editor/command/CommandStack.h"
+#include "core/models/shapes/IShape.h"
 
 namespace LaserCutStudio {
 namespace Core {

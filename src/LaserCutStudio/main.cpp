@@ -4,9 +4,9 @@
 #include "core/ui/canvas/Canvas2DView.h"
 #include "core/ui/viewmodels/GenericPropertiesViewModel.h"
 #include "core/services/editor/EditorService.h"
-#include "core/models/editor/implementations/ShapeCreationTool.h"
-#include "core/models/editor/implementations/SelectionTool.h"
-#include "core/models/shapes/interfaces/IShape.h"
+#include "core/models/editor/tool/ShapeCreationTool.h"
+#include "core/models/editor/tool/SelectionTool.h"
+#include "core/models/shapes/IShape.h"
 
 int main(int argc, char *argv[])
 {

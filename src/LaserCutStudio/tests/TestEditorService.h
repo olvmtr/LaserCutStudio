@@ -13,8 +13,8 @@
 #include <QTest>
 #include <QSignalSpy>
 #include "core/services/editor/EditorService.h"
-#include "core/models/shapes/implementations/Rectangle.h"
-#include "core/models/shapes/implementations/Circle.h"
+#include "core/models/shapes/Rectangle.h"
+#include "core/models/shapes/Circle.h"
 
 namespace LaserCutStudio {
 namespace Core {

@@ -1,6 +1,9 @@
 <RCC>
   <qresource prefix="/LaserCutStudio/">
     <file alias="Main.qml">/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/Main.qml</file>
+    <file alias="EditorView.qml">/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/EditorView.qml</file>
+    <file alias="ToolPalette.qml">/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/ToolPalette.qml</file>
+    <file alias="ShapesListPanel.qml">/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/ShapesListPanel.qml</file>
   </qresource>
 </RCC>
 

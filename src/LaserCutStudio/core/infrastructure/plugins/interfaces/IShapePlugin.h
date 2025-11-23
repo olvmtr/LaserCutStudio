@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QString>
 #include <QVariant>
-#include "core/models/shapes/interfaces/IShape.h"
+#include "core/models/shapes/IShape.h"
 
 namespace LaserCutStudio {
 namespace Core {

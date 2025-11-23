@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <QTest>
-#include "core/models/joints/implementations/TabJoint.h"
-#include "core/models/joints/implementations/FingerJoint.h"
-#include "core/models/parts/implementations/Part.h"
+#include "core/models/joints/TabJoint.h"
+#include "core/models/joints/FingerJoint.h"
+#include "core/models/parts/Part.h"
 
 using namespace LaserCutStudio::Core;
 

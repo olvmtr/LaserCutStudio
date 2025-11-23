@@ -1,6 +1,6 @@
 #include "PluginManager.h"
-#include "core/models/shapes/interfaces/IShape.h"
-#include "core/models/joints/interfaces/IJoint.h"
+#include "core/models/shapes/IShape.h"
+#include "core/models/joints/IJoint.h"
 #include <QCoreApplication>
 #include <QDirIterator>
 #include <QStandardPaths>
