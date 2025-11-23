@@ -80,6 +80,10 @@ class FactoryViolationChecker:
                 matches = re.findall(rf'registerFactory<(\w+)>\s*\(\)', content)
                 concrete_classes.update(matches)
 
+                # Pattern 3: registerCustomFactory("ClassName", ...)
+                matches = re.findall(rf'registerCustomFactory\s*\(\s*"(\w+)"', content)
+                concrete_classes.update(matches)
+
             self.concrete_classes[interface_name] = sorted(concrete_classes)
 
             if concrete_classes:
@@ -133,6 +137,19 @@ class FactoryViolationChecker:
                                 # 2. return new ConcreteClass(*this) - Pattern Prototype
                                 if 'return new' in code_part and '*this' in code_part:
                                     continue  # Clone pattern légitime
+
+                                # 3. Lambda dans registerCustomFactory() - Factory Pattern légitime
+                                # Chercher registerCustomFactory dans les 10 lignes précédentes
+                                context_lines = lines[max(0, line_num-10):line_num]
+                                context_text = '\n'.join(context_lines)
+                                if 'registerCustomFactory' in context_text:
+                                    continue  # Lambda factory légitime
+
+                                # 4. Tools créant des commandes avec paramètres runtime - Légitime
+                                # Les outils interactifs (SelectionTool, etc.) créent des commandes
+                                # avec des dépendances runtime, pas pour sérialisation
+                                if '/tool/' in str(source_file) and 'Command' in class_name:
+                                    continue  # Tool créant commande légitime
 
                                 # Violation trouvée !
                                 relative_path = source_file.relative_to(PROJECT_ROOT)
