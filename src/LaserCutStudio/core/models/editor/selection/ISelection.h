@@ -47,16 +47,16 @@ class ISelection : public Interface, protected Patterns::FactoryMixin<ISelection
 {
     Q_OBJECT
 
-    // Expose les méthodes du Factory Pattern
-    using FactoryMixin<ISelection>::create;
-    using FactoryMixin<ISelection>::availableTypes;
-    using FactoryMixin<ISelection>::registerFactory;
-
     Q_PROPERTY(int count READ getCount NOTIFY countChanged)
     Q_PROPERTY(bool isEmpty READ isEmpty NOTIFY countChanged)
     Q_PROPERTY(QRectF boundingRect READ getBoundingRect NOTIFY boundingRectChanged)
 
 public:
+    // Expose les méthodes du Factory Pattern
+    using FactoryMixin<ISelection>::create;
+    using FactoryMixin<ISelection>::availableTypes;
+    using FactoryMixin<ISelection>::registerFactory;
+
     explicit ISelection(QObject* parent = nullptr) : Interface(parent) {}
     ~ISelection() override = default;
 

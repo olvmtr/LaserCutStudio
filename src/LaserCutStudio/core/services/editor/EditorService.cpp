@@ -4,6 +4,7 @@
  */
 
 #include "core/services/editor/EditorService.h"
+#include "core/models/editor/selection/ISelection.h"
 #include "core/models/editor/selection/SelectionManager.h"
 #include "core/models/editor/command/CreateShapeCommand.h"
 #include "core/models/editor/command/DeleteShapeCommand.h"
@@ -22,8 +23,15 @@ EditorService::EditorService(QObject* parent)
 {
     qCInfo(logCore()) << "EditorService created";
 
-    // Créer le gestionnaire de sélection
-    m_selection = new Editor::SelectionManager(this);
+    // Créer le gestionnaire de sélection via Factory Pattern
+    QVariantMap selectionParams;
+    selectionParams["type"] = "SelectionManager";
+    m_selection = qobject_cast<Editor::SelectionManager*>(
+        Editor::ISelection::create(selectionParams)
+    );
+    if (m_selection) {
+        m_selection->setParent(this);
+    }
 
     // Créer le CommandStack
     m_commandStack = new Editor::CommandStack(this);

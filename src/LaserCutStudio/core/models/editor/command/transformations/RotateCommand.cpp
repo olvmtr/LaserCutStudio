@@ -31,8 +31,48 @@ RotateCommand::~RotateCommand()
     qCDebug(logCore()) << "RotateCommand destroyed";
 }
 
+RotateCommand::RotateCommand(const QVariantMap& params, QObject* parent)
+    : RotateCommand(resolveShapesFromVariant(params),
+                   params.value("angleDegrees").toDouble(),
+                   Point2D(params.value("centerX").toDouble(),
+                          params.value("centerY").toDouble()),
+                   parent)
+{
+    // Le constructeur délègue au constructeur principal
+}
+
 // ===== Macro pour clone() =====
 IMPLEMENT_CLONE(RotateCommand, IEditorCommand)
+
+// ===== Helper privé pour résolution des shapes =====
+
+QVector<IShape*> RotateCommand::resolveShapesFromVariant(const QVariantMap& params)
+{
+    // Extraire les IDs des formes
+    QStringList shapeIds = params.value("shapeIds").toStringList();
+
+    // Résoudre les UUIDs en pointeurs IShape*
+    QVector<IShape*> shapes;
+    QList<IShape*> allShapes = IShape::getAllInstances();
+
+    for (const QString& id : shapeIds) {
+        // Chercher la forme avec cet UUID
+        QUuid uuid(id);  // Convertir QString en QUuid
+        for (IShape* shape : allShapes) {
+            if (shape && shape->getId() == uuid) {
+                shapes.append(shape);
+                break;
+            }
+        }
+    }
+
+    // Log si aucune forme trouvée
+    if (shapes.isEmpty()) {
+        qCWarning(logCore()) << "RotateCommand: No shapes found for IDs:" << shapeIds;
+    }
+
+    return shapes;
+}
 
 // ===== IEditorCommand interface =====
 
@@ -136,6 +176,16 @@ QString RotateCommand::getCommandId() const
 {
     return "RotateShape";
 }
+
+// ===== Enregistrement automatique dans Factory =====
+
+// Enregistre RotateCommand dans le Factory de ITransformationCommand avec factory personnalisée
+const bool RotateCommand::s_registered = ITransformationCommand::registerCustomFactory(
+    "RotateCommand",
+    [](const QVariantMap& params) -> ITransformationCommand* {
+        return new RotateCommand(params);
+    }
+);
 
 } // namespace Editor
 } // namespace Core

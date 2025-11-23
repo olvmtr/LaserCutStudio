@@ -58,6 +58,20 @@ public:
                           const Point2D& center,
                           QObject* parent = nullptr);
 
+    /**
+     * @brief Constructeur Factory Pattern (depuis QVariantMap)
+     *
+     * Paramètres attendus:
+     * - "shapeIds": QStringList des UUIDs des formes
+     * - "angleDegrees": double - angle de rotation en degrés
+     * - "centerX": double - centre X
+     * - "centerY": double - centre Y
+     *
+     * @param params Paramètres de création
+     * @param parent Parent Qt
+     */
+    explicit RotateCommand(const QVariantMap& params, QObject* parent = nullptr);
+
     ~RotateCommand() override;
 
     // ===== Type name (Factory Pattern) =====
@@ -75,8 +89,18 @@ public:
     QString getCommandId() const override;
 
 private:
+    /**
+     * @brief Helper pour résoudre les UUIDs en pointeurs IShape*
+     * @param params QVariantMap contenant "shapeIds"
+     * @return QVector<IShape*> des formes résolues
+     */
+    static QVector<IShape*> resolveShapesFromVariant(const QVariantMap& params);
+
     double m_angleDegrees;  ///< Angle de rotation (degrés)
     Point2D m_center;       ///< Centre de rotation
+
+    // Enregistrement automatique dans Factory
+    static const bool s_registered;
 };
 
 } // namespace Editor

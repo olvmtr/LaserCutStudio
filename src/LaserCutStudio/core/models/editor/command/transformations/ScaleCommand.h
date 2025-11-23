@@ -60,6 +60,21 @@ public:
                          const Point2D& center,
                          QObject* parent = nullptr);
 
+    /**
+     * @brief Constructeur Factory Pattern (depuis QVariantMap)
+     *
+     * Paramètres attendus:
+     * - "shapeIds": QStringList des UUIDs des formes
+     * - "scaleX": double - facteur d'échelle horizontal
+     * - "scaleY": double - facteur d'échelle vertical
+     * - "centerX": double - centre X
+     * - "centerY": double - centre Y
+     *
+     * @param params Paramètres de création
+     * @param parent Parent Qt
+     */
+    explicit ScaleCommand(const QVariantMap& params, QObject* parent = nullptr);
+
     ~ScaleCommand() override;
 
     // ===== Type name (Factory Pattern) =====
@@ -77,9 +92,19 @@ public:
     QString getCommandId() const override;
 
 private:
+    /**
+     * @brief Helper pour résoudre les UUIDs en pointeurs IShape*
+     * @param params QVariantMap contenant "shapeIds"
+     * @return QVector<IShape*> des formes résolues
+     */
+    static QVector<IShape*> resolveShapesFromVariant(const QVariantMap& params);
+
     double m_scaleX;    ///< Facteur d'échelle horizontal
     double m_scaleY;    ///< Facteur d'échelle vertical
     Point2D m_center;   ///< Centre de mise à l'échelle
+
+    // Enregistrement automatique dans Factory
+    static const bool s_registered;
 };
 
 } // namespace Editor
