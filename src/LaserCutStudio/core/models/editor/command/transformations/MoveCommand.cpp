@@ -27,6 +27,15 @@ MoveCommand::MoveCommand(const QVector<IShape*>& shapes,
                        << m_dx << "," << m_dy;
 }
 
+MoveCommand::MoveCommand(const QVariantMap& params, QObject* parent)
+    : MoveCommand(resolveShapesFromVariant(params),
+                  params.value("dx").toDouble(),
+                  params.value("dy").toDouble(),
+                  parent)
+{
+    // Le constructeur délègue au constructeur principal
+}
+
 MoveCommand::~MoveCommand()
 {
     qCDebug(logCore()) << "MoveCommand destroyed";
@@ -34,6 +43,36 @@ MoveCommand::~MoveCommand()
 
 // ===== Macro pour clone() =====
 IMPLEMENT_CLONE(MoveCommand, IEditorCommand)
+
+// ===== Helper privé pour résolution des shapes =====
+
+QVector<IShape*> MoveCommand::resolveShapesFromVariant(const QVariantMap& params)
+{
+    // Extraire les IDs des formes
+    QStringList shapeIds = params.value("shapeIds").toStringList();
+
+    // Résoudre les UUIDs en pointeurs IShape*
+    QVector<IShape*> shapes;
+    QList<IShape*> allShapes = IShape::getAllInstances();
+
+    for (const QString& id : shapeIds) {
+        // Chercher la forme avec cet UUID
+        QUuid uuid(id);  // Convertir QString en QUuid
+        for (IShape* shape : allShapes) {
+            if (shape && shape->getId() == uuid) {
+                shapes.append(shape);
+                break;
+            }
+        }
+    }
+
+    // Log si aucune forme trouvée
+    if (shapes.isEmpty()) {
+        qCWarning(logCore()) << "MoveCommand: No shapes found for IDs:" << shapeIds;
+    }
+
+    return shapes;
+}
 
 // ===== IEditorCommand interface =====
 
@@ -128,6 +167,16 @@ bool MoveCommand::mergeWith(IEditorCommand* other)
 
     return true;
 }
+
+// ===== Enregistrement automatique dans Factory =====
+
+// Enregistre MoveCommand dans le Factory de ITransformationCommand avec factory personnalisée
+const bool MoveCommand::s_registered = ITransformationCommand::registerCustomFactory(
+    "MoveCommand",
+    [](const QVariantMap& params) -> ITransformationCommand* {
+        return new MoveCommand(params);
+    }
+);
 
 } // namespace Editor
 } // namespace Core

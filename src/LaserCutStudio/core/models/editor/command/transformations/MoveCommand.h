@@ -44,7 +44,7 @@ class MoveCommand : public Transformations::ITransformationCommand
 
 public:
     /**
-     * @brief Constructeur
+     * @brief Constructeur principal
      * @param shapes Formes à déplacer
      * @param dx Déplacement horizontal
      * @param dy Déplacement vertical
@@ -54,6 +54,19 @@ public:
                         double dx,
                         double dy,
                         QObject* parent = nullptr);
+
+    /**
+     * @brief Constructeur Factory Pattern (depuis QVariantMap)
+     *
+     * Paramètres attendus:
+     * - "shapeIds": QStringList des UUIDs des formes
+     * - "dx": double - déplacement horizontal
+     * - "dy": double - déplacement vertical
+     *
+     * @param params Paramètres de création
+     * @param parent Parent Qt
+     */
+    explicit MoveCommand(const QVariantMap& params, QObject* parent = nullptr);
 
     ~MoveCommand() override;
 
@@ -72,8 +85,18 @@ public:
     QString getCommandId() const override;
 
 private:
+    /**
+     * @brief Helper pour résoudre les UUIDs en pointeurs IShape*
+     * @param params QVariantMap contenant "shapeIds"
+     * @return QVector<IShape*> des formes résolues
+     */
+    static QVector<IShape*> resolveShapesFromVariant(const QVariantMap& params);
+
     double m_dx;  ///< Déplacement horizontal
     double m_dy;  ///< Déplacement vertical
+
+    // Enregistrement automatique dans Factory
+    static const bool s_registered;
 };
 
 } // namespace Editor

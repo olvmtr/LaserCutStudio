@@ -8,6 +8,7 @@
  *
  * ## Pattern Architectural
  * - Hérite de IEditorCommand (interface principale)
+ * - Utilise FactoryMixin pour création polymorphe (Factory Pattern)
  * - Utilise ListManagerMixin pour introspection des instances
  * - Fournit des helpers protected pour validation et état
  * - Organisée dans le namespace Transformations pour refléter la hiérarchie
@@ -15,6 +16,7 @@
  * ## Cohérence avec autres interfaces
  * Comme IShape, IPart, IJoint, IProject, cette interface :
  * - Suit la convention de nommage "I*"
+ * - Possède FactoryMixin pour création polymorphe (create, availableTypes, registerFactory)
  * - Possède ListManagerMixin pour tracking des instances
  * - Permet l'introspection (instanceCount, getAllInstances, clearAllInstances)
  */
@@ -24,6 +26,7 @@
 
 #include "core/models/editor/command/IEditorCommand.h"
 #include "core/models/shapes/IShape.h"
+#include "core/infrastructure/patterns/factory/FactoryMixin.h"
 #include "core/infrastructure/patterns/lists/ListManagerMixin.h"
 #include <QVector>
 #include <QMap>
@@ -52,6 +55,25 @@ namespace Transformations {  // ⭐ Nouveau sous-namespace pour sous-interface
  * - Appeler les helpers de validation avant transformation
  * - Utiliser les helpers de comparaison pour la fusion
  *
+ * ## Factory Pattern (création polymorphe)
+ * ITransformationCommand supporte maintenant le Factory Pattern :
+ * @code
+ * using namespace LaserCutStudio::Core::Editor::Transformations;
+ *
+ * // Créer une commande depuis un QVariantMap
+ * QVariantMap params;
+ * params["type"] = "MoveCommand";
+ * params["dx"] = 10.0;
+ * params["dy"] = 20.0;
+ * // Note: shapes et service injectés via ServiceLocator
+ *
+ * ITransformationCommand* cmd = ITransformationCommand::create(params);
+ *
+ * // Lister les types disponibles
+ * QStringList types = ITransformationCommand::availableTypes();
+ * // => ["MoveCommand", "RotateCommand", "ScaleCommand"]
+ * @endcode
+ *
  * ## Introspection
  * Comme toutes les interfaces principales, ITransformationCommand permet :
  * @code
@@ -76,6 +98,7 @@ namespace Transformations {  // ⭐ Nouveau sous-namespace pour sous-interface
  * - **Organisation hiérarchique claire** via namespace Transformations
  */
 class ITransformationCommand : public IEditorCommand,
+                                protected Patterns::FactoryMixin<ITransformationCommand>,
                                 protected Patterns::ListManagerMixin<ITransformationCommand>
 {
     Q_OBJECT
@@ -102,6 +125,33 @@ public:
      * @return true
      */
     bool canMerge() const override { return true; }
+
+    // ===== FactoryMixin - Factory Pattern =====
+
+    /**
+     * @brief Expose les méthodes de FactoryMixin pour création polymorphe
+     *
+     * Ces méthodes permettent de :
+     * - Créer des commandes de transformation depuis QVariantMap (create)
+     * - Lister les types enregistrés (availableTypes)
+     * - Enregistrer de nouveaux types (registerFactory)
+     */
+    using FactoryMixin<ITransformationCommand>::create;
+    using FactoryMixin<ITransformationCommand>::availableTypes;
+    using FactoryMixin<ITransformationCommand>::registerFactory;
+
+    /**
+     * @brief Enregistre une factory function personnalisée
+     *
+     * Utilisé pour les commandes qui ne peuvent pas utiliser le Factory Pattern
+     * standard (dépendances runtime complexes).
+     *
+     * @param typeName Nom du type
+     * @param factory Factory function personnalisée
+     * @return true
+     */
+    static bool registerCustomFactory(const QString& typeName,
+                                      std::function<ITransformationCommand*(const QVariantMap&)> factory);
 
     // ===== ListManagerMixin - Introspection des instances =====
 

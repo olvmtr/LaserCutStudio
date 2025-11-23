@@ -46,6 +46,16 @@ bool ITransformationCommand::isObsolete() const
     return true;
 }
 
+// ===== Factory Pattern - Enregistrement custom =====
+
+bool ITransformationCommand::registerCustomFactory(const QString& typeName,
+                                                   std::function<ITransformationCommand*(const QVariantMap&)> factory)
+{
+    // Accède directement à s_factories de FactoryMixin<ITransformationCommand>
+    FactoryMixin<ITransformationCommand>::s_factories[typeName] = factory;
+    return true;
+}
+
 // ===== Helpers de validation =====
 
 bool ITransformationCommand::validateTransformState(bool isRedo) const

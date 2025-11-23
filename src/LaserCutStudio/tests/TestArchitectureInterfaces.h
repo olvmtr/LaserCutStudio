@@ -62,6 +62,9 @@ private slots:
     void testCanListAllTransformationCommands();
     void testTransformationCommandsAreTracked();
     void testTransformationCommandsCanBeCleared();
+
+    // Test architectural générique (appelle le script Python)
+    void testNoFactoryPatternViolations();
 };
 
 } // namespace Tests
