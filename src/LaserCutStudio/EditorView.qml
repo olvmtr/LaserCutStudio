@@ -14,9 +14,9 @@ Item {
     // Propriétés exposées
     property EditorService editor: editorService
 
-    // ViewModel pour les propriétés de sélection (Pattern MVVM)
-    SelectionPropertiesViewModel {
-        id: selectionVM
+    // ViewModel générique pour les propriétés (Introspection Qt)
+    GenericPropertiesViewModel {
+        id: propsVM
         Component.onCompleted: {
             setSelection(editor.selection)
         }
@@ -258,7 +258,7 @@ Item {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         clip: true
-                        visible: selectionVM.hasSelection
+                        visible: propsVM.hasSelection
 
                         Rectangle {
                             width: parent.width
@@ -285,11 +285,11 @@ Item {
                                     }
                                     TextField {
                                         width: parent.width - 45
-                                        text: selectionVM.name
+                                        text: propsVM.properties["name"] || ""
                                         placeholderText: "Sans nom"
                                         font.pixelSize: 10
                                         onEditingFinished: {
-                                            selectionVM.name = text
+                                            propsVM.setProperty("name", text)
                                         }
                                     }
                                 }
@@ -307,10 +307,10 @@ Item {
                                         width: parent.width - 45
                                         from: -10000
                                         to: 10000
-                                        value: selectionVM.x
+                                        value: propsVM.properties["x"] || 0
                                         editable: true
                                         onValueModified: {
-                                            selectionVM.x = value
+                                            propsVM.setProperty("x", value)
                                         }
                                     }
                                 }
@@ -328,10 +328,10 @@ Item {
                                         width: parent.width - 45
                                         from: -10000
                                         to: 10000
-                                        value: selectionVM.y
+                                        value: propsVM.properties["y"] || 0
                                         editable: true
                                         onValueModified: {
-                                            selectionVM.y = value
+                                            propsVM.setProperty("y", value)
                                         }
                                     }
                                 }
@@ -340,7 +340,7 @@ Item {
                                 Row {
                                     width: parent.width
                                     spacing: 5
-                                    visible: selectionVM.hasWidth
+                                    visible: propsVM.properties["width"] !== undefined
                                     Label {
                                         text: "W:"
                                         width: 40
@@ -350,10 +350,10 @@ Item {
                                         width: parent.width - 45
                                         from: 1
                                         to: 10000
-                                        value: selectionVM.width
+                                        value: propsVM.properties["width"] || 100
                                         editable: true
                                         onValueModified: {
-                                            selectionVM.width = value
+                                            propsVM.setProperty("width", value)
                                         }
                                     }
                                 }
@@ -362,7 +362,7 @@ Item {
                                 Row {
                                     width: parent.width
                                     spacing: 5
-                                    visible: selectionVM.hasHeight
+                                    visible: propsVM.properties["height"] !== undefined
                                     Label {
                                         text: "H:"
                                         width: 40
@@ -372,17 +372,17 @@ Item {
                                         width: parent.width - 45
                                         from: 1
                                         to: 10000
-                                        value: selectionVM.height
+                                        value: propsVM.properties["height"] || 100
                                         editable: true
                                         onValueModified: {
-                                            selectionVM.height = value
+                                            propsVM.setProperty("height", value)
                                         }
                                     }
                                 }
 
                                 // Type
                                 Label {
-                                    text: "Type: " + selectionVM.type
+                                    text: "Type: " + (propsVM.properties["type"] || "")
                                     font.pixelSize: 9
                                     color: "#666"
                                 }

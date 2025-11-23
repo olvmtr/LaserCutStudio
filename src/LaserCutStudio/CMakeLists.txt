@@ -86,8 +86,8 @@ qt_add_executable(appLaserCutStudio
     core/ui/canvas/Canvas2DView.h
     core/ui/canvas/Canvas2DView.cpp
     # Core Module - UI ViewModels
-    core/ui/viewmodels/SelectionPropertiesViewModel.h
-    core/ui/viewmodels/SelectionPropertiesViewModel.cpp
+    core/ui/viewmodels/GenericPropertiesViewModel.h
+    core/ui/viewmodels/GenericPropertiesViewModel.cpp
     # Core Module - Infrastructure Config
     core/infrastructure/config/ConfigManager.h
     core/infrastructure/config/ConfigManager.cpp
