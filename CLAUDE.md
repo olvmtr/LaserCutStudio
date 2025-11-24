@@ -20,6 +20,90 @@ LaserCutStudio est une application desktop pour concevoir des projets de découp
 - **Qt Quick 3D** (Qt 6+) pour la visualisation 3D (Phase 5)
 - QPainter/QGraphicsView (prévu) pour l'édition 2D
 
+## 🆕 Système de Géométrie Contrainte (Nouveau !)
+
+Le projet utilise maintenant un **système de géométrie contrainte** inspiré de GNU Dr. Geo et des sketchers CAD (FreeCAD, SolidWorks), remplaçant l'ancien système de formes primitives.
+
+### Architecture du système
+
+**Éléments géométriques** (`core/models/geometry/`) :
+- `GeometricPoint` : Points avec verrouillage (locked/unlocked)
+- `GeometricSegment` : Segments entre 2 points (calculs: longueur, angle, direction)
+- `GeometricArc` : Arcs de cercle (centre, rayon, angles)
+
+**Contraintes géométriques** (`core/models/constraints/`) :
+- `DistanceConstraint` : Distance fixe entre 2 points
+- `LengthConstraint` : Longueur d'un segment
+- `AngleConstraint` : Angle entre 2 segments
+- `FixedPointConstraint` : Point fixe (x, y)
+
+**Solveur et conteneur** (`core/models/sketch/`) :
+- `ConstraintSolver` : Résolution par relaxation itérative (100 iter max, tolérance 1e-6)
+- `ConstraintSketch` : Conteneur principal avec unités (mm/cm/inch), Factory Pattern, export
+
+### Exemple d'utilisation : Rectangle 10cm × 5cm
+
+```cpp
+ConstraintSketch* sketch = new ConstraintSketch("Pièce laser");
+sketch->setUnit(ConstraintSketch::Centimeters);
+
+// 4 coins (origine fixe, 3 libres)
+GeometricPoint* p1 = sketch->addPoint(0, 0, true);   // Fixe
+GeometricPoint* p2 = sketch->addPoint(100, 0);
+GeometricPoint* p3 = sketch->addPoint(100, 50);
+GeometricPoint* p4 = sketch->addPoint(0, 50);
+
+// 4 segments
+GeometricSegment* s1 = sketch->addSegment(p1, p2);
+GeometricSegment* s2 = sketch->addSegment(p2, p3);
+GeometricSegment* s3 = sketch->addSegment(p3, p4);
+GeometricSegment* s4 = sketch->addSegment(p4, p1);
+
+// Contraintes de longueur (verrouillées)
+sketch->addLengthConstraint(s1, 10.0, true);  // 10 cm
+sketch->addLengthConstraint(s2, 5.0, true);   // 5 cm
+sketch->addLengthConstraint(s3, 10.0, true);
+sketch->addLengthConstraint(s4, 5.0, true);
+
+// Contraintes d'angle (90°)
+sketch->addAngleConstraint(s1, s2, 90.0, true);
+sketch->addAngleConstraint(s2, s3, 90.0, true);
+sketch->addAngleConstraint(s3, s4, 90.0, true);
+
+// RÉSOUDRE → convergence en ~5-10 itérations
+if (sketch->solve()) {
+    qDebug() << "Rectangle créé !";
+
+    // Modifier une contrainte → recalcule automatiquement
+    s1->getLengthConstraint()->setLength(15.0);  // Changer largeur
+    sketch->solve();
+
+    // Export pour découpe laser
+    QList<Point2D> polyline = sketch->toPolyline();
+    QPainterPath path = sketch->toPainterPath();
+}
+```
+
+### Fonctionnalités clés
+
+✅ **Points verrouillables** : Fixes ou ajustés par le solveur
+✅ **Contraintes éditables** : Modifier → recalcul automatique
+✅ **Mesures réelles** : cm/mm/inches (pas de pixels)
+✅ **Solveur robuste** : Relaxation itérative convergente
+✅ **Factory Pattern** : Création, sérialisation QVariantMap
+✅ **Signals/Slots Qt** : Notifications de changements
+✅ **Export** : toPolyline(), toPainterPath() pour découpe laser
+✅ **20 tests unitaires** : TestGeometry (GeometricPoint, GeometricSegment, GeometricArc)
+
+### État actuel
+
+- ✅ **Implémenté** : Éléments géométriques, 4 contraintes, solveur, sketch, tests
+- ✅ **Compilé** : Sans erreurs
+- ✅ **Testé** : 20 tests unitaires passent
+- ✅ **Committé** : 2 commits (feat + test)
+- ⚠️ **Ancien système** : IShape/Rectangle/Circle marqués DEPRECATED (à supprimer)
+- 📝 **Prochaines étapes** : Plus de contraintes (Parallel, Perpendicular, Equal, Tangent), intégration Canvas2D
+
 ## Factory Pattern avec FactoryMixin (CRTP)
 
 Le projet utilise un **mixin template basé sur CRTP** (Curiously Recurring Template Pattern) pour fournir le Factory Pattern automatiquement à toutes les interfaces, éliminant ainsi la duplication de code.
