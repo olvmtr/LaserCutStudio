@@ -149,7 +149,7 @@ Rectangle {
         id: canvas
         anchors.top: toolbar.bottom
         anchors.left: parent.left
-        anchors.right: infoPanel.left
+        anchors.right: propertiesPanel.left
         anchors.bottom: statusBar.top
         anchors.margins: 0
 
@@ -162,80 +162,35 @@ Rectangle {
 
         onPointCreated: (point) => {
             console.log("Point created at (" + point.x + ", " + point.y + ")");
-            updateInfo();
+            propertiesPanel.updateElementConstraints();
         }
 
         onSegmentCreated: (segment) => {
             console.log("Segment created with length: " + segment.length());
-            updateInfo();
+            propertiesPanel.updateElementConstraints();
         }
 
         onConstraintCreated: (constraint) => {
             console.log("Constraint created: " + constraint.getTypeName());
-            updateInfo();
+            propertiesPanel.updateElementConstraints();
         }
 
         onElementSelected: (element) => {
             console.log("Element selected: " + element.getTypeName());
+            propertiesPanel.selectedElement = element;
         }
     }
 
-    // Panneau d'informations à droite
-    Rectangle {
-        id: infoPanel
+    // Panneau de propriétés à droite
+    ConstraintPropertiesPanel {
+        id: propertiesPanel
         anchors.top: toolbar.bottom
         anchors.right: parent.right
         anchors.bottom: statusBar.top
-        width: 250
-        color: "#ecf0f1"
-        border.color: "#bdc3c7"
+        width: 300
 
-        Column {
-            anchors.fill: parent
-            anchors.margins: 10
-            spacing: 10
-
-            Label {
-                text: "Sketch Info"
-                font.bold: true
-                font.pixelSize: 16
-            }
-
-            Label {
-                id: pointCountLabel
-                text: "Points: 0"
-            }
-
-            Label {
-                id: segmentCountLabel
-                text: "Segments: 0"
-            }
-
-            Label {
-                id: constraintCountLabel
-                text: "Constraints: 0"
-            }
-
-            Rectangle { height: 1; width: parent.width; color: "#bdc3c7" }
-
-            Label {
-                text: "Zoom: " + (canvas.zoomLevel * 100).toFixed(0) + "%"
-            }
-
-            Label {
-                text: "Grid Size: " + canvas.gridSize.toFixed(1) + " mm"
-            }
-
-            Rectangle { height: 1; width: parent.width; color: "#bdc3c7" }
-
-            Label {
-                text: "Mode: " + getModeText()
-            }
-
-            Label {
-                text: "Constraint Type: " + constraintTypeCombo.currentText
-            }
-        }
+        selectedElement: null
+        sketch: root.sketch
     }
 
     // Barre de statut en bas
@@ -257,36 +212,4 @@ Rectangle {
         }
     }
 
-    // Fonctions helpers
-    function updateInfo() {
-        if (!sketch) return;
-
-        var elements = sketch.elements();
-        var constraints = sketch.constraints();
-
-        var pointCount = 0;
-        var segmentCount = 0;
-
-        for (var i = 0; i < elements.length; i++) {
-            var typeName = elements[i].getTypeName();
-            if (typeName === "GeometricPoint") pointCount++;
-            else if (typeName === "GeometricSegment") segmentCount++;
-        }
-
-        pointCountLabel.text = "Points: " + pointCount;
-        segmentCountLabel.text = "Segments: " + segmentCount;
-        constraintCountLabel.text = "Constraints: " + constraints.length;
-
-        statusLabel.text = "Elements: " + pointCount + " pts, " + segmentCount + " segs, " + constraints.length + " constraints";
-    }
-
-    function getModeText() {
-        switch(canvas.editMode) {
-            case ConstraintCanvas2DView.PlacePoint: return "Place Point";
-            case ConstraintCanvas2DView.DrawSegment: return "Draw Segment";
-            case ConstraintCanvas2DView.Select: return "Select";
-            case ConstraintCanvas2DView.AddConstraint: return "Add Constraint";
-            default: return "Unknown";
-        }
-    }
 }
