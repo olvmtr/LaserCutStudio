@@ -24,7 +24,7 @@ qt_add_executable(appLaserCutStudio
     core/models/base/types/Point3D.h
     core/models/base/types/Material.h
     core/models/base/types/JointType.h
-    # Core Module - Models Shapes
+    # Core Module - Models Shapes (DEPRECATED - will be removed)
     core/models/shapes/IShape.h
     core/models/shapes/IShape.cpp
     core/models/shapes/Rectangle.h
@@ -33,6 +33,31 @@ qt_add_executable(appLaserCutStudio
     core/models/shapes/Circle.cpp
     core/models/shapes/Triangle.h
     core/models/shapes/Triangle.cpp
+    # Core Module - Models Geometry (NEW - Constraint-based)
+    core/models/geometry/IGeometricElement.h
+    core/models/geometry/IGeometricElement.cpp
+    core/models/geometry/GeometricPoint.h
+    core/models/geometry/GeometricPoint.cpp
+    core/models/geometry/GeometricSegment.h
+    core/models/geometry/GeometricSegment.cpp
+    core/models/geometry/GeometricArc.h
+    core/models/geometry/GeometricArc.cpp
+    # Core Module - Models Constraints
+    core/models/constraints/IConstraint.h
+    core/models/constraints/IConstraint.cpp
+    core/models/constraints/DistanceConstraint.h
+    core/models/constraints/DistanceConstraint.cpp
+    core/models/constraints/LengthConstraint.h
+    core/models/constraints/LengthConstraint.cpp
+    core/models/constraints/AngleConstraint.h
+    core/models/constraints/AngleConstraint.cpp
+    core/models/constraints/FixedPointConstraint.h
+    core/models/constraints/FixedPointConstraint.cpp
+    # Core Module - Models Sketch
+    core/models/sketch/ConstraintSolver.h
+    core/models/sketch/ConstraintSolver.cpp
+    core/models/sketch/ConstraintSketch.h
+    core/models/sketch/ConstraintSketch.cpp
     # Core Module - Models Parts
     core/models/parts/IPart.h
     core/models/parts/IPart.cpp

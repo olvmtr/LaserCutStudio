@@ -1,0 +1,191 @@
+#ifndef CONSTRAINTSKETCH_H
+#define CONSTRAINTSKETCH_H
+
+#include "core/models/base/Interface.h"
+#include "core/models/geometry/IGeometricElement.h"
+#include "core/models/geometry/GeometricPoint.h"
+#include "core/models/geometry/GeometricSegment.h"
+#include "core/models/geometry/GeometricArc.h"
+#include "core/models/constraints/IConstraint.h"
+#include "core/models/sketch/ConstraintSolver.h"
+#include "core/infrastructure/patterns/factory/FactoryMixin.h"
+#include "core/infrastructure/patterns/properties/PropertyMixin.h"
+#include <QString>
+#include <QList>
+#include <QPainterPath>
+
+namespace LaserCutStudio {
+namespace Core {
+
+/**
+ * @brief Sketch de géométrie contrainte
+ *
+ * ConstraintSketch est le conteneur principal qui regroupe :
+ * - Éléments géométriques (points, segments, arcs)
+ * - Contraintes géométriques (distance, angle, longueur, etc.)
+ * - Solveur de contraintes (résolution itérative)
+ *
+ * ## Exemple d'utilisation : Rectangle 10cm × 5cm
+ *
+ * @code
+ * ConstraintSketch* sketch = new ConstraintSketch("Pièce laser");
+ * sketch->setUnit(ConstraintSketch::Centimeters);
+ *
+ * // Créer les 4 coins
+ * GeometricPoint* p1 = sketch->addPoint(0, 0, true);   // Origine fixe
+ * GeometricPoint* p2 = sketch->addPoint(100, 0);
+ * GeometricPoint* p3 = sketch->addPoint(100, 50);
+ * GeometricPoint* p4 = sketch->addPoint(0, 50);
+ *
+ * // Créer les segments
+ * GeometricSegment* s1 = sketch->addSegment(p1, p2);
+ * GeometricSegment* s2 = sketch->addSegment(p2, p3);
+ * GeometricSegment* s3 = sketch->addSegment(p3, p4);
+ * GeometricSegment* s4 = sketch->addSegment(p4, p1);
+ *
+ * // Contraintes de longueur
+ * sketch->addLengthConstraint(s1, 10.0, true);  // 10 cm (verrouillé)
+ * sketch->addLengthConstraint(s2, 5.0, true);   // 5 cm (verrouillé)
+ * sketch->addLengthConstraint(s3, 10.0, true);
+ * sketch->addLengthConstraint(s4, 5.0, true);
+ *
+ * // Contraintes d'angle (90°)
+ * sketch->addAngleConstraint(s1, s2, 90.0, true);
+ * sketch->addAngleConstraint(s2, s3, 90.0, true);
+ * sketch->addAngleConstraint(s3, s4, 90.0, true);
+ *
+ * // Résoudre
+ * if (sketch->solve()) {
+ *     qDebug() << "Rectangle créé avec succès !";
+ *
+ *     // Export pour découpe laser
+ *     QList<Point2D> polyline = sketch->toPolyline();
+ *     QPainterPath path = sketch->toPainterPath();
+ * }
+ * @endcode
+ */
+class ConstraintSketch : public Interface,
+                         protected Patterns::FactoryMixin<ConstraintSketch>,
+                         protected Patterns::PropertyMixin<ConstraintSketch>
+{
+    Q_OBJECT
+
+public:
+    /**
+     * @brief Unités de mesure
+     */
+    enum MeasurementUnit {
+        Millimeters,
+        Centimeters,
+        Inches
+    };
+    Q_ENUM(MeasurementUnit)
+
+private:
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(MeasurementUnit unit READ unit WRITE setUnit NOTIFY unitChanged)
+    Q_PROPERTY(bool autoSolve READ autoSolve WRITE setAutoSolve NOTIFY autoSolveChanged)
+
+signals:
+    void nameChanged(const QString& newName);
+    void unitChanged(MeasurementUnit newUnit);
+    void autoSolveChanged(bool newAutoSolve);
+
+    void elementAdded(IGeometricElement* element);
+    void elementRemoved(IGeometricElement* element);
+    void constraintAdded(IConstraint* constraint);
+    void constraintRemoved(IConstraint* constraint);
+
+    void solveCompleted(bool success);
+    void geometryChanged();
+
+public:
+
+    /**
+     * @brief Constructeur par défaut
+     */
+    ConstraintSketch();
+
+    /**
+     * @brief Constructeur avec nom
+     * @param name Nom du sketch
+     */
+    explicit ConstraintSketch(const QString& name);
+
+    /**
+     * @brief Destructeur
+     */
+    ~ConstraintSketch() override;
+
+    /**
+     * @brief Clone le sketch
+     */
+    ConstraintSketch* clone() const override;
+
+    DECLARE_TYPE_NAME(ConstraintSketch)
+
+    // Getters
+    QString name() const { return m_name; }
+    MeasurementUnit unit() const { return m_unit; }
+    bool autoSolve() const { return m_autoSolve; }
+
+    QList<IGeometricElement*> elements() const { return m_elements; }
+    QList<IConstraint*> constraints() const { return m_constraints; }
+
+    ConstraintSolver* solver() const { return m_solver; }
+
+    // Setters
+    void setName(const QString& name);
+    void setUnit(MeasurementUnit unit);
+    void setAutoSolve(bool autoSolve);
+
+    // Gestion des éléments géométriques
+    GeometricPoint* addPoint(double x, double y, bool locked = false);
+    GeometricSegment* addSegment(GeometricPoint* start, GeometricPoint* end);
+    GeometricArc* addArc(GeometricPoint* center, double radius, double startAngle = 0.0, double endAngle = 360.0);
+
+    void addElement(IGeometricElement* element);
+    void removeElement(IGeometricElement* element);
+    void clearElements();
+
+    // Gestion des contraintes
+    void addConstraint(IConstraint* constraint);
+    void removeConstraint(IConstraint* constraint);
+    void clearConstraints();
+
+    // Helpers pour créer des contraintes
+    IConstraint* addDistanceConstraint(GeometricPoint* p1, GeometricPoint* p2, double distance, bool locked = false);
+    IConstraint* addLengthConstraint(GeometricSegment* segment, double length, bool locked = false);
+    IConstraint* addAngleConstraint(GeometricSegment* s1, GeometricSegment* s2, double angleDegrees, bool locked = false);
+    IConstraint* addFixedPointConstraint(GeometricPoint* point, double x, double y, bool locked = true);
+
+    // Résolution
+    bool solve();
+
+    // Export
+    QList<Point2D> toPolyline() const;
+    QPainterPath toPainterPath() const;
+    QRectF getBoundingBox() const;
+
+    // Factory Pattern
+    using FactoryMixin<ConstraintSketch>::create;
+    using FactoryMixin<ConstraintSketch>::availableTypes;
+    using FactoryMixin<ConstraintSketch>::registerFactory;
+
+private:
+    QString m_name;
+    MeasurementUnit m_unit = Millimeters;
+    bool m_autoSolve = false;
+
+    QList<IGeometricElement*> m_elements;
+    QList<IConstraint*> m_constraints;
+
+    ConstraintSolver* m_solver;
+
+    static const bool s_registered;
+};
+
+} // namespace Core
+} // namespace LaserCutStudio
+
+#endif // CONSTRAINTSKETCH_H
