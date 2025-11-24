@@ -23,31 +23,6 @@ namespace Core {
 namespace UI {
 
 /**
- * @brief Mode d'édition actif
- */
-enum class EditMode {
-    Select,          ///< Sélection d'éléments
-    PlacePoint,      ///< Placement de points
-    DrawSegment,     ///< Dessin de segments
-    AddConstraint    ///< Ajout de contraintes
-};
-
-/**
- * @brief Type de contrainte à ajouter
- */
-enum class ConstraintType {
-    None,
-    Distance,
-    Length,
-    Angle,
-    FixedPoint,
-    Parallel,
-    Perpendicular,
-    EqualLength,
-    Coincident
-};
-
-/**
  * @class ConstraintCanvas2DView
  * @brief Canvas pour édition avec géométrie contrainte
  *
@@ -77,6 +52,34 @@ class ConstraintCanvas2DView : public QQuickPaintedItem
 {
     Q_OBJECT
 
+public:
+    /**
+     * @brief Mode d'édition actif
+     */
+    enum class EditMode {
+        Select,          ///< Sélection d'éléments
+        PlacePoint,      ///< Placement de points
+        DrawSegment,     ///< Dessin de segments
+        AddConstraint    ///< Ajout de contraintes
+    };
+    Q_ENUM(EditMode)
+
+    /**
+     * @brief Type de contrainte à ajouter
+     */
+    enum class ConstraintType {
+        None,
+        Distance,
+        Length,
+        Angle,
+        FixedPoint,
+        Parallel,
+        Perpendicular,
+        EqualLength,
+        Coincident
+    };
+    Q_ENUM(ConstraintType)
+
     // ===== Propriétés QML =====
     Q_PROPERTY(ConstraintSketch* sketch READ sketch WRITE setSketch NOTIFY sketchChanged)
     Q_PROPERTY(EditMode editMode READ editMode WRITE setEditMode NOTIFY editModeChanged)
@@ -96,13 +99,8 @@ class ConstraintCanvas2DView : public QQuickPaintedItem
     Q_PROPERTY(bool showMeasurements READ showMeasurements WRITE setShowMeasurements NOTIFY showMeasurementsChanged)
     Q_PROPERTY(bool autoSolve READ autoSolve WRITE setAutoSolve NOTIFY autoSolveChanged)
 
-public:
     explicit ConstraintCanvas2DView(QQuickItem* parent = nullptr);
     ~ConstraintCanvas2DView() override;
-
-    // Enregistrement des enums pour QML
-    Q_ENUM(EditMode)
-    Q_ENUM(ConstraintType)
 
     // ===== QQuickPaintedItem interface =====
     void paint(QPainter* painter) override;

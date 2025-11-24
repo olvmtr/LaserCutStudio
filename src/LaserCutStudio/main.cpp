@@ -2,11 +2,13 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "core/ui/canvas/Canvas2DView.h"
+#include "core/ui/canvas/ConstraintCanvas2DView.h"
 #include "core/ui/viewmodels/GenericPropertiesViewModel.h"
 #include "core/services/editor/EditorService.h"
 #include "core/models/editor/tool/ShapeCreationTool.h"
 #include "core/models/editor/tool/SelectionTool.h"
 #include "core/models/shapes/IShape.h"
+#include "core/models/sketch/ConstraintSketch.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +17,12 @@ int main(int argc, char *argv[])
     // Enregistrer les types Qt pour QML
     qmlRegisterType<LaserCutStudio::Core::UI::Canvas2DView>(
         "LaserCutStudio", 1, 0, "Canvas2DView");
+
+    qmlRegisterType<LaserCutStudio::Core::UI::ConstraintCanvas2DView>(
+        "LaserCutStudio", 1, 0, "ConstraintCanvas2DView");
+
+    qmlRegisterType<LaserCutStudio::Core::ConstraintSketch>(
+        "LaserCutStudio", 1, 0, "ConstraintSketch");
 
     qmlRegisterType<LaserCutStudio::Core::UI::GenericPropertiesViewModel>(
         "LaserCutStudio", 1, 0, "GenericPropertiesViewModel");
