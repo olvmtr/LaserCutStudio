@@ -2,6 +2,7 @@
 #define PART_H
 
 #include "core/models/parts/IPart.h"
+#include "core/models/patterns/prototype/ClonableMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {

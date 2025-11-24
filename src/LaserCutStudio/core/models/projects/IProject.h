@@ -129,7 +129,7 @@ struct ProjectMetadata
  *
  * @code
  * // Sauvegarder projet en JSON
- * IProject* project = /* ... ;
+ * IProject* project = createProject();
  * QVariantMap data = project->toVariant();
  * QJsonDocument doc = QJsonDocument::fromVariant(data);
  * QFile file("project.json");
@@ -194,67 +194,67 @@ public:
     /**
      * @brief Obtient le nom du projet
      */
-    QString getName() const { return m_name; }
+    virtual QString getName() const = 0;
 
     /**
      * @brief Définit le nom du projet
      */
-    void setName(const QString& name) { m_name = name; }
+    virtual void setName(const QString& name) = 0;
 
     /**
      * @brief Obtient les métadonnées
      */
-    ProjectMetadata getMetadata() const { return m_metadata; }
+    virtual ProjectMetadata getMetadata() const = 0;
 
     /**
      * @brief Définit les métadonnées
      */
-    void setMetadata(const ProjectMetadata& metadata) { m_metadata = metadata; }
+    virtual void setMetadata(const ProjectMetadata& metadata) = 0;
 
     /**
      * @brief Ajoute une pièce au projet
      */
-    void addPart(IPart* part);
+    virtual void addPart(IPart* part) = 0;
 
     /**
      * @brief Retire une pièce du projet
      */
-    void removePart(IPart* part);
+    virtual void removePart(IPart* part) = 0;
 
     /**
      * @brief Obtient toutes les pièces du projet
      */
-    QList<IPart*> getParts() const { return m_parts; }
+    virtual QList<IPart*> getParts() const = 0;
 
     /**
      * @brief Vérifie si le projet est vide
      */
-    bool isEmpty() const { return m_parts.isEmpty(); }
+    virtual bool isEmpty() const = 0;
 
     /**
      * @brief Obtient le nombre de pièces
      */
-    int getPartCount() const { return m_parts.count(); }
+    virtual int getPartCount() const = 0;
 
     /**
      * @brief Calcule le volume total du projet
      */
-    double getTotalVolume() const;
+    virtual double getTotalVolume() const = 0;
 
     /**
      * @brief Calcule la masse totale du projet
      */
-    double getTotalMass() const;
+    virtual double getTotalMass() const = 0;
 
     /**
      * @brief Sauvegarde le projet
      */
-    virtual bool save(const QString& filePath) const;
+    virtual bool save(const QString& filePath) const = 0;
 
     /**
      * @brief Charge le projet
      */
-    virtual bool load(const QString& filePath);
+    virtual bool load(const QString& filePath) = 0;
 
     // Factory Pattern fourni par FactoryMixin
     using FactoryMixin<IProject>::create;
@@ -278,10 +278,6 @@ protected:
     IProject();
     IProject(const QString& name);
     IProject(const IProject& other);
-
-    QString m_name;              ///< Nom du projet
-    ProjectMetadata m_metadata;  ///< Métadonnées
-    QList<IPart*> m_parts;       ///< Liste des pièces
 };
 
 } // namespace Core

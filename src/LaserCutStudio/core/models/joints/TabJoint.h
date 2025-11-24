@@ -3,6 +3,7 @@
 
 #include "core/models/joints/IJoint.h"
 #include "core/models/patterns/properties/PropertyMixin.h"
+#include "core/models/patterns/prototype/ClonableMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {

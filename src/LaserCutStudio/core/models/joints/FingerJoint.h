@@ -3,6 +3,7 @@
 
 #include "core/models/joints/IJoint.h"
 #include "core/models/patterns/properties/PropertyMixin.h"
+#include "core/models/patterns/prototype/ClonableMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {
@@ -29,71 +30,49 @@ signals:
     void fingerWidthChanged(double newWidth);
 
 public:
-    /**
-     * @brief Constructeur par défaut
-     *
-     * Crée un finger joint avec 5 doigts de 10mm de largeur
-     */
     FingerJoint();
-
-    /**
-     * @brief Constructeur avec paramètres
-     * @param partA Première pièce à assembler
-     * @param partB Seconde pièce à assembler
-     * @param position Position 3D du joint dans l'espace
-     * @param angle Angle de rotation du joint en degrés
-     * @param fingerCount Nombre de doigts (doit être ≥ 1)
-     * @param fingerWidth Largeur de chaque doigt en mm (doit être > 0)
-     */
     FingerJoint(IPart* partA, IPart* partB, const Point3D& position, double angle,
                 int fingerCount, double fingerWidth);
-
-    /**
-     * @brief Constructeur de copie
-     * @param other Finger joint à copier
-     * @note Les pointeurs vers les pièces sont copiés (shallow copy)
-     */
     FingerJoint(const FingerJoint& other);
-
     ~FingerJoint() override = default;
 
-    /**
-     * @brief Clone le finger joint
-     * @return Nouveau finger joint identique alloué dynamiquement
-     * @note Les pointeurs vers les pièces sont copiés (shallow copy)
-     */
+    // Interface IJoint implementation
     IJoint* clone() const override;
+    DECLARE_TYPE_NAME(FingerJoint)
 
-    static QString staticTypeName() { return "FingerJoint"; }
-    QString getTypeName() const override { return staticTypeName(); }
+    JointType getType() const override;
+    void setType(JointType type) override;
+    IPart* getPartA() const override;
+    IPart* getPartB() const override;
+    void connect(IPart* partA, IPart* partB) override;
+    void disconnect() override;
+    Point3D getPosition() const override;
+    void setPosition(const Point3D& position) override;
+    double getAngle() const override;
+    void setAngle(double angle) override;
+    bool isValid() const override;
 
-    /**
-     * @brief Obtient le nombre de doigts
-     * @return Nombre de doigts du joint
-     */
+    // FingerJoint specific properties
     int getFingerCount() const { return m_fingerCount; }
-
-    /**
-     * @brief Définit le nombre de doigts
-     * @param count Nouveau nombre de doigts (doit être ≥ 1)
-     */
     void setFingerCount(int count);
-
-    /**
-     * @brief Obtient la largeur des doigts
-     * @return Largeur de chaque doigt en mm
-     */
     double getFingerWidth() const { return m_fingerWidth; }
-
-    /**
-     * @brief Définit la largeur des doigts
-     * @param width Nouvelle largeur en mm (doit être > 0)
-     */
     void setFingerWidth(double width);
 
 private:
-    int m_fingerCount;      ///< Nombre de doigts
-    double m_fingerWidth;   ///< Largeur de chaque doigt
+    // IJoint members
+    JointType m_type;
+    IPart* m_partA;
+    IPart* m_partB;
+    Point3D m_position;
+    double m_angle;
+
+    // FingerJoint specific members
+    int m_fingerCount;
+    double m_fingerWidth;
+
+    // Helpers
+    void connectToPart(IPart*& partMember, IPart* newPart);
+    void disconnectFromPart(IPart*& partMember);
 
     // Auto-enregistrement dans le Factory Pattern
     static const bool s_registered;

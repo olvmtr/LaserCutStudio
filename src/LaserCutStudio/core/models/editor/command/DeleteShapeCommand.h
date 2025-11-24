@@ -11,11 +11,16 @@
 
 #include "core/models/editor/command/IEditorCommand.h"
 #include "core/models/shapes/IShape.h"
-#include "core/services/editor/EditorService.h"
 #include <QVector>
 
 namespace LaserCutStudio {
 namespace Core {
+
+// Forward declaration to avoid circular dependency
+namespace Services {
+    class EditorService;
+}
+
 namespace Editor {
 
 /**

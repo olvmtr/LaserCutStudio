@@ -5,6 +5,7 @@
 
 #include "core/models/editor/command/CreateShapeCommand.h"
 #include "core/models/patterns/prototype/ClonableMixin.h"
+#include "core/services/editor/EditorService.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include <QDebug>
 

@@ -1,4 +1,5 @@
 #include "core/models/joints/TabJoint.h"
+#include "core/models/parts/IPart.h"
 
 namespace LaserCutStudio {
 namespace Core {
