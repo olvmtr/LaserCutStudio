@@ -493,8 +493,13 @@ void ConstraintCanvas2DView::drawDistanceMeasurement(QPainter* painter, const QP
     // Position du texte au milieu
     QPointF midpoint = (p1 + p2) / 2.0;
 
-    // Afficher distance en mm (1 unité = 1mm)
-    QString text = QString::number(distance, 'f', 1) + " mm";
+    // Afficher distance avec l'unité du sketch
+    QString text;
+    if (m_sketch) {
+        text = m_sketch->formatValue(distance, m_sketch->unit());
+    } else {
+        text = QString::number(distance, 'f', 1) + " mm";
+    }
     painter->drawText(midpoint + QPointF(5, -5), text);
 
     painter->restore();

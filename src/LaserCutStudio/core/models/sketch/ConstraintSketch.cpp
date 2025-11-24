@@ -236,5 +236,64 @@ QRectF ConstraintSketch::getBoundingBox() const
     return bbox;
 }
 
+// ===== Conversion d'unités =====
+
+double ConstraintSketch::convertToUnit(double valueInMm, MeasurementUnit targetUnit) const
+{
+    switch (targetUnit) {
+    case Millimeters:
+        return valueInMm;
+    case Centimeters:
+        return valueInMm / 10.0;
+    case Inches:
+        return valueInMm / 25.4;
+    default:
+        return valueInMm;
+    }
+}
+
+double ConstraintSketch::convertFromUnit(double value, MeasurementUnit sourceUnit) const
+{
+    switch (sourceUnit) {
+    case Millimeters:
+        return value;
+    case Centimeters:
+        return value * 10.0;
+    case Inches:
+        return value * 25.4;
+    default:
+        return value;
+    }
+}
+
+QString ConstraintSketch::formatValue(double valueInMm, MeasurementUnit targetUnit) const
+{
+    double converted = convertToUnit(valueInMm, targetUnit);
+    QString suffix = unitSuffix(targetUnit);
+
+    // Format avec 2 décimales sauf si très petit
+    if (converted < 0.01) {
+        return QString::number(converted, 'f', 4) + " " + suffix;
+    } else if (converted < 1.0) {
+        return QString::number(converted, 'f', 3) + " " + suffix;
+    } else {
+        return QString::number(converted, 'f', 2) + " " + suffix;
+    }
+}
+
+QString ConstraintSketch::unitSuffix(MeasurementUnit unit) const
+{
+    switch (unit) {
+    case Millimeters:
+        return "mm";
+    case Centimeters:
+        return "cm";
+    case Inches:
+        return "in";
+    default:
+        return "mm";
+    }
+}
+
 } // namespace Core
 } // namespace LaserCutStudio

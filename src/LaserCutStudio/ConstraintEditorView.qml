@@ -88,6 +88,30 @@ Rectangle {
 
             Rectangle { width: 2; height: parent.height; color: "#34495e" }
 
+            // Sélecteur d'unités
+            Label {
+                text: "Unit:"
+                color: "white"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            ComboBox {
+                id: unitCombo
+                model: ["mm", "cm", "in"]
+                currentIndex: 0
+                onCurrentIndexChanged: {
+                    if (sketch) {
+                        switch(currentIndex) {
+                            case 0: sketch.setUnit(0); break; // Millimeters
+                            case 1: sketch.setUnit(1); break; // Centimeters
+                            case 2: sketch.setUnit(2); break; // Inches
+                        }
+                    }
+                }
+            }
+
+            Rectangle { width: 2; height: parent.height; color: "#34495e" }
+
             // Actions
             ToolButton {
                 text: "Solve"

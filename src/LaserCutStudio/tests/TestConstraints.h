@@ -39,6 +39,26 @@ private slots:
     void testFixedPointConstraintConstruction();
     void testFixedPointConstraintError();
     void testFixedPointConstraintApply();
+
+    // ParallelConstraint
+    void testParallelConstraintConstruction();
+    void testParallelConstraintError();
+    void testParallelConstraintApply();
+
+    // PerpendicularConstraint
+    void testPerpendicularConstraintConstruction();
+    void testPerpendicularConstraintError();
+    void testPerpendicularConstraintApply();
+
+    // EqualLengthConstraint
+    void testEqualLengthConstraintConstruction();
+    void testEqualLengthConstraintError();
+    void testEqualLengthConstraintApply();
+
+    // CoincidentConstraint
+    void testCoincidentConstraintConstruction();
+    void testCoincidentConstraintError();
+    void testCoincidentConstraintApply();
 };
 
 } // namespace Tests

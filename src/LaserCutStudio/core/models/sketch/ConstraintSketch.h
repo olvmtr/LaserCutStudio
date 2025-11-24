@@ -167,6 +167,12 @@ public:
     QPainterPath toPainterPath() const;
     QRectF getBoundingBox() const;
 
+    // Conversion d'unités
+    Q_INVOKABLE double convertToUnit(double valueInMm, MeasurementUnit targetUnit) const;
+    Q_INVOKABLE double convertFromUnit(double value, MeasurementUnit sourceUnit) const;
+    Q_INVOKABLE QString formatValue(double valueInMm, MeasurementUnit targetUnit) const;
+    Q_INVOKABLE QString unitSuffix(MeasurementUnit unit) const;
+
     // Factory Pattern
     using FactoryMixin<ConstraintSketch>::create;
     using FactoryMixin<ConstraintSketch>::availableTypes;
