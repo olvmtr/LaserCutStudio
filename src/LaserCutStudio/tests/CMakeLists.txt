@@ -33,6 +33,8 @@ add_executable(LaserCutStudioTests
     TestEditorService.cpp
     TestArchitectureInterfaces.h
     TestArchitectureInterfaces.cpp
+    TestGeometry.h
+    TestGeometry.cpp
     # Sources du module Core (seulement ceux qui ne sont pas dans LibInterface)
     ../core/models/base/types/Point2D.h
     ../core/models/base/types/Point3D.h
@@ -94,6 +96,29 @@ add_executable(LaserCutStudioTests
     ../core/models/editor/tool/SelectionTool.cpp
     ../core/models/editor/tool/ShapeCreationTool.h
     ../core/models/editor/tool/ShapeCreationTool.cpp
+    # New constraint-based geometry system
+    ../core/models/geometry/IGeometricElement.h
+    ../core/models/geometry/IGeometricElement.cpp
+    ../core/models/geometry/GeometricPoint.h
+    ../core/models/geometry/GeometricPoint.cpp
+    ../core/models/geometry/GeometricSegment.h
+    ../core/models/geometry/GeometricSegment.cpp
+    ../core/models/geometry/GeometricArc.h
+    ../core/models/geometry/GeometricArc.cpp
+    ../core/models/constraints/IConstraint.h
+    ../core/models/constraints/IConstraint.cpp
+    ../core/models/constraints/DistanceConstraint.h
+    ../core/models/constraints/DistanceConstraint.cpp
+    ../core/models/constraints/LengthConstraint.h
+    ../core/models/constraints/LengthConstraint.cpp
+    ../core/models/constraints/AngleConstraint.h
+    ../core/models/constraints/AngleConstraint.cpp
+    ../core/models/constraints/FixedPointConstraint.h
+    ../core/models/constraints/FixedPointConstraint.cpp
+    ../core/models/sketch/ConstraintSolver.h
+    ../core/models/sketch/ConstraintSolver.cpp
+    ../core/models/sketch/ConstraintSketch.h
+    ../core/models/sketch/ConstraintSketch.cpp
 )
 
 # Lie les bibliothèques Qt et LibInterface

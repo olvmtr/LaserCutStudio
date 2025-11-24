@@ -13,6 +13,7 @@
 #include "TestEditorCommands.h"
 #include "TestEditorService.h"
 #include "TestArchitectureInterfaces.h"
+#include "TestGeometry.h"
 
 int main(int argc, char *argv[])
 {
@@ -78,6 +79,11 @@ int main(int argc, char *argv[])
     {
         LaserCutStudio::Core::Tests::TestArchitectureInterfaces testArchInterfaces;
         status |= QTest::qExec(&testArchInterfaces, argc, argv);
+    }
+
+    {
+        LaserCutStudio::Core::Tests::TestGeometry testGeometry;
+        status |= QTest::qExec(&testGeometry, argc, argv);
     }
 
     return status;

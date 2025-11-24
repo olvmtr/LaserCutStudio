@@ -529,6 +529,364 @@
     {
         "classes": [
             {
+                "className": "ConstraintSketch",
+                "enums": [
+                    {
+                        "isClass": false,
+                        "isFlag": false,
+                        "name": "MeasurementUnit",
+                        "values": [
+                            "Millimeters",
+                            "Centimeters",
+                            "Inches"
+                        ]
+                    }
+                ],
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "name",
+                        "notify": "nameChanged",
+                        "read": "name",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false,
+                        "write": "setName"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "unit",
+                        "notify": "unitChanged",
+                        "read": "unit",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "MeasurementUnit",
+                        "user": false,
+                        "write": "setUnit"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "autoSolve",
+                        "notify": "autoSolveChanged",
+                        "read": "autoSolve",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setAutoSolve"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::ConstraintSketch",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newName",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "nameChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newUnit",
+                                "type": "MeasurementUnit"
+                            }
+                        ],
+                        "name": "unitChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newAutoSolve",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "autoSolveChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "element",
+                                "type": "IGeometricElement*"
+                            }
+                        ],
+                        "name": "elementAdded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "element",
+                                "type": "IGeometricElement*"
+                            }
+                        ],
+                        "name": "elementRemoved",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "constraint",
+                                "type": "IConstraint*"
+                            }
+                        ],
+                        "name": "constraintAdded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "constraint",
+                                "type": "IConstraint*"
+                            }
+                        ],
+                        "name": "constraintRemoved",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "success",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "solveCompleted",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "geometryChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<ConstraintSketch>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<ConstraintSketch>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ConstraintSketch.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "ConstraintSolver",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "maxIterations",
+                        "notify": "maxIterationsChanged",
+                        "read": "maxIterations",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false,
+                        "write": "setMaxIterations"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "tolerance",
+                        "notify": "toleranceChanged",
+                        "read": "tolerance",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setTolerance"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "iterationCount",
+                        "notify": "iterationCountChanged",
+                        "read": "iterationCount",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "residualError",
+                        "notify": "residualErrorChanged",
+                        "read": "residualError",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 4,
+                        "name": "converged",
+                        "notify": "convergedChanged",
+                        "read": "converged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::ConstraintSolver",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newMaxIterations",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "maxIterationsChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newTolerance",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "toleranceChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newIterationCount",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "iterationCountChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newResidualError",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "residualErrorChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newConverged",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "convergedChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "solvingStarted",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "iteration",
+                                "type": "int"
+                            },
+                            {
+                                "name": "error",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "iterationCompleted",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "success",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "solvingFinished",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ConstraintSolver.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
                 "className": "IPart",
                 "object": true,
                 "qualifiedClassName": "LaserCutStudio::Core::IPart",
@@ -1302,6 +1660,885 @@
     {
         "classes": [
             {
+                "className": "AngleConstraint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "segment1",
+                        "notify": "segment1Changed",
+                        "read": "segment1",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricSegment*",
+                        "user": false,
+                        "write": "setSegment1"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "segment2",
+                        "notify": "segment2Changed",
+                        "read": "segment2",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricSegment*",
+                        "user": false,
+                        "write": "setSegment2"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "angle",
+                        "notify": "angleChanged",
+                        "read": "angle",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setAngle"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::AngleConstraint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newSegment1",
+                                "type": "GeometricSegment*"
+                            }
+                        ],
+                        "name": "segment1Changed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newSegment2",
+                                "type": "GeometricSegment*"
+                            }
+                        ],
+                        "name": "segment2Changed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newAngle",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "angleChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IConstraint"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<AngleConstraint>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "AngleConstraint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "DistanceConstraint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "point1",
+                        "notify": "point1Changed",
+                        "read": "point1",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricPoint*",
+                        "user": false,
+                        "write": "setPoint1"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "point2",
+                        "notify": "point2Changed",
+                        "read": "point2",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricPoint*",
+                        "user": false,
+                        "write": "setPoint2"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "distance",
+                        "notify": "distanceChanged",
+                        "read": "distance",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setDistance"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::DistanceConstraint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newPoint1",
+                                "type": "GeometricPoint*"
+                            }
+                        ],
+                        "name": "point1Changed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newPoint2",
+                                "type": "GeometricPoint*"
+                            }
+                        ],
+                        "name": "point2Changed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newDistance",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "distanceChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IConstraint"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<DistanceConstraint>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "DistanceConstraint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "FixedPointConstraint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "point",
+                        "notify": "pointChanged",
+                        "read": "point",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricPoint*",
+                        "user": false,
+                        "write": "setPoint"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "x",
+                        "notify": "xChanged",
+                        "read": "x",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setX"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "y",
+                        "notify": "yChanged",
+                        "read": "y",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setY"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::FixedPointConstraint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newPoint",
+                                "type": "GeometricPoint*"
+                            }
+                        ],
+                        "name": "pointChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newX",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "xChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newY",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "yChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IConstraint"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<FixedPointConstraint>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "FixedPointConstraint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "IConstraint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "locked",
+                        "notify": "lockedChanged",
+                        "read": "isLocked",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setLocked"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "priority",
+                        "notify": "priorityChanged",
+                        "read": "priority",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setPriority"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::IConstraint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "constraintChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "locked",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "lockedChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "priority",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "priorityChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "satisfied",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "violated",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<IConstraint>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<IConstraint>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "IConstraint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "LengthConstraint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "segment",
+                        "notify": "segmentChanged",
+                        "read": "segment",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricSegment*",
+                        "user": false,
+                        "write": "setSegment"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "length",
+                        "notify": "lengthChanged",
+                        "read": "length",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setLength"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::LengthConstraint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newSegment",
+                                "type": "GeometricSegment*"
+                            }
+                        ],
+                        "name": "segmentChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newLength",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "lengthChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IConstraint"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<LengthConstraint>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "LengthConstraint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "GeometricArc",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "center",
+                        "notify": "centerChanged",
+                        "read": "center",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricPoint*",
+                        "user": false,
+                        "write": "setCenter"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "radius",
+                        "notify": "radiusChanged",
+                        "read": "radius",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setRadius"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "startAngle",
+                        "notify": "startAngleChanged",
+                        "read": "startAngle",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setStartAngle"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "endAngle",
+                        "notify": "endAngleChanged",
+                        "read": "endAngle",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setEndAngle"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::GeometricArc",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newCenter",
+                                "type": "GeometricPoint*"
+                            }
+                        ],
+                        "name": "centerChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newRadius",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "radiusChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newStartAngle",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "startAngleChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newEndAngle",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "endAngleChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IGeometricElement"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<GeometricArc>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "GeometricArc.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Geometry"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Geometric 2D point with constraints support"
+                    }
+                ],
+                "className": "GeometricPoint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "x",
+                        "notify": "xChanged",
+                        "read": "x",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setX"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "y",
+                        "notify": "yChanged",
+                        "read": "y",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setY"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "locked",
+                        "notify": "lockedChanged",
+                        "read": "isLocked",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setLocked"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::GeometricPoint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newX",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "xChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newY",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "yChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "locked",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "lockedChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IGeometricElement"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<GeometricPoint>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "GeometricPoint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "Version",
+                        "value": "1.0.0"
+                    },
+                    {
+                        "name": "Category",
+                        "value": "Geometry"
+                    },
+                    {
+                        "name": "Description",
+                        "value": "Geometric segment between two points"
+                    }
+                ],
+                "className": "GeometricSegment",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "startPoint",
+                        "notify": "startPointChanged",
+                        "read": "startPoint",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricPoint*",
+                        "user": false,
+                        "write": "setStartPoint"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "endPoint",
+                        "notify": "endPointChanged",
+                        "read": "endPoint",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricPoint*",
+                        "user": false,
+                        "write": "setEndPoint"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "length",
+                        "notify": "geometryChanged",
+                        "read": "length",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "angle",
+                        "notify": "geometryChanged",
+                        "read": "angle",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::GeometricSegment",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newStartPoint",
+                                "type": "GeometricPoint*"
+                            }
+                        ],
+                        "name": "startPointChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "newEndPoint",
+                                "type": "GeometricPoint*"
+                            }
+                        ],
+                        "name": "endPointChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IGeometricElement"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::PropertyMixin<GeometricSegment>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "GeometricSegment.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "IGeometricElement",
+                "object": true,
+                "qualifiedClassName": "LaserCutStudio::Core::IGeometricElement",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "geometryChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "Interface"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<IGeometricElement>"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::ListManagerMixin<IGeometricElement>"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "IGeometricElement.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
                 "className": "PluginManager",
                 "object": true,
                 "qualifiedClassName": "LaserCutStudio::Core::Plugins::PluginManager",
@@ -1365,6 +2602,10 @@
                     {
                         "access": "public",
                         "name": "IEditorCommand"
+                    },
+                    {
+                        "access": "protected",
+                        "name": "Patterns::FactoryMixin<ITransformationCommand>"
                     },
                     {
                         "access": "protected",

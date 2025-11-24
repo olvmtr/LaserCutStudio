@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 13.0.0, 2025-11-20T20:17:35. -->
+<!-- Written by QtCreator 13.0.0, 2025-11-23T22:22:20. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -70,6 +70,28 @@
     <value type="bool" key="AutoTest.Framework.QtTest">true</value>
    </valuemap>
    <valuemap type="QVariantMap" key="AutoTest.CheckStates">
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:LaserCutStudio::Core::Tests::TestArchitectureInterfaces">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:cleanupTestCase">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:initTestCase">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testAllInterfacesFollowNamingConvention">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testAllSubInterfacesHaveFactory">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testAllSubInterfacesHaveListManager">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testCanListAllTransformationCommands">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testIEditorCommandHasFactory">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testIJointHasListManager">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testIPartHasListManager">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testIProjectHasListManager">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testIShapeHasListManager">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testITransformationCommandExists">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testITransformationCommandHasFactory">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testITransformationCommandHasListManager">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testITransformationCommandInheritsFromIEditorCommand">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testMoveCommandInheritsFromITransformationCommand">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testNoFactoryPatternViolations">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testRotateCommandInheritsFromITransformationCommand">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testScaleCommandInheritsFromITransformationCommand">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testTransformationCommandsAreTracked">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestArchitectureInterfaces.h:testTransformationCommandsCanBeCleared">Unchecked</value>
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestConfigManager.h:LaserCutStudio::Tests::TestConfigManager">Unchecked</value>
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestConfigManager.h:cleanup">Unchecked</value>
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestConfigManager.h:cleanupTestCase">Unchecked</value>
@@ -97,6 +119,60 @@
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestConfigManager.h:testSetMaterial">Unchecked</value>
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestConfigManager.h:testSingleton">Unchecked</value>
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestConfigManager.h:testUpdateMaterial">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:TestEditorCommands">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:cleanup">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:cleanupTestCase">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:init">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:initTestCase">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testBugFix_ConsecutiveDragsWithMerge">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testBugReproduction_MultipleUndoRedo">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testBugReproduction_UndoAfterMove">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testCommandStack_Clear">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testCommandStack_PushAndUndo">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testCommandStack_UndoLimit">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testCommandStack_UndoRedo">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testCreateShapeCommand_Execute">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testCreateShapeCommand_MultipleShapes">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testCreateShapeCommand_Redo">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testCreateShapeCommand_Undo">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testEditorService_AddShapeWithCommand">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testEditorService_CompleteWorkflow">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testEditorService_RedoAddShape">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testEditorService_UndoAddShape">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testMoveCommand_Execute">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testMoveCommand_Merge">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testMoveCommand_MultipleShapes">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testMoveCommand_Redo">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testMoveCommand_Undo">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testSelectionTool_ClearSelection">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testSelectionTool_DragAndDrop">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testSelectionTool_SelectAll">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorCommands.h:testSelectionTool_SelectShape">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:LaserCutStudio::Core::Tests::TestEditorService">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:cleanup">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:cleanupTestCase">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:init">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:initTestCase">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testAddShape">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testClear">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testDeleteSelectedShapes">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testGetShapes">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testGetShapesReturnsValidPointers">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testRemoveShape">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testSelectionAddRemove">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testSelectionClear">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testSelectionCount">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testSelectionExists">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testSelectionFromListActivatesSelectionTool">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testSelectionIsSelected">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testSelectionToggle">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testSetSelectionPropertyModifiesShape">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testShapeAddedSignal">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testShapeCount">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testShapeCountChangedSignal">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testShapeHasNameProperty">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testShapeRemovedSignal">Unchecked</value>
+    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestEditorService.h:testShapeToVariantForDisplay">Unchecked</value>
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestJoint.h:TestJoint">Unchecked</value>
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestJoint.h:cleanupTestCase">Unchecked</value>
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestJoint.h:initTestCase">Unchecked</value>
@@ -222,25 +298,7 @@
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestTypes.h:testPoint3DConstruction">Unchecked</value>
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestTypes.h:testPoint3DDistance">Unchecked</value>
     <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/TestTypes.h:testPoint3DOperators">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:LaserCutStudio::Benchmarks::BenchmarkShapes">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkCircleArea">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkCircleBoundingBox">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkCircleClone">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkCircleContainsPoint">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkCircleCreation">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkCircleToVariantMap">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkFactoryCreate">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkFactoryRoundtrip">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkRectangleArea">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkRectangleBoundingBox">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkRectangleClone">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkRectangleContainsPoint">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkRectangleCreation">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkRectangleRotate">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkRectangleScale">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkRectangleToVariantMap">Unchecked</value>
-    <value type="Qt::CheckState" key="1@/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/tests/benchmarks/BenchmarkShapes.h:benchmarkRectangleTranslate">Unchecked</value>
-    <value type="Qt::CheckState" key="1@:Qt Test">Unchecked</value>
+    <value type="Qt::CheckState" key="1@:Qt Test">PartiallyChecked</value>
    </valuemap>
    <value type="int" key="AutoTest.RunAfterBuild">0</value>
    <value type="bool" key="AutoTest.UseGlobal">true</value>

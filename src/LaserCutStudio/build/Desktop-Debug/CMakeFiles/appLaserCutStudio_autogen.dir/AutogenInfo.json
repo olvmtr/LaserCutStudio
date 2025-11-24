@@ -353,6 +353,36 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/AngleConstraint.h",
+			"MU",
+			"PKD67KECZY/moc_AngleConstraint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/DistanceConstraint.h",
+			"MU",
+			"PKD67KECZY/moc_DistanceConstraint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/FixedPointConstraint.h",
+			"MU",
+			"PKD67KECZY/moc_FixedPointConstraint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/IConstraint.h",
+			"MU",
+			"PKD67KECZY/moc_IConstraint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/LengthConstraint.h",
+			"MU",
+			"PKD67KECZY/moc_LengthConstraint.cpp",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/CommandStack.h",
 			"MU",
 			"V5T6AIA6VA/moc_CommandStack.cpp",
@@ -443,6 +473,30 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/geometry/GeometricArc.h",
+			"MU",
+			"QMM7WCXL3L/moc_GeometricArc.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/geometry/GeometricPoint.h",
+			"MU",
+			"QMM7WCXL3L/moc_GeometricPoint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/geometry/GeometricSegment.h",
+			"MU",
+			"QMM7WCXL3L/moc_GeometricSegment.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/geometry/IGeometricElement.h",
+			"MU",
+			"QMM7WCXL3L/moc_IGeometricElement.cpp",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/FingerJoint.h",
 			"MU",
 			"7BFAKV5J3E/moc_FingerJoint.cpp",
@@ -506,6 +560,18 @@
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/Triangle.h",
 			"MU",
 			"YXENAAPBZT/moc_Triangle.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/sketch/ConstraintSketch.h",
+			"MU",
+			"BWDEPUJTTD/moc_ConstraintSketch.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/sketch/ConstraintSolver.h",
+			"MU",
+			"BWDEPUJTTD/moc_ConstraintSolver.cpp",
 			null
 		],
 		[
@@ -651,6 +717,31 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/AngleConstraint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/DistanceConstraint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/FixedPointConstraint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/IConstraint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/LengthConstraint.cpp",
+			"MU",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/editor/command/CommandStack.cpp",
 			"MU",
 			null
@@ -726,6 +817,26 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/geometry/GeometricArc.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/geometry/GeometricPoint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/geometry/GeometricSegment.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/geometry/IGeometricElement.cpp",
+			"MU",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/joints/FingerJoint.cpp",
 			"MU",
 			null
@@ -777,6 +888,16 @@
 		],
 		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/shapes/Triangle.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/sketch/ConstraintSketch.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/sketch/ConstraintSolver.cpp",
 			"MU",
 			null
 		],
