@@ -53,6 +53,14 @@ qt_add_executable(appLaserCutStudio
     core/models/constraints/AngleConstraint.cpp
     core/models/constraints/FixedPointConstraint.h
     core/models/constraints/FixedPointConstraint.cpp
+    core/models/constraints/ParallelConstraint.h
+    core/models/constraints/ParallelConstraint.cpp
+    core/models/constraints/PerpendicularConstraint.h
+    core/models/constraints/PerpendicularConstraint.cpp
+    core/models/constraints/EqualLengthConstraint.h
+    core/models/constraints/EqualLengthConstraint.cpp
+    core/models/constraints/CoincidentConstraint.h
+    core/models/constraints/CoincidentConstraint.cpp
     # Core Module - Models Sketch
     core/models/sketch/ConstraintSolver.h
     core/models/sketch/ConstraintSolver.cpp
