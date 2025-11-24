@@ -938,7 +938,7 @@ build .qt_plugins/Qt6_QmlPlugins_Imports_appLaserCutStudio.cmake | ${cmake_ninja
 #############################################
 # Phony custom command for CMakeFiles/appLaserCutStudio_autogen_timestamp_deps
 
-build CMakeFiles/appLaserCutStudio_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/appLaserCutStudio_autogen_timestamp_deps: phony .rcc/qmlcache/appLaserCutStudio_qmlcache_loader.cpp /usr/lib/qt6/libexec/moc /usr/lib/x86_64-linux-gnu/libQt6Quick.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Qml.so.6.4.2 LibInterface/libLibInterface.a || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
+build CMakeFiles/appLaserCutStudio_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/appLaserCutStudio_autogen_timestamp_deps: phony .rcc/qmlcache/appLaserCutStudio_qmlcache_loader.cpp /usr/lib/qt6/libexec/moc /usr/lib/x86_64-linux-gnu/libQt6Qml.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Quick.so.6.4.2 LibInterface/libLibInterface.a || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
 
 
 #############################################
@@ -1677,7 +1677,7 @@ build tests/LaserCutStudioTests_autogen/timestamp tests/LaserCutStudioTests_auto
 #############################################
 # Phony custom command for tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps
 
-build tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps | ${cmake_ninja_workdir}tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps: phony /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 /usr/lib/qt6/libexec/moc /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2 LibInterface/libLibInterface.a || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
+build tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps | ${cmake_ninja_workdir}tests/CMakeFiles/LaserCutStudioTests_autogen_timestamp_deps: phony /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 /usr/lib/qt6/libexec/moc /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2 LibInterface/libLibInterface.a /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
 
 
 #############################################
@@ -1855,7 +1855,7 @@ build tests/benchmarks/LaserCutStudioBenchmarks_autogen/timestamp tests/benchmar
 #############################################
 # Phony custom command for tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen_timestamp_deps
 
-build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen_timestamp_deps | ${cmake_ninja_workdir}tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen_timestamp_deps: phony /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 /usr/lib/qt6/libexec/moc LibInterface/libLibInterface.a || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
+build tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen_timestamp_deps | ${cmake_ninja_workdir}tests/benchmarks/CMakeFiles/LaserCutStudioBenchmarks_autogen_timestamp_deps: phony /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2 /usr/lib/qt6/libexec/moc LibInterface/libLibInterface.a /usr/lib/x86_64-linux-gnu/libQt6Test.so.6.4.2 || LibInterface/LibInterface_autogen LibInterface/LibInterface_autogen_timestamp_deps LibInterface/libLibInterface.a
 
 
 #############################################
