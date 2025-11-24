@@ -11,26 +11,12 @@ add_executable(LaserCutStudioTests
     main.cpp
     TestTypes.h
     TestTypes.cpp
-    TestShapes.h
-    TestShapes.cpp
-    TestPart.h
-    TestPart.cpp
-    TestJoint.h
-    TestJoint.cpp
-    TestProject.h
-    TestProject.cpp
     TestConfigManager.h
     TestConfigManager.cpp
     TestLogging.h
     TestLogging.cpp
-    TestPluginManager.h
-    TestPluginManager.cpp
     TestServiceLocator.h
     TestServiceLocator.cpp
-    TestEditorCommands.h
-    TestEditorCommands.cpp
-    TestEditorService.h
-    TestEditorService.cpp
     TestArchitectureInterfaces.h
     TestArchitectureInterfaces.cpp
     TestGeometry.h
@@ -44,57 +30,13 @@ add_executable(LaserCutStudioTests
     ../core/models/base/types/Point3D.h
     ../core/models/base/types/Material.h
     ../core/models/base/types/JointType.h
-    ../core/models/parts/IPart.h
-    ../core/models/parts/IPart.cpp
-    ../core/models/parts/implementation/Part.h
-    ../core/models/parts/implementation/Part.cpp
-    ../core/models/joints/IJoint.h
-    ../core/models/joints/IJoint.cpp
-    ../core/models/joints/TabJoint.h
-    ../core/models/joints/TabJoint.cpp
-    ../core/models/joints/FingerJoint.h
-    ../core/models/joints/FingerJoint.cpp
-    ../core/models/projects/IProject.h
-    ../core/models/projects/IProject.cpp
-    ../core/models/projects/implementation/Project.h
-    ../core/models/projects/implementation/Project.cpp
     ../core/infrastructure/config/ConfigManager.h
     ../core/infrastructure/config/ConfigManager.cpp
     ../core/infrastructure/logging/LogCategories.h
     ../core/infrastructure/logging/LogCategories.cpp
     ../core/infrastructure/logging/LogManager.h
     ../core/infrastructure/logging/LogManager.cpp
-    ../core/infrastructure/plugins/interfaces/IShapePlugin.h
-    ../core/infrastructure/plugins/interfaces/IJointPlugin.h
-    ../core/infrastructure/plugins/core/PluginManager.h
-    ../core/infrastructure/plugins/core/PluginManager.cpp
-    # Editor components
-    ../core/services/editor/EditorService.h
-    ../core/services/editor/EditorService.cpp
-    ../core/models/editor/tool/ITool.h
-    ../core/models/editor/selection/ISelection.h
-    ../core/models/editor/command/IEditorCommand.h
-    ../core/models/editor/command/transformations/ITransformationCommand.h
-    ../core/models/editor/command/transformations/ITransformationCommand.cpp
-    ../core/models/editor/command/CommandStack.h
-    ../core/models/editor/command/CommandStack.cpp
-    ../core/models/editor/command/CreateShapeCommand.h
-    ../core/models/editor/command/CreateShapeCommand.cpp
-    ../core/models/editor/command/transformations/MoveCommand.h
-    ../core/models/editor/command/transformations/MoveCommand.cpp
-    ../core/models/editor/command/DeleteShapeCommand.h
-    ../core/models/editor/command/DeleteShapeCommand.cpp
-    ../core/models/editor/command/transformations/RotateCommand.h
-    ../core/models/editor/command/transformations/RotateCommand.cpp
-    ../core/models/editor/command/transformations/ScaleCommand.h
-    ../core/models/editor/command/transformations/ScaleCommand.cpp
-    ../core/models/editor/selection/SelectionManager.h
-    ../core/models/editor/selection/SelectionManager.cpp
-    ../core/models/editor/tool/SelectionTool.h
-    ../core/models/editor/tool/SelectionTool.cpp
-    ../core/models/editor/tool/ShapeCreationTool.h
-    ../core/models/editor/tool/ShapeCreationTool.cpp
-    # New constraint-based geometry system
+    # Constraint-based geometry system
     ../core/models/geometry/IGeometricElement.h
     ../core/models/geometry/IGeometricElement.cpp
     ../core/models/geometry/implementation/GeometricPoint.h
@@ -161,18 +103,3 @@ add_test(NAME LaserCutStudioTests COMMAND LaserCutStudioTests)
 set_target_properties(LaserCutStudioTests PROPERTIES
     AUTOMOC ON
 )
-
-# Option pour compiler les benchmarks (activée par défaut en Debug uniquement)
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    option(BUILD_BENCHMARKS "Build performance benchmarks" ON)
-else()
-    option(BUILD_BENCHMARKS "Build performance benchmarks" OFF)
-endif()
-
-# Ajoute les benchmarks si l'option est activée
-if(BUILD_BENCHMARKS)
-    message(STATUS "Building benchmarks (BUILD_BENCHMARKS=ON)")
-    add_subdirectory(benchmarks)
-else()
-    message(STATUS "Skipping benchmarks (BUILD_BENCHMARKS=OFF)")
-endif()

@@ -57,65 +57,9 @@ qt_add_executable(appLaserCutStudio
     core/models/sketch/ConstraintSolver.cpp
     core/models/sketch/ConstraintSketch.h
     core/models/sketch/ConstraintSketch.cpp
-    # Core Module - Models Parts
-    core/models/parts/IPart.h
-    core/models/parts/IPart.cpp
-    core/models/parts/implementation/Part.h
-    core/models/parts/implementation/Part.cpp
-    # Core Module - Models Joints
-    core/models/joints/IJoint.h
-    core/models/joints/IJoint.cpp
-    core/models/joints/TabJoint.h
-    core/models/joints/TabJoint.cpp
-    core/models/joints/FingerJoint.h
-    core/models/joints/FingerJoint.cpp
-    # Core Module - Models Projects
-    core/models/projects/IProject.h
-    core/models/projects/IProject.cpp
-    core/models/projects/implementation/Project.h
-    core/models/projects/implementation/Project.cpp
-    # Core Module - Models Editor
-    core/models/editor/tool/ITool.h
-    core/models/editor/tool/ITool.cpp
-    core/models/editor/command/IEditorCommand.h
-    core/models/editor/command/IEditorCommand.cpp
-    core/models/editor/command/transformations/ITransformationCommand.h
-    core/models/editor/command/transformations/ITransformationCommand.cpp
-    core/models/editor/selection/ISelection.h
-    core/models/editor/selection/ISelection.cpp
-    core/models/editor/tool/ShapeCreationTool.h
-    core/models/editor/tool/ShapeCreationTool.cpp
-    core/models/editor/tool/PanTool.h
-    core/models/editor/tool/PanTool.cpp
-    core/models/editor/tool/ZoomTool.h
-    core/models/editor/tool/ZoomTool.cpp
-    core/models/editor/tool/SelectionTool.h
-    core/models/editor/tool/SelectionTool.cpp
-    core/models/editor/selection/SelectionManager.h
-    core/models/editor/selection/SelectionManager.cpp
-    core/models/editor/command/CreateShapeCommand.h
-    core/models/editor/command/CreateShapeCommand.cpp
-    core/models/editor/command/transformations/MoveCommand.h
-    core/models/editor/command/transformations/MoveCommand.cpp
-    core/models/editor/command/DeleteShapeCommand.h
-    core/models/editor/command/DeleteShapeCommand.cpp
-    core/models/editor/command/transformations/RotateCommand.h
-    core/models/editor/command/transformations/RotateCommand.cpp
-    core/models/editor/command/transformations/ScaleCommand.h
-    core/models/editor/command/transformations/ScaleCommand.cpp
-    core/models/editor/command/CommandStack.h
-    core/models/editor/command/CommandStack.cpp
-    # Core Module - Services Editor
-    core/services/editor/EditorService.h
-    core/services/editor/EditorService.cpp
     # Core Module - UI Canvas
-    core/ui/canvas/Canvas2DView.h
-    core/ui/canvas/Canvas2DView.cpp
     core/ui/canvas/ConstraintCanvas2DView.h
     core/ui/canvas/ConstraintCanvas2DView.cpp
-    # Core Module - UI ViewModels
-    core/ui/viewmodels/GenericPropertiesViewModel.h
-    core/ui/viewmodels/GenericPropertiesViewModel.cpp
     # Core Module - Infrastructure Config
     core/infrastructure/config/ConfigManager.h
     core/infrastructure/config/ConfigManager.cpp
@@ -124,11 +68,6 @@ qt_add_executable(appLaserCutStudio
     core/infrastructure/logging/LogCategories.cpp
     core/infrastructure/logging/LogManager.h
     core/infrastructure/logging/LogManager.cpp
-    # Core Module - Infrastructure Plugins
-    core/infrastructure/plugins/interfaces/IShapePlugin.h
-    core/infrastructure/plugins/interfaces/IJointPlugin.h
-    core/infrastructure/plugins/core/PluginManager.h
-    core/infrastructure/plugins/core/PluginManager.cpp
     # Core Module - Infrastructure DI
     core/infrastructure/di/ServiceLocator.h
     core/infrastructure/di/ServiceLocator.cpp
@@ -139,12 +78,8 @@ qt_add_qml_module(appLaserCutStudio
     VERSION 1.0
     QML_FILES
         Main.qml
-        EditorView.qml
-        ToolPalette.qml
-        ShapesListPanel.qml
         ConstraintEditorView.qml
         ConstraintPropertiesPanel.qml
-        ComponentPalette.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
