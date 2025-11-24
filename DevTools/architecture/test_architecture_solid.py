@@ -188,6 +188,10 @@ class TestArchitectureSOLID:
 
         implementations_dir = CORE_PATH / "models"
 
+        # Liste des classes concrètes à détecter
+        concrete_classes = ['Rectangle', 'Circle', 'Triangle', 'Part', 'TabJoint', 'FingerJoint', 'Project']
+
+        # Vérifier les includes
         for impl_file in self.analyzer.get_all_headers(implementations_dir):
             if 'implementations' not in str(impl_file):
                 continue
@@ -218,6 +222,47 @@ class TestArchitectureSOLID:
                             f"   INTERDIT: Inclure des classes concrètes\n"
                             f"   SOLUTION: Déclarer les dépendances avec des interfaces (I*)"
                         )
+
+        # Vérifier les déclarations de types concrets dans le code (.h et .cpp)
+        for file_path in list(CORE_PATH.rglob("*.h")) + list(CORE_PATH.rglob("*.cpp")):
+            if 'test' in str(file_path).lower() or 'moc_' in str(file_path):
+                continue
+
+            try:
+                content = file_path.read_text(encoding='utf-8')
+                lines = content.split('\n')
+
+                for line_num, line in enumerate(lines, 1):
+                    # Skip commentaires
+                    if '//' in line:
+                        line = line[:line.index('//')]
+
+                    # Chercher des déclarations de types concrets
+                    for concrete in concrete_classes:
+                        # Pattern: Type* variable, Type& variable, Type variable, function(Type* param)
+                        import re
+                        patterns = [
+                            rf'\b{concrete}\s*\*\s+\w+',  # Rectangle* var
+                            rf'\b{concrete}\s*&\s+\w+',   # Rectangle& var
+                            rf'\({concrete}\s*\*',        # function(Rectangle*
+                            rf'\({concrete}\s*&',         # function(Rectangle&
+                        ]
+
+                        for pattern in patterns:
+                            if re.search(pattern, line):
+                                # Vérifier que ce n'est pas dans le fichier de définition de la classe elle-même
+                                if concrete not in file_path.stem:
+                                    self.log_error(
+                                        f"VIOLATION RÈGLE 2: Utilisation de type concret {concrete}\n"
+                                        f"   Fichier: {file_path}\n"
+                                        f"   Ligne {line_num}: {line.strip()}\n"
+                                        f"   INTERDIT: Déclarer des variables/paramètres avec des types concrets\n"
+                                        f"   SOLUTION: Utiliser l'interface correspondante (IShape*, IPart*, IJoint*, IProject*)"
+                                    )
+                                    break
+
+            except Exception as e:
+                continue
 
         if not any("RÈGLE 2" in err for err in self.errors):
             self.log_success("RÈGLE 2: Toutes les dépendances utilisent les interfaces")

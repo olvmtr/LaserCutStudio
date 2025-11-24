@@ -24,24 +24,15 @@ qt_add_executable(appLaserCutStudio
     core/models/base/types/Point3D.h
     core/models/base/types/Material.h
     core/models/base/types/JointType.h
-    # Core Module - Models Shapes (DEPRECATED - will be removed)
-    core/models/shapes/IShape.h
-    core/models/shapes/IShape.cpp
-    core/models/shapes/Rectangle.h
-    core/models/shapes/Rectangle.cpp
-    core/models/shapes/Circle.h
-    core/models/shapes/Circle.cpp
-    core/models/shapes/Triangle.h
-    core/models/shapes/Triangle.cpp
     # Core Module - Models Geometry (NEW - Constraint-based)
     core/models/geometry/IGeometricElement.h
     core/models/geometry/IGeometricElement.cpp
-    core/models/geometry/GeometricPoint.h
-    core/models/geometry/GeometricPoint.cpp
-    core/models/geometry/GeometricSegment.h
-    core/models/geometry/GeometricSegment.cpp
-    core/models/geometry/GeometricArc.h
-    core/models/geometry/GeometricArc.cpp
+    core/models/geometry/implementation/GeometricPoint.h
+    core/models/geometry/implementation/GeometricPoint.cpp
+    core/models/geometry/implementation/GeometricSegment.h
+    core/models/geometry/implementation/GeometricSegment.cpp
+    core/models/geometry/implementation/GeometricArc.h
+    core/models/geometry/implementation/GeometricArc.cpp
     # Core Module - Models Constraints
     core/models/constraints/IConstraint.h
     core/models/constraints/IConstraint.cpp
@@ -69,8 +60,8 @@ qt_add_executable(appLaserCutStudio
     # Core Module - Models Parts
     core/models/parts/IPart.h
     core/models/parts/IPart.cpp
-    core/models/parts/Part.h
-    core/models/parts/Part.cpp
+    core/models/parts/implementation/Part.h
+    core/models/parts/implementation/Part.cpp
     # Core Module - Models Joints
     core/models/joints/IJoint.h
     core/models/joints/IJoint.cpp
@@ -81,8 +72,8 @@ qt_add_executable(appLaserCutStudio
     # Core Module - Models Projects
     core/models/projects/IProject.h
     core/models/projects/IProject.cpp
-    core/models/projects/Project.h
-    core/models/projects/Project.cpp
+    core/models/projects/implementation/Project.h
+    core/models/projects/implementation/Project.cpp
     # Core Module - Models Editor
     core/models/editor/tool/ITool.h
     core/models/editor/tool/ITool.cpp

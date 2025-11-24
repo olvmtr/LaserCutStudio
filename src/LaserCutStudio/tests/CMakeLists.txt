@@ -44,16 +44,10 @@ add_executable(LaserCutStudioTests
     ../core/models/base/types/Point3D.h
     ../core/models/base/types/Material.h
     ../core/models/base/types/JointType.h
-    ../core/models/shapes/IShape.h
-    ../core/models/shapes/IShape.cpp
-    ../core/models/shapes/Rectangle.h
-    ../core/models/shapes/Rectangle.cpp
-    ../core/models/shapes/Circle.h
-    ../core/models/shapes/Circle.cpp
     ../core/models/parts/IPart.h
     ../core/models/parts/IPart.cpp
-    ../core/models/parts/Part.h
-    ../core/models/parts/Part.cpp
+    ../core/models/parts/implementation/Part.h
+    ../core/models/parts/implementation/Part.cpp
     ../core/models/joints/IJoint.h
     ../core/models/joints/IJoint.cpp
     ../core/models/joints/TabJoint.h
@@ -62,8 +56,8 @@ add_executable(LaserCutStudioTests
     ../core/models/joints/FingerJoint.cpp
     ../core/models/projects/IProject.h
     ../core/models/projects/IProject.cpp
-    ../core/models/projects/Project.h
-    ../core/models/projects/Project.cpp
+    ../core/models/projects/implementation/Project.h
+    ../core/models/projects/implementation/Project.cpp
     ../core/infrastructure/config/ConfigManager.h
     ../core/infrastructure/config/ConfigManager.cpp
     ../core/infrastructure/logging/LogCategories.h
@@ -103,12 +97,12 @@ add_executable(LaserCutStudioTests
     # New constraint-based geometry system
     ../core/models/geometry/IGeometricElement.h
     ../core/models/geometry/IGeometricElement.cpp
-    ../core/models/geometry/GeometricPoint.h
-    ../core/models/geometry/GeometricPoint.cpp
-    ../core/models/geometry/GeometricSegment.h
-    ../core/models/geometry/GeometricSegment.cpp
-    ../core/models/geometry/GeometricArc.h
-    ../core/models/geometry/GeometricArc.cpp
+    ../core/models/geometry/implementation/GeometricPoint.h
+    ../core/models/geometry/implementation/GeometricPoint.cpp
+    ../core/models/geometry/implementation/GeometricSegment.h
+    ../core/models/geometry/implementation/GeometricSegment.cpp
+    ../core/models/geometry/implementation/GeometricArc.h
+    ../core/models/geometry/implementation/GeometricArc.cpp
     ../core/models/constraints/IConstraint.h
     ../core/models/constraints/IConstraint.cpp
     ../core/models/constraints/DistanceConstraint.h
