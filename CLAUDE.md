@@ -32,10 +32,18 @@ Le projet utilise maintenant un **système de géométrie contrainte** inspiré 
 - `GeometricArc` : Arcs de cercle (centre, rayon, angles)
 
 **Contraintes géométriques** (`core/models/constraints/`) :
+
+Contraintes de base :
 - `DistanceConstraint` : Distance fixe entre 2 points
 - `LengthConstraint` : Longueur d'un segment
 - `AngleConstraint` : Angle entre 2 segments
 - `FixedPointConstraint` : Point fixe (x, y)
+
+Contraintes avancées :
+- `ParallelConstraint` : Force 2 segments à être parallèles
+- `PerpendicularConstraint` : Force 2 segments à être perpendiculaires (90°)
+- `EqualLengthConstraint` : Force 2 segments à avoir la même longueur
+- `CoincidentConstraint` : Force 2 points à occuper la même position
 
 **Solveur et conteneur** (`core/models/sketch/`) :
 - `ConstraintSolver` : Résolution par relaxation itérative (100 iter max, tolérance 1e-6)
@@ -90,19 +98,67 @@ if (sketch->solve()) {
 ✅ **Contraintes éditables** : Modifier → recalcul automatique
 ✅ **Mesures réelles** : cm/mm/inches (pas de pixels)
 ✅ **Solveur robuste** : Relaxation itérative convergente
+✅ **8 types de contraintes** : Distance, Length, Angle, FixedPoint, Parallel, Perpendicular, EqualLength, Coincident
 ✅ **Factory Pattern** : Création, sérialisation QVariantMap
 ✅ **Signals/Slots Qt** : Notifications de changements
 ✅ **Export** : toPolyline(), toPainterPath() pour découpe laser
-✅ **20 tests unitaires** : TestGeometry (GeometricPoint, GeometricSegment, GeometricArc)
+✅ **47 tests unitaires** : TestGeometry (20) + TestConstraints (15) + TestConstraintSketch (12)
 
-### État actuel
+### Interface utilisateur interactive
 
-- ✅ **Implémenté** : Éléments géométriques, 4 contraintes, solveur, sketch, tests
-- ✅ **Compilé** : Sans erreurs
-- ✅ **Testé** : 20 tests unitaires passent
-- ✅ **Committé** : 2 commits (feat + test)
+**ConstraintCanvas2DView** (`core/ui/canvas/ConstraintCanvas2DView.h/cpp`) :
+
+Canvas interactif Qt Quick pour édition avec contraintes :
+- 🖱️ **Placement de points** : Clic gauche + snap to grid configurable
+- ✏️ **Dessin de segments** : Relier 2 points existants
+- 🔍 **Sélection** : Clic sur points/segments (hover vert, sélection bleue)
+- 🔧 **Application de contraintes** : Sélectionner 2 éléments puis choisir type
+- 👁️ **Visualisation** : Icônes contraintes, mesures distances/angles
+- ⚡ **Résolution temps réel** : Auto-solve optionnel après chaque modification
+- 🔎 **Zoom/Pan** : Molette + bouton milieu
+- 📐 **Grille** : Affichage + magnétisme configurable
+
+**Modes d'édition** (enum EditMode exposé en QML) :
+- `PlacePoint` : Créer nouveaux points
+- `DrawSegment` : Relier deux points par un segment
+- `Select` : Sélectionner éléments
+- `AddConstraint` : Sélectionner 2 éléments puis appliquer contrainte
+
+**ConstraintEditorView.qml** :
+
+Interface complète avec :
+- Toolbar : Boutons modes, sélecteur contraintes, actions (Solve/Clear/Reset)
+- Canvas central : ConstraintCanvas2DView interactif
+- Panneau propriétés : ConstraintPropertiesPanel (300px droite)
+- Barre statut : Feedback temps réel
+- Options : Grid, Snap, Constraints, Measurements, Auto Solve (checkboxes)
+
+**ConstraintPropertiesPanel.qml** :
+
+Panneau de gestion des contraintes :
+- 📋 **Liste contraintes actives** sur élément sélectionné
+- ✓/✗ **Indicateur satisfaction** (vert/rouge + erreur)
+- 🔒 **Checkbox Lock/Unlock** pour chaque contrainte
+- ✏️ **Contrôles éditables** selon type :
+  * Distance : Slider 0-200mm + SpinBox 0-1000mm
+  * Length : Slider 0-200mm + SpinBox 0-1000mm
+  * Angle : Slider 0-360° + SpinBox 0-360°
+- ❌ **Bouton Delete** pour supprimer contrainte
+- 📊 **Info élément** : Type, position (points), longueur (segments), checkbox locked
+
+### État actuel (2025-11-24)
+
+- ✅ **Géométrie contrainte** : 8 contraintes, solveur, 47 tests unitaires
+- ✅ **Interface utilisateur** : Canvas interactif + panneau propriétés
+- ✅ **Compilé** : Sans erreurs, Qt 6.4.2
+- ✅ **Committé** : 5 commits
+  - feat(geometry): Système complet géométrie contrainte
+  - test(constraints): 27 tests unitaires contraintes + solver
+  - feat(constraints): 4 nouvelles contraintes (Parallel/Perpendicular/Equal/Coincident)
+  - feat(ui): Option 1 - ConstraintCanvas2DView
+  - feat(ui): Option 2 - ConstraintPropertiesPanel
 - ⚠️ **Ancien système** : IShape/Rectangle/Circle marqués DEPRECATED (à supprimer)
-- 📝 **Prochaines étapes** : Plus de contraintes (Parallel, Perpendicular, Equal, Tangent), intégration Canvas2D
+- 📝 **Prochaines étapes** : Système de cotation avancé, conversion unités, tests UI
 
 ## Factory Pattern avec FactoryMixin (CRTP)
 
