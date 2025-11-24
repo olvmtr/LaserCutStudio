@@ -113,6 +113,282 @@ Rectangle {
             }
         }
 
+        // Transformations
+        GroupBox {
+            title: "Transformations"
+            Layout.fillWidth: true
+            visible: selectedElement !== null
+
+            ColumnLayout {
+                anchors.fill: parent
+                spacing: 8
+
+                // Transformations pour points
+                ColumnLayout {
+                    visible: selectedElement && selectedElement.getTypeName() === "GeometricPoint"
+                    Layout.fillWidth: true
+                    spacing: 5
+
+                    Label {
+                        text: "Move Point:"
+                        font.bold: true
+                        font.pixelSize: 11
+                    }
+
+                    GridLayout {
+                        columns: 3
+                        Layout.fillWidth: true
+
+                        Label {
+                            text: "X:"
+                            font.pixelSize: 10
+                        }
+                        SpinBox {
+                            id: pointXSpinBox
+                            from: -10000
+                            to: 10000
+                            value: selectedElement ? selectedElement.x : 0
+                            onValueModified: {
+                                if (selectedElement && selectedElement.getTypeName() === "GeometricPoint") {
+                                    selectedElement.setX(value);
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                }
+                            }
+                            editable: true
+                            Layout.fillWidth: true
+                        }
+                        Label { text: "mm" }
+
+                        Label {
+                            text: "Y:"
+                            font.pixelSize: 10
+                        }
+                        SpinBox {
+                            id: pointYSpinBox
+                            from: -10000
+                            to: 10000
+                            value: selectedElement ? selectedElement.y : 0
+                            onValueModified: {
+                                if (selectedElement && selectedElement.getTypeName() === "GeometricPoint") {
+                                    selectedElement.setY(value);
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                }
+                            }
+                            editable: true
+                            Layout.fillWidth: true
+                        }
+                        Label { text: "mm" }
+                    }
+
+                    Row {
+                        spacing: 5
+                        Layout.fillWidth: true
+
+                        Button {
+                            text: "↑ 10"
+                            onClicked: {
+                                if (selectedElement) {
+                                    selectedElement.setY(selectedElement.y - 10);
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                    pointYSpinBox.value = selectedElement.y;
+                                }
+                            }
+                        }
+                        Button {
+                            text: "↓ 10"
+                            onClicked: {
+                                if (selectedElement) {
+                                    selectedElement.setY(selectedElement.y + 10);
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                    pointYSpinBox.value = selectedElement.y;
+                                }
+                            }
+                        }
+                        Button {
+                            text: "← 10"
+                            onClicked: {
+                                if (selectedElement) {
+                                    selectedElement.setX(selectedElement.x - 10);
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                    pointXSpinBox.value = selectedElement.x;
+                                }
+                            }
+                        }
+                        Button {
+                            text: "→ 10"
+                            onClicked: {
+                                if (selectedElement) {
+                                    selectedElement.setX(selectedElement.x + 10);
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                    pointXSpinBox.value = selectedElement.x;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Transformations pour segments
+                ColumnLayout {
+                    visible: selectedElement && selectedElement.getTypeName() === "GeometricSegment"
+                    Layout.fillWidth: true
+                    spacing: 5
+
+                    Label {
+                        text: "Transform Segment:"
+                        font.bold: true
+                        font.pixelSize: 11
+                    }
+
+                    Row {
+                        spacing: 5
+                        Layout.fillWidth: true
+
+                        Button {
+                            text: "↻ 45°"
+                            ToolTip.text: "Rotate segment 45° CW around midpoint"
+                            ToolTip.visible: hovered
+                            onClicked: {
+                                if (selectedElement) {
+                                    var mid = selectedElement.midpoint();
+                                    var start = selectedElement.start();
+                                    var end = selectedElement.end();
+
+                                    // Rotation de 45° autour du milieu
+                                    var angle = 45 * Math.PI / 180;
+                                    var cos = Math.cos(angle);
+                                    var sin = Math.sin(angle);
+
+                                    // Rotate start
+                                    var dx1 = start.x - mid.x;
+                                    var dy1 = start.y - mid.y;
+                                    start.setX(mid.x + dx1 * cos - dy1 * sin);
+                                    start.setY(mid.y + dx1 * sin + dy1 * cos);
+
+                                    // Rotate end
+                                    var dx2 = end.x - mid.x;
+                                    var dy2 = end.y - mid.y;
+                                    end.setX(mid.x + dx2 * cos - dy2 * sin);
+                                    end.setY(mid.y + dx2 * sin + dy2 * cos);
+
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                }
+                            }
+                        }
+
+                        Button {
+                            text: "↺ 45°"
+                            ToolTip.text: "Rotate segment 45° CCW around midpoint"
+                            ToolTip.visible: hovered
+                            onClicked: {
+                                if (selectedElement) {
+                                    var mid = selectedElement.midpoint();
+                                    var start = selectedElement.start();
+                                    var end = selectedElement.end();
+
+                                    // Rotation de -45° autour du milieu
+                                    var angle = -45 * Math.PI / 180;
+                                    var cos = Math.cos(angle);
+                                    var sin = Math.sin(angle);
+
+                                    // Rotate start
+                                    var dx1 = start.x - mid.x;
+                                    var dy1 = start.y - mid.y;
+                                    start.setX(mid.x + dx1 * cos - dy1 * sin);
+                                    start.setY(mid.y + dx1 * sin + dy1 * cos);
+
+                                    // Rotate end
+                                    var dx2 = end.x - mid.x;
+                                    var dy2 = end.y - mid.y;
+                                    end.setX(mid.x + dx2 * cos - dy2 * sin);
+                                    end.setY(mid.y + dx2 * sin + dy2 * cos);
+
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                }
+                            }
+                        }
+
+                        Button {
+                            text: "⟷ Flip"
+                            ToolTip.text: "Swap segment endpoints"
+                            ToolTip.visible: hovered
+                            onClicked: {
+                                if (selectedElement) {
+                                    var start = selectedElement.start();
+                                    var end = selectedElement.end();
+
+                                    var tempX = start.x;
+                                    var tempY = start.y;
+                                    start.setX(end.x);
+                                    start.setY(end.y);
+                                    end.setX(tempX);
+                                    end.setY(tempY);
+
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                }
+                            }
+                        }
+                    }
+
+                    Row {
+                        spacing: 5
+                        Layout.fillWidth: true
+
+                        Button {
+                            text: "× 2"
+                            ToolTip.text: "Scale segment length ×2"
+                            ToolTip.visible: hovered
+                            onClicked: {
+                                if (selectedElement) {
+                                    var mid = selectedElement.midpoint();
+                                    var start = selectedElement.start();
+                                    var end = selectedElement.end();
+
+                                    // Scale from midpoint
+                                    var dx1 = (start.x - mid.x) * 2;
+                                    var dy1 = (start.y - mid.y) * 2;
+                                    start.setX(mid.x + dx1);
+                                    start.setY(mid.y + dy1);
+
+                                    var dx2 = (end.x - mid.x) * 2;
+                                    var dy2 = (end.y - mid.y) * 2;
+                                    end.setX(mid.x + dx2);
+                                    end.setY(mid.y + dy2);
+
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                }
+                            }
+                        }
+
+                        Button {
+                            text: "÷ 2"
+                            ToolTip.text: "Scale segment length ÷2"
+                            ToolTip.visible: hovered
+                            onClicked: {
+                                if (selectedElement) {
+                                    var mid = selectedElement.midpoint();
+                                    var start = selectedElement.start();
+                                    var end = selectedElement.end();
+
+                                    // Scale from midpoint
+                                    var dx1 = (start.x - mid.x) * 0.5;
+                                    var dy1 = (start.y - mid.y) * 0.5;
+                                    start.setX(mid.x + dx1);
+                                    start.setY(mid.y + dy1);
+
+                                    var dx2 = (end.x - mid.x) * 0.5;
+                                    var dy2 = (end.y - mid.y) * 0.5;
+                                    end.setX(mid.x + dx2);
+                                    end.setY(mid.y + dy2);
+
+                                    if (sketch && sketch.autoSolve) sketch.solve();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         // Liste des contraintes
         GroupBox {
             title: "Active Constraints (" + elementConstraints.length + ")"

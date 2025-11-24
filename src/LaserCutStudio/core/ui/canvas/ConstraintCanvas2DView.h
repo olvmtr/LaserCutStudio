@@ -166,6 +166,33 @@ public:
      */
     Q_INVOKABLE QPointF sceneToScreen(const QPointF& scenePos) const;
 
+    // ===== Undo/Redo =====
+
+    /**
+     * @brief Annule la dernière action
+     */
+    Q_INVOKABLE void undo();
+
+    /**
+     * @brief Refait la dernière action annulée
+     */
+    Q_INVOKABLE void redo();
+
+    /**
+     * @brief Vérifie si un undo est possible
+     */
+    Q_INVOKABLE bool canUndo() const;
+
+    /**
+     * @brief Vérifie si un redo est possible
+     */
+    Q_INVOKABLE bool canRedo() const;
+
+    /**
+     * @brief Efface l'historique Undo/Redo
+     */
+    Q_INVOKABLE void clearHistory();
+
 signals:
     void sketchChanged(ConstraintSketch* sketch);
     void editModeChanged(EditMode mode);
@@ -254,6 +281,35 @@ private:
 
     // Sélection pour contraintes (peut nécessiter 2 éléments)
     QList<IGeometricElement*> m_constraintSelection;
+
+    // ===== Undo/Redo =====
+
+    /**
+     * @brief Structure de commande simple pour Undo/Redo
+     */
+    struct CanvasCommand {
+        QString description;                      ///< Description de la commande
+        std::function<void()> executeFunc;        ///< Fonction à appeler pour faire
+        std::function<void()> undoFunc;           ///< Fonction à appeler pour annuler
+
+        CanvasCommand(const QString& desc,
+                     std::function<void()> exec,
+                     std::function<void()> undo)
+            : description(desc), executeFunc(exec), undoFunc(undo) {}
+    };
+
+    QVector<CanvasCommand*> m_undoStack;  ///< Pile d'annulation
+    QVector<CanvasCommand*> m_redoStack;  ///< Pile de rétablissement
+
+    /**
+     * @brief Ajoute une commande à l'historique
+     * @param description Description de l'action
+     * @param executeFunc Fonction pour exécuter l'action
+     * @param undoFunc Fonction pour annuler l'action
+     */
+    void pushCommand(const QString& description,
+                    std::function<void()> executeFunc,
+                    std::function<void()> undoFunc);
 };
 
 } // namespace UI

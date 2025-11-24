@@ -17,6 +17,8 @@
 #include <QWheelEvent>
 #include <QPainterPath>
 #include <QtMath>
+#include <memory>
+#include <functional>
 
 namespace LaserCutStudio {
 namespace Core {
@@ -573,13 +575,25 @@ void ConstraintCanvas2DView::handlePointPlacement(const QPointF& scenePos)
     // Snap to grid si activé
     QPointF adjustedPos = m_snapToGrid ? snapToGridInternal(scenePos) : scenePos;
 
-    // Créer point
-    GeometricPoint* point = m_sketch->addPoint(adjustedPos.x(), adjustedPos.y());
+    // Capturer le pointeur créé (shared_ptr pour gestion mémoire sûre)
+    std::shared_ptr<GeometricPoint*> pointPtr = std::make_shared<GeometricPoint*>(nullptr);
 
-    qCInfo(logCore()) << "Point placed at" << adjustedPos;
-    emit pointCreated(point);
-
-    triggerSolveIfEnabled();
+    pushCommand("Add Point",
+        // Execute: ajouter point
+        [this, adjustedPos, pointPtr]() {
+            *pointPtr = m_sketch->addPoint(adjustedPos.x(), adjustedPos.y());
+            qCInfo(logCore()) << "Point placed at" << adjustedPos;
+            emit pointCreated(*pointPtr);
+            triggerSolveIfEnabled();
+        },
+        // Undo: supprimer point
+        [this, pointPtr]() {
+            if (*pointPtr && m_sketch) {
+                m_sketch->removeElement(*pointPtr);
+                update();
+            }
+        }
+    );
 }
 
 void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
@@ -599,13 +613,29 @@ void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
         m_segmentStartPoint = clickedPoint;
         qCInfo(logCore()) << "Segment start point set";
     } else {
-        // Second clic : créer segment
+        // Second clic : créer segment avec Undo/Redo
         if (clickedPoint != m_segmentStartPoint) {
-            GeometricSegment* segment = m_sketch->addSegment(m_segmentStartPoint, clickedPoint);
-            qCInfo(logCore()) << "Segment created";
-            emit segmentCreated(segment);
+            GeometricPoint* startPt = m_segmentStartPoint;
+            GeometricPoint* endPt = clickedPoint;
 
-            triggerSolveIfEnabled();
+            std::shared_ptr<GeometricSegment*> segmentPtr = std::make_shared<GeometricSegment*>(nullptr);
+
+            pushCommand("Add Segment",
+                // Execute: ajouter segment
+                [this, startPt, endPt, segmentPtr]() {
+                    *segmentPtr = m_sketch->addSegment(startPt, endPt);
+                    qCInfo(logCore()) << "Segment created";
+                    emit segmentCreated(*segmentPtr);
+                    triggerSolveIfEnabled();
+                },
+                // Undo: supprimer segment
+                [this, segmentPtr]() {
+                    if (*segmentPtr && m_sketch) {
+                        m_sketch->removeElement(*segmentPtr);
+                        update();
+                    }
+                }
+            );
         }
 
         // Reset pour prochain segment
@@ -736,6 +766,82 @@ void ConstraintCanvas2DView::triggerSolveIfEnabled()
         m_sketch->solve();
         update();
     }
+}
+
+// ===== Undo/Redo =====
+
+void ConstraintCanvas2DView::pushCommand(const QString& description,
+                                        std::function<void()> executeFunc,
+                                        std::function<void()> undoFunc)
+{
+    // Exécuter la commande immédiatement
+    executeFunc();
+
+    // Ajouter la commande à la pile d'annulation
+    m_undoStack.append(new CanvasCommand(description, executeFunc, undoFunc));
+
+    // Vider la pile de rétablissement (on ne peut plus refaire après une nouvelle action)
+    qDeleteAll(m_redoStack);
+    m_redoStack.clear();
+
+    // Limiter la taille de la pile (ex: 50 commandes max)
+    const int MAX_HISTORY = 50;
+    while (m_undoStack.size() > MAX_HISTORY) {
+        delete m_undoStack.takeFirst();
+    }
+}
+
+void ConstraintCanvas2DView::undo()
+{
+    if (!canUndo()) return;
+
+    // Récupérer la dernière commande
+    CanvasCommand* cmd = m_undoStack.takeLast();
+
+    // Exécuter l'annulation
+    cmd->undoFunc();
+
+    // Déplacer vers pile de rétablissement
+    m_redoStack.append(cmd);
+
+    // Mettre à jour l'affichage
+    update();
+}
+
+void ConstraintCanvas2DView::redo()
+{
+    if (!canRedo()) return;
+
+    // Récupérer la commande à refaire
+    CanvasCommand* cmd = m_redoStack.takeLast();
+
+    // Ré-exécuter la commande
+    cmd->executeFunc();
+
+    // Déplacer vers pile d'annulation
+    m_undoStack.append(cmd);
+
+    // Mettre à jour l'affichage
+    update();
+}
+
+bool ConstraintCanvas2DView::canUndo() const
+{
+    return !m_undoStack.isEmpty();
+}
+
+bool ConstraintCanvas2DView::canRedo() const
+{
+    return !m_redoStack.isEmpty();
+}
+
+void ConstraintCanvas2DView::clearHistory()
+{
+    qDeleteAll(m_undoStack);
+    m_undoStack.clear();
+
+    qDeleteAll(m_redoStack);
+    m_redoStack.clear();
 }
 
 } // namespace UI

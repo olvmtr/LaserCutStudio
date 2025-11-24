@@ -66,6 +66,25 @@ Rectangle {
 
             Rectangle { width: 2; height: parent.height; color: "#34495e" }
 
+            // Boutons Undo/Redo
+            ToolButton {
+                text: "Undo"
+                enabled: canvas.canUndo()
+                onClicked: canvas.undo()
+                ToolTip.text: "Annuler (Ctrl+Z)"
+                ToolTip.visible: hovered
+            }
+
+            ToolButton {
+                text: "Redo"
+                enabled: canvas.canRedo()
+                onClicked: canvas.redo()
+                ToolTip.text: "Refaire (Ctrl+Y)"
+                ToolTip.visible: hovered
+            }
+
+            Rectangle { width: 2; height: parent.height; color: "#34495e" }
+
             // Type de contrainte
             Label {
                 text: "Constraint:"
@@ -234,6 +253,19 @@ Rectangle {
             text: "Ready - Place points to start"
             color: "white"
         }
+    }
+
+    // Raccourcis clavier
+    Shortcut {
+        sequence: "Ctrl+Z"
+        enabled: canvas.canUndo()
+        onActivated: canvas.undo()
+    }
+
+    Shortcut {
+        sequence: "Ctrl+Y"
+        enabled: canvas.canRedo()
+        onActivated: canvas.redo()
     }
 
 }
