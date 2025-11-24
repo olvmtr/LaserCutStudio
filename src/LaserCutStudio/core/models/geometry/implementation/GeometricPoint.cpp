@@ -9,7 +9,7 @@ namespace Core {
 const bool GeometricPoint::s_registered = IGeometricElement::registerFactory<GeometricPoint>();
 
 GeometricPoint::GeometricPoint()
-    : IGeometricElement(),
+    : IGeometricPoint(),
       m_x(0.0),
       m_y(0.0),
       m_locked(false)
@@ -17,7 +17,7 @@ GeometricPoint::GeometricPoint()
 }
 
 GeometricPoint::GeometricPoint(double x, double y, bool locked)
-    : IGeometricElement(),
+    : IGeometricPoint(),
       m_x(x),
       m_y(y),
       m_locked(locked)
@@ -25,14 +25,14 @@ GeometricPoint::GeometricPoint(double x, double y, bool locked)
 }
 
 GeometricPoint::GeometricPoint(const GeometricPoint& other)
-    : IGeometricElement(),
+    : IGeometricPoint(),
       m_x(other.m_x),
       m_y(other.m_y),
       m_locked(other.m_locked)
 {
 }
 
-IGeometricElement* GeometricPoint::clone() const
+IGeometricPoint* GeometricPoint::clone() const
 {
     return new GeometricPoint(*this);
 }
@@ -65,10 +65,10 @@ QList<Point2D> GeometricPoint::getPoints(int resolution) const
     return QList<Point2D>() << Point2D(m_x, m_y);
 }
 
-double GeometricPoint::distance(const GeometricPoint& other) const
+double GeometricPoint::distance(const IGeometricPoint& other) const
 {
-    double dx = m_x - other.m_x;
-    double dy = m_y - other.m_y;
+    double dx = m_x - other.x();
+    double dy = m_y - other.y();
     return std::sqrt(dx * dx + dy * dy);
 }
 

@@ -2,10 +2,14 @@
 #define COINCIDENTCONSTRAINT_H
 
 #include "IConstraint.h"
-#include "../geometry/GeometricPoint.h"
+#include "../geometry/IGeometricPoint.h"
 
 namespace LaserCutStudio {
 namespace Core {
+
+// Forward declarations
+class GeometricSegment;
+class GeometricPoint;
 
 /**
  * @brief Contrainte de coïncidence entre deux points
@@ -20,8 +24,8 @@ class CoincidentConstraint : public IConstraint
 {
     Q_OBJECT
 
-    Q_PROPERTY(GeometricPoint* point1 READ point1 WRITE setPoint1 NOTIFY point1Changed)
-    Q_PROPERTY(GeometricPoint* point2 READ point2 WRITE setPoint2 NOTIFY point2Changed)
+    Q_PROPERTY(IGeometricPoint* point1 READ point1 WRITE setPoint1 NOTIFY point1Changed)
+    Q_PROPERTY(IGeometricPoint* point2 READ point2 WRITE setPoint2 NOTIFY point2Changed)
 
 public:
     DECLARE_TYPE_NAME(CoincidentConstraint)
@@ -33,19 +37,19 @@ public:
      * @param locked Si true, la contrainte a priorité maximale
      * @param parent Parent Qt (optionnel)
      */
-    explicit CoincidentConstraint(GeometricPoint* point1 = nullptr,
-                                   GeometricPoint* point2 = nullptr,
+    explicit CoincidentConstraint(IGeometricPoint* point1 = nullptr,
+                                   IGeometricPoint* point2 = nullptr,
                                    bool locked = false,
                                    QObject* parent = nullptr);
 
     ~CoincidentConstraint() override;
 
     // Accesseurs
-    GeometricPoint* point1() const { return m_point1; }
-    void setPoint1(GeometricPoint* point);
+    IGeometricPoint* point1() const { return m_point1; }
+    void setPoint1(IGeometricPoint* point);
 
-    GeometricPoint* point2() const { return m_point2; }
-    void setPoint2(GeometricPoint* point);
+    IGeometricPoint* point2() const { return m_point2; }
+    void setPoint2(IGeometricPoint* point);
 
     // Implémentation IConstraint
     bool isValid() const;
@@ -58,15 +62,15 @@ public:
     IConstraint* clone() const override;
 
 signals:
-    void point1Changed(GeometricPoint* point);
-    void point2Changed(GeometricPoint* point);
+    void point1Changed(IGeometricPoint* point);
+    void point2Changed(IGeometricPoint* point);
 
 private:
-    void connectToPoint(GeometricPoint* point);
-    void disconnectFromPoint(GeometricPoint* point);
+    void connectToPoint(IGeometricPoint* point);
+    void disconnectFromPoint(IGeometricPoint* point);
 
-    GeometricPoint* m_point1;
-    GeometricPoint* m_point2;
+    IGeometricPoint* m_point1;
+    IGeometricPoint* m_point2;
 
     // Enregistrement automatique dans le Factory Pattern
     static const bool s_registered;

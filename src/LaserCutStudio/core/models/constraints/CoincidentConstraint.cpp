@@ -1,15 +1,22 @@
 #include "CoincidentConstraint.h"
+#include "../geometry/IGeometricSegment.h"
+#include "../geometry/IGeometricPoint.h"
 #include <cmath>
 
 namespace LaserCutStudio {
 namespace Core {
 
+// Forward declarations
+class GeometricSegment;
+class GeometricPoint;
+class GeometricArc;
+
 // Enregistrement automatique dans le Factory Pattern
 const bool CoincidentConstraint::s_registered =
     IConstraint::registerFactory<CoincidentConstraint>();
 
-CoincidentConstraint::CoincidentConstraint(GeometricPoint* point1,
-                                           GeometricPoint* point2,
+CoincidentConstraint::CoincidentConstraint(IGeometricPoint* point1,
+                                           IGeometricPoint* point2,
                                            bool locked,
                                            QObject* parent)
     : IConstraint(parent)
@@ -27,7 +34,7 @@ CoincidentConstraint::~CoincidentConstraint()
     disconnectFromPoint(m_point2);
 }
 
-void CoincidentConstraint::setPoint1(GeometricPoint* point)
+void CoincidentConstraint::setPoint1(IGeometricPoint* point)
 {
     if (m_point1 == point) return;
 
@@ -39,7 +46,7 @@ void CoincidentConstraint::setPoint1(GeometricPoint* point)
     emit constraintChanged();
 }
 
-void CoincidentConstraint::setPoint2(GeometricPoint* point)
+void CoincidentConstraint::setPoint2(IGeometricPoint* point)
 {
     if (m_point2 == point) return;
 
@@ -51,7 +58,7 @@ void CoincidentConstraint::setPoint2(GeometricPoint* point)
     emit constraintChanged();
 }
 
-void CoincidentConstraint::connectToPoint(GeometricPoint* point)
+void CoincidentConstraint::connectToPoint(IGeometricPoint* point)
 {
     if (!point) return;
 
@@ -64,7 +71,7 @@ void CoincidentConstraint::connectToPoint(GeometricPoint* point)
     });
 }
 
-void CoincidentConstraint::disconnectFromPoint(GeometricPoint* point)
+void CoincidentConstraint::disconnectFromPoint(IGeometricPoint* point)
 {
     if (!point) return;
     QObject::disconnect(point, nullptr, this, nullptr);
@@ -130,10 +137,10 @@ QList<GeometricPoint*> CoincidentConstraint::affectedPoints() const
 {
     QList<GeometricPoint*> points;
     if (m_point1 && !m_point1->isLocked()) {
-        points << m_point1;
+        points << qobject_cast<GeometricPoint*>(m_point1);
     }
     if (m_point2 && !m_point2->isLocked()) {
-        points << m_point2;
+        points << qobject_cast<GeometricPoint*>(m_point2);
     }
     return points;
 }

@@ -1,8 +1,14 @@
 #include "FixedPointConstraint.h"
+#include "core/models/geometry/IGeometricPoint.h"
 #include <cmath>
 
 namespace LaserCutStudio {
 namespace Core {
+
+// Forward declarations
+class GeometricSegment;
+class GeometricPoint;
+class GeometricArc;
 
 const bool FixedPointConstraint::s_registered = IConstraint::registerFactory<FixedPointConstraint>();
 
@@ -11,7 +17,7 @@ FixedPointConstraint::FixedPointConstraint()
 {
 }
 
-FixedPointConstraint::FixedPointConstraint(GeometricPoint* point, double x, double y, bool locked)
+FixedPointConstraint::FixedPointConstraint(IGeometricPoint* point, double x, double y, bool locked)
     : IConstraint(locked, 1.0), m_point(point), m_x(x), m_y(y)
 {
 }
@@ -59,11 +65,11 @@ void FixedPointConstraint::apply()
 QList<GeometricPoint*> FixedPointConstraint::affectedPoints() const
 {
     QList<GeometricPoint*> points;
-    if (m_point) points << m_point;
+    if (m_point) points << qobject_cast<GeometricPoint*>(m_point);
     return points;
 }
 
-void FixedPointConstraint::setPoint(GeometricPoint* point)
+void FixedPointConstraint::setPoint(IGeometricPoint* point)
 {
     if (m_point == point) return;
     m_point = point;

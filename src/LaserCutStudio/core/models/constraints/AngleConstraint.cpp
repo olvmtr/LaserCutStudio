@@ -1,8 +1,15 @@
 #include "AngleConstraint.h"
+#include "core/models/geometry/IGeometricSegment.h"
+#include "core/models/geometry/IGeometricPoint.h"
 #include <cmath>
 
 namespace LaserCutStudio {
 namespace Core {
+
+// Forward declarations
+class GeometricSegment;
+class GeometricPoint;
+class GeometricArc;
 
 const bool AngleConstraint::s_registered = IConstraint::registerFactory<AngleConstraint>();
 
@@ -11,7 +18,7 @@ AngleConstraint::AngleConstraint()
 {
 }
 
-AngleConstraint::AngleConstraint(GeometricSegment* segment1, GeometricSegment* segment2, double angleDegrees, bool locked)
+AngleConstraint::AngleConstraint(IGeometricSegment* segment1, IGeometricSegment* segment2, double angleDegrees, bool locked)
     : IConstraint(locked, 1.0), m_segment1(segment1), m_segment2(segment2), m_angleDegrees(angleDegrees)
 {
 }
@@ -34,6 +41,13 @@ AngleConstraint::~AngleConstraint()
 IConstraint* AngleConstraint::clone() const
 {
     return new AngleConstraint(*this);
+}
+
+bool AngleConstraint::isValid() const
+{
+    GeometricSegment* seg1 = qobject_cast<GeometricSegment*>(m_segment1);
+    GeometricSegment* seg2 = qobject_cast<GeometricSegment*>(m_segment2);
+    return seg1 && seg2 && seg1->isValid() && seg2->isValid();
 }
 
 bool AngleConstraint::isSatisfied(double tolerance) const
@@ -62,8 +76,12 @@ void AngleConstraint::apply()
 {
     if (!isValid()) return;
 
-    double angle1 = m_segment1->angle();
-    double angle2 = m_segment2->angle();
+    GeometricSegment* seg1 = qobject_cast<GeometricSegment*>(m_segment1);
+    GeometricSegment* seg2 = qobject_cast<GeometricSegment*>(m_segment2);
+    if (!seg1 || !seg2) return;
+
+    double angle1 = seg1->angle();
+    double angle2 = seg2->angle();
 
     // Différence actuelle
     double currentDiff = angle2 - angle1;
@@ -82,8 +100,8 @@ void AngleConstraint::apply()
     double correctionAngle = -errorAngle * 0.5;  // Convergence progressive
 
     // Rotation du second segment autour de son point de départ
-    GeometricPoint* start2 = m_segment2->startPoint();
-    GeometricPoint* end2 = m_segment2->endPoint();
+    IGeometricPoint* start2 = seg2->startPoint();
+    IGeometricPoint* end2 = seg2->endPoint();
 
     if (start2 && end2 && !end2->isLocked()) {
         double angleRad = correctionAngle * M_PI / 180.0;
@@ -107,16 +125,28 @@ void AngleConstraint::apply()
 QList<GeometricPoint*> AngleConstraint::affectedPoints() const
 {
     QList<GeometricPoint*> points;
-    if (m_segment1 && m_segment1->isValid()) {
-        points << m_segment1->startPoint() << m_segment1->endPoint();
+    if (m_segment1) {
+        GeometricSegment* seg1 = qobject_cast<GeometricSegment*>(m_segment1);
+        if (seg1 && seg1->isValid()) {
+            IGeometricPoint* start = seg1->startPoint();
+            IGeometricPoint* end = seg1->endPoint();
+            if (start) points << qobject_cast<GeometricPoint*>(start);
+            if (end) points << qobject_cast<GeometricPoint*>(end);
+        }
     }
-    if (m_segment2 && m_segment2->isValid()) {
-        points << m_segment2->startPoint() << m_segment2->endPoint();
+    if (m_segment2) {
+        GeometricSegment* seg2 = qobject_cast<GeometricSegment*>(m_segment2);
+        if (seg2 && seg2->isValid()) {
+            IGeometricPoint* start = seg2->startPoint();
+            IGeometricPoint* end = seg2->endPoint();
+            if (start) points << qobject_cast<GeometricPoint*>(start);
+            if (end) points << qobject_cast<GeometricPoint*>(end);
+        }
     }
     return points;
 }
 
-void AngleConstraint::setSegment1(GeometricSegment* segment)
+void AngleConstraint::setSegment1(IGeometricSegment* segment)
 {
     if (m_segment1 == segment) return;
     m_segment1 = segment;
@@ -124,7 +154,7 @@ void AngleConstraint::setSegment1(GeometricSegment* segment)
     emit constraintChanged();
 }
 
-void AngleConstraint::setSegment2(GeometricSegment* segment)
+void AngleConstraint::setSegment2(IGeometricSegment* segment)
 {
     if (m_segment2 == segment) return;
     m_segment2 = segment;

@@ -123,16 +123,39 @@ infrastructure/ (peut dépendre de models/ et services/)
 - `services/` → `models/`
 - `infrastructure/` → `models/` et `services/`
 
-### RÈGLE 6 : Pas de dépendances circulaires
+### RÈGLE 6 : Pas de dépendances circulaires entre packages
 
-**Principe** : Aucun cycle de dépendances entre packages.
+**Principe** : Aucun cycle de dépendances entre packages au même niveau hiérarchique.
+
+Le test analyse automatiquement tous les packages et sous-packages du projet :
+- Packages principaux : `models`, `services`, `infrastructure`, `ui`, `plugins`, etc.
+- Sous-packages : `models/shapes`, `models/geometry`, `models/constraints`, etc.
 
 ❌ **INTERDIT** :
 ```
-models/ → services/ → models/  (CYCLE)
+models/ → services/ → models/           (CYCLE entre packages principaux)
+models/shapes → models/parts → models/shapes  (CYCLE entre sous-packages)
 ```
 
-Le test utilise un **algorithme DFS** pour détecter les cycles.
+✅ **AUTORISÉ** :
+```
+models/ → models/constraints            (Package parent → sous-package OK)
+models/constraints → models/geometry    (Sous-packages du même parent OK)
+```
+
+**Détection avancée** :
+- Algorithme **DFS (Depth-First Search)** pour détecter tous les cycles
+- Graphe de dépendances affiché avec détails (19+ packages analysés)
+- Ignore les dépendances naturelles parent ↔ sous-package
+- Affiche les fichiers impliqués dans chaque cycle détecté
+
+**Sortie exemple** :
+```
+📊 Graphe de dépendances (19 packages analysés):
+   models → models/base, models/constraints, models/geometry
+   services → models, models/base
+   ui → models, models/constraints, models/geometry
+```
 
 ### RÈGLE 7 : Mixins totalement indépendants
 
@@ -150,6 +173,186 @@ Le test utilise un **algorithme DFS** pour détecter les cycles.
 #include <QObject>
 #include <QVariantMap>
 #include <QString>
+```
+
+### RÈGLE 8 : Les interfaces sont purement abstraites
+
+**Principe** : Les interfaces (IShape, IPart, IJoint, IProject) doivent être purement abstraites sans données membres ni implémentation inline.
+
+❌ **INTERDIT dans les interfaces** :
+```cpp
+// IShape.h
+class IShape : public Interface
+{
+protected:
+    QString m_name;  // VIOLATION : membre de données
+
+public:
+    QString getName() const { return m_name; }  // VIOLATION : implémentation inline
+};
+```
+
+✅ **AUTORISÉ dans les interfaces** :
+```cpp
+// IShape.h
+class IShape : public Interface
+{
+public:
+    virtual QString getName() const = 0;  // OK : méthode virtuelle pure
+    virtual ~IShape() = default;          // OK : destructeur virtuel
+};
+```
+
+**Les données et implémentations doivent être dans les classes concrètes.**
+
+### RÈGLE 9 : Classes concrètes dans implementation/
+
+**Principe** : Toutes les classes concrètes doivent être dans des sous-packages `implementation/`. Les interfaces (I*) restent dans le package parent.
+
+✅ **Organisation correcte** :
+```
+core/models/shapes/
+  ├── IShape.h                           # Interface dans le package parent
+  └── implementation/
+      ├── Rectangle.h                    # Classe concrète dans implementation/
+      └── Circle.h                       # Classe concrète dans implementation/
+```
+
+❌ **Organisation incorrecte** :
+```
+core/models/shapes/
+  ├── IShape.h
+  ├── Rectangle.h                        # VIOLATION : classe concrète hors de implementation/
+  └── Circle.h                           # VIOLATION : classe concrète hors de implementation/
+```
+
+**Exceptions** : Les types de base (Point2D, Point3D, Material) et les contraintes géométriques peuvent rester dans le package parent.
+
+### RÈGLE 10 : Aucun import depuis implementation/
+
+**Principe** : Les classes ne doivent JAMAIS importer depuis les packages `implementation/`. Elles doivent dépendre des interfaces (abstractions), pas des implémentations concrètes. C'est le **Dependency Inversion Principle (DIP)**.
+
+❌ **INTERDIT** :
+```cpp
+// MyClass.h
+#include "shapes/implementation/Rectangle.h"      // VIOLATION : import depuis implementation/
+#include "geometry/implementation/GeometricPoint.h" // VIOLATION : import depuis implementation/
+```
+
+✅ **AUTORISÉ** :
+```cpp
+// MyClass.h
+#include "shapes/IShape.h"                // OK : importer l'interface
+#include "geometry/GeometricPoint.h"      // OK : type de base (pas dans implementation/)
+
+// Utilisation
+IShape* shape = IShape::create("Rectangle", params);  // Factory Pattern
+```
+
+**Exceptions** :
+- Un fichier dans `geometry/implementation/` peut inclure d'autres fichiers du MÊME package `geometry/implementation/`
+- Les fichiers de test peuvent inclure les implémentations pour les tester
+
+**Bénéfices** :
+- ✅ Découplage complet entre modules
+- ✅ Facilite le remplacement d'implémentations
+- ✅ Permet le chargement dynamique de plugins
+- ✅ Respecte le principe SOLID (DIP)
+
+### RÈGLE 11 : Pas de dépendances circulaires entre fichiers
+
+**Principe** : Les fichiers ne doivent pas s'inclure mutuellement, créant des cycles d'includes.
+
+Le test construit un graphe complet des includes et détecte tous les cycles avec un algorithme DFS.
+
+❌ **INTERDIT** :
+```cpp
+// A.h
+#include "B.h"  // A inclut B
+
+// B.h
+#include "A.h"  // B inclut A → CYCLE !
+```
+
+❌ **Cycle indirect** :
+```cpp
+// A.h → B.h → C.h → A.h  (CYCLE de 3 fichiers)
+```
+
+✅ **SOLUTION** :
+
+**1. Forward declarations** :
+```cpp
+// A.h
+class B;  // Forward declaration au lieu de #include "B.h"
+
+class A {
+    B* m_b;  // Pointeur ou référence seulement
+};
+```
+
+**2. Déplacer les includes dans le .cpp** :
+```cpp
+// A.h (pas d'include B.h)
+class B;
+class A {
+    B* m_b;
+};
+
+// A.cpp (include dans l'implémentation)
+#include "B.h"
+A::A() : m_b(new B()) { }
+```
+
+**3. Extraire une interface commune** :
+```cpp
+// ICommon.h (nouvelle interface)
+class ICommon {
+    virtual void doSomething() = 0;
+};
+
+// A.h et B.h incluent ICommon.h au lieu de se référencer mutuellement
+```
+
+**Détection avancée** :
+- Analyse de 32+ fichiers headers du projet
+- Construction d'un graphe complet d'includes
+- Détection de TOUS les cycles (directs et indirects)
+- Normalisation des cycles pour éviter les doublons
+- Affichage détaillé du chemin de chaque cycle
+
+**Sortie exemple** :
+```
+📁 Analyse de 32 fichiers headers...
+✓ Aucun cycle détecté
+
+✅ RÈGLE 11: Aucune dépendance circulaire entre fichiers détectée (32 fichiers vérifiés)
+```
+
+Si un cycle est trouvé :
+```
+⚠️  2 cycle(s) détecté(s) !
+
+VIOLATION RÈGLE 11: Dépendance circulaire entre fichiers (cycle #1)
+   Cycle: A.h → B.h → C.h → A.h
+   Longueur: 3 fichiers
+
+   Fichiers impliqués:
+   • models/shapes/A.h
+     ↓ inclut
+     models/parts/B.h
+   • models/parts/B.h
+     ↓ inclut
+     models/joints/C.h
+   • models/joints/C.h
+     ↓ inclut
+     models/shapes/A.h
+
+   SOLUTION:
+   1. Utiliser des forward declarations (class ClassName;)
+   2. Déplacer les includes dans le fichier .cpp
+   3. Extraire une interface commune
+   4. Restructurer pour casser la dépendance circulaire
 ```
 
 ## Utilisation
@@ -226,6 +429,20 @@ test-architecture:
 🔍 Test 7: Vérification de l'indépendance des mixins...
 ✅ RÈGLE 7: Tous les mixins sont indépendants
 
+🔍 Test 8: Vérification que les interfaces sont purement abstraites...
+✅ RÈGLE 8: Toutes les interfaces sont purement abstraites
+
+🔍 Test 9: Vérification de l'organisation des classes concrètes...
+✅ RÈGLE 9: Toutes les classes concrètes sont dans implementation/
+
+🔍 Test 10: Vérification qu'aucune classe n'importe depuis implementation/...
+✅ RÈGLE 10: Aucun import depuis implementation/ détecté
+
+🔍 Test 11: Détection des dépendances circulaires entre fichiers...
+   📁 Analyse de 32 fichiers headers...
+   ✓ Aucun cycle détecté
+✅ RÈGLE 11: Aucune dépendance circulaire entre fichiers détectée (32 fichiers vérifiés)
+
 ================================================================================
 ✅ Tous les tests SOLID passés avec succès !
 ================================================================================
@@ -275,6 +492,25 @@ class Rectangle : public IShape
 
 **Solution** : Restructurer pour inverser la dépendance ou déplacer le code.
 
+### Violation RÈGLE 10 : Import depuis implementation/
+
+**Problème** : `MyClass.h` importe `shapes/implementation/Rectangle.h`
+
+**Solution** :
+1. Remplacer par l'interface : `#include "shapes/IShape.h"`
+2. Utiliser le Factory Pattern pour créer les instances :
+   ```cpp
+   // Au lieu de :
+   Rectangle* rect = new Rectangle(0, 0, 100, 50);
+
+   // Utiliser :
+   QVariantMap params;
+   params["x"] = 0; params["y"] = 0;
+   params["width"] = 100; params["height"] = 50;
+   IShape* shape = IShape::create("Rectangle", params);
+   ```
+3. Dépendre des abstractions via les pointeurs d'interface : `IShape*`, `IPart*`, etc.
+
 ## Avantages de ce système
 
 ✅ **Automatique** : Détecte les violations dès le développement
@@ -286,7 +522,7 @@ class Rectangle : public IShape
 
 ## État actuel
 
-**Dernière vérification** : 2025-11-19
+**Dernière vérification** : 2025-11-24
 
 ### Résultats des tests d'architecture
 
@@ -296,8 +532,12 @@ class Rectangle : public IShape
 ✅ RÈGLE 3: Toutes les implémentations héritent de leur interface
 ✅ RÈGLE 4: Tous les patterns sont correctement utilisés
 ✅ RÈGLE 5: Hiérarchie des packages respectée
-✅ RÈGLE 6: Aucune dépendance circulaire détectée
+✅ RÈGLE 6: Aucune dépendance circulaire détectée (19 packages vérifiés)
 ✅ RÈGLE 7: Tous les mixins sont indépendants
+✅ RÈGLE 8: Toutes les interfaces sont purement abstraites
+✅ RÈGLE 9: Toutes les classes concrètes sont dans implementation/
+✅ RÈGLE 10: Aucun import depuis implementation/ détecté
+✅ RÈGLE 11: Aucune dépendance circulaire entre fichiers détectée (32 fichiers vérifiés)
 
 Tous les tests SOLID passés avec succès !
 ```

@@ -1,16 +1,22 @@
 #include "EqualLengthConstraint.h"
-#include "core/models/geometry/GeometricPoint.h"
+#include "../geometry/IGeometricSegment.h"
+#include "../geometry/IGeometricPoint.h"
 #include <cmath>
 
 namespace LaserCutStudio {
 namespace Core {
 
+// Forward declarations
+class GeometricSegment;
+class GeometricPoint;
+class GeometricArc;
+
 // Enregistrement automatique dans le Factory Pattern
 const bool EqualLengthConstraint::s_registered =
     IConstraint::registerFactory<EqualLengthConstraint>();
 
-EqualLengthConstraint::EqualLengthConstraint(GeometricSegment* segment1,
-                                             GeometricSegment* segment2,
+EqualLengthConstraint::EqualLengthConstraint(IGeometricSegment* segment1,
+                                             IGeometricSegment* segment2,
                                              bool locked,
                                              QObject* parent)
     : IConstraint(parent)
@@ -28,7 +34,7 @@ EqualLengthConstraint::~EqualLengthConstraint()
     disconnectFromSegment(m_segment2);
 }
 
-void EqualLengthConstraint::setSegment1(GeometricSegment* segment)
+void EqualLengthConstraint::setSegment1(IGeometricSegment* segment)
 {
     if (m_segment1 == segment) return;
 
@@ -40,7 +46,7 @@ void EqualLengthConstraint::setSegment1(GeometricSegment* segment)
     emit constraintChanged();
 }
 
-void EqualLengthConstraint::setSegment2(GeometricSegment* segment)
+void EqualLengthConstraint::setSegment2(IGeometricSegment* segment)
 {
     if (m_segment2 == segment) return;
 
@@ -52,7 +58,7 @@ void EqualLengthConstraint::setSegment2(GeometricSegment* segment)
     emit constraintChanged();
 }
 
-void EqualLengthConstraint::connectToSegment(GeometricSegment* segment)
+void EqualLengthConstraint::connectToSegment(IGeometricSegment* segment)
 {
     if (!segment) return;
 
@@ -65,7 +71,7 @@ void EqualLengthConstraint::connectToSegment(GeometricSegment* segment)
     });
 }
 
-void EqualLengthConstraint::disconnectFromSegment(GeometricSegment* segment)
+void EqualLengthConstraint::disconnectFromSegment(IGeometricSegment* segment)
 {
     if (!segment) return;
     QObject::disconnect(segment, nullptr, this, nullptr);
@@ -104,8 +110,8 @@ void EqualLengthConstraint::apply()
     double errorValue = targetLength - currentLength;
 
     // Trouver les points du segment2
-    GeometricPoint* start = m_segment2->startPoint();
-    GeometricPoint* end = m_segment2->endPoint();
+    IGeometricPoint* start = m_segment2->startPoint();
+    IGeometricPoint* end = m_segment2->endPoint();
 
     if (!start || !end) return;
 
@@ -149,11 +155,13 @@ QList<GeometricPoint*> EqualLengthConstraint::affectedPoints() const
 {
     QList<GeometricPoint*> points;
     if (m_segment2 && m_segment2->isValid()) {
-        if (m_segment2->startPoint() && !m_segment2->startPoint()->isLocked()) {
-            points << m_segment2->startPoint();
+        IGeometricPoint* start = m_segment2->startPoint();
+        IGeometricPoint* end = m_segment2->endPoint();
+        if (start && !start->isLocked()) {
+            points << qobject_cast<GeometricPoint*>(start);
         }
-        if (m_segment2->endPoint() && !m_segment2->endPoint()->isLocked()) {
-            points << m_segment2->endPoint();
+        if (end && !end->isLocked()) {
+            points << qobject_cast<GeometricPoint*>(end);
         }
     }
     return points;

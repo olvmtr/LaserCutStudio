@@ -1,7 +1,7 @@
 #ifndef GEOMETRICPOINT_H
 #define GEOMETRICPOINT_H
 
-#include "core/models/geometry/IGeometricElement.h"
+#include "core/models/geometry/IGeometricPoint.h"
 #include "core/models/patterns/properties/PropertyMixin.h"
 
 namespace LaserCutStudio {
@@ -28,7 +28,7 @@ namespace Core {
  *
  * @note Utilise PropertyMixin pour setters avec signaux automatiques
  */
-class GeometricPoint : public IGeometricElement,
+class GeometricPoint : public IGeometricPoint,
                        protected Patterns::PropertyMixin<GeometricPoint>
 {
     Q_OBJECT
@@ -73,7 +73,7 @@ public:
     /**
      * @brief Clone le point
      */
-    IGeometricElement* clone() const override;
+    IGeometricPoint* clone() const override;
 
     /**
      * @brief Déclare automatiquement staticTypeName() et getTypeName()
@@ -101,63 +101,63 @@ public:
     QList<Point2D> getPoints(int resolution = 32) const override;
 
     // Getters
-    double x() const { return m_x; }
-    double y() const { return m_y; }
-    bool isLocked() const { return m_locked; }
+    double x() const override { return m_x; }
+    double y() const override { return m_y; }
+    bool isLocked() const override { return m_locked; }
 
     /**
      * @brief Obtient la position comme Point2D
      */
-    Point2D position() const { return Point2D(m_x, m_y); }
+    Point2D position() const override { return Point2D(m_x, m_y); }
 
     /**
      * @brief Calcule la distance avec un autre point
      */
-    double distance(const GeometricPoint& other) const;
+    double distance(const IGeometricPoint& other) const override;
 
     /**
      * @brief Calcule la distance avec un Point2D
      */
-    double distance(const Point2D& other) const;
+    double distance(const Point2D& other) const override;
 
     // Setters
     /**
      * @brief Définit la coordonnée X
      * @param x Nouvelle coordonnée X
      */
-    void setX(double x);
+    void setX(double x) override;
 
     /**
      * @brief Définit la coordonnée Y
      * @param y Nouvelle coordonnée Y
      */
-    void setY(double y);
+    void setY(double y) override;
 
     /**
      * @brief Définit la position (x, y)
      * @param x Nouvelle coordonnée X
      * @param y Nouvelle coordonnée Y
      */
-    void setPosition(double x, double y);
+    void setPosition(double x, double y) override;
 
     /**
      * @brief Définit la position depuis un Point2D
      * @param pos Nouvelle position
      */
-    void setPosition(const Point2D& pos);
+    void setPosition(const Point2D& pos) override;
 
     /**
      * @brief Définit l'état de verrouillage
      * @param locked true pour verrouiller (empêcher modifications par solveur)
      */
-    void setLocked(bool locked);
+    void setLocked(bool locked) override;
 
     /**
      * @brief Translate le point
      * @param dx Déplacement en X
      * @param dy Déplacement en Y
      */
-    void translate(double dx, double dy);
+    void translate(double dx, double dy) override;
 
 private:
     double m_x = 0.0;       ///< Coordonnée X

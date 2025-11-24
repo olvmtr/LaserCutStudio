@@ -14,9 +14,17 @@
 #include <QPainter>
 #include <QTransform>
 #include "core/models/sketch/ConstraintSketch.h"
-#include "core/models/geometry/GeometricPoint.h"
-#include "core/models/geometry/GeometricSegment.h"
+#include "core/models/geometry/IGeometricPoint.h"
+#include "core/models/geometry/IGeometricSegment.h"
 #include "core/models/constraints/IConstraint.h"
+
+// Forward declarations
+namespace LaserCutStudio {
+namespace Core {
+    class GeometricPoint;
+    class GeometricSegment;
+}
+}
 
 namespace LaserCutStudio {
 namespace Core {

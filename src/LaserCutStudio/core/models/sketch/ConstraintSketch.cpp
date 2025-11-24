@@ -1,4 +1,7 @@
 #include "ConstraintSketch.h"
+#include "core/models/geometry/IGeometricPoint.h"
+#include "core/models/geometry/IGeometricSegment.h"
+#include "core/models/geometry/IGeometricArc.h"
 #include "core/models/constraints/DistanceConstraint.h"
 #include "core/models/constraints/LengthConstraint.h"
 #include "core/models/constraints/AngleConstraint.h"
@@ -7,6 +10,11 @@
 
 namespace LaserCutStudio {
 namespace Core {
+
+// Forward declarations
+class GeometricPoint;
+class GeometricSegment;
+class GeometricArc;
 
 const bool ConstraintSketch::s_registered = ConstraintSketch::registerFactory<ConstraintSketch>();
 
@@ -74,21 +82,21 @@ void ConstraintSketch::setAutoSolve(bool autoSolve)
     }
 }
 
-GeometricPoint* ConstraintSketch::addPoint(double x, double y, bool locked)
+IGeometricPoint* ConstraintSketch::addPoint(double x, double y, bool locked)
 {
     GeometricPoint* point = new GeometricPoint(x, y, locked);
     addElement(point);
     return point;
 }
 
-GeometricSegment* ConstraintSketch::addSegment(GeometricPoint* start, GeometricPoint* end)
+IGeometricSegment* ConstraintSketch::addSegment(IGeometricPoint* start, IGeometricPoint* end)
 {
     GeometricSegment* segment = new GeometricSegment(start, end);
     addElement(segment);
     return segment;
 }
 
-GeometricArc* ConstraintSketch::addArc(GeometricPoint* center, double radius, double startAngle, double endAngle)
+IGeometricArc* ConstraintSketch::addArc(IGeometricPoint* center, double radius, double startAngle, double endAngle)
 {
     GeometricArc* arc = new GeometricArc(center, radius, startAngle, endAngle);
     addElement(arc);
@@ -130,18 +138,18 @@ ConstraintSketch::SegmentWithPoints ConstraintSketch::addSegmentWithAutoPoints(d
 
     // Créer les points manquants
     if (!result.startPoint) {
-        result.startPoint = addPoint(x1, y1);
+        result.startPoint = static_cast<GeometricPoint*>(addPoint(x1, y1));
         result.startPointCreated = true;
     }
 
     if (!result.endPoint) {
-        result.endPoint = addPoint(x2, y2);
+        result.endPoint = static_cast<GeometricPoint*>(addPoint(x2, y2));
         result.endPointCreated = true;
     }
 
     // Créer le segment
     if (result.startPoint && result.endPoint && result.startPoint != result.endPoint) {
-        result.segment = addSegment(result.startPoint, result.endPoint);
+        result.segment = static_cast<GeometricSegment*>(addSegment(result.startPoint, result.endPoint));
     }
 
     return result;

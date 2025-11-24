@@ -1,8 +1,14 @@
 #include "LengthConstraint.h"
+#include "core/models/geometry/IGeometricSegment.h"
+#include "core/models/geometry/IGeometricPoint.h"
 #include <cmath>
 
 namespace LaserCutStudio {
 namespace Core {
+
+// Forward declarations
+class GeometricSegment;
+class GeometricPoint;
 
 const bool LengthConstraint::s_registered = IConstraint::registerFactory<LengthConstraint>();
 
@@ -11,7 +17,7 @@ LengthConstraint::LengthConstraint()
 {
 }
 
-LengthConstraint::LengthConstraint(GeometricSegment* segment, double length, bool locked)
+LengthConstraint::LengthConstraint(IGeometricSegment* segment, double length, bool locked)
     : IConstraint(locked, 1.0), m_segment(segment), m_length(length)
 {
 }
@@ -20,7 +26,7 @@ LengthConstraint::LengthConstraint(const LengthConstraint& other)
     : IConstraint(other.m_locked, other.m_priority), m_segment(nullptr), m_length(other.m_length)
 {
     if (other.m_segment) {
-        m_segment = static_cast<GeometricSegment*>(other.m_segment->clone());
+        m_segment = other.m_segment->clone();
     }
 }
 
@@ -38,18 +44,28 @@ bool LengthConstraint::isSatisfied(double tolerance) const
     return error() < tolerance;
 }
 
+bool LengthConstraint::isValid() const
+{
+    GeometricSegment* seg = qobject_cast<GeometricSegment*>(m_segment);
+    return seg != nullptr && seg->isValid();
+}
+
 double LengthConstraint::error() const
 {
     if (!isValid()) return 0.0;
-    return std::abs(m_segment->length() - m_length);
+    GeometricSegment* seg = qobject_cast<GeometricSegment*>(m_segment);
+    return std::abs(seg->length() - m_length);
 }
 
 void LengthConstraint::apply()
 {
     if (!isValid()) return;
 
-    GeometricPoint* start = m_segment->startPoint();
-    GeometricPoint* end = m_segment->endPoint();
+    GeometricSegment* seg = qobject_cast<GeometricSegment*>(m_segment);
+    if (!seg) return;
+
+    IGeometricPoint* start = seg->startPoint();
+    IGeometricPoint* end = seg->endPoint();
 
     if (!start || !end) return;
 
@@ -92,12 +108,18 @@ QList<GeometricPoint*> LengthConstraint::affectedPoints() const
 {
     QList<GeometricPoint*> points;
     if (isValid()) {
-        points << m_segment->startPoint() << m_segment->endPoint();
+        GeometricSegment* seg = qobject_cast<GeometricSegment*>(m_segment);
+        if (seg) {
+            IGeometricPoint* start = seg->startPoint();
+            IGeometricPoint* end = seg->endPoint();
+            if (start) points << qobject_cast<GeometricPoint*>(start);
+            if (end) points << qobject_cast<GeometricPoint*>(end);
+        }
     }
     return points;
 }
 
-void LengthConstraint::setSegment(GeometricSegment* segment)
+void LengthConstraint::setSegment(IGeometricSegment* segment)
 {
     if (m_segment == segment) return;
     m_segment = segment;

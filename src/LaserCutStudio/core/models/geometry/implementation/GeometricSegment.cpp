@@ -1,4 +1,5 @@
 #include "GeometricSegment.h"
+#include "GeometricPoint.h"
 #include <QPainterPath>
 #include <cmath>
 
@@ -9,14 +10,14 @@ namespace Core {
 const bool GeometricSegment::s_registered = IGeometricElement::registerFactory<GeometricSegment>();
 
 GeometricSegment::GeometricSegment()
-    : IGeometricElement(),
+    : IGeometricSegment(),
       m_startPoint(nullptr),
       m_endPoint(nullptr)
 {
 }
 
-GeometricSegment::GeometricSegment(GeometricPoint* start, GeometricPoint* end)
-    : IGeometricElement(),
+GeometricSegment::GeometricSegment(IGeometricPoint* start, IGeometricPoint* end)
+    : IGeometricSegment(),
       m_startPoint(nullptr),
       m_endPoint(nullptr)
 {
@@ -25,17 +26,17 @@ GeometricSegment::GeometricSegment(GeometricPoint* start, GeometricPoint* end)
 }
 
 GeometricSegment::GeometricSegment(const GeometricSegment& other)
-    : IGeometricElement(),
+    : IGeometricSegment(),
       m_startPoint(nullptr),
       m_endPoint(nullptr)
 {
     // Clone les points (nouveaux points indépendants)
     if (other.m_startPoint) {
-        m_startPoint = static_cast<GeometricPoint*>(other.m_startPoint->clone());
+        m_startPoint = other.m_startPoint->clone();
         connectToPoint(m_startPoint);
     }
     if (other.m_endPoint) {
-        m_endPoint = static_cast<GeometricPoint*>(other.m_endPoint->clone());
+        m_endPoint = other.m_endPoint->clone();
         connectToPoint(m_endPoint);
     }
 }
@@ -46,7 +47,7 @@ GeometricSegment::~GeometricSegment()
     disconnectFromPoint(m_endPoint);
 }
 
-IGeometricElement* GeometricSegment::clone() const
+IGeometricSegment* GeometricSegment::clone() const
 {
     return new GeometricSegment(*this);
 }
@@ -166,7 +167,7 @@ Point2D GeometricSegment::direction() const
     return Point2D(dx, dy);
 }
 
-void GeometricSegment::setStartPoint(GeometricPoint* start)
+void GeometricSegment::setStartPoint(IGeometricPoint* start)
 {
     if (m_startPoint == start) {
         return;
@@ -180,7 +181,7 @@ void GeometricSegment::setStartPoint(GeometricPoint* start)
     emit geometryChanged();
 }
 
-void GeometricSegment::setEndPoint(GeometricPoint* end)
+void GeometricSegment::setEndPoint(IGeometricPoint* end)
 {
     if (m_endPoint == end) {
         return;
@@ -228,10 +229,10 @@ double GeometricSegment::distanceToPoint(const Point2D& point) const
     return point.distance(closest);
 }
 
-void GeometricSegment::connectToPoint(GeometricPoint* point)
+void GeometricSegment::connectToPoint(IGeometricPoint* point)
 {
     if (point) {
-        connect(point, &GeometricPoint::geometryChanged,
+        connect(point, &IGeometricPoint::geometryChanged,
                 this, &GeometricSegment::geometryChanged);
 
         connect(point, &Interface::aboutToBeDestroyed,
@@ -246,7 +247,7 @@ void GeometricSegment::connectToPoint(GeometricPoint* point)
     }
 }
 
-void GeometricSegment::disconnectFromPoint(GeometricPoint* point)
+void GeometricSegment::disconnectFromPoint(IGeometricPoint* point)
 {
     if (point) {
         disconnect(point, nullptr, this, nullptr);

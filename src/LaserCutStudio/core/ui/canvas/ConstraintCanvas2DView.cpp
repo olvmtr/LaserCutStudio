@@ -4,6 +4,8 @@
  */
 
 #include "ConstraintCanvas2DView.h"
+#include "core/models/geometry/IGeometricPoint.h"
+#include "core/models/geometry/IGeometricSegment.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include "core/models/constraints/DistanceConstraint.h"
 #include "core/models/constraints/LengthConstraint.h"
@@ -450,8 +452,8 @@ void ConstraintCanvas2DView::drawSegment(QPainter* painter, GeometricSegment* se
 
     painter->setPen(QPen(color, 1.5 / m_zoomLevel));
 
-    GeometricPoint* p1 = segment->startPoint();
-    GeometricPoint* p2 = segment->endPoint();
+    IGeometricPoint* p1 = segment->startPoint();
+    IGeometricPoint* p2 = segment->endPoint();
     painter->drawLine(QPointF(p1->x(), p1->y()), QPointF(p2->x(), p2->y()));
 
     painter->restore();
@@ -581,7 +583,7 @@ void ConstraintCanvas2DView::handlePointPlacement(const QPointF& scenePos)
     pushCommand("Add Point",
         // Execute: ajouter point
         [this, adjustedPos, pointPtr]() {
-            *pointPtr = m_sketch->addPoint(adjustedPos.x(), adjustedPos.y());
+            *pointPtr = static_cast<GeometricPoint*>(m_sketch->addPoint(adjustedPos.x(), adjustedPos.y()));
             qCInfo(logCore()) << "Point placed at" << adjustedPos;
             emit pointCreated(*pointPtr);
             triggerSolveIfEnabled();
@@ -614,7 +616,7 @@ void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
 
             pushCommand("Add Point",
                 [this, adjustedPos, pointPtr]() {
-                    *pointPtr = m_sketch->addPoint(adjustedPos.x(), adjustedPos.y());
+                    *pointPtr = static_cast<GeometricPoint*>(m_sketch->addPoint(adjustedPos.x(), adjustedPos.y()));
                     qCInfo(logCore()) << "Auto-created start point at" << adjustedPos;
                     emit pointCreated(*pointPtr);
                     triggerSolveIfEnabled();
@@ -646,7 +648,7 @@ void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
 
             pushCommand("Add Point",
                 [this, adjustedPos, pointPtr]() {
-                    *pointPtr = m_sketch->addPoint(adjustedPos.x(), adjustedPos.y());
+                    *pointPtr = static_cast<GeometricPoint*>(m_sketch->addPoint(adjustedPos.x(), adjustedPos.y()));
                     qCInfo(logCore()) << "Auto-created end point at" << adjustedPos;
                     emit pointCreated(*pointPtr);
                     triggerSolveIfEnabled();
@@ -671,7 +673,7 @@ void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
 
             pushCommand("Add Segment",
                 [this, startPt, endPt, segmentPtr]() {
-                    *segmentPtr = m_sketch->addSegment(startPt, endPt);
+                    *segmentPtr = static_cast<GeometricSegment*>(m_sketch->addSegment(startPt, endPt));
                     qCInfo(logCore()) << "Segment created";
                     emit segmentCreated(*segmentPtr);
                     triggerSolveIfEnabled();

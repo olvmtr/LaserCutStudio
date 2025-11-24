@@ -3,10 +3,19 @@
 
 #include "core/models/base/Interface.h"
 #include "core/models/geometry/IGeometricElement.h"
-#include "core/models/geometry/GeometricPoint.h"
-#include "core/models/geometry/GeometricSegment.h"
-#include "core/models/geometry/GeometricArc.h"
+#include "core/models/geometry/IGeometricPoint.h"
+#include "core/models/geometry/IGeometricSegment.h"
+#include "core/models/geometry/IGeometricArc.h"
 #include "core/models/constraints/IConstraint.h"
+
+// Forward declarations
+namespace LaserCutStudio {
+namespace Core {
+    class GeometricPoint;
+    class GeometricSegment;
+    class GeometricArc;
+}
+}
 #include "core/models/sketch/ConstraintSolver.h"
 #include "core/models/patterns/factory/FactoryMixin.h"
 #include "core/models/patterns/properties/PropertyMixin.h"
@@ -140,9 +149,9 @@ public:
     void setAutoSolve(bool autoSolve);
 
     // Gestion des éléments géométriques
-    GeometricPoint* addPoint(double x, double y, bool locked = false);
-    GeometricSegment* addSegment(GeometricPoint* start, GeometricPoint* end);
-    GeometricArc* addArc(GeometricPoint* center, double radius, double startAngle = 0.0, double endAngle = 360.0);
+    IGeometricPoint* addPoint(double x, double y, bool locked = false);
+    IGeometricSegment* addSegment(IGeometricPoint* start, IGeometricPoint* end);
+    IGeometricArc* addArc(IGeometricPoint* center, double radius, double startAngle = 0.0, double endAngle = 360.0);
 
     /**
      * @brief Crée un segment avec points automatiques (style KSP)

@@ -2,12 +2,16 @@
 #define ANGLECONSTRAINT_H
 
 #include "core/models/constraints/IConstraint.h"
-#include "core/models/geometry/GeometricSegment.h"
+#include "core/models/geometry/IGeometricSegment.h"
 #include "core/models/patterns/properties/PropertyMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {
 
+
+// Forward declarations
+class GeometricSegment;
+class GeometricPoint;
 /**
  * @brief Contrainte d'angle entre deux segments
  *
@@ -26,18 +30,18 @@ class AngleConstraint : public IConstraint,
 {
     Q_OBJECT
 
-    Q_PROPERTY(GeometricSegment* segment1 READ segment1 WRITE setSegment1 NOTIFY segment1Changed)
-    Q_PROPERTY(GeometricSegment* segment2 READ segment2 WRITE setSegment2 NOTIFY segment2Changed)
+    Q_PROPERTY(IGeometricSegment* segment1 READ segment1 WRITE setSegment1 NOTIFY segment1Changed)
+    Q_PROPERTY(IGeometricSegment* segment2 READ segment2 WRITE setSegment2 NOTIFY segment2Changed)
     Q_PROPERTY(double angle READ angle WRITE setAngle NOTIFY angleChanged)
 
 signals:
-    void segment1Changed(GeometricSegment* newSegment1);
-    void segment2Changed(GeometricSegment* newSegment2);
+    void segment1Changed(IGeometricSegment* newSegment1);
+    void segment2Changed(IGeometricSegment* newSegment2);
     void angleChanged(double newAngle);
 
 public:
     AngleConstraint();
-    AngleConstraint(GeometricSegment* segment1, GeometricSegment* segment2, double angleDegrees, bool locked = false);
+    AngleConstraint(IGeometricSegment* segment1, IGeometricSegment* segment2, double angleDegrees, bool locked = false);
     AngleConstraint(const AngleConstraint& other);
     ~AngleConstraint() override;
 
@@ -49,18 +53,18 @@ public:
     void apply() override;
     QList<GeometricPoint*> affectedPoints() const override;
 
-    GeometricSegment* segment1() const { return m_segment1; }
-    GeometricSegment* segment2() const { return m_segment2; }
+    IGeometricSegment* segment1() const { return m_segment1; }
+    IGeometricSegment* segment2() const { return m_segment2; }
     double angle() const { return m_angleDegrees; }
-    bool isValid() const { return m_segment1 != nullptr && m_segment1->isValid() && m_segment2 != nullptr && m_segment2->isValid(); }
+    bool isValid() const;
 
-    void setSegment1(GeometricSegment* segment);
-    void setSegment2(GeometricSegment* segment);
+    void setSegment1(IGeometricSegment* segment);
+    void setSegment2(IGeometricSegment* segment);
     void setAngle(double angleDegrees);
 
 private:
-    GeometricSegment* m_segment1 = nullptr;
-    GeometricSegment* m_segment2 = nullptr;
+    IGeometricSegment* m_segment1 = nullptr;
+    IGeometricSegment* m_segment2 = nullptr;
     double m_angleDegrees = 0.0;
 
     static const bool s_registered;

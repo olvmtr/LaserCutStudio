@@ -2,10 +2,14 @@
 #define PERPENDICULARCONSTRAINT_H
 
 #include "IConstraint.h"
-#include "../geometry/GeometricSegment.h"
+#include "../geometry/IGeometricSegment.h"
 
 namespace LaserCutStudio {
 namespace Core {
+
+// Forward declarations
+class GeometricSegment;
+class GeometricPoint;
 
 /**
  * @brief Contrainte de perpendicularité entre deux segments
@@ -19,8 +23,8 @@ class PerpendicularConstraint : public IConstraint
 {
     Q_OBJECT
 
-    Q_PROPERTY(GeometricSegment* segment1 READ segment1 WRITE setSegment1 NOTIFY segment1Changed)
-    Q_PROPERTY(GeometricSegment* segment2 READ segment2 WRITE setSegment2 NOTIFY segment2Changed)
+    Q_PROPERTY(IGeometricSegment* segment1 READ segment1 WRITE setSegment1 NOTIFY segment1Changed)
+    Q_PROPERTY(IGeometricSegment* segment2 READ segment2 WRITE setSegment2 NOTIFY segment2Changed)
 
 public:
     DECLARE_TYPE_NAME(PerpendicularConstraint)
@@ -32,19 +36,19 @@ public:
      * @param locked Si true, la contrainte a priorité maximale
      * @param parent Parent Qt (optionnel)
      */
-    explicit PerpendicularConstraint(GeometricSegment* segment1 = nullptr,
-                                     GeometricSegment* segment2 = nullptr,
+    explicit PerpendicularConstraint(IGeometricSegment* segment1 = nullptr,
+                                     IGeometricSegment* segment2 = nullptr,
                                      bool locked = false,
                                      QObject* parent = nullptr);
 
     ~PerpendicularConstraint() override;
 
     // Accesseurs
-    GeometricSegment* segment1() const { return m_segment1; }
-    void setSegment1(GeometricSegment* segment);
+    IGeometricSegment* segment1() const { return m_segment1; }
+    void setSegment1(IGeometricSegment* segment);
 
-    GeometricSegment* segment2() const { return m_segment2; }
-    void setSegment2(GeometricSegment* segment);
+    IGeometricSegment* segment2() const { return m_segment2; }
+    void setSegment2(IGeometricSegment* segment);
 
     // Implémentation IConstraint
     bool isValid() const;
@@ -57,15 +61,15 @@ public:
     IConstraint* clone() const override;
 
 signals:
-    void segment1Changed(GeometricSegment* segment);
-    void segment2Changed(GeometricSegment* segment);
+    void segment1Changed(IGeometricSegment* segment);
+    void segment2Changed(IGeometricSegment* segment);
 
 private:
-    void connectToSegment(GeometricSegment* segment);
-    void disconnectFromSegment(GeometricSegment* segment);
+    void connectToSegment(IGeometricSegment* segment);
+    void disconnectFromSegment(IGeometricSegment* segment);
 
-    GeometricSegment* m_segment1;
-    GeometricSegment* m_segment2;
+    IGeometricSegment* m_segment1;
+    IGeometricSegment* m_segment2;
 
     // Enregistrement automatique dans le Factory Pattern
     static const bool s_registered;

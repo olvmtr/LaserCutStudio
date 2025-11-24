@@ -7,8 +7,13 @@ Ces tests garantissent que l'architecture respecte les règles suivantes :
 - RÈGLE 2: Seules les interfaces (I*) peuvent être utilisées entre classes
 - RÈGLE 3: Toutes les implémentations héritent d'une interface
 - RÈGLE 4: Tous les patterns sont utilisés (FactoryMixin, PropertyMixin, macros)
-- RÈGLE 5: Pas de cycles d'includes
-- RÈGLE 6: Les mixins sont totalement indépendants (pas d'includes du projet)
+- RÈGLE 5: Hiérarchie des packages respectée
+- RÈGLE 6: Pas de dépendances circulaires entre packages
+- RÈGLE 7: Les mixins sont totalement indépendants (pas d'includes du projet)
+- RÈGLE 8: Les interfaces doivent être purement abstraites
+- RÈGLE 9: Toutes les classes concrètes doivent être dans des sous-packages implementation/
+- RÈGLE 10: Aucune classe ne doit importer depuis les packages implementation/
+- RÈGLE 11: Pas de dépendances circulaires entre fichiers individuels
 
 Inspiré des tests Python du projet ai-front-portal-main.
 """
@@ -413,64 +418,124 @@ class TestArchitectureSOLID:
         RÈGLE 6: Pas de dépendances circulaires entre packages.
 
         Utilise un algorithme DFS pour détecter les cycles dans le graphe de dépendances
-        entre packages.
+        entre packages et sous-packages.
         """
         print("\n🔍 Test 6: Détection des dépendances circulaires entre packages...")
 
-        # Construire le graphe de dépendances entre packages
-        dependency_graph: Dict[str, Set[str]] = {}
+        # Découvrir tous les packages et sous-packages automatiquement
+        all_packages = set()
 
-        packages = ['models', 'services', 'infrastructure']
+        # Packages principaux
+        main_packages = ['models', 'services', 'infrastructure', 'ui', 'plugins', 'di', 'patterns', 'utils']
 
-        for package in packages:
+        for main_pkg in main_packages:
+            main_path = CORE_PATH / main_pkg
+            if main_path.exists() and main_path.is_dir():
+                all_packages.add(main_pkg)
+
+                # Découvrir les sous-packages (shapes, parts, joints, geometry, etc.)
+                for subdir in main_path.iterdir():
+                    if subdir.is_dir() and not subdir.name.startswith('.') and subdir.name != 'implementation':
+                        subpkg_name = f"{main_pkg}/{subdir.name}"
+                        all_packages.add(subpkg_name)
+
+        # Construire le graphe de dépendances
+        dependency_graph: Dict[str, Set[str]] = {pkg: set() for pkg in all_packages}
+        dependency_details: Dict[str, Dict[str, List[str]]] = {pkg: {} for pkg in all_packages}
+
+        for package in all_packages:
             package_path = CORE_PATH / package
             if not package_path.exists():
                 continue
-
-            dependencies = set()
 
             for file in self.analyzer.get_all_headers(package_path):
                 includes = self.analyzer.get_includes(file)
 
                 for include in includes:
-                    for other_package in packages:
-                        if other_package != package and f'{other_package}/' in include:
-                            dependencies.add(other_package)
+                    # Vérifier les dépendances vers d'autres packages
+                    for other_package in all_packages:
+                        if other_package != package and other_package in include:
+                            dependency_graph[package].add(other_package)
 
-            dependency_graph[package] = dependencies
+                            # Enregistrer les détails pour le rapport
+                            if other_package not in dependency_details[package]:
+                                dependency_details[package][other_package] = []
+                            dependency_details[package][other_package].append(
+                                f"{file.relative_to(CORE_PATH)} → {include}"
+                            )
 
-        # Détecter les cycles avec DFS
-        def has_cycle(node: str, visited: Set[str], rec_stack: Set[str]) -> Tuple[bool, List[str]]:
-            """Détection de cycles par DFS."""
+        # Afficher le graphe de dépendances (mode verbose)
+        print(f"\n   📊 Graphe de dépendances ({len(all_packages)} packages analysés):")
+        for pkg, deps in sorted(dependency_graph.items()):
+            if deps:
+                print(f"      {pkg} → {', '.join(sorted(deps))}")
+
+        # Fonction pour vérifier si un package est parent d'un autre
+        def is_parent_package(parent: str, child: str) -> bool:
+            """Vérifie si parent est un package parent de child."""
+            return child.startswith(parent + '/')
+
+        # Détecter les cycles avec DFS amélioré
+        def has_cycle(node: str, visited: Set[str], rec_stack: Set[str], path: List[str]) -> Tuple[bool, List[str]]:
+            """Détection de cycles par DFS avec reconstruction du chemin complet."""
             visited.add(node)
             rec_stack.add(node)
+            path.append(node)
 
             for neighbor in dependency_graph.get(node, set()):
+                # Ignorer les dépendances entre package parent et sous-package
+                # (models/ → models/constraints est OK, models/constraints → models/ est OK)
+                if is_parent_package(node, neighbor) or is_parent_package(neighbor, node):
+                    continue
+
                 if neighbor not in visited:
-                    has_cycle_result, path = has_cycle(neighbor, visited, rec_stack)
+                    has_cycle_result, cycle_path = has_cycle(neighbor, visited, rec_stack, path[:])
                     if has_cycle_result:
-                        return True, [node] + path
+                        return True, cycle_path
                 elif neighbor in rec_stack:
-                    return True, [node, neighbor]
+                    # Cycle détecté ! Reconstruire le chemin du cycle
+                    cycle_start_idx = path.index(neighbor)
+                    return True, path[cycle_start_idx:] + [neighbor]
 
             rec_stack.remove(node)
             return False, []
 
         visited = set()
+        cycles_found = []
 
-        for node in dependency_graph:
+        for node in sorted(dependency_graph.keys()):
             if node not in visited:
-                cycle_found, cycle_path = has_cycle(node, visited, set())
-                if cycle_found:
-                    self.log_error(
-                        f"VIOLATION RÈGLE 6: Dépendance circulaire détectée !\n"
-                        f"   Cycle: {' → '.join(cycle_path)}\n"
-                        f"   INTERDIT: Les packages ne doivent pas avoir de dépendances circulaires\n"
-                        f"   SOLUTION: Restructurer pour respecter models/ ← services/ ← infrastructure/"
-                    )
+                cycle_found, cycle_path = has_cycle(node, visited, set(), [])
+                if cycle_found and cycle_path not in cycles_found:
+                    cycles_found.append(cycle_path)
+
+                    # Afficher les détails du cycle
+                    cycle_str = ' → '.join(cycle_path)
+                    error_msg = f"VIOLATION RÈGLE 6: Dépendance circulaire détectée !\n"
+                    error_msg += f"   Cycle: {cycle_str}\n"
+                    error_msg += f"   Longueur du cycle: {len(cycle_path) - 1} dépendances\n\n"
+
+                    # Afficher les fichiers impliqués dans le cycle
+                    error_msg += "   Détails des dépendances:\n"
+                    for i in range(len(cycle_path) - 1):
+                        from_pkg = cycle_path[i]
+                        to_pkg = cycle_path[i + 1]
+
+                        if to_pkg in dependency_details.get(from_pkg, {}):
+                            files = dependency_details[from_pkg][to_pkg]
+                            error_msg += f"   • {from_pkg} → {to_pkg}:\n"
+                            for file_info in files[:3]:  # Limiter à 3 exemples
+                                error_msg += f"      - {file_info}\n"
+                            if len(files) > 3:
+                                error_msg += f"      ... et {len(files) - 3} autres fichiers\n"
+
+                    error_msg += "\n   INTERDIT: Les packages ne doivent pas avoir de dépendances circulaires\n"
+                    error_msg += "   SOLUTION: Restructurer pour casser le cycle (extraire interface, inverser dépendance, ou fusionner packages)"
+
+                    self.log_error(error_msg)
 
         if not any("RÈGLE 6" in err for err in self.errors):
-            self.log_success("RÈGLE 6: Aucune dépendance circulaire détectée")
+            self.log_success(f"RÈGLE 6: Aucune dépendance circulaire détectée ({len(all_packages)} packages vérifiés)")
 
     def test_mixins_independence(self):
         """
@@ -619,6 +684,303 @@ class TestArchitectureSOLID:
         if not any("RÈGLE 8" in err for err in self.errors):
             self.log_success("RÈGLE 8: Toutes les interfaces sont purement abstraites")
 
+    def test_concrete_classes_in_implementation(self):
+        """
+        RÈGLE 9: Toutes les classes concrètes doivent être dans des sous-packages implementation/.
+
+        Les interfaces (I*) restent dans le package parent.
+        Les implémentations concrètes doivent être dans implementation/.
+        """
+        print("\n🔍 RÈGLE 9: Vérification de l'organisation des classes concrètes...")
+
+        # Parcourir tous les headers dans core/models/
+        models_path = CORE_PATH / "models"
+        if not models_path.exists():
+            print(f"⚠️  Répertoire models/ introuvable: {models_path}")
+            return
+
+        for header_file in models_path.rglob("*.h"):
+            # Ignorer les fichiers dans patterns/, base/, utils/
+            relative_path = header_file.relative_to(CORE_PATH)
+            path_parts = relative_path.parts
+
+            if any(x in path_parts for x in ['patterns', 'base', 'infrastructure']):
+                continue
+
+            # Vérifier si c'est une interface
+            class_name = header_file.stem
+            is_interface = self.analyzer.is_interface(class_name)
+
+            # Vérifier si le fichier est dans un sous-dossier implementation/
+            is_in_implementation = 'implementation' in path_parts
+
+            # VIOLATION: Classe concrète HORS de implementation/
+            if not is_interface and not is_in_implementation:
+                # Exceptions: types de base, contraintes sont OK
+                if class_name in ['Point2D', 'Point3D', 'Material', 'JointType']:
+                    continue
+                if 'Constraint' in class_name or class_name in ['ConstraintSolver', 'ConstraintSketch']:
+                    continue
+
+                self.log_error(
+                    f"VIOLATION RÈGLE 9: Classe concrète hors du package implementation/\n"
+                    f"   Fichier: {header_file.relative_to(PROJECT_ROOT)}\n"
+                    f"   Classe: {class_name}\n"
+                    f"   PROBLÈME: Les classes concrètes doivent être dans implementation/\n"
+                    f"   SOLUTION: Déplacer dans {header_file.parent}/implementation/{header_file.name}\n"
+                    f"   ARCHITECTURE: Seules les interfaces (I*) restent dans le package parent"
+                )
+
+            # VIOLATION: Interface DANS implementation/
+            elif is_interface and is_in_implementation:
+                self.log_error(
+                    f"VIOLATION RÈGLE 9: Interface dans le package implementation/\n"
+                    f"   Fichier: {header_file.relative_to(PROJECT_ROOT)}\n"
+                    f"   Interface: {class_name}\n"
+                    f"   PROBLÈME: Les interfaces doivent rester dans le package parent\n"
+                    f"   SOLUTION: Déplacer dans {header_file.parent.parent}/{header_file.name}\n"
+                    f"   ARCHITECTURE: implementation/ est réservé aux classes concrètes"
+                )
+
+        if not any("RÈGLE 9" in err for err in self.errors):
+            self.log_success("RÈGLE 9: Toutes les classes concrètes sont dans implementation/")
+
+    def test_no_imports_from_implementation(self):
+        """
+        RÈGLE 10: Aucune classe ne doit importer depuis les packages implementation/.
+
+        Les classes doivent dépendre des interfaces (dans le package parent), jamais des
+        implémentations concrètes (dans implementation/).
+
+        Exceptions:
+        - Un fichier dans implementation/ peut inclure d'autres fichiers du MÊME package implementation/
+        - Les fichiers de test peuvent inclure les implémentations pour les tester
+        """
+        print("\n🔍 Test 10: Vérification qu'aucune classe n'importe depuis implementation/...")
+
+        # Parcourir tous les fichiers sources (header et cpp)
+        for file_path in list(CORE_PATH.rglob("*.h")) + list(CORE_PATH.rglob("*.cpp")):
+            # Ignorer les fichiers de test et générés
+            if 'test' in str(file_path).lower() or 'moc_' in str(file_path) or 'qrc_' in str(file_path):
+                continue
+
+            # Déterminer si le fichier est lui-même dans implementation/
+            relative_path = file_path.relative_to(CORE_PATH)
+            path_parts = relative_path.parts
+            file_is_in_implementation = 'implementation' in path_parts
+
+            # Extraire les includes
+            includes = self.analyzer.get_includes(file_path)
+
+            for include in includes:
+                # Vérifier si l'include pointe vers implementation/ ou implementations/
+                if 'implementation' in include.lower():
+                    # Exception : Si le fichier est lui-même dans implementation/, il peut inclure
+                    # d'autres fichiers du MÊME package implementation/
+                    if file_is_in_implementation:
+                        # Vérifier que c'est bien le même package
+                        # Exemple : geometry/implementation/GeometricPoint.h peut inclure geometry/implementation/GeometricSegment.h
+                        # mais PAS shapes/implementation/Rectangle.h
+
+                        # Extraire le package parent de l'include
+                        include_parts = Path(include).parts
+                        if len(include_parts) >= 2:
+                            # Trouver l'index de 'implementation' dans l'include
+                            try:
+                                impl_index = include_parts.index('implementation')
+                                if impl_index > 0:
+                                    include_package = include_parts[impl_index - 1]
+                                else:
+                                    include_package = None
+                            except ValueError:
+                                include_package = None
+
+                            # Extraire le package parent du fichier
+                            try:
+                                file_impl_index = path_parts.index('implementation')
+                                if file_impl_index > 0:
+                                    file_package = path_parts[file_impl_index - 1]
+                                else:
+                                    file_package = None
+                            except ValueError:
+                                file_package = None
+
+                            # Si les packages sont différents, c'est une violation
+                            if include_package and file_package and include_package != file_package:
+                                self.log_error(
+                                    f"VIOLATION RÈGLE 10: Import depuis implementation/ d'un autre package\n"
+                                    f"   Fichier: {file_path.relative_to(PROJECT_ROOT)}\n"
+                                    f"   Package du fichier: {file_package}/\n"
+                                    f"   Include: {include}\n"
+                                    f"   Package de l'include: {include_package}/\n"
+                                    f"   INTERDIT: Importer depuis implementation/ d'un autre package\n"
+                                    f"   SOLUTION: Importer l'interface depuis {include_package}/ (ex: I*.h)\n"
+                                    f"   PRINCIPE: Dépendre des abstractions, pas des implémentations"
+                                )
+                        continue
+
+                    # Si le fichier n'est PAS dans implementation/, c'est une violation claire
+                    self.log_error(
+                        f"VIOLATION RÈGLE 10: Import depuis un package implementation/\n"
+                        f"   Fichier: {file_path.relative_to(PROJECT_ROOT)}\n"
+                        f"   Include interdit: {include}\n"
+                        f"   INTERDIT: Importer depuis implementation/ (classes concrètes)\n"
+                        f"   SOLUTION: Importer l'interface correspondante depuis le package parent (I*.h)\n"
+                        f"   EXEMPLE: Au lieu de 'shapes/implementation/Rectangle.h', utiliser 'shapes/IShape.h'\n"
+                        f"   PRINCIPE: Dependency Inversion Principle (DIP) - Dépendre des abstractions"
+                    )
+
+        if not any("RÈGLE 10" in err for err in self.errors):
+            self.log_success("RÈGLE 10: Aucun import depuis implementation/ détecté")
+
+    def test_no_circular_file_dependencies(self):
+        """
+        RÈGLE 11: Pas de dépendances circulaires entre fichiers individuels.
+
+        Détecte les includes mutuels entre fichiers (A.h inclut B.h, B.h inclut A.h).
+        Utilise un algorithme DFS pour trouver tous les cycles dans le graphe d'includes.
+        """
+        print("\n🔍 Test 11: Détection des dépendances circulaires entre fichiers...")
+
+        # Construire le graphe d'includes entre tous les fichiers
+        file_graph: Dict[Path, Set[Path]] = {}
+        all_files = list(CORE_PATH.rglob("*.h"))
+
+        # Ignorer les fichiers de test et générés
+        all_files = [f for f in all_files if 'test' not in str(f).lower() and 'moc_' not in str(f)]
+
+        print(f"   📁 Analyse de {len(all_files)} fichiers headers...")
+
+        # Créer un mapping nom de fichier → chemin complet pour résolution
+        file_name_to_path: Dict[str, List[Path]] = {}
+        for file_path in all_files:
+            file_name = file_path.name
+            if file_name not in file_name_to_path:
+                file_name_to_path[file_name] = []
+            file_name_to_path[file_name].append(file_path)
+
+        # Construire le graphe
+        for file_path in all_files:
+            includes = self.analyzer.get_includes(file_path)
+            file_graph[file_path] = set()
+
+            for include in includes:
+                # Résoudre l'include vers un chemin de fichier
+                include_name = Path(include).name
+
+                # Chercher le fichier inclus
+                if include_name in file_name_to_path:
+                    for candidate in file_name_to_path[include_name]:
+                        # Vérifier que c'est bien un fichier du projet (pas Qt ou système)
+                        if candidate in all_files:
+                            file_graph[file_path].add(candidate)
+
+        # Détecter les cycles avec DFS
+        def find_cycles_from_node(start: Path, current: Path, visited: Set[Path], path: List[Path]) -> List[List[Path]]:
+            """Trouve tous les cycles partant d'un nœud."""
+            cycles = []
+            visited.add(current)
+            path.append(current)
+
+            for neighbor in file_graph.get(current, set()):
+                if neighbor == start and len(path) > 1:
+                    # Cycle trouvé !
+                    cycles.append(path[:] + [neighbor])
+                elif neighbor not in visited:
+                    cycles.extend(find_cycles_from_node(start, neighbor, visited, path[:]))
+
+            return cycles
+
+        # Chercher tous les cycles
+        all_cycles = []
+        visited_starts = set()
+
+        for start_node in sorted(file_graph.keys(), key=lambda p: str(p)):
+            if start_node not in visited_starts:
+                cycles = find_cycles_from_node(start_node, start_node, set(), [])
+                for cycle in cycles:
+                    # Normaliser le cycle (toujours commencer par le plus petit élément)
+                    min_idx = cycle.index(min(cycle[:-1], key=lambda p: str(p)))
+                    normalized = cycle[min_idx:-1] + cycle[:min_idx] + [cycle[min_idx]]
+
+                    # Vérifier si ce cycle n'a pas déjà été trouvé
+                    if normalized not in all_cycles:
+                        all_cycles.append(normalized)
+                        visited_starts.update(cycle[:-1])
+
+        # Rapporter les cycles
+        if all_cycles:
+            print(f"   ⚠️  {len(all_cycles)} cycle(s) détecté(s) !\n")
+
+            for idx, cycle in enumerate(all_cycles, 1):
+                cycle_str = ' → '.join([f.name for f in cycle])
+                error_msg = f"VIOLATION RÈGLE 11: Dépendance circulaire entre fichiers (cycle #{idx})\n"
+                error_msg += f"   Cycle: {cycle_str}\n"
+                error_msg += f"   Longueur: {len(cycle) - 1} fichiers\n\n"
+
+                error_msg += "   Fichiers impliqués:\n"
+                for i in range(len(cycle) - 1):
+                    from_file = cycle[i]
+                    to_file = cycle[i + 1]
+                    error_msg += f"   • {from_file.relative_to(CORE_PATH)}\n"
+                    error_msg += f"     ↓ inclut\n"
+                    error_msg += f"     {to_file.relative_to(CORE_PATH)}\n"
+
+                error_msg += "\n   INTERDIT: Les fichiers ne doivent pas s'inclure mutuellement\n"
+                error_msg += "   SOLUTION:\n"
+                error_msg += "   1. Utiliser des forward declarations (class ClassName;)\n"
+                error_msg += "   2. Déplacer les includes dans le fichier .cpp\n"
+                error_msg += "   3. Extraire une interface commune\n"
+                error_msg += "   4. Restructurer pour casser la dépendance circulaire"
+
+                self.log_error(error_msg)
+        else:
+            print(f"   ✓ Aucun cycle détecté\n")
+
+        if not any("RÈGLE 11" in err for err in self.errors):
+            self.log_success(f"RÈGLE 11: Aucune dépendance circulaire entre fichiers détectée ({len(all_files)} fichiers vérifiés)")
+
+    def test_one_interface_per_package(self):
+        """
+        RÈGLE 12: Un seul fichier interface (I*.h) par package.
+
+        Chaque package ne doit contenir qu'une seule interface publique.
+        Les sous-interfaces doivent être dans des sous-packages dédiés.
+        """
+        print("\n🔍 Test 12: Vérification d'une seule interface par package...")
+
+        # Parcourir tous les packages dans core/
+        for package_dir in CORE_PATH.rglob("*"):
+            if not package_dir.is_dir():
+                continue
+
+            # Skip les répertoires implementation, tests, generated
+            if any(skip in str(package_dir) for skip in ['implementation', 'test', 'generated', '.git', 'build']):
+                continue
+
+            # Compter les fichiers interface (I*.h) directement dans ce répertoire
+            interface_files = [f for f in package_dir.glob("I*.h") if f.is_file()]
+
+            if len(interface_files) > 1:
+                package_name = package_dir.relative_to(CORE_PATH)
+                interface_names = [f.name for f in interface_files]
+
+                error_msg = (
+                    f"❌ VIOLATION RÈGLE 12: Plusieurs interfaces dans le même package\n"
+                    f"   Package: {package_name}\n"
+                    f"   Interfaces trouvées: {', '.join(interface_names)}\n"
+                    f"   INTERDIT: Avoir plusieurs interfaces (I*.h) dans le même package\n"
+                    f"   SOLUTION: Créer des sous-packages dédiés pour chaque interface\n"
+                    f"   EXEMPLE: Au lieu de geometry/IPoint.h + geometry/ISegment.h\n"
+                    f"           Utiliser geometry/point/IPoint.h + geometry/segment/ISegment.h\n"
+                    f"   PRINCIPE: Interface Segregation Principle (ISP) - Séparation des responsabilités\n"
+                )
+                self.errors.append(error_msg)
+                print(error_msg)
+
+        if not any("RÈGLE 12" in err for err in self.errors):
+            self.log_success("RÈGLE 12: Une seule interface par package")
+
     def run_all_tests(self):
         """Exécute tous les tests SOLID."""
         print("=" * 80)
@@ -633,6 +995,10 @@ class TestArchitectureSOLID:
         self.test_no_circular_dependencies()
         self.test_mixins_independence()
         self.test_interfaces_are_pure()
+        self.test_concrete_classes_in_implementation()
+        self.test_no_imports_from_implementation()
+        self.test_no_circular_file_dependencies()
+        self.test_one_interface_per_package()
 
         print("\n" + "=" * 80)
         if self.errors:

@@ -2,7 +2,10 @@
 #define DISTANCECONSTRAINT_H
 
 #include "core/models/constraints/IConstraint.h"
-#include "core/models/geometry/GeometricPoint.h"
+#include "core/models/geometry/IGeometricPoint.h"
+
+// Forward declarations
+class GeometricPoint;
 #include "core/models/patterns/properties/PropertyMixin.h"
 
 namespace LaserCutStudio {
@@ -39,13 +42,13 @@ class DistanceConstraint : public IConstraint,
 {
     Q_OBJECT
 
-    Q_PROPERTY(GeometricPoint* point1 READ point1 WRITE setPoint1 NOTIFY point1Changed)
-    Q_PROPERTY(GeometricPoint* point2 READ point2 WRITE setPoint2 NOTIFY point2Changed)
+    Q_PROPERTY(IGeometricPoint* point1 READ point1 WRITE setPoint1 NOTIFY point1Changed)
+    Q_PROPERTY(IGeometricPoint* point2 READ point2 WRITE setPoint2 NOTIFY point2Changed)
     Q_PROPERTY(double distance READ distance WRITE setDistance NOTIFY distanceChanged)
 
 signals:
-    void point1Changed(GeometricPoint* newPoint1);
-    void point2Changed(GeometricPoint* newPoint2);
+    void point1Changed(IGeometricPoint* newPoint1);
+    void point2Changed(IGeometricPoint* newPoint2);
     void distanceChanged(double newDistance);
 
 public:
@@ -61,7 +64,7 @@ public:
      * @param distance Distance cible (en unités)
      * @param locked État de verrouillage (prioritaire si true)
      */
-    DistanceConstraint(GeometricPoint* point1, GeometricPoint* point2, double distance, bool locked = false);
+    DistanceConstraint(IGeometricPoint* point1, IGeometricPoint* point2, double distance, bool locked = false);
 
     /**
      * @brief Constructeur de copie
@@ -104,22 +107,22 @@ public:
     QList<GeometricPoint*> affectedPoints() const override;
 
     // Getters
-    GeometricPoint* point1() const { return m_point1; }
-    GeometricPoint* point2() const { return m_point2; }
+    IGeometricPoint* point1() const { return m_point1; }
+    IGeometricPoint* point2() const { return m_point2; }
     double distance() const { return m_distance; }
-    bool isValid() const { return m_point1 != nullptr && m_point2 != nullptr; }
+    bool isValid() const;
 
     // Setters
-    void setPoint1(GeometricPoint* point);
-    void setPoint2(GeometricPoint* point);
+    void setPoint1(IGeometricPoint* point);
+    void setPoint2(IGeometricPoint* point);
     void setDistance(double distance);
 
 private:
-    void connectToPoint(GeometricPoint* point);
-    void disconnectFromPoint(GeometricPoint* point);
+    void connectToPoint(IGeometricPoint* point);
+    void disconnectFromPoint(IGeometricPoint* point);
 
-    GeometricPoint* m_point1 = nullptr;  ///< Premier point
-    GeometricPoint* m_point2 = nullptr;  ///< Second point
+    IGeometricPoint* m_point1 = nullptr;  ///< Premier point
+    IGeometricPoint* m_point2 = nullptr;  ///< Second point
     double m_distance = 0.0;             ///< Distance cible
 
     static const bool s_registered;

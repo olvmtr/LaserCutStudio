@@ -7,8 +7,8 @@
 #include "core/models/constraints/PerpendicularConstraint.h"
 #include "core/models/constraints/EqualLengthConstraint.h"
 #include "core/models/constraints/CoincidentConstraint.h"
-#include "core/models/geometry/GeometricPoint.h"
-#include "core/models/geometry/GeometricSegment.h"
+#include "core/models/geometry/implementation/GeometricPoint.h"
+#include "core/models/geometry/implementation/GeometricSegment.h"
 
 namespace LaserCutStudio {
 namespace Core {

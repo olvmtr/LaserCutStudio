@@ -1,16 +1,22 @@
 #include "PerpendicularConstraint.h"
-#include "core/models/geometry/GeometricPoint.h"
+#include "../geometry/IGeometricSegment.h"
+#include "../geometry/IGeometricPoint.h"
 #include <cmath>
 
 namespace LaserCutStudio {
 namespace Core {
 
+// Forward declarations
+class GeometricSegment;
+class GeometricPoint;
+class GeometricArc;
+
 // Enregistrement automatique dans le Factory Pattern
 const bool PerpendicularConstraint::s_registered =
     IConstraint::registerFactory<PerpendicularConstraint>();
 
-PerpendicularConstraint::PerpendicularConstraint(GeometricSegment* segment1,
-                                                 GeometricSegment* segment2,
+PerpendicularConstraint::PerpendicularConstraint(IGeometricSegment* segment1,
+                                                 IGeometricSegment* segment2,
                                                  bool locked,
                                                  QObject* parent)
     : IConstraint(parent)
@@ -28,7 +34,7 @@ PerpendicularConstraint::~PerpendicularConstraint()
     disconnectFromSegment(m_segment2);
 }
 
-void PerpendicularConstraint::setSegment1(GeometricSegment* segment)
+void PerpendicularConstraint::setSegment1(IGeometricSegment* segment)
 {
     if (m_segment1 == segment) return;
 
@@ -40,7 +46,7 @@ void PerpendicularConstraint::setSegment1(GeometricSegment* segment)
     emit constraintChanged();
 }
 
-void PerpendicularConstraint::setSegment2(GeometricSegment* segment)
+void PerpendicularConstraint::setSegment2(IGeometricSegment* segment)
 {
     if (m_segment2 == segment) return;
 
@@ -52,7 +58,7 @@ void PerpendicularConstraint::setSegment2(GeometricSegment* segment)
     emit constraintChanged();
 }
 
-void PerpendicularConstraint::connectToSegment(GeometricSegment* segment)
+void PerpendicularConstraint::connectToSegment(IGeometricSegment* segment)
 {
     if (!segment) return;
 
@@ -65,7 +71,7 @@ void PerpendicularConstraint::connectToSegment(GeometricSegment* segment)
     });
 }
 
-void PerpendicularConstraint::disconnectFromSegment(GeometricSegment* segment)
+void PerpendicularConstraint::disconnectFromSegment(IGeometricSegment* segment)
 {
     if (!segment) return;
     QObject::disconnect(segment, nullptr, this, nullptr);
@@ -131,8 +137,8 @@ void PerpendicularConstraint::apply()
     while (angleDiff < -180.0) angleDiff += 360.0;
 
     // Trouver les points libres du segment2
-    GeometricPoint* start = m_segment2->startPoint();
-    GeometricPoint* end = m_segment2->endPoint();
+    IGeometricPoint* start = m_segment2->startPoint();
+    IGeometricPoint* end = m_segment2->endPoint();
 
     if (!start || !end) return;
 
@@ -175,11 +181,13 @@ QList<GeometricPoint*> PerpendicularConstraint::affectedPoints() const
 {
     QList<GeometricPoint*> points;
     if (m_segment2 && m_segment2->isValid()) {
-        if (m_segment2->startPoint() && !m_segment2->startPoint()->isLocked()) {
-            points << m_segment2->startPoint();
+        IGeometricPoint* start = m_segment2->startPoint();
+        IGeometricPoint* end = m_segment2->endPoint();
+        if (start && !start->isLocked()) {
+            points << qobject_cast<GeometricPoint*>(start);
         }
-        if (m_segment2->endPoint() && !m_segment2->endPoint()->isLocked()) {
-            points << m_segment2->endPoint();
+        if (end && !end->isLocked()) {
+            points << qobject_cast<GeometricPoint*>(end);
         }
     }
     return points;

@@ -1,7 +1,7 @@
 #include "TestGeometry.h"
-#include "core/models/geometry/GeometricPoint.h"
-#include "core/models/geometry/GeometricSegment.h"
-#include "core/models/geometry/GeometricArc.h"
+#include "core/models/geometry/implementation/GeometricPoint.h"
+#include "core/models/geometry/implementation/GeometricSegment.h"
+#include "core/models/geometry/implementation/GeometricArc.h"
 #include <cmath>
 
 namespace LaserCutStudio {

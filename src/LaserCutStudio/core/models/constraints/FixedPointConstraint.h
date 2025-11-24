@@ -2,12 +2,15 @@
 #define FIXEDPOINTCONSTRAINT_H
 
 #include "core/models/constraints/IConstraint.h"
-#include "core/models/geometry/GeometricPoint.h"
+#include "core/models/geometry/IGeometricPoint.h"
 #include "core/models/patterns/properties/PropertyMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {
 
+
+// Forward declaration
+class GeometricPoint;
 /**
  * @brief Contrainte de point fixe
  *
@@ -19,18 +22,18 @@ class FixedPointConstraint : public IConstraint,
 {
     Q_OBJECT
 
-    Q_PROPERTY(GeometricPoint* point READ point WRITE setPoint NOTIFY pointChanged)
+    Q_PROPERTY(IGeometricPoint* point READ point WRITE setPoint NOTIFY pointChanged)
     Q_PROPERTY(double x READ x WRITE setX NOTIFY xChanged)
     Q_PROPERTY(double y READ y WRITE setY NOTIFY yChanged)
 
 signals:
-    void pointChanged(GeometricPoint* newPoint);
+    void pointChanged(IGeometricPoint* newPoint);
     void xChanged(double newX);
     void yChanged(double newY);
 
 public:
     FixedPointConstraint();
-    FixedPointConstraint(GeometricPoint* point, double x, double y, bool locked = true);
+    FixedPointConstraint(IGeometricPoint* point, double x, double y, bool locked = true);
     FixedPointConstraint(const FixedPointConstraint& other);
     ~FixedPointConstraint() override;
 
@@ -42,18 +45,18 @@ public:
     void apply() override;
     QList<GeometricPoint*> affectedPoints() const override;
 
-    GeometricPoint* point() const { return m_point; }
+    IGeometricPoint* point() const { return m_point; }
     double x() const { return m_x; }
     double y() const { return m_y; }
     bool isValid() const { return m_point != nullptr; }
 
-    void setPoint(GeometricPoint* point);
+    void setPoint(IGeometricPoint* point);
     void setX(double x);
     void setY(double y);
     void setPosition(double x, double y);
 
 private:
-    GeometricPoint* m_point = nullptr;
+    IGeometricPoint* m_point = nullptr;
     double m_x = 0.0;
     double m_y = 0.0;
 

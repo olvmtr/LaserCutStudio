@@ -1,8 +1,14 @@
 #include "DistanceConstraint.h"
+#include "core/models/geometry/IGeometricPoint.h"
 #include <cmath>
 
 namespace LaserCutStudio {
 namespace Core {
+
+// Forward declarations
+class GeometricSegment;
+class GeometricPoint;
+class GeometricArc;
 
 const bool DistanceConstraint::s_registered = IConstraint::registerFactory<DistanceConstraint>();
 
@@ -14,7 +20,7 @@ DistanceConstraint::DistanceConstraint()
 {
 }
 
-DistanceConstraint::DistanceConstraint(GeometricPoint* point1, GeometricPoint* point2, double distance, bool locked)
+DistanceConstraint::DistanceConstraint(IGeometricPoint* point1, IGeometricPoint* point2, double distance, bool locked)
     : IConstraint(locked, 1.0),
       m_point1(nullptr),
       m_point2(nullptr),
@@ -52,6 +58,13 @@ IConstraint* DistanceConstraint::clone() const
     return new DistanceConstraint(*this);
 }
 
+bool DistanceConstraint::isValid() const
+{
+    GeometricPoint* pt1 = qobject_cast<GeometricPoint*>(m_point1);
+    GeometricPoint* pt2 = qobject_cast<GeometricPoint*>(m_point2);
+    return pt1 != nullptr && pt2 != nullptr;
+}
+
 bool DistanceConstraint::isSatisfied(double tolerance) const
 {
     return error() < tolerance;
@@ -63,7 +76,10 @@ double DistanceConstraint::error() const
         return 0.0;
     }
 
-    double currentDistance = m_point1->distance(*m_point2);
+    GeometricPoint* pt1 = qobject_cast<GeometricPoint*>(m_point1);
+    GeometricPoint* pt2 = qobject_cast<GeometricPoint*>(m_point2);
+
+    double currentDistance = pt1->distance(*pt2);
     return std::abs(currentDistance - m_distance);
 }
 
@@ -73,8 +89,11 @@ void DistanceConstraint::apply()
         return;
     }
 
+    GeometricPoint* pt1 = qobject_cast<GeometricPoint*>(m_point1);
+    GeometricPoint* pt2 = qobject_cast<GeometricPoint*>(m_point2);
+
     // Calcul de la distance actuelle
-    double currentDist = m_point1->distance(*m_point2);
+    double currentDist = pt1->distance(*pt2);
 
     // Si distance déjà correcte, rien à faire
     if (std::abs(currentDist - m_distance) < 1e-9) {
@@ -82,8 +101,8 @@ void DistanceConstraint::apply()
     }
 
     // Direction point1 → point2
-    double dx = m_point2->x() - m_point1->x();
-    double dy = m_point2->y() - m_point1->y();
+    double dx = pt2->x() - pt1->x();
+    double dy = pt2->y() - pt1->y();
 
     // Normaliser
     if (currentDist > 1e-9) {
@@ -100,8 +119,8 @@ void DistanceConstraint::apply()
 
     // Nombre de points libres
     int freePoints = 0;
-    if (!m_point1->isLocked()) freePoints++;
-    if (!m_point2->isLocked()) freePoints++;
+    if (!pt1->isLocked()) freePoints++;
+    if (!pt2->isLocked()) freePoints++;
 
     if (freePoints == 0) {
         // Aucun point libre : contrainte non satisfaisable
@@ -112,26 +131,32 @@ void DistanceConstraint::apply()
     double correction = errorValue / freePoints;
 
     // Appliquer la correction
-    if (!m_point1->isLocked()) {
-        m_point1->setX(m_point1->x() + dx * correction);
-        m_point1->setY(m_point1->y() + dy * correction);
+    if (!pt1->isLocked()) {
+        pt1->setX(pt1->x() + dx * correction);
+        pt1->setY(pt1->y() + dy * correction);
     }
 
-    if (!m_point2->isLocked()) {
-        m_point2->setX(m_point2->x() - dx * correction);
-        m_point2->setY(m_point2->y() - dy * correction);
+    if (!pt2->isLocked()) {
+        pt2->setX(pt2->x() - dx * correction);
+        pt2->setY(pt2->y() - dy * correction);
     }
 }
 
 QList<GeometricPoint*> DistanceConstraint::affectedPoints() const
 {
     QList<GeometricPoint*> points;
-    if (m_point1) points << m_point1;
-    if (m_point2) points << m_point2;
+    if (m_point1) {
+        GeometricPoint* pt1 = qobject_cast<GeometricPoint*>(m_point1);
+        if (pt1) points << pt1;
+    }
+    if (m_point2) {
+        GeometricPoint* pt2 = qobject_cast<GeometricPoint*>(m_point2);
+        if (pt2) points << pt2;
+    }
     return points;
 }
 
-void DistanceConstraint::setPoint1(GeometricPoint* point)
+void DistanceConstraint::setPoint1(IGeometricPoint* point)
 {
     if (m_point1 == point) {
         return;
@@ -145,7 +170,7 @@ void DistanceConstraint::setPoint1(GeometricPoint* point)
     emit constraintChanged();
 }
 
-void DistanceConstraint::setPoint2(GeometricPoint* point)
+void DistanceConstraint::setPoint2(IGeometricPoint* point)
 {
     if (m_point2 == point) {
         return;
@@ -164,7 +189,7 @@ void DistanceConstraint::setDistance(double distance)
     updateProperty(m_distance, distance, &DistanceConstraint::distanceChanged, &DistanceConstraint::constraintChanged);
 }
 
-void DistanceConstraint::connectToPoint(GeometricPoint* point)
+void DistanceConstraint::connectToPoint(IGeometricPoint* point)
 {
     if (point) {
         connect(point, &GeometricPoint::geometryChanged,
@@ -182,7 +207,7 @@ void DistanceConstraint::connectToPoint(GeometricPoint* point)
     }
 }
 
-void DistanceConstraint::disconnectFromPoint(GeometricPoint* point)
+void DistanceConstraint::disconnectFromPoint(IGeometricPoint* point)
 {
     if (point) {
         disconnect(point, nullptr, this, nullptr);

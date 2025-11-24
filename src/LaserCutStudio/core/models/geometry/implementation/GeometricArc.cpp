@@ -1,4 +1,5 @@
 #include "GeometricArc.h"
+#include "GeometricPoint.h"
 #include <QPainterPath>
 #include <cmath>
 
@@ -8,22 +9,22 @@ namespace Core {
 const bool GeometricArc::s_registered = IGeometricElement::registerFactory<GeometricArc>();
 
 GeometricArc::GeometricArc()
-    : IGeometricElement(), m_center(nullptr), m_radius(0.0), m_startAngle(0.0), m_endAngle(360.0)
+    : IGeometricArc(), m_center(nullptr), m_radius(0.0), m_startAngle(0.0), m_endAngle(360.0)
 {
 }
 
-GeometricArc::GeometricArc(GeometricPoint* center, double radius, double startAngle, double endAngle)
-    : IGeometricElement(), m_center(nullptr), m_radius(radius), m_startAngle(startAngle), m_endAngle(endAngle)
+GeometricArc::GeometricArc(IGeometricPoint* center, double radius, double startAngle, double endAngle)
+    : IGeometricArc(), m_center(nullptr), m_radius(radius), m_startAngle(startAngle), m_endAngle(endAngle)
 {
     setCenter(center);
 }
 
 GeometricArc::GeometricArc(const GeometricArc& other)
-    : IGeometricElement(), m_center(nullptr), m_radius(other.m_radius),
+    : IGeometricArc(), m_center(nullptr), m_radius(other.m_radius),
       m_startAngle(other.m_startAngle), m_endAngle(other.m_endAngle)
 {
     if (other.m_center) {
-        m_center = static_cast<GeometricPoint*>(other.m_center->clone());
+        m_center = other.m_center->clone();
         connectToPoint(m_center);
     }
 }
@@ -33,7 +34,7 @@ GeometricArc::~GeometricArc()
     disconnectFromPoint(m_center);
 }
 
-IGeometricElement* GeometricArc::clone() const
+IGeometricArc* GeometricArc::clone() const
 {
     return new GeometricArc(*this);
 }
@@ -82,7 +83,7 @@ QList<Point2D> GeometricArc::getPoints(int resolution) const
     return points;
 }
 
-void GeometricArc::setCenter(GeometricPoint* center)
+void GeometricArc::setCenter(IGeometricPoint* center)
 {
     if (m_center == center) return;
     disconnectFromPoint(m_center);
@@ -107,17 +108,17 @@ void GeometricArc::setEndAngle(double angle)
     updateProperty(m_endAngle, angle, &GeometricArc::endAngleChanged, &GeometricArc::geometryChanged);
 }
 
-void GeometricArc::connectToPoint(GeometricPoint* point)
+void GeometricArc::connectToPoint(IGeometricPoint* point)
 {
     if (point) {
-        connect(point, &GeometricPoint::geometryChanged, this, &GeometricArc::geometryChanged);
+        connect(point, &IGeometricPoint::geometryChanged, this, &GeometricArc::geometryChanged);
         connect(point, &Interface::aboutToBeDestroyed, this, [this](Interface* destroyed) {
             if (m_center == destroyed) m_center = nullptr;
         });
     }
 }
 
-void GeometricArc::disconnectFromPoint(GeometricPoint* point)
+void GeometricArc::disconnectFromPoint(IGeometricPoint* point)
 {
     if (point) disconnect(point, nullptr, this, nullptr);
 }

@@ -2,11 +2,15 @@
 #define LENGTHCONSTRAINT_H
 
 #include "core/models/constraints/IConstraint.h"
-#include "core/models/geometry/GeometricSegment.h"
+#include "core/models/geometry/IGeometricSegment.h"
 #include "core/models/patterns/properties/PropertyMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {
+
+// Forward declaration
+class GeometricSegment;
+class GeometricPoint;
 
 /**
  * @brief Contrainte de longueur pour un segment
@@ -19,16 +23,16 @@ class LengthConstraint : public IConstraint,
 {
     Q_OBJECT
 
-    Q_PROPERTY(GeometricSegment* segment READ segment WRITE setSegment NOTIFY segmentChanged)
+    Q_PROPERTY(IGeometricSegment* segment READ segment WRITE setSegment NOTIFY segmentChanged)
     Q_PROPERTY(double length READ length WRITE setLength NOTIFY lengthChanged)
 
 signals:
-    void segmentChanged(GeometricSegment* newSegment);
+    void segmentChanged(IGeometricSegment* newSegment);
     void lengthChanged(double newLength);
 
 public:
     LengthConstraint();
-    LengthConstraint(GeometricSegment* segment, double length, bool locked = false);
+    LengthConstraint(IGeometricSegment* segment, double length, bool locked = false);
     LengthConstraint(const LengthConstraint& other);
     ~LengthConstraint() override;
 
@@ -40,15 +44,15 @@ public:
     void apply() override;
     QList<GeometricPoint*> affectedPoints() const override;
 
-    GeometricSegment* segment() const { return m_segment; }
+    IGeometricSegment* segment() const { return m_segment; }
     double length() const { return m_length; }
-    bool isValid() const { return m_segment != nullptr && m_segment->isValid(); }
+    bool isValid() const;
 
-    void setSegment(GeometricSegment* segment);
+    void setSegment(IGeometricSegment* segment);
     void setLength(double length);
 
 private:
-    GeometricSegment* m_segment = nullptr;
+    IGeometricSegment* m_segment = nullptr;
     double m_length = 0.0;
 
     static const bool s_registered;
