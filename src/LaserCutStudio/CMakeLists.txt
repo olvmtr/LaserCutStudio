@@ -120,6 +120,8 @@ qt_add_executable(appLaserCutStudio
     # Core Module - UI Canvas
     core/ui/canvas/Canvas2DView.h
     core/ui/canvas/Canvas2DView.cpp
+    core/ui/canvas/ConstraintCanvas2DView.h
+    core/ui/canvas/ConstraintCanvas2DView.cpp
     # Core Module - UI ViewModels
     core/ui/viewmodels/GenericPropertiesViewModel.h
     core/ui/viewmodels/GenericPropertiesViewModel.cpp
@@ -149,6 +151,7 @@ qt_add_qml_module(appLaserCutStudio
         EditorView.qml
         ToolPalette.qml
         ShapesListPanel.qml
+        ConstraintEditorView.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
