@@ -693,6 +693,7 @@
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ComponentPalette_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ConstraintEditorView_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ConstraintPropertiesPanel_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_EditorView_qml.cpp",
@@ -983,6 +984,7 @@
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : 
 	[
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ComponentPalette_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ConstraintEditorView_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ConstraintPropertiesPanel_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_EditorView_qml.cpp",

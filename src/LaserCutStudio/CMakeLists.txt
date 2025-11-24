@@ -153,6 +153,7 @@ qt_add_qml_module(appLaserCutStudio
         ShapesListPanel.qml
         ConstraintEditorView.qml
         ConstraintPropertiesPanel.qml
+        ComponentPalette.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

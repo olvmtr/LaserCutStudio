@@ -186,40 +186,181 @@ Rectangle {
         }
     }
 
-    // Canvas de dessin
-    ConstraintCanvas2DView {
-        id: canvas
+    // Palette de composants à gauche (style Kerbal)
+    ComponentPalette {
+        id: componentPalette
         anchors.top: toolbar.bottom
         anchors.left: parent.left
+        anchors.bottom: statusBar.top
+        width: 200
+
+        onComponentDropped: (componentType, x, y) => {
+            console.log("Component dropped:", componentType, "at", x, y)
+            // Le canvas recevra le drop via DropArea
+        }
+    }
+
+    // Canvas de dessin avec DropArea
+    Item {
+        id: canvasContainer
+        anchors.top: toolbar.bottom
+        anchors.left: componentPalette.right
         anchors.right: propertiesPanel.left
         anchors.bottom: statusBar.top
-        anchors.margins: 0
 
-        gridVisible: true
-        snapToGrid: true
-        showConstraints: true
-        showMeasurements: true
-        autoSolve: true
-        gridSize: 10.0
+        ConstraintCanvas2DView {
+            id: canvas
+            anchors.fill: parent
 
-        onPointCreated: (point) => {
-            console.log("Point created at (" + point.x + ", " + point.y + ")");
-            propertiesPanel.updateElementConstraints();
+            gridVisible: true
+            snapToGrid: true
+            showConstraints: true
+            showMeasurements: true
+            autoSolve: true
+            gridSize: 10.0
+
+            onPointCreated: (point) => {
+                console.log("Point created at (" + point.x + ", " + point.y + ")");
+                propertiesPanel.updateElementConstraints();
+            }
+
+            onSegmentCreated: (segment) => {
+                console.log("Segment created with length: " + segment.length());
+                propertiesPanel.updateElementConstraints();
+            }
+
+            onConstraintCreated: (constraint) => {
+                console.log("Constraint created: " + constraint.getTypeName());
+                propertiesPanel.updateElementConstraints();
+            }
+
+            onElementSelected: (element) => {
+                console.log("Element selected: " + element.getTypeName());
+                propertiesPanel.selectedElement = element;
+            }
         }
 
-        onSegmentCreated: (segment) => {
-            console.log("Segment created with length: " + segment.length());
-            propertiesPanel.updateElementConstraints();
+        // DropArea pour recevoir les composants
+        DropArea {
+            id: dropArea
+            anchors.fill: parent
+            keys: ["text/plain"]
+
+            onEntered: (drag) => {
+                var componentType = drag.getDataAsString("text/plain")
+                console.log("Drag entered canvas:", componentType)
+                statusLabel.text = "Drop to create " + componentType
+                // TODO: Highlight canvas
+            }
+
+            onExited: (drag) => {
+                console.log("Drag exited canvas")
+                statusLabel.text = "Ready - Drag components from left palette"
+            }
+
+            onDropped: (drop) => {
+                // Récupérer le type de composant
+                var componentType = drop.getDataAsString("text/plain")
+
+                // Récupérer la position dans les coordonnées du canvas
+                var canvasPos = mapToItem(canvas, drop.x, drop.y)
+                console.log("Component dropped:", componentType, "at canvas pos:", canvasPos.x, canvasPos.y)
+
+                // Créer le composant selon son type
+                createComponentAtPosition(componentType, canvasPos.x, canvasPos.y)
+
+                drop.accept(Qt.CopyAction)
+                statusLabel.text = "Created " + componentType + " at (" + Math.round(canvasPos.x) + ", " + Math.round(canvasPos.y) + ")"
+            }
+        }
+    }
+
+    // ========== FONCTION: Créer un composant à une position ==========
+    function createComponentAtPosition(componentType, x, y) {
+        if (!sketch) {
+            console.error("No sketch available")
+            return
         }
 
-        onConstraintCreated: (constraint) => {
-            console.log("Constraint created: " + constraint.getTypeName());
-            propertiesPanel.updateElementConstraints();
-        }
+        console.log("Creating component:", componentType, "at", x, y)
 
-        onElementSelected: (element) => {
-            console.log("Element selected: " + element.getTypeName());
-            propertiesPanel.selectedElement = element;
+        switch(componentType) {
+            case "Point":
+                // Créer un point fixe
+                var point = sketch.addPoint(x, y, false)  // Non verrouillé
+                if (point) {
+                    console.log("Point created successfully")
+                    canvas.update()
+                }
+                break
+
+            case "Segment":
+                // Mode: Passer en DrawSegment pour que l'utilisateur dessine
+                canvas.editMode = ConstraintCanvas2DView.DrawSegment
+                statusLabel.text = "Click two points to draw segment"
+                break
+
+            case "Circle":
+                // Créer un cercle centré à cette position
+                // TODO: Demander le rayon ou utiliser une valeur par défaut
+                console.log("Circle creation not yet implemented")
+                statusLabel.text = "Circle creation - Coming soon!"
+                break
+
+            case "Rectangle":
+                // TODO: Créer un rectangle
+                console.log("Rectangle creation not yet implemented")
+                statusLabel.text = "Rectangle creation - Coming soon!"
+                break
+
+            case "Arc":
+                // TODO: Créer un arc
+                console.log("Arc creation not yet implemented")
+                statusLabel.text = "Arc creation - Coming soon!"
+                break
+
+            // Contraintes
+            case "DistanceConstraint":
+            case "LengthConstraint":
+            case "AngleConstraint":
+            case "ParallelConstraint":
+            case "PerpendicularConstraint":
+            case "CoincidentConstraint":
+            case "EqualLengthConstraint":
+                // Passer en mode AddConstraint
+                canvas.editMode = ConstraintCanvas2DView.AddConstraint
+                // Sélectionner le type de contrainte
+                setConstraintTypeFromName(componentType)
+                statusLabel.text = "Select elements to apply " + componentType
+                break
+
+            default:
+                console.warn("Unknown component type:", componentType)
+                statusLabel.text = "Unknown component: " + componentType
+        }
+    }
+
+    // ========== FONCTION: Sélectionner type de contrainte par nom ==========
+    function setConstraintTypeFromName(constraintName) {
+        switch(constraintName) {
+            case "CoincidentConstraint":
+                canvas.constraintType = ConstraintCanvas2DView.Coincident
+                constraintTypeCombo.currentIndex = 0
+                break
+            case "ParallelConstraint":
+                canvas.constraintType = ConstraintCanvas2DView.Parallel
+                constraintTypeCombo.currentIndex = 1
+                break
+            case "PerpendicularConstraint":
+                canvas.constraintType = ConstraintCanvas2DView.Perpendicular
+                constraintTypeCombo.currentIndex = 2
+                break
+            case "EqualLengthConstraint":
+                canvas.constraintType = ConstraintCanvas2DView.EqualLength
+                constraintTypeCombo.currentIndex = 3
+                break
+            default:
+                console.warn("Unknown constraint type:", constraintName)
         }
     }
 
@@ -249,7 +390,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 10
-            text: "Ready - Click to draw segments (points created automatically)"
+            text: "Ready - Drag components from left palette or use toolbar"
             color: "white"
         }
     }

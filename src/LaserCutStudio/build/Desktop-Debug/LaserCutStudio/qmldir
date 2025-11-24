@@ -7,4 +7,5 @@ ToolPalette 1.0 ToolPalette.qml
 ShapesListPanel 1.0 ShapesListPanel.qml
 ConstraintEditorView 1.0 ConstraintEditorView.qml
 ConstraintPropertiesPanel 1.0 ConstraintPropertiesPanel.qml
+ComponentPalette 1.0 ComponentPalette.qml
 
