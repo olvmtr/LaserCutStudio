@@ -35,6 +35,10 @@ add_executable(LaserCutStudioTests
     TestArchitectureInterfaces.cpp
     TestGeometry.h
     TestGeometry.cpp
+    TestConstraints.h
+    TestConstraints.cpp
+    TestConstraintSketch.h
+    TestConstraintSketch.cpp
     # Sources du module Core (seulement ceux qui ne sont pas dans LibInterface)
     ../core/models/base/types/Point2D.h
     ../core/models/base/types/Point3D.h
