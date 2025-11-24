@@ -2,7 +2,7 @@
 #define FINGERJOINT_H
 
 #include "core/models/joints/IJoint.h"
-#include "core/infrastructure/patterns/properties/PropertyMixin.h"
+#include "core/models/patterns/properties/PropertyMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {

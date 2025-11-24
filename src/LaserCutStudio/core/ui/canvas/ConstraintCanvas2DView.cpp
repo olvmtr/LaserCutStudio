@@ -600,35 +600,82 @@ void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
 {
     if (!m_sketch) return;
 
-    // Trouver point près du clic
-    GeometricPoint* clickedPoint = findPointNear(scenePos);
+    // Snap to grid si activé
+    QPointF adjustedPos = m_snapToGrid ? snapToGridInternal(scenePos) : scenePos;
 
-    if (!clickedPoint) {
-        qCWarning(logCore()) << "No point found to create segment";
-        return;
-    }
+    // Chercher un point existant près du clic (tolérance: 10 pixels)
+    GeometricPoint* clickedPoint = findPointNear(scenePos, 10.0);
 
     if (!m_segmentStartPoint) {
-        // Premier clic : mémoriser point de départ
-        m_segmentStartPoint = clickedPoint;
+        // Premier clic : créer ou réutiliser point de départ
+        if (!clickedPoint) {
+            // Créer nouveau point automatiquement
+            std::shared_ptr<GeometricPoint*> pointPtr = std::make_shared<GeometricPoint*>(nullptr);
+
+            pushCommand("Add Point",
+                [this, adjustedPos, pointPtr]() {
+                    *pointPtr = m_sketch->addPoint(adjustedPos.x(), adjustedPos.y());
+                    qCInfo(logCore()) << "Auto-created start point at" << adjustedPos;
+                    emit pointCreated(*pointPtr);
+                    triggerSolveIfEnabled();
+                },
+                [this, pointPtr]() {
+                    if (*pointPtr && m_sketch) {
+                        m_sketch->removeElement(*pointPtr);
+                        update();
+                    }
+                }
+            );
+
+            m_segmentStartPoint = *pointPtr;
+        } else {
+            // Réutiliser point existant
+            m_segmentStartPoint = clickedPoint;
+        }
+
         qCInfo(logCore()) << "Segment start point set";
+        update(); // Afficher le point de départ
+
     } else {
-        // Second clic : créer segment avec Undo/Redo
-        if (clickedPoint != m_segmentStartPoint) {
+        // Second clic : créer point final et segment
+        GeometricPoint* endPoint = clickedPoint;
+
+        if (!endPoint) {
+            // Créer nouveau point final
+            std::shared_ptr<GeometricPoint*> pointPtr = std::make_shared<GeometricPoint*>(nullptr);
+
+            pushCommand("Add Point",
+                [this, adjustedPos, pointPtr]() {
+                    *pointPtr = m_sketch->addPoint(adjustedPos.x(), adjustedPos.y());
+                    qCInfo(logCore()) << "Auto-created end point at" << adjustedPos;
+                    emit pointCreated(*pointPtr);
+                    triggerSolveIfEnabled();
+                },
+                [this, pointPtr]() {
+                    if (*pointPtr && m_sketch) {
+                        m_sketch->removeElement(*pointPtr);
+                        update();
+                    }
+                }
+            );
+
+            endPoint = *pointPtr;
+        }
+
+        // Créer segment entre les deux points
+        if (endPoint != m_segmentStartPoint) {
             GeometricPoint* startPt = m_segmentStartPoint;
-            GeometricPoint* endPt = clickedPoint;
+            GeometricPoint* endPt = endPoint;
 
             std::shared_ptr<GeometricSegment*> segmentPtr = std::make_shared<GeometricSegment*>(nullptr);
 
             pushCommand("Add Segment",
-                // Execute: ajouter segment
                 [this, startPt, endPt, segmentPtr]() {
                     *segmentPtr = m_sketch->addSegment(startPt, endPt);
                     qCInfo(logCore()) << "Segment created";
                     emit segmentCreated(*segmentPtr);
                     triggerSolveIfEnabled();
                 },
-                // Undo: supprimer segment
                 [this, segmentPtr]() {
                     if (*segmentPtr && m_sketch) {
                         m_sketch->removeElement(*segmentPtr);
@@ -640,6 +687,7 @@ void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
 
         // Reset pour prochain segment
         m_segmentStartPoint = nullptr;
+        update();
     }
 }
 

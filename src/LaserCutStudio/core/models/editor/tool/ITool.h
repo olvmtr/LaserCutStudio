@@ -11,8 +11,8 @@
 #define ITOOL_H
 
 #include "core/models/base/Interface.h"
-#include "core/infrastructure/patterns/factory/FactoryMixin.h"
-#include "core/infrastructure/patterns/lists/ListManagerMixin.h"
+#include "core/models/patterns/factory/FactoryMixin.h"
+#include "core/models/patterns/lists/ListManagerMixin.h"
 #include "core/models/base/types/Point2D.h"
 #include "core/models/shapes/IShape.h"
 #include <QCursor>

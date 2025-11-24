@@ -359,9 +359,21 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/CoincidentConstraint.h",
+			"MU",
+			"PKD67KECZY/moc_CoincidentConstraint.cpp",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/DistanceConstraint.h",
 			"MU",
 			"PKD67KECZY/moc_DistanceConstraint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/EqualLengthConstraint.h",
+			"MU",
+			"PKD67KECZY/moc_EqualLengthConstraint.cpp",
 			null
 		],
 		[
@@ -380,6 +392,18 @@
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/LengthConstraint.h",
 			"MU",
 			"PKD67KECZY/moc_LengthConstraint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/ParallelConstraint.h",
+			"MU",
+			"PKD67KECZY/moc_ParallelConstraint.cpp",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/PerpendicularConstraint.h",
+			"MU",
+			"PKD67KECZY/moc_PerpendicularConstraint.cpp",
 			null
 		],
 		[
@@ -587,6 +611,12 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/ui/canvas/ConstraintCanvas2DView.h",
+			"MU",
+			"226JOLOGLZ/moc_ConstraintCanvas2DView.cpp",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/ui/viewmodels/GenericPropertiesViewModel.h",
 			"MU",
 			"LHAYUJDJDF/moc_GenericPropertiesViewModel.cpp",
@@ -663,6 +693,8 @@
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ConstraintEditorView_qml.cpp",
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ConstraintPropertiesPanel_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_EditorView_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_Main_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ShapesListPanel_qml.cpp",
@@ -722,7 +754,17 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/CoincidentConstraint.cpp",
+			"MU",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/DistanceConstraint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/EqualLengthConstraint.cpp",
 			"MU",
 			null
 		],
@@ -738,6 +780,16 @@
 		],
 		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/LengthConstraint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/ParallelConstraint.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/models/constraints/PerpendicularConstraint.cpp",
 			"MU",
 			null
 		],
@@ -912,6 +964,11 @@
 			null
 		],
 		[
+			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/ui/canvas/ConstraintCanvas2DView.cpp",
+			"MU",
+			null
+		],
+		[
 			"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/core/ui/viewmodels/GenericPropertiesViewModel.cpp",
 			"MU",
 			null
@@ -926,6 +983,8 @@
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : 
 	[
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ConstraintEditorView_qml.cpp",
+		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ConstraintPropertiesPanel_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_EditorView_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_Main_qml.cpp",
 		"/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/build/Desktop-Debug/.rcc/qmlcache/appLaserCutStudio_ShapesListPanel_qml.cpp",

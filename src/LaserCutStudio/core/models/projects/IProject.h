@@ -2,8 +2,8 @@
 #define IPROJECT_H
 
 #include "core/models/base/Interface.h"
-#include "core/infrastructure/patterns/factory/FactoryMixin.h"
-#include "core/infrastructure/patterns/lists/ListManagerMixin.h"
+#include "core/models/patterns/factory/FactoryMixin.h"
+#include "core/models/patterns/lists/ListManagerMixin.h"
 #include "core/models/parts/IPart.h"
 #include <QString>
 #include <QList>

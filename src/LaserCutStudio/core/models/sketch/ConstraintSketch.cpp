@@ -3,6 +3,7 @@
 #include "core/models/constraints/LengthConstraint.h"
 #include "core/models/constraints/AngleConstraint.h"
 #include "core/models/constraints/FixedPointConstraint.h"
+#include <cmath>
 
 namespace LaserCutStudio {
 namespace Core {
@@ -92,6 +93,58 @@ GeometricArc* ConstraintSketch::addArc(GeometricPoint* center, double radius, do
     GeometricArc* arc = new GeometricArc(center, radius, startAngle, endAngle);
     addElement(arc);
     return arc;
+}
+
+ConstraintSketch::SegmentWithPoints ConstraintSketch::addSegmentWithAutoPoints(double x1, double y1, double x2, double y2, double tolerance)
+{
+    SegmentWithPoints result;
+    result.segment = nullptr;
+    result.startPoint = nullptr;
+    result.endPoint = nullptr;
+    result.startPointCreated = false;
+    result.endPointCreated = false;
+
+    // Chercher points existants près des coordonnées
+    for (IGeometricElement* elem : m_elements) {
+        if (elem->getTypeName() == "GeometricPoint") {
+            GeometricPoint* point = static_cast<GeometricPoint*>(elem);
+
+            // Point proche du départ?
+            double dist1 = std::sqrt(std::pow(point->x() - x1, 2) + std::pow(point->y() - y1, 2));
+            if (!result.startPoint && dist1 < tolerance) {
+                result.startPoint = point;
+            }
+
+            // Point proche de l'arrivée?
+            double dist2 = std::sqrt(std::pow(point->x() - x2, 2) + std::pow(point->y() - y2, 2));
+            if (!result.endPoint && dist2 < tolerance) {
+                result.endPoint = point;
+            }
+
+            // Si les deux points sont trouvés, arrêter la recherche
+            if (result.startPoint && result.endPoint) {
+                break;
+            }
+        }
+    }
+
+    // Créer les points manquants
+    if (!result.startPoint) {
+        result.startPoint = addPoint(x1, y1);
+        result.startPointCreated = true;
+    }
+
+    if (!result.endPoint) {
+        result.endPoint = addPoint(x2, y2);
+        result.endPointCreated = true;
+    }
+
+    // Créer le segment
+    if (result.startPoint && result.endPoint && result.startPoint != result.endPoint) {
+        result.segment = addSegment(result.startPoint, result.endPoint);
+    }
+
+    return result;
 }
 
 void ConstraintSketch::addElement(IGeometricElement* element)

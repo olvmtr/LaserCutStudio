@@ -2,7 +2,7 @@
 #define TABJOINT_H
 
 #include "core/models/joints/IJoint.h"
-#include "core/infrastructure/patterns/properties/PropertyMixin.h"
+#include "core/models/patterns/properties/PropertyMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {
@@ -39,74 +39,49 @@ signals:
     void tabDepthChanged(double newDepth);
 
 public:
-    /**
-     * @brief Constructeur par défaut
-     *
-     * Crée un tab joint avec largeur 20mm et profondeur 10mm
-     */
     TabJoint();
-
-    /**
-     * @brief Constructeur avec paramètres
-     * @param partA Première pièce à assembler
-     * @param partB Seconde pièce à assembler
-     * @param position Position 3D du joint dans l'espace
-     * @param angle Angle de rotation du joint en degrés
-     * @param tabWidth Largeur du tenon en mm (doit être > 0)
-     * @param tabDepth Profondeur du tenon en mm (doit être > 0)
-     */
     TabJoint(IPart* partA, IPart* partB, const Point3D& position, double angle,
              double tabWidth, double tabDepth);
-
-    /**
-     * @brief Constructeur de copie
-     * @param other Tab joint à copier
-     * @note Les pointeurs vers les pièces sont copiés (shallow copy)
-     */
     TabJoint(const TabJoint& other);
-
     ~TabJoint() override = default;
 
-    /**
-     * @brief Clone le joint
-     */
+    // Interface IJoint implementation
     IJoint* clone() const override;
+    DECLARE_TYPE_NAME(TabJoint)
 
-    /**
-     * @brief Retourne le nom de type statique pour le Factory Pattern
-     */
-    static QString staticTypeName() { return "TabJoint"; }
+    JointType getType() const override;
+    void setType(JointType type) override;
+    IPart* getPartA() const override;
+    IPart* getPartB() const override;
+    void connect(IPart* partA, IPart* partB) override;
+    void disconnect() override;
+    Point3D getPosition() const override;
+    void setPosition(const Point3D& position) override;
+    double getAngle() const override;
+    void setAngle(double angle) override;
+    bool isValid() const override;
 
-    /**
-     * @brief Retourne le nom de type pour l'instance (Factory Pattern)
-     */
-    QString getTypeName() const override { return staticTypeName(); }
-
-    /**
-     * @brief Obtient la largeur du tenon
-     */
+    // TabJoint specific properties
     double getTabWidth() const { return m_tabWidth; }
-
-    /**
-     * @brief Définit la largeur du tenon et émet le signal si la valeur change
-     * @param width Nouvelle largeur du tenon en mm (doit être > 0)
-     */
     void setTabWidth(double width);
-
-    /**
-     * @brief Obtient la profondeur du tenon
-     */
     double getTabDepth() const { return m_tabDepth; }
-
-    /**
-     * @brief Définit la profondeur du tenon et émet le signal si la valeur change
-     * @param depth Nouvelle profondeur du tenon en mm (doit être > 0)
-     */
     void setTabDepth(double depth);
 
 private:
-    double m_tabWidth;  ///< Largeur du tenon
-    double m_tabDepth;  ///< Profondeur du tenon
+    // IJoint members
+    JointType m_type;
+    IPart* m_partA;
+    IPart* m_partB;
+    Point3D m_position;
+    double m_angle;
+
+    // TabJoint specific members
+    double m_tabWidth;
+    double m_tabDepth;
+
+    // Helpers
+    void connectToPart(IPart*& partMember, IPart* newPart);
+    void disconnectFromPart(IPart*& partMember);
 
     // Auto-enregistrement dans le Factory Pattern
     static const bool s_registered;

@@ -2,3 +2,5 @@
 /LaserCutStudio/EditorView.qml
 /LaserCutStudio/ToolPalette.qml
 /LaserCutStudio/ShapesListPanel.qml
+/LaserCutStudio/ConstraintEditorView.qml
+/LaserCutStudio/ConstraintPropertiesPanel.qml

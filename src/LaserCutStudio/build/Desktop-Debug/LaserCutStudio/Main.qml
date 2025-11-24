@@ -8,10 +8,10 @@ Window {
     minimumWidth: 1024
     minimumHeight: 600
     visible: true
-    title: qsTr("LaserCutStudio - Éditeur 2D")
+    title: qsTr("LaserCutStudio - Éditeur de géométrie contrainte")
 
-    // Charger l'interface complète de l'éditeur
-    EditorView {
+    // Éditeur de géométrie contrainte
+    ConstraintEditorView {
         anchors.fill: parent
     }
 }

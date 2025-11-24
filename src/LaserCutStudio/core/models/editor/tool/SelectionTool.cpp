@@ -6,7 +6,7 @@
 #include "core/models/editor/tool/SelectionTool.h"
 #include "core/services/editor/EditorService.h"
 #include "core/models/editor/command/transformations/MoveCommand.h"
-#include "core/infrastructure/patterns/prototype/ClonableMixin.h"
+#include "core/models/patterns/prototype/ClonableMixin.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include <QDebug>
 #include <QtMath>

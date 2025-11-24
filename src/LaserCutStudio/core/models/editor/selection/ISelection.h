@@ -11,7 +11,7 @@
 #define ISELECTION_H
 
 #include "core/models/base/Interface.h"
-#include "core/infrastructure/patterns/factory/FactoryMixin.h"
+#include "core/models/patterns/factory/FactoryMixin.h"
 #include "core/models/shapes/IShape.h"
 #include "core/models/base/types/Point2D.h"
 #include <QVector>

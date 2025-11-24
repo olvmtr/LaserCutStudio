@@ -26,22 +26,31 @@ public:
     Part(const Part& other);
     ~Part() override = default;
 
-    /**
-     * @brief Clone la pièce
-     */
+    // Interface IPart implementation
     IPart* clone() const override;
+    DECLARE_TYPE_NAME(Part)
 
-    /**
-     * @brief Retourne le nom de type statique pour le Factory Pattern
-     */
-    static QString staticTypeName() { return "Part"; }
-
-    /**
-     * @brief Retourne le nom de type pour l'instance (Factory Pattern)
-     */
-    QString getTypeName() const override { return staticTypeName(); }
+    QString getName() const override;
+    void setName(const QString& name) override;
+    IShape* getShape() const override;
+    void setShape(IShape* shape) override;
+    double getThickness() const override;
+    void setThickness(double thickness) override;
+    Material getMaterial() const override;
+    void setMaterial(const Material& material) override;
+    void addJoint(IJoint* joint) override;
+    void removeJoint(IJoint* joint) override;
+    QList<IJoint*> getJoints() const override;
+    double getVolume() const override;
+    double getMass() const override;
 
 private:
+    QString m_name;
+    IShape* m_shape;
+    double m_thickness;
+    Material m_material;
+    QList<IJoint*> m_joints;
+
     // Auto-enregistrement dans le Factory Pattern
     static const bool s_registered;
 };

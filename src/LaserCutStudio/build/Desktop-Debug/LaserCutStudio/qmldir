@@ -5,4 +5,6 @@ Main 1.0 Main.qml
 EditorView 1.0 EditorView.qml
 ToolPalette 1.0 ToolPalette.qml
 ShapesListPanel 1.0 ShapesListPanel.qml
+ConstraintEditorView 1.0 ConstraintEditorView.qml
+ConstraintPropertiesPanel 1.0 ConstraintPropertiesPanel.qml
 

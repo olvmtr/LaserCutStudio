@@ -1,6 +1,6 @@
 #include "core/models/shapes/Circle.h"
 #include "core/services/geometry/GeometryUtils.h"
-#include "core/infrastructure/patterns/prototype/ClonableMixin.h"
+#include "core/models/patterns/prototype/ClonableMixin.h"
 #include <cmath>
 
 #ifndef M_PI

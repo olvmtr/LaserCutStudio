@@ -11,7 +11,7 @@
 #define SHAPECREATIONTOOL_H
 
 #include "core/models/editor/tool/ITool.h"
-#include "core/infrastructure/patterns/properties/PropertyMixin.h"
+#include "core/models/patterns/properties/PropertyMixin.h"
 #include "core/models/shapes/IShape.h"
 #include "core/models/base/types/Point2D.h"
 #include <QIcon>

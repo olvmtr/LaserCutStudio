@@ -8,8 +8,8 @@
 #include "core/models/geometry/GeometricArc.h"
 #include "core/models/constraints/IConstraint.h"
 #include "core/models/sketch/ConstraintSolver.h"
-#include "core/infrastructure/patterns/factory/FactoryMixin.h"
-#include "core/infrastructure/patterns/properties/PropertyMixin.h"
+#include "core/models/patterns/factory/FactoryMixin.h"
+#include "core/models/patterns/properties/PropertyMixin.h"
 #include <QString>
 #include <QList>
 #include <QPainterPath>
@@ -143,6 +143,29 @@ public:
     GeometricPoint* addPoint(double x, double y, bool locked = false);
     GeometricSegment* addSegment(GeometricPoint* start, GeometricPoint* end);
     GeometricArc* addArc(GeometricPoint* center, double radius, double startAngle = 0.0, double endAngle = 360.0);
+
+    /**
+     * @brief Crée un segment avec points automatiques (style KSP)
+     *
+     * Cherche des points existants près des coordonnées. Si aucun point
+     * n'existe, crée automatiquement les points nécessaires.
+     *
+     * @param x1 X du premier point
+     * @param y1 Y du premier point
+     * @param x2 X du second point
+     * @param y2 Y du second point
+     * @param tolerance Distance de recherche pour points existants
+     * @return Structure contenant le segment et les points créés
+     */
+    struct SegmentWithPoints {
+        GeometricSegment* segment;
+        GeometricPoint* startPoint;
+        GeometricPoint* endPoint;
+        bool startPointCreated;  // true si le point de départ a été créé
+        bool endPointCreated;    // true si le point d'arrivée a été créé
+    };
+
+    SegmentWithPoints addSegmentWithAutoPoints(double x1, double y1, double x2, double y2, double tolerance = 10.0);
 
     void addElement(IGeometricElement* element);
     void removeElement(IGeometricElement* element);

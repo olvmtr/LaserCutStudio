@@ -2,7 +2,7 @@
 #define RECTANGLE_H
 
 #include "core/models/shapes/IShape.h"
-#include "core/infrastructure/patterns/properties/PropertyMixin.h"
+#include "core/models/patterns/properties/PropertyMixin.h"
 
 namespace LaserCutStudio {
 namespace Core {

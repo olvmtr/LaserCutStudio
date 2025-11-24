@@ -4,6 +4,8 @@
     <file alias="EditorView.qml">/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/EditorView.qml</file>
     <file alias="ToolPalette.qml">/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/ToolPalette.qml</file>
     <file alias="ShapesListPanel.qml">/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/ShapesListPanel.qml</file>
+    <file alias="ConstraintEditorView.qml">/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/ConstraintEditorView.qml</file>
+    <file alias="ConstraintPropertiesPanel.qml">/home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio/ConstraintPropertiesPanel.qml</file>
   </qresource>
 </RCC>
 

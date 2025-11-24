@@ -10,7 +10,7 @@
 #define SELECTIONMANAGER_H
 
 #include "core/models/editor/selection/ISelection.h"
-#include "core/infrastructure/patterns/properties/PropertyMixin.h"
+#include "core/models/patterns/properties/PropertyMixin.h"
 #include <QVector>
 #include <QRectF>
 

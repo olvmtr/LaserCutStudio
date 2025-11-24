@@ -4,7 +4,7 @@
  */
 
 #include "core/models/editor/command/transformations/ScaleCommand.h"
-#include "core/infrastructure/patterns/prototype/ClonableMixin.h"
+#include "core/models/patterns/prototype/ClonableMixin.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include <QDebug>
 

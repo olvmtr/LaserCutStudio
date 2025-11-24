@@ -252,7 +252,7 @@ private:
 
     // ===== Membres =====
     ConstraintSketch* m_sketch = nullptr;
-    EditMode m_editMode = EditMode::PlacePoint;
+    EditMode m_editMode = EditMode::DrawSegment;
     ConstraintType m_constraintType = ConstraintType::None;
 
     // Grille

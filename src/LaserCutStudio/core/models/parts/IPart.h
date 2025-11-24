@@ -2,8 +2,8 @@
 #define IPART_H
 
 #include "core/models/base/Interface.h"
-#include "core/infrastructure/patterns/factory/FactoryMixin.h"
-#include "core/infrastructure/patterns/lists/ListManagerMixin.h"
+#include "core/models/patterns/factory/FactoryMixin.h"
+#include "core/models/patterns/lists/ListManagerMixin.h"
 #include "core/models/shapes/IShape.h"
 #include "core/models/base/types/Material.h"
 #include <QString>
@@ -139,67 +139,67 @@ public:
     /**
      * @brief Obtient le nom de la pièce
      */
-    QString getName() const { return m_name; }
+    virtual QString getName() const = 0;
 
     /**
      * @brief Définit le nom de la pièce
      */
-    void setName(const QString& name) { m_name = name; }
+    virtual void setName(const QString& name) = 0;
 
     /**
      * @brief Obtient la forme de la pièce
      */
-    IShape* getShape() const { return m_shape; }
+    virtual IShape* getShape() const = 0;
 
     /**
      * @brief Définit la forme de la pièce
      */
-    void setShape(IShape* shape) { m_shape = shape; }
+    virtual void setShape(IShape* shape) = 0;
 
     /**
      * @brief Obtient l'épaisseur
      */
-    double getThickness() const { return m_thickness; }
+    virtual double getThickness() const = 0;
 
     /**
      * @brief Définit l'épaisseur
      */
-    void setThickness(double thickness) { m_thickness = thickness; }
+    virtual void setThickness(double thickness) = 0;
 
     /**
      * @brief Obtient le matériau
      */
-    Material getMaterial() const { return m_material; }
+    virtual Material getMaterial() const = 0;
 
     /**
      * @brief Définit le matériau
      */
-    void setMaterial(const Material& material) { m_material = material; }
+    virtual void setMaterial(const Material& material) = 0;
 
     /**
      * @brief Ajoute un joint à la pièce
      */
-    void addJoint(IJoint* joint);
+    virtual void addJoint(IJoint* joint) = 0;
 
     /**
      * @brief Retire un joint de la pièce
      */
-    void removeJoint(IJoint* joint);
+    virtual void removeJoint(IJoint* joint) = 0;
 
     /**
      * @brief Obtient tous les joints de la pièce
      */
-    QList<IJoint*> getJoints() const { return m_joints; }
+    virtual QList<IJoint*> getJoints() const = 0;
 
     /**
      * @brief Calcule le volume de la pièce
      */
-    double getVolume() const;
+    virtual double getVolume() const = 0;
 
     /**
      * @brief Calcule la masse de la pièce
      */
-    double getMass() const;
+    virtual double getMass() const = 0;
 
     // Factory Pattern fourni par FactoryMixin
     using FactoryMixin<IPart>::create;
@@ -223,12 +223,6 @@ protected:
     IPart();
     IPart(const QString& name, IShape* shape, double thickness, const Material& material);
     IPart(const IPart& other);
-
-    QString m_name;             ///< Nom de la pièce
-    IShape* m_shape;            ///< Forme 2D de la pièce
-    double m_thickness;         ///< Épaisseur en mm
-    Material m_material;        ///< Matériau de la pièce
-    QList<IJoint*> m_joints;    ///< Joints connectés à cette pièce
 };
 
 } // namespace Core

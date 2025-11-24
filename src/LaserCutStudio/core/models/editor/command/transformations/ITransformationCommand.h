@@ -26,8 +26,8 @@
 
 #include "core/models/editor/command/IEditorCommand.h"
 #include "core/models/shapes/IShape.h"
-#include "core/infrastructure/patterns/factory/FactoryMixin.h"
-#include "core/infrastructure/patterns/lists/ListManagerMixin.h"
+#include "core/models/patterns/factory/FactoryMixin.h"
+#include "core/models/patterns/lists/ListManagerMixin.h"
 #include <QVector>
 #include <QMap>
 #include <QPair>

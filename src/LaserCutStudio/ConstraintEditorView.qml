@@ -37,17 +37,12 @@ Rectangle {
 
             // Boutons de mode
             ToolButton {
-                text: "Place Point"
-                checkable: true
-                checked: canvas.editMode === ConstraintCanvas2DView.PlacePoint
-                onClicked: canvas.editMode = ConstraintCanvas2DView.PlacePoint
-            }
-
-            ToolButton {
                 text: "Draw Segment"
                 checkable: true
                 checked: canvas.editMode === ConstraintCanvas2DView.DrawSegment
                 onClicked: canvas.editMode = ConstraintCanvas2DView.DrawSegment
+                ToolTip.text: "Dessiner des segments (crée les points automatiquement)"
+                ToolTip.visible: hovered
             }
 
             ToolButton {
@@ -55,6 +50,8 @@ Rectangle {
                 checkable: true
                 checked: canvas.editMode === ConstraintCanvas2DView.Select
                 onClicked: canvas.editMode = ConstraintCanvas2DView.Select
+                ToolTip.text: "Sélectionner et déplacer les éléments"
+                ToolTip.visible: hovered
             }
 
             ToolButton {
@@ -62,6 +59,8 @@ Rectangle {
                 checkable: true
                 checked: canvas.editMode === ConstraintCanvas2DView.AddConstraint
                 onClicked: canvas.editMode = ConstraintCanvas2DView.AddConstraint
+                ToolTip.text: "Ajouter des contraintes entre éléments"
+                ToolTip.visible: hovered
             }
 
             Rectangle { width: 2; height: parent.height; color: "#34495e" }
@@ -250,7 +249,7 @@ Rectangle {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.margins: 10
-            text: "Ready - Place points to start"
+            text: "Ready - Click to draw segments (points created automatically)"
             color: "white"
         }
     }

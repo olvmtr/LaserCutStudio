@@ -276,6 +276,450 @@
     {
         "classes": [
             {
+                "className": "ConstraintCanvas2DView",
+                "enums": [
+                    {
+                        "isClass": true,
+                        "isFlag": false,
+                        "name": "EditMode",
+                        "values": [
+                            "Select",
+                            "PlacePoint",
+                            "DrawSegment",
+                            "AddConstraint"
+                        ]
+                    },
+                    {
+                        "isClass": true,
+                        "isFlag": false,
+                        "name": "ConstraintType",
+                        "values": [
+                            "None",
+                            "Distance",
+                            "Length",
+                            "Angle",
+                            "FixedPoint",
+                            "Parallel",
+                            "Perpendicular",
+                            "EqualLength",
+                            "Coincident"
+                        ]
+                    }
+                ],
+                "methods": [
+                    {
+                        "access": "public",
+                        "name": "solve",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "clear",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "resetView",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "screenPos",
+                                "type": "QPointF"
+                            }
+                        ],
+                        "name": "screenToScene",
+                        "returnType": "QPointF"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "scenePos",
+                                "type": "QPointF"
+                            }
+                        ],
+                        "name": "sceneToScreen",
+                        "returnType": "QPointF"
+                    },
+                    {
+                        "access": "public",
+                        "name": "undo",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "redo",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "canUndo",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "canRedo",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "name": "clearHistory",
+                        "returnType": "void"
+                    }
+                ],
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "sketch",
+                        "notify": "sketchChanged",
+                        "read": "sketch",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "ConstraintSketch*",
+                        "user": false,
+                        "write": "setSketch"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "editMode",
+                        "notify": "editModeChanged",
+                        "read": "editMode",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "EditMode",
+                        "user": false,
+                        "write": "setEditMode"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "constraintType",
+                        "notify": "constraintTypeChanged",
+                        "read": "constraintType",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "ConstraintType",
+                        "user": false,
+                        "write": "setConstraintType"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "gridVisible",
+                        "notify": "gridVisibleChanged",
+                        "read": "isGridVisible",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setGridVisible"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 4,
+                        "name": "gridSize",
+                        "notify": "gridSizeChanged",
+                        "read": "gridSize",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setGridSize"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 5,
+                        "name": "snapToGrid",
+                        "notify": "snapToGridChanged",
+                        "read": "isSnapToGrid",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setSnapToGrid"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 6,
+                        "name": "zoomLevel",
+                        "notify": "zoomLevelChanged",
+                        "read": "zoomLevel",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false,
+                        "write": "setZoomLevel"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 7,
+                        "name": "panOffset",
+                        "notify": "panOffsetChanged",
+                        "read": "panOffset",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QPointF",
+                        "user": false,
+                        "write": "setPanOffset"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 8,
+                        "name": "showConstraints",
+                        "notify": "showConstraintsChanged",
+                        "read": "showConstraints",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setShowConstraints"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 9,
+                        "name": "showMeasurements",
+                        "notify": "showMeasurementsChanged",
+                        "read": "showMeasurements",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setShowMeasurements"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 10,
+                        "name": "autoSolve",
+                        "notify": "autoSolveChanged",
+                        "read": "autoSolve",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false,
+                        "write": "setAutoSolve"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::UI::ConstraintCanvas2DView",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "sketch",
+                                "type": "ConstraintSketch*"
+                            }
+                        ],
+                        "name": "sketchChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "mode",
+                                "type": "EditMode"
+                            }
+                        ],
+                        "name": "editModeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "type",
+                                "type": "ConstraintType"
+                            }
+                        ],
+                        "name": "constraintTypeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "visible",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "gridVisibleChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "size",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "gridSizeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "snap",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "snapToGridChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "zoom",
+                                "type": "double"
+                            }
+                        ],
+                        "name": "zoomLevelChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "offset",
+                                "type": "QPointF"
+                            }
+                        ],
+                        "name": "panOffsetChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "show",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "showConstraintsChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "show",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "showMeasurementsChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "autoSolve",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "autoSolveChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "point",
+                                "type": "GeometricPoint*"
+                            }
+                        ],
+                        "name": "pointCreated",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "segment",
+                                "type": "GeometricSegment*"
+                            }
+                        ],
+                        "name": "segmentCreated",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "constraint",
+                                "type": "IConstraint*"
+                            }
+                        ],
+                        "name": "constraintCreated",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "element",
+                                "type": "IGeometricElement*"
+                            }
+                        ],
+                        "name": "elementSelected",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QQuickPaintedItem"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ConstraintCanvas2DView.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
                 "classInfos": [
                     {
                         "name": "Version",
@@ -540,6 +984,64 @@
                             "Centimeters",
                             "Inches"
                         ]
+                    }
+                ],
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "valueInMm",
+                                "type": "double"
+                            },
+                            {
+                                "name": "targetUnit",
+                                "type": "MeasurementUnit"
+                            }
+                        ],
+                        "name": "convertToUnit",
+                        "returnType": "double"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "value",
+                                "type": "double"
+                            },
+                            {
+                                "name": "sourceUnit",
+                                "type": "MeasurementUnit"
+                            }
+                        ],
+                        "name": "convertFromUnit",
+                        "returnType": "double"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "valueInMm",
+                                "type": "double"
+                            },
+                            {
+                                "name": "targetUnit",
+                                "type": "MeasurementUnit"
+                            }
+                        ],
+                        "name": "formatValue",
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "unit",
+                                "type": "MeasurementUnit"
+                            }
+                        ],
+                        "name": "unitSuffix",
+                        "returnType": "QString"
                     }
                 ],
                 "object": true,
@@ -1763,6 +2265,79 @@
     {
         "classes": [
             {
+                "className": "CoincidentConstraint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "point1",
+                        "notify": "point1Changed",
+                        "read": "point1",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricPoint*",
+                        "user": false,
+                        "write": "setPoint1"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "point2",
+                        "notify": "point2Changed",
+                        "read": "point2",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricPoint*",
+                        "user": false,
+                        "write": "setPoint2"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::CoincidentConstraint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "point",
+                                "type": "GeometricPoint*"
+                            }
+                        ],
+                        "name": "point1Changed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "point",
+                                "type": "GeometricPoint*"
+                            }
+                        ],
+                        "name": "point2Changed",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IConstraint"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "CoincidentConstraint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
                 "className": "DistanceConstraint",
                 "object": true,
                 "properties": [
@@ -1861,6 +2436,79 @@
             }
         ],
         "inputFile": "DistanceConstraint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "EqualLengthConstraint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "segment1",
+                        "notify": "segment1Changed",
+                        "read": "segment1",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricSegment*",
+                        "user": false,
+                        "write": "setSegment1"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "segment2",
+                        "notify": "segment2Changed",
+                        "read": "segment2",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricSegment*",
+                        "user": false,
+                        "write": "setSegment2"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::EqualLengthConstraint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "segment",
+                                "type": "GeometricSegment*"
+                            }
+                        ],
+                        "name": "segment1Changed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "segment",
+                                "type": "GeometricSegment*"
+                            }
+                        ],
+                        "name": "segment2Changed",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IConstraint"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "EqualLengthConstraint.h",
         "outputRevision": 68
     },
     {
@@ -2137,6 +2785,152 @@
             }
         ],
         "inputFile": "LengthConstraint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "ParallelConstraint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "segment1",
+                        "notify": "segment1Changed",
+                        "read": "segment1",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricSegment*",
+                        "user": false,
+                        "write": "setSegment1"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "segment2",
+                        "notify": "segment2Changed",
+                        "read": "segment2",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricSegment*",
+                        "user": false,
+                        "write": "setSegment2"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::ParallelConstraint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "segment",
+                                "type": "GeometricSegment*"
+                            }
+                        ],
+                        "name": "segment1Changed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "segment",
+                                "type": "GeometricSegment*"
+                            }
+                        ],
+                        "name": "segment2Changed",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IConstraint"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "ParallelConstraint.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "PerpendicularConstraint",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "segment1",
+                        "notify": "segment1Changed",
+                        "read": "segment1",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricSegment*",
+                        "user": false,
+                        "write": "setSegment1"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "segment2",
+                        "notify": "segment2Changed",
+                        "read": "segment2",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "GeometricSegment*",
+                        "user": false,
+                        "write": "setSegment2"
+                    }
+                ],
+                "qualifiedClassName": "LaserCutStudio::Core::PerpendicularConstraint",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "segment",
+                                "type": "GeometricSegment*"
+                            }
+                        ],
+                        "name": "segment1Changed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "segment",
+                                "type": "GeometricSegment*"
+                            }
+                        ],
+                        "name": "segment2Changed",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "IConstraint"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "PerpendicularConstraint.h",
         "outputRevision": 68
     },
     {

@@ -19,10 +19,12 @@ from pathlib import Path
 from typing import Set, Dict, List, Tuple
 
 # Racine du projet
-# Si exécuté depuis /home/vm-mint/Projet/LaserCutStudio
-# alors PROJECT_ROOT = /home/vm-mint/Projet/LaserCutStudio/src/LaserCutStudio
-PROJECT_ROOT = Path(__file__).parent.parent
-CORE_PATH = PROJECT_ROOT / "core"
+# __file__ = /home/vm-mint/Projet/LaserCutStudio/DevTools/architecture/test_architecture_solid.py
+# parent = /home/vm-mint/Projet/LaserCutStudio/DevTools/architecture
+# parent.parent = /home/vm-mint/Projet/LaserCutStudio/DevTools
+# parent.parent.parent = /home/vm-mint/Projet/LaserCutStudio (RACINE)
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+CORE_PATH = PROJECT_ROOT / "src" / "LaserCutStudio" / "core"
 
 
 class IncludeAnalyzer:
@@ -467,6 +469,111 @@ class TestArchitectureSOLID:
         if not any("RÈGLE 7" in err for err in self.errors):
             self.log_success("RÈGLE 7: Tous les mixins sont indépendants")
 
+    def test_interfaces_are_pure(self):
+        """
+        RÈGLE 8: Les interfaces doivent être purement abstraites.
+
+        Les interfaces (IShape, IPart, IJoint, IProject) ne doivent contenir :
+        - AUCUN membre de données (m_name, m_shape, etc.)
+        - SEULEMENT des méthodes virtuelles pures (= 0)
+        - PAS d'implémentation inline (sauf destructeur virtuel et using declarations)
+
+        Les données et implémentations doivent être dans les classes concrètes.
+        Utiliser Q_PROPERTY + introspection au lieu de getters/setters inline.
+        """
+        print("\n🔍 Test 8: Vérification que les interfaces sont purement abstraites...")
+
+        interface_files = {
+            'IShape': CORE_PATH / "models" / "shapes" / "IShape.h",
+            'IPart': CORE_PATH / "models" / "parts" / "IPart.h",
+            'IJoint': CORE_PATH / "models" / "joints" / "IJoint.h",
+            'IProject': CORE_PATH / "models" / "projects" / "IProject.h"
+        }
+
+        for interface_name, interface_file in interface_files.items():
+            if not interface_file.exists():
+                continue
+
+            try:
+                content = interface_file.read_text(encoding='utf-8')
+                lines = content.split('\n')
+
+                in_interface_class = False
+                in_protected_section = False
+                brace_depth = 0
+
+                for line_num, line in enumerate(lines, 1):
+                    stripped = line.strip()
+
+                    # Détecter début de la classe interface
+                    if f'class {interface_name}' in line and ':' in line and not stripped.startswith('//'):
+                        in_interface_class = True
+                        brace_depth = 0
+                        continue
+
+                    if not in_interface_class:
+                        continue
+
+                    # Compter les accolades pour détecter fin de classe
+                    brace_depth += line.count('{') - line.count('}')
+
+                    # Si on trouve la fermeture finale de la classe
+                    if stripped == '};' and brace_depth <= 0:
+                        in_interface_class = False
+                        in_protected_section = False
+                        continue
+
+                    # Détecter section protected
+                    if stripped == 'protected:':
+                        in_protected_section = True
+                        continue
+
+                    # Détecter sortie de section protected (public, private, ou signals)
+                    if stripped in ['public:', 'private:', 'signals:']:
+                        in_protected_section = False
+                        continue
+
+                    # Dans section protected, chercher membres m_*
+                    if in_protected_section:
+                        # Pattern simplifié: cherche toute ligne avec "m_" suivi d'un identificateur et se terminant par ;
+                        # Ignore les constructeurs/méthodes
+                        if 'm_' in line and ';' in line and '(' not in line:
+                            # Vérifie que c'est bien une déclaration de membre (pas un commentaire)
+                            if not stripped.startswith('//') and not stripped.startswith('*') and not stripped.startswith('///'):
+                                self.log_error(
+                                    f"VIOLATION RÈGLE 8: {interface_name} contient un membre de données\n"
+                                    f"   Fichier: {interface_file}\n"
+                                    f"   Ligne {line_num}: {stripped}\n"
+                                    f"   INTERDIT: Les interfaces ne doivent pas contenir de membres de données\n"
+                                    f"   SOLUTION: Déplacer ce membre dans la classe concrète (Part, TabJoint, etc.)\n"
+                                    f"   ALTERNATIVE: Utiliser Q_PROPERTY + getters virtuels purs"
+                                )
+
+                # Détecter les méthodes avec implémentation inline (return m_*)
+                for line_num, line in enumerate(lines, 1):
+                    stripped = line.strip()
+
+                    # Skip commentaires et using declarations
+                    if stripped.startswith('//') or stripped.startswith('*') or 'using ' in line or 'virtual ~' in line:
+                        continue
+
+                    # Chercher pattern: method() { return m_* }
+                    if 'return m_' in line and '{' in line and '}' in line:
+                        self.log_error(
+                            f"VIOLATION RÈGLE 8: {interface_name} contient une méthode avec implémentation inline\n"
+                            f"   Fichier: {interface_file}\n"
+                            f"   Ligne {line_num}: {stripped}\n"
+                            f"   INTERDIT: Les interfaces ne doivent pas contenir d'implémentation\n"
+                            f"   SOLUTION: Rendre la méthode virtuelle pure (= 0) ou la déplacer dans la classe concrète\n"
+                            f"   ALTERNATIVE: Utiliser Q_PROPERTY pour l'introspection"
+                        )
+
+            except Exception as e:
+                print(f"⚠️  Erreur analyse {interface_file}: {e}")
+
+        if not any("RÈGLE 8" in err for err in self.errors):
+            self.log_success("RÈGLE 8: Toutes les interfaces sont purement abstraites")
+
     def run_all_tests(self):
         """Exécute tous les tests SOLID."""
         print("=" * 80)
@@ -480,6 +587,7 @@ class TestArchitectureSOLID:
         self.test_package_dependencies()
         self.test_no_circular_dependencies()
         self.test_mixins_independence()
+        self.test_interfaces_are_pure()
 
         print("\n" + "=" * 80)
         if self.errors:

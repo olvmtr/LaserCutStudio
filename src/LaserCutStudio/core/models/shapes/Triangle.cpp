@@ -4,7 +4,7 @@
  */
 
 #include "Triangle.h"
-#include "core/infrastructure/patterns/prototype/ClonableMixin.h"
+#include "core/models/patterns/prototype/ClonableMixin.h"
 #include "core/infrastructure/logging/LogCategories.h"
 #include "core/services/geometry/GeometryUtils.h"
 #include <QtMath>
