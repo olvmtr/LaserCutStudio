@@ -1,7 +1,7 @@
 #ifndef CONSTRAINTSKETCH_H
 #define CONSTRAINTSKETCH_H
 
-#include "core/models/base/Interface.h"
+#include <LibInterface/Interface.h>
 #include "core/models/geometry/IGeometricElement.h"
 #include "core/models/geometry/IGeometricPoint.h"
 #include "core/models/geometry/IGeometricSegment.h"
@@ -17,8 +17,8 @@ namespace Core {
 }
 }
 #include "core/models/sketch/ConstraintSolver.h"
-#include "core/models/patterns/factory/FactoryMixin.h"
-#include "core/models/patterns/properties/PropertyMixin.h"
+#include <LibInterface/Patterns/FactoryMixin.h>
+#include <LibInterface/Patterns/PropertyMixin.h>
 #include <QString>
 #include <QList>
 #include <QPainterPath>
@@ -167,9 +167,9 @@ public:
      * @return Structure contenant le segment et les points créés
      */
     struct SegmentWithPoints {
-        GeometricSegment* segment;
-        GeometricPoint* startPoint;
-        GeometricPoint* endPoint;
+        IGeometricSegment* segment;
+        IGeometricPoint* startPoint;
+        IGeometricPoint* endPoint;
         bool startPointCreated;  // true si le point de départ a été créé
         bool endPointCreated;    // true si le point d'arrivée a été créé
     };
@@ -186,10 +186,10 @@ public:
     void clearConstraints();
 
     // Helpers pour créer des contraintes
-    IConstraint* addDistanceConstraint(GeometricPoint* p1, GeometricPoint* p2, double distance, bool locked = false);
-    IConstraint* addLengthConstraint(GeometricSegment* segment, double length, bool locked = false);
-    IConstraint* addAngleConstraint(GeometricSegment* s1, GeometricSegment* s2, double angleDegrees, bool locked = false);
-    IConstraint* addFixedPointConstraint(GeometricPoint* point, double x, double y, bool locked = true);
+    IConstraint* addDistanceConstraint(IGeometricPoint* p1, IGeometricPoint* p2, double distance, bool locked = false);
+    IConstraint* addLengthConstraint(IGeometricSegment* segment, double length, bool locked = false);
+    IConstraint* addAngleConstraint(IGeometricSegment* s1, IGeometricSegment* s2, double angleDegrees, bool locked = false);
+    IConstraint* addFixedPointConstraint(IGeometricPoint* point, double x, double y, bool locked = true);
 
     // Résolution
     bool solve();

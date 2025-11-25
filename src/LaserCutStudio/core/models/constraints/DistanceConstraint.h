@@ -6,7 +6,7 @@
 
 // Forward declarations
 class GeometricPoint;
-#include "core/models/patterns/properties/PropertyMixin.h"
+#include <LibInterface/Patterns/PropertyMixin.h>
 
 namespace LaserCutStudio {
 namespace Core {
@@ -104,7 +104,7 @@ public:
     /**
      * @brief Obtient les points affectés
      */
-    QList<GeometricPoint*> affectedPoints() const override;
+    QList<IGeometricPoint*> affectedPoints() const override;
 
     // Getters
     IGeometricPoint* point1() const { return m_point1; }

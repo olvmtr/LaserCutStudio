@@ -1,15 +1,15 @@
 #ifndef ICONSTRAINT_H
 #define ICONSTRAINT_H
 
-#include "core/models/base/Interface.h"
-#include "core/models/patterns/factory/FactoryMixin.h"
-#include "core/models/patterns/lists/ListManagerMixin.h"
+#include <LibInterface/Interface.h>
+#include <LibInterface/Patterns/FactoryMixin.h>
+#include <LibInterface/Patterns/ListManagerMixin.h>
 
 namespace LaserCutStudio {
 namespace Core {
 
 // Forward declarations
-class GeometricPoint;
+class IGeometricPoint;
 
 /**
  * @brief Interface de base pour toutes les contraintes géométriques
@@ -123,7 +123,7 @@ public:
      * @brief Obtient la liste des points affectés par cette contrainte
      * @return Liste des points (pour calcul des degrés de liberté)
      */
-    virtual QList<GeometricPoint*> affectedPoints() const = 0;
+    virtual QList<IGeometricPoint*> affectedPoints() const = 0;
 
     /**
      * @brief Vérifie si la contrainte est verrouillée (prioritaire)

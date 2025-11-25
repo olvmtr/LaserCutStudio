@@ -3,7 +3,7 @@
 
 #include "core/models/constraints/IConstraint.h"
 #include "core/models/geometry/IGeometricSegment.h"
-#include "core/models/patterns/properties/PropertyMixin.h"
+#include <LibInterface/Patterns/PropertyMixin.h>
 
 namespace LaserCutStudio {
 namespace Core {
@@ -51,7 +51,7 @@ public:
     bool isSatisfied(double tolerance = 1e-6) const override;
     double error() const override;
     void apply() override;
-    QList<GeometricPoint*> affectedPoints() const override;
+    QList<IGeometricPoint*> affectedPoints() const override;
 
     IGeometricSegment* segment1() const { return m_segment1; }
     IGeometricSegment* segment2() const { return m_segment2; }

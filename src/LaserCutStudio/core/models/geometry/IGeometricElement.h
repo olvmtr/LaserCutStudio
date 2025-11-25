@@ -1,9 +1,9 @@
 #ifndef IGEOMETRICELEMENT_H
 #define IGEOMETRICELEMENT_H
 
-#include "core/models/base/Interface.h"
-#include "core/models/patterns/factory/FactoryMixin.h"
-#include "core/models/patterns/lists/ListManagerMixin.h"
+#include <LibInterface/Interface.h>
+#include <LibInterface/Patterns/FactoryMixin.h>
+#include <LibInterface/Patterns/ListManagerMixin.h>
 #include "core/models/base/types/Point2D.h"
 #include <QPainterPath>
 

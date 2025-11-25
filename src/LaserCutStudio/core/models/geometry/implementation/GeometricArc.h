@@ -3,7 +3,7 @@
 
 #include "core/models/geometry/IGeometricArc.h"
 #include "core/models/geometry/IGeometricPoint.h"
-#include "core/models/patterns/properties/PropertyMixin.h"
+#include <LibInterface/Patterns/PropertyMixin.h>
 
 // Forward declaration
 namespace LaserCutStudio {

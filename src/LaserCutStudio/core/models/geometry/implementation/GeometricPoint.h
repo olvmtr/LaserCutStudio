@@ -2,7 +2,7 @@
 #define GEOMETRICPOINT_H
 
 #include "core/models/geometry/IGeometricPoint.h"
-#include "core/models/patterns/properties/PropertyMixin.h"
+#include <LibInterface/Patterns/PropertyMixin.h>
 
 namespace LaserCutStudio {
 namespace Core {
