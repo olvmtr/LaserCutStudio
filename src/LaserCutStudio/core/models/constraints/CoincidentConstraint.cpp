@@ -133,14 +133,14 @@ void CoincidentConstraint::apply()
     }
 }
 
-QList<GeometricPoint*> CoincidentConstraint::affectedPoints() const
+QList<IGeometricPoint*> CoincidentConstraint::affectedPoints() const
 {
-    QList<GeometricPoint*> points;
+    QList<IGeometricPoint*> points;
     if (m_point1 && !m_point1->isLocked()) {
-        points << qobject_cast<GeometricPoint*>(m_point1);
+        points << m_point1;
     }
     if (m_point2 && !m_point2->isLocked()) {
-        points << qobject_cast<GeometricPoint*>(m_point2);
+        points << m_point2;
     }
     return points;
 }

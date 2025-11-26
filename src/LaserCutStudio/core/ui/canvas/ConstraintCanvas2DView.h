@@ -216,8 +216,8 @@ signals:
     void autoSolveChanged(bool autoSolve);
 
     // Notifications d'événements
-    void pointCreated(GeometricPoint* point);
-    void segmentCreated(GeometricSegment* segment);
+    void pointCreated(IGeometricPoint* point);
+    void segmentCreated(IGeometricSegment* segment);
     void constraintCreated(IConstraint* constraint);
     void elementSelected(IGeometricElement* element);
 
@@ -239,15 +239,15 @@ private:
     void drawPreview(QPainter* painter);
 
     // ===== Helpers de rendu =====
-    void drawPoint(QPainter* painter, GeometricPoint* point);
-    void drawSegment(QPainter* painter, GeometricSegment* segment);
+    void drawPoint(QPainter* painter, IGeometricPoint* point);
+    void drawSegment(QPainter* painter, IGeometricSegment* segment);
     void drawConstraintIcon(QPainter* painter, IConstraint* constraint);
     void drawDistanceMeasurement(QPainter* painter, const QPointF& p1, const QPointF& p2, double distance);
     void drawAngleMeasurement(QPainter* painter, const QPointF& p1, const QPointF& p2, const QPointF& p3, double angle);
 
     // ===== Helpers d'interaction =====
-    GeometricPoint* findPointNear(const QPointF& scenePos, double tolerance = 10.0);
-    GeometricSegment* findSegmentNear(const QPointF& scenePos, double tolerance = 10.0);
+    IGeometricPoint* findPointNear(const QPointF& scenePos, double tolerance = 10.0);
+    IGeometricSegment* findSegmentNear(const QPointF& scenePos, double tolerance = 10.0);
     void handlePointPlacement(const QPointF& scenePos);
     void handleSegmentDrawing(const QPointF& scenePos);
     void handleSelection(const QPointF& scenePos);
@@ -280,9 +280,9 @@ private:
     bool m_autoSolve = true;
 
     // État d'interaction
-    GeometricPoint* m_segmentStartPoint = nullptr;  // Pour dessin de segment en cours
-    GeometricPoint* m_hoveredPoint = nullptr;
-    GeometricSegment* m_hoveredSegment = nullptr;
+    IGeometricPoint* m_segmentStartPoint = nullptr;  // Pour dessin de segment en cours
+    IGeometricPoint* m_hoveredPoint = nullptr;
+    IGeometricSegment* m_hoveredSegment = nullptr;
     IGeometricElement* m_selectedElement = nullptr;
 
     // Sélection pour contraintes (peut nécessiter 2 éléments)

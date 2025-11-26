@@ -46,14 +46,14 @@ bool LengthConstraint::isSatisfied(double tolerance) const
 
 bool LengthConstraint::isValid() const
 {
-    GeometricSegment* seg = qobject_cast<GeometricSegment*>(m_segment);
+    IGeometricSegment* seg = m_segment;
     return seg != nullptr && seg->isValid();
 }
 
 double LengthConstraint::error() const
 {
     if (!isValid()) return 0.0;
-    GeometricSegment* seg = qobject_cast<GeometricSegment*>(m_segment);
+    IGeometricSegment* seg = m_segment;
     return std::abs(seg->length() - m_length);
 }
 
@@ -61,7 +61,7 @@ void LengthConstraint::apply()
 {
     if (!isValid()) return;
 
-    GeometricSegment* seg = qobject_cast<GeometricSegment*>(m_segment);
+    IGeometricSegment* seg = m_segment;
     if (!seg) return;
 
     IGeometricPoint* start = seg->startPoint();
@@ -104,16 +104,16 @@ void LengthConstraint::apply()
     }
 }
 
-QList<GeometricPoint*> LengthConstraint::affectedPoints() const
+QList<IGeometricPoint*> LengthConstraint::affectedPoints() const
 {
-    QList<GeometricPoint*> points;
+    QList<IGeometricPoint*> points;
     if (isValid()) {
-        GeometricSegment* seg = qobject_cast<GeometricSegment*>(m_segment);
+        IGeometricSegment* seg = m_segment;
         if (seg) {
             IGeometricPoint* start = seg->startPoint();
             IGeometricPoint* end = seg->endPoint();
-            if (start) points << qobject_cast<GeometricPoint*>(start);
-            if (end) points << qobject_cast<GeometricPoint*>(end);
+            if (start) points << start;
+            if (end) points << end;
         }
     }
     return points;

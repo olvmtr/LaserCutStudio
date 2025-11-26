@@ -336,7 +336,7 @@ void ConstraintCanvas2DView::drawPoints(QPainter* painter)
 
     const QList<IGeometricElement*>& elements = m_sketch->elements();
     for (IGeometricElement* elem : elements) {
-        GeometricPoint* point = qobject_cast<GeometricPoint*>(elem);
+        IGeometricPoint* point = qobject_cast<IGeometricPoint*>(elem);
         if (point) {
             drawPoint(painter, point);
         }
@@ -349,7 +349,7 @@ void ConstraintCanvas2DView::drawSegments(QPainter* painter)
 
     const QList<IGeometricElement*>& elements = m_sketch->elements();
     for (IGeometricElement* elem : elements) {
-        GeometricSegment* segment = qobject_cast<GeometricSegment*>(elem);
+        IGeometricSegment* segment = qobject_cast<IGeometricSegment*>(elem);
         if (segment) {
             drawSegment(painter, segment);
         }
@@ -374,7 +374,7 @@ void ConstraintCanvas2DView::drawMeasurements(QPainter* painter)
     // Pour l'instant, on affiche les longueurs des segments
     const QList<IGeometricElement*>& elements = m_sketch->elements();
     for (IGeometricElement* elem : elements) {
-        GeometricSegment* segment = qobject_cast<GeometricSegment*>(elem);
+        IGeometricSegment* segment = qobject_cast<IGeometricSegment*>(elem);
         if (segment && segment->isValid()) {
             QPointF p1 = sceneToScreen(QPointF(segment->startPoint()->x(), segment->startPoint()->y()));
             QPointF p2 = sceneToScreen(QPointF(segment->endPoint()->x(), segment->endPoint()->y()));
@@ -417,7 +417,7 @@ void ConstraintCanvas2DView::drawPreview(QPainter* painter)
 
 // ===== Helpers de rendu =====
 
-void ConstraintCanvas2DView::drawPoint(QPainter* painter, GeometricPoint* point)
+void ConstraintCanvas2DView::drawPoint(QPainter* painter, IGeometricPoint* point)
 {
     if (!painter || !point) return;
 
@@ -438,7 +438,7 @@ void ConstraintCanvas2DView::drawPoint(QPainter* painter, GeometricPoint* point)
     painter->restore();
 }
 
-void ConstraintCanvas2DView::drawSegment(QPainter* painter, GeometricSegment* segment)
+void ConstraintCanvas2DView::drawSegment(QPainter* painter, IGeometricSegment* segment)
 {
     if (!painter || !segment || !segment->isValid()) return;
 
@@ -471,10 +471,10 @@ void ConstraintCanvas2DView::drawConstraintIcon(QPainter* painter, IConstraint* 
 
     // TODO: Dessiner icône spécifique selon type de contrainte
     // Pour l'instant, dessiner un petit carré au centre des éléments affectés
-    QList<GeometricPoint*> points = constraint->affectedPoints();
+    QList<IGeometricPoint*> points = constraint->affectedPoints();
     if (!points.isEmpty()) {
         QPointF center(0, 0);
-        for (GeometricPoint* p : points) {
+        for (IGeometricPoint* p : points) {
             center += QPointF(p->x(), p->y());
         }
         center /= points.size();
@@ -521,16 +521,16 @@ void ConstraintCanvas2DView::drawAngleMeasurement(QPainter* painter, const QPoin
 
 // ===== Helpers d'interaction =====
 
-GeometricPoint* ConstraintCanvas2DView::findPointNear(const QPointF& scenePos, double tolerance)
+IGeometricPoint* ConstraintCanvas2DView::findPointNear(const QPointF& scenePos, double tolerance)
 {
     if (!m_sketch) return nullptr;
 
     double minDist = tolerance / m_zoomLevel;
-    GeometricPoint* nearest = nullptr;
+    IGeometricPoint* nearest = nullptr;
 
     const QList<IGeometricElement*>& elements = m_sketch->elements();
     for (IGeometricElement* elem : elements) {
-        GeometricPoint* point = qobject_cast<GeometricPoint*>(elem);
+        IGeometricPoint* point = qobject_cast<IGeometricPoint*>(elem);
         if (point) {
             double dx = point->x() - scenePos.x();
             double dy = point->y() - scenePos.y();
@@ -546,16 +546,16 @@ GeometricPoint* ConstraintCanvas2DView::findPointNear(const QPointF& scenePos, d
     return nearest;
 }
 
-GeometricSegment* ConstraintCanvas2DView::findSegmentNear(const QPointF& scenePos, double tolerance)
+IGeometricSegment* ConstraintCanvas2DView::findSegmentNear(const QPointF& scenePos, double tolerance)
 {
     if (!m_sketch) return nullptr;
 
     double minDist = tolerance / m_zoomLevel;
-    GeometricSegment* nearest = nullptr;
+    IGeometricSegment* nearest = nullptr;
 
     const QList<IGeometricElement*>& elements = m_sketch->elements();
     for (IGeometricElement* elem : elements) {
-        GeometricSegment* segment = qobject_cast<GeometricSegment*>(elem);
+        IGeometricSegment* segment = qobject_cast<IGeometricSegment*>(elem);
         if (segment && segment->isValid()) {
             Point2D p(scenePos.x(), scenePos.y());
             double dist = segment->distanceToPoint(p);
@@ -578,12 +578,12 @@ void ConstraintCanvas2DView::handlePointPlacement(const QPointF& scenePos)
     QPointF adjustedPos = m_snapToGrid ? snapToGridInternal(scenePos) : scenePos;
 
     // Capturer le pointeur créé (shared_ptr pour gestion mémoire sûre)
-    std::shared_ptr<GeometricPoint*> pointPtr = std::make_shared<GeometricPoint*>(nullptr);
+    std::shared_ptr<IGeometricPoint*> pointPtr = std::make_shared<IGeometricPoint*>(nullptr);
 
     pushCommand("Add Point",
         // Execute: ajouter point
         [this, adjustedPos, pointPtr]() {
-            *pointPtr = static_cast<GeometricPoint*>(m_sketch->addPoint(adjustedPos.x(), adjustedPos.y()));
+            *pointPtr = static_cast<IGeometricPoint*>(m_sketch->addPoint(adjustedPos.x(), adjustedPos.y()));
             qCInfo(logCore()) << "Point placed at" << adjustedPos;
             emit pointCreated(*pointPtr);
             triggerSolveIfEnabled();
@@ -606,17 +606,17 @@ void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
     QPointF adjustedPos = m_snapToGrid ? snapToGridInternal(scenePos) : scenePos;
 
     // Chercher un point existant près du clic (tolérance: 10 pixels)
-    GeometricPoint* clickedPoint = findPointNear(scenePos, 10.0);
+    IGeometricPoint* clickedPoint = findPointNear(scenePos, 10.0);
 
     if (!m_segmentStartPoint) {
         // Premier clic : créer ou réutiliser point de départ
         if (!clickedPoint) {
             // Créer nouveau point automatiquement
-            std::shared_ptr<GeometricPoint*> pointPtr = std::make_shared<GeometricPoint*>(nullptr);
+            std::shared_ptr<IGeometricPoint*> pointPtr = std::make_shared<IGeometricPoint*>(nullptr);
 
             pushCommand("Add Point",
                 [this, adjustedPos, pointPtr]() {
-                    *pointPtr = static_cast<GeometricPoint*>(m_sketch->addPoint(adjustedPos.x(), adjustedPos.y()));
+                    *pointPtr = static_cast<IGeometricPoint*>(m_sketch->addPoint(adjustedPos.x(), adjustedPos.y()));
                     qCInfo(logCore()) << "Auto-created start point at" << adjustedPos;
                     emit pointCreated(*pointPtr);
                     triggerSolveIfEnabled();
@@ -640,15 +640,15 @@ void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
 
     } else {
         // Second clic : créer point final et segment
-        GeometricPoint* endPoint = clickedPoint;
+        IGeometricPoint* endPoint = clickedPoint;
 
         if (!endPoint) {
             // Créer nouveau point final
-            std::shared_ptr<GeometricPoint*> pointPtr = std::make_shared<GeometricPoint*>(nullptr);
+            std::shared_ptr<IGeometricPoint*> pointPtr = std::make_shared<IGeometricPoint*>(nullptr);
 
             pushCommand("Add Point",
                 [this, adjustedPos, pointPtr]() {
-                    *pointPtr = static_cast<GeometricPoint*>(m_sketch->addPoint(adjustedPos.x(), adjustedPos.y()));
+                    *pointPtr = static_cast<IGeometricPoint*>(m_sketch->addPoint(adjustedPos.x(), adjustedPos.y()));
                     qCInfo(logCore()) << "Auto-created end point at" << adjustedPos;
                     emit pointCreated(*pointPtr);
                     triggerSolveIfEnabled();
@@ -666,14 +666,14 @@ void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
 
         // Créer segment entre les deux points
         if (endPoint != m_segmentStartPoint) {
-            GeometricPoint* startPt = m_segmentStartPoint;
-            GeometricPoint* endPt = endPoint;
+            IGeometricPoint* startPt = m_segmentStartPoint;
+            IGeometricPoint* endPt = endPoint;
 
-            std::shared_ptr<GeometricSegment*> segmentPtr = std::make_shared<GeometricSegment*>(nullptr);
+            std::shared_ptr<IGeometricSegment*> segmentPtr = std::make_shared<IGeometricSegment*>(nullptr);
 
             pushCommand("Add Segment",
                 [this, startPt, endPt, segmentPtr]() {
-                    *segmentPtr = static_cast<GeometricSegment*>(m_sketch->addSegment(startPt, endPt));
+                    *segmentPtr = static_cast<IGeometricSegment*>(m_sketch->addSegment(startPt, endPt));
                     qCInfo(logCore()) << "Segment created";
                     emit segmentCreated(*segmentPtr);
                     triggerSolveIfEnabled();
@@ -696,7 +696,7 @@ void ConstraintCanvas2DView::handleSegmentDrawing(const QPointF& scenePos)
 void ConstraintCanvas2DView::handleSelection(const QPointF& scenePos)
 {
     // Chercher point ou segment près du clic
-    GeometricPoint* point = findPointNear(scenePos);
+    IGeometricPoint* point = findPointNear(scenePos);
     if (point) {
         m_selectedElement = point;
         qCInfo(logCore()) << "Point selected";
@@ -712,7 +712,7 @@ void ConstraintCanvas2DView::handleSelection(const QPointF& scenePos)
         return;
     }
 
-    GeometricSegment* segment = findSegmentNear(scenePos);
+    IGeometricSegment* segment = findSegmentNear(scenePos);
     if (segment) {
         m_selectedElement = segment;
         qCInfo(logCore()) << "Segment selected";
@@ -741,8 +741,8 @@ void ConstraintCanvas2DView::handleConstraintAddition()
     // Créer contrainte selon type
     switch (m_constraintType) {
     case ConstraintType::Coincident: {
-        GeometricPoint* p1 = qobject_cast<GeometricPoint*>(m_constraintSelection[0]);
-        GeometricPoint* p2 = qobject_cast<GeometricPoint*>(m_constraintSelection[1]);
+        IGeometricPoint* p1 = qobject_cast<IGeometricPoint*>(m_constraintSelection[0]);
+        IGeometricPoint* p2 = qobject_cast<IGeometricPoint*>(m_constraintSelection[1]);
         if (p1 && p2) {
             constraint = new CoincidentConstraint(p1, p2, false);
             m_sketch->addConstraint(constraint);
@@ -750,8 +750,8 @@ void ConstraintCanvas2DView::handleConstraintAddition()
         break;
     }
     case ConstraintType::Parallel: {
-        GeometricSegment* s1 = qobject_cast<GeometricSegment*>(m_constraintSelection[0]);
-        GeometricSegment* s2 = qobject_cast<GeometricSegment*>(m_constraintSelection[1]);
+        IGeometricSegment* s1 = qobject_cast<IGeometricSegment*>(m_constraintSelection[0]);
+        IGeometricSegment* s2 = qobject_cast<IGeometricSegment*>(m_constraintSelection[1]);
         if (s1 && s2) {
             constraint = new ParallelConstraint(s1, s2, false);
             m_sketch->addConstraint(constraint);
@@ -759,8 +759,8 @@ void ConstraintCanvas2DView::handleConstraintAddition()
         break;
     }
     case ConstraintType::Perpendicular: {
-        GeometricSegment* s1 = qobject_cast<GeometricSegment*>(m_constraintSelection[0]);
-        GeometricSegment* s2 = qobject_cast<GeometricSegment*>(m_constraintSelection[1]);
+        IGeometricSegment* s1 = qobject_cast<IGeometricSegment*>(m_constraintSelection[0]);
+        IGeometricSegment* s2 = qobject_cast<IGeometricSegment*>(m_constraintSelection[1]);
         if (s1 && s2) {
             constraint = new PerpendicularConstraint(s1, s2, false);
             m_sketch->addConstraint(constraint);
@@ -768,8 +768,8 @@ void ConstraintCanvas2DView::handleConstraintAddition()
         break;
     }
     case ConstraintType::EqualLength: {
-        GeometricSegment* s1 = qobject_cast<GeometricSegment*>(m_constraintSelection[0]);
-        GeometricSegment* s2 = qobject_cast<GeometricSegment*>(m_constraintSelection[1]);
+        IGeometricSegment* s1 = qobject_cast<IGeometricSegment*>(m_constraintSelection[0]);
+        IGeometricSegment* s2 = qobject_cast<IGeometricSegment*>(m_constraintSelection[1]);
         if (s1 && s2) {
             constraint = new EqualLengthConstraint(s1, s2, false);
             m_sketch->addConstraint(constraint);

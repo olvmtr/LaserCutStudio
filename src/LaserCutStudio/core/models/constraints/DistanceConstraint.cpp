@@ -38,11 +38,11 @@ DistanceConstraint::DistanceConstraint(const DistanceConstraint& other)
 {
     // Clone les points
     if (other.m_point1) {
-        m_point1 = static_cast<GeometricPoint*>(other.m_point1->clone());
+        m_point1 = static_cast<IGeometricPoint*>(other.m_point1->clone());
         connectToPoint(m_point1);
     }
     if (other.m_point2) {
-        m_point2 = static_cast<GeometricPoint*>(other.m_point2->clone());
+        m_point2 = static_cast<IGeometricPoint*>(other.m_point2->clone());
         connectToPoint(m_point2);
     }
 }
@@ -60,8 +60,8 @@ IConstraint* DistanceConstraint::clone() const
 
 bool DistanceConstraint::isValid() const
 {
-    GeometricPoint* pt1 = qobject_cast<GeometricPoint*>(m_point1);
-    GeometricPoint* pt2 = qobject_cast<GeometricPoint*>(m_point2);
+    IGeometricPoint* pt1 = m_point1;
+    IGeometricPoint* pt2 = m_point2;
     return pt1 != nullptr && pt2 != nullptr;
 }
 
@@ -76,8 +76,8 @@ double DistanceConstraint::error() const
         return 0.0;
     }
 
-    GeometricPoint* pt1 = qobject_cast<GeometricPoint*>(m_point1);
-    GeometricPoint* pt2 = qobject_cast<GeometricPoint*>(m_point2);
+    IGeometricPoint* pt1 = m_point1;
+    IGeometricPoint* pt2 = m_point2;
 
     double currentDistance = pt1->distance(*pt2);
     return std::abs(currentDistance - m_distance);
@@ -89,8 +89,8 @@ void DistanceConstraint::apply()
         return;
     }
 
-    GeometricPoint* pt1 = qobject_cast<GeometricPoint*>(m_point1);
-    GeometricPoint* pt2 = qobject_cast<GeometricPoint*>(m_point2);
+    IGeometricPoint* pt1 = m_point1;
+    IGeometricPoint* pt2 = m_point2;
 
     // Calcul de la distance actuelle
     double currentDist = pt1->distance(*pt2);
@@ -142,15 +142,15 @@ void DistanceConstraint::apply()
     }
 }
 
-QList<GeometricPoint*> DistanceConstraint::affectedPoints() const
+QList<IGeometricPoint*> DistanceConstraint::affectedPoints() const
 {
-    QList<GeometricPoint*> points;
+    QList<IGeometricPoint*> points;
     if (m_point1) {
-        GeometricPoint* pt1 = qobject_cast<GeometricPoint*>(m_point1);
+        IGeometricPoint* pt1 = m_point1;
         if (pt1) points << pt1;
     }
     if (m_point2) {
-        GeometricPoint* pt2 = qobject_cast<GeometricPoint*>(m_point2);
+        IGeometricPoint* pt2 = m_point2;
         if (pt2) points << pt2;
     }
     return points;
@@ -192,7 +192,7 @@ void DistanceConstraint::setDistance(double distance)
 void DistanceConstraint::connectToPoint(IGeometricPoint* point)
 {
     if (point) {
-        connect(point, &GeometricPoint::geometryChanged,
+        connect(point, &IGeometricPoint::geometryChanged,
                 this, &DistanceConstraint::constraintChanged);
 
         connect(point, &Interface::aboutToBeDestroyed,

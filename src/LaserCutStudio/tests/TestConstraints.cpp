@@ -32,8 +32,8 @@ void TestConstraints::cleanupTestCase()
 
 void TestConstraints::testDistanceConstraintConstruction()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(3, 4);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(3, 4);
 
     DistanceConstraint* constraint = new DistanceConstraint(p1, p2, 5.0, false);
 
@@ -50,8 +50,8 @@ void TestConstraints::testDistanceConstraintConstruction()
 
 void TestConstraints::testDistanceConstraintError()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(3, 4);  // Distance = 5
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(3, 4);  // Distance = 5
 
     DistanceConstraint* constraint = new DistanceConstraint(p1, p2, 10.0, false);
 
@@ -66,8 +66,8 @@ void TestConstraints::testDistanceConstraintError()
 
 void TestConstraints::testDistanceConstraintApply()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0, true);  // Fixed
-    GeometricPoint* p2 = new GeometricPoint(5, 0, false); // Free
+    IGeometricPoint* p1 = new GeometricPoint(0, 0, true);  // Fixed
+    IGeometricPoint* p2 = new GeometricPoint(5, 0, false); // Free
 
     DistanceConstraint* constraint = new DistanceConstraint(p1, p2, 10.0, false);
 
@@ -85,8 +85,8 @@ void TestConstraints::testDistanceConstraintApply()
 
 void TestConstraints::testDistanceConstraintLocked()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(5, 0);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(5, 0);
 
     DistanceConstraint* constraint = new DistanceConstraint(p1, p2, 10.0, true);
 
@@ -107,9 +107,9 @@ void TestConstraints::testDistanceConstraintLocked()
 
 void TestConstraints::testLengthConstraintConstruction()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);
-    GeometricSegment* seg = new GeometricSegment(p1, p2);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);
+    IGeometricSegment* seg = new GeometricSegment(p1, p2);
 
     LengthConstraint* constraint = new LengthConstraint(seg, 15.0, false);
 
@@ -125,9 +125,9 @@ void TestConstraints::testLengthConstraintConstruction()
 
 void TestConstraints::testLengthConstraintError()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);  // Length = 10
-    GeometricSegment* seg = new GeometricSegment(p1, p2);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);  // Length = 10
+    IGeometricSegment* seg = new GeometricSegment(p1, p2);
 
     LengthConstraint* constraint = new LengthConstraint(seg, 15.0, false);
 
@@ -142,9 +142,9 @@ void TestConstraints::testLengthConstraintError()
 
 void TestConstraints::testLengthConstraintApply()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0, true);   // Fixed
-    GeometricPoint* p2 = new GeometricPoint(10, 0, false); // Free
-    GeometricSegment* seg = new GeometricSegment(p1, p2);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0, true);   // Fixed
+    IGeometricPoint* p2 = new GeometricPoint(10, 0, false); // Free
+    IGeometricSegment* seg = new GeometricSegment(p1, p2);
 
     LengthConstraint* constraint = new LengthConstraint(seg, 20.0, false);
 
@@ -165,12 +165,12 @@ void TestConstraints::testLengthConstraintApply()
 
 void TestConstraints::testAngleConstraintConstruction()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);
-    GeometricPoint* p3 = new GeometricPoint(10, 10);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);
+    IGeometricPoint* p3 = new GeometricPoint(10, 10);
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p2, p3);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p2, p3);
 
     AngleConstraint* constraint = new AngleConstraint(s1, s2, 90.0, false);
 
@@ -189,12 +189,12 @@ void TestConstraints::testAngleConstraintConstruction()
 
 void TestConstraints::testAngleConstraintError()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);   // s1: 0°
-    GeometricPoint* p3 = new GeometricPoint(10, 10);  // s2: 90°
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);   // s1: 0°
+    IGeometricPoint* p3 = new GeometricPoint(10, 10);  // s2: 90°
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p2, p3);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p2, p3);
 
     AngleConstraint* constraint = new AngleConstraint(s1, s2, 90.0, false);
 
@@ -211,12 +211,12 @@ void TestConstraints::testAngleConstraintError()
 
 void TestConstraints::testAngleConstraintApply()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);
-    GeometricPoint* p3 = new GeometricPoint(15, 5, false);  // Free
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);
+    IGeometricPoint* p3 = new GeometricPoint(15, 5, false);  // Free
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p2, p3);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p2, p3);
 
     AngleConstraint* constraint = new AngleConstraint(s1, s2, 90.0, false);
 
@@ -248,7 +248,7 @@ void TestConstraints::testAngleConstraintApply()
 
 void TestConstraints::testFixedPointConstraintConstruction()
 {
-    GeometricPoint* p = new GeometricPoint(5, 5);
+    IGeometricPoint* p = new GeometricPoint(5, 5);
 
     FixedPointConstraint* constraint = new FixedPointConstraint(p, 10.0, 20.0, true);
 
@@ -264,7 +264,7 @@ void TestConstraints::testFixedPointConstraintConstruction()
 
 void TestConstraints::testFixedPointConstraintError()
 {
-    GeometricPoint* p = new GeometricPoint(3, 4);  // Distance from origin = 5
+    IGeometricPoint* p = new GeometricPoint(3, 4);  // Distance from origin = 5
 
     FixedPointConstraint* constraint = new FixedPointConstraint(p, 0.0, 0.0, true);
 
@@ -277,7 +277,7 @@ void TestConstraints::testFixedPointConstraintError()
 
 void TestConstraints::testFixedPointConstraintApply()
 {
-    GeometricPoint* p = new GeometricPoint(5, 5, false);  // Free
+    IGeometricPoint* p = new GeometricPoint(5, 5, false);  // Free
 
     FixedPointConstraint* constraint = new FixedPointConstraint(p, 10.0, 20.0, true);
 
@@ -297,13 +297,13 @@ void TestConstraints::testFixedPointConstraintApply()
 
 void TestConstraints::testParallelConstraintConstruction()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);
-    GeometricPoint* p3 = new GeometricPoint(0, 5);
-    GeometricPoint* p4 = new GeometricPoint(10, 5);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);
+    IGeometricPoint* p3 = new GeometricPoint(0, 5);
+    IGeometricPoint* p4 = new GeometricPoint(10, 5);
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p3, p4);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p3, p4);
 
     ParallelConstraint* constraint = new ParallelConstraint(s1, s2, false);
 
@@ -323,13 +323,13 @@ void TestConstraints::testParallelConstraintConstruction()
 
 void TestConstraints::testParallelConstraintError()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);    // s1: horizontal (0°)
-    GeometricPoint* p3 = new GeometricPoint(0, 5);
-    GeometricPoint* p4 = new GeometricPoint(10, 10);   // s2: angle ~26°
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);    // s1: horizontal (0°)
+    IGeometricPoint* p3 = new GeometricPoint(0, 5);
+    IGeometricPoint* p4 = new GeometricPoint(10, 10);   // s2: angle ~26°
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p3, p4);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p3, p4);
 
     ParallelConstraint* constraint = new ParallelConstraint(s1, s2, false);
 
@@ -347,13 +347,13 @@ void TestConstraints::testParallelConstraintError()
 
 void TestConstraints::testParallelConstraintApply()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);    // s1: horizontal
-    GeometricPoint* p3 = new GeometricPoint(0, 5);
-    GeometricPoint* p4 = new GeometricPoint(10, 8, false);  // s2: slightly off, free point
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);    // s1: horizontal
+    IGeometricPoint* p3 = new GeometricPoint(0, 5);
+    IGeometricPoint* p4 = new GeometricPoint(10, 8, false);  // s2: slightly off, free point
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p3, p4);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p3, p4);
 
     ParallelConstraint* constraint = new ParallelConstraint(s1, s2, false);
 
@@ -380,13 +380,13 @@ void TestConstraints::testParallelConstraintApply()
 
 void TestConstraints::testPerpendicularConstraintConstruction()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);
-    GeometricPoint* p3 = new GeometricPoint(10, 0);
-    GeometricPoint* p4 = new GeometricPoint(10, 10);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);
+    IGeometricPoint* p3 = new GeometricPoint(10, 0);
+    IGeometricPoint* p4 = new GeometricPoint(10, 10);
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p3, p4);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p3, p4);
 
     PerpendicularConstraint* constraint = new PerpendicularConstraint(s1, s2, false);
 
@@ -405,13 +405,13 @@ void TestConstraints::testPerpendicularConstraintConstruction()
 
 void TestConstraints::testPerpendicularConstraintError()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);   // s1: 0°
-    GeometricPoint* p3 = new GeometricPoint(0, 5);
-    GeometricPoint* p4 = new GeometricPoint(0, 15);   // s2: 90° (already perpendicular)
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);   // s1: 0°
+    IGeometricPoint* p3 = new GeometricPoint(0, 5);
+    IGeometricPoint* p4 = new GeometricPoint(0, 15);   // s2: 90° (already perpendicular)
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p3, p4);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p3, p4);
 
     PerpendicularConstraint* constraint = new PerpendicularConstraint(s1, s2, false);
 
@@ -429,13 +429,13 @@ void TestConstraints::testPerpendicularConstraintError()
 
 void TestConstraints::testPerpendicularConstraintApply()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);   // s1: horizontal
-    GeometricPoint* p3 = new GeometricPoint(0, 5);
-    GeometricPoint* p4 = new GeometricPoint(5, 10, false);  // s2: slightly off 90°, free
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);   // s1: horizontal
+    IGeometricPoint* p3 = new GeometricPoint(0, 5);
+    IGeometricPoint* p4 = new GeometricPoint(5, 10, false);  // s2: slightly off 90°, free
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p3, p4);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p3, p4);
 
     PerpendicularConstraint* constraint = new PerpendicularConstraint(s1, s2, false);
 
@@ -462,13 +462,13 @@ void TestConstraints::testPerpendicularConstraintApply()
 
 void TestConstraints::testEqualLengthConstraintConstruction()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);
-    GeometricPoint* p3 = new GeometricPoint(0, 5);
-    GeometricPoint* p4 = new GeometricPoint(15, 5);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);
+    IGeometricPoint* p3 = new GeometricPoint(0, 5);
+    IGeometricPoint* p4 = new GeometricPoint(15, 5);
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);  // Length 10
-    GeometricSegment* s2 = new GeometricSegment(p3, p4);  // Length 15
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);  // Length 10
+    IGeometricSegment* s2 = new GeometricSegment(p3, p4);  // Length 15
 
     EqualLengthConstraint* constraint = new EqualLengthConstraint(s1, s2, false);
 
@@ -487,13 +487,13 @@ void TestConstraints::testEqualLengthConstraintConstruction()
 
 void TestConstraints::testEqualLengthConstraintError()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);  // Length 10
-    GeometricPoint* p3 = new GeometricPoint(0, 5);
-    GeometricPoint* p4 = new GeometricPoint(15, 5);  // Length 15
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);  // Length 10
+    IGeometricPoint* p3 = new GeometricPoint(0, 5);
+    IGeometricPoint* p4 = new GeometricPoint(15, 5);  // Length 15
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p3, p4);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p3, p4);
 
     EqualLengthConstraint* constraint = new EqualLengthConstraint(s1, s2, false);
 
@@ -511,13 +511,13 @@ void TestConstraints::testEqualLengthConstraintError()
 
 void TestConstraints::testEqualLengthConstraintApply()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0);      // s1: 10
-    GeometricPoint* p3 = new GeometricPoint(0, 5);
-    GeometricPoint* p4 = new GeometricPoint(15, 5, false);  // s2: 15, free
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0);      // s1: 10
+    IGeometricPoint* p3 = new GeometricPoint(0, 5);
+    IGeometricPoint* p4 = new GeometricPoint(15, 5, false);  // s2: 15, free
 
-    GeometricSegment* s1 = new GeometricSegment(p1, p2);
-    GeometricSegment* s2 = new GeometricSegment(p3, p4);
+    IGeometricSegment* s1 = new GeometricSegment(p1, p2);
+    IGeometricSegment* s2 = new GeometricSegment(p3, p4);
 
     EqualLengthConstraint* constraint = new EqualLengthConstraint(s1, s2, false);
 
@@ -544,8 +544,8 @@ void TestConstraints::testEqualLengthConstraintApply()
 
 void TestConstraints::testCoincidentConstraintConstruction()
 {
-    GeometricPoint* p1 = new GeometricPoint(5, 5);
-    GeometricPoint* p2 = new GeometricPoint(10, 10);
+    IGeometricPoint* p1 = new GeometricPoint(5, 5);
+    IGeometricPoint* p2 = new GeometricPoint(10, 10);
 
     CoincidentConstraint* constraint = new CoincidentConstraint(p1, p2, false);
 
@@ -560,8 +560,8 @@ void TestConstraints::testCoincidentConstraintConstruction()
 
 void TestConstraints::testCoincidentConstraintError()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(3, 4);  // Distance 5
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(3, 4);  // Distance 5
 
     CoincidentConstraint* constraint = new CoincidentConstraint(p1, p2, false);
 
@@ -575,8 +575,8 @@ void TestConstraints::testCoincidentConstraintError()
 
 void TestConstraints::testCoincidentConstraintApply()
 {
-    GeometricPoint* p1 = new GeometricPoint(0, 0);
-    GeometricPoint* p2 = new GeometricPoint(10, 0, false);  // Free
+    IGeometricPoint* p1 = new GeometricPoint(0, 0);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0, false);  // Free
 
     CoincidentConstraint* constraint = new CoincidentConstraint(p1, p2, false);
 

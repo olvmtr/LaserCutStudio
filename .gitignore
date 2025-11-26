@@ -18,6 +18,7 @@ CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 Makefile
+compile_commands.json
 
 # Qt
 *.qmlc
@@ -25,6 +26,20 @@ Makefile
 moc_*.cpp
 qrc_*.cpp
 ui_*.h
+.generated/
+.qt_plugins/
+.rcc/
+meta_types/
+qmltypes/
+src/LaserCutStudio/LaserCutStudio/
+src/LaserCutStudio/LibInterface/
+
+# Binaries
+appLaserCutStudio
+*.exe
+*.dll
+*.so
+*.dylib
 
 # IDE
 .vscode/

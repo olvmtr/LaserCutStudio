@@ -36,12 +36,12 @@ void TestGeometry::cleanup()
 
 void TestGeometry::testGeometricPointConstruction()
 {
-    GeometricPoint* p1 = new GeometricPoint();
+    IGeometricPoint* p1 = new GeometricPoint();
     QCOMPARE(p1->x(), 0.0);
     QCOMPARE(p1->y(), 0.0);
     QCOMPARE(p1->isLocked(), false);
 
-    GeometricPoint* p2 = new GeometricPoint(10.0, 20.0, true);
+    IGeometricPoint* p2 = new GeometricPoint(10.0, 20.0, true);
     QCOMPARE(p2->x(), 10.0);
     QCOMPARE(p2->y(), 20.0);
     QCOMPARE(p2->isLocked(), true);
@@ -52,7 +52,7 @@ void TestGeometry::testGeometricPointConstruction()
 
 void TestGeometry::testGeometricPointProperties()
 {
-    GeometricPoint* p = new GeometricPoint(5.0, 10.0);
+    IGeometricPoint* p = new GeometricPoint(5.0, 10.0);
 
     // Test setters
     p->setX(15.0);
@@ -75,7 +75,7 @@ void TestGeometry::testGeometricPointProperties()
 
 void TestGeometry::testGeometricPointLocking()
 {
-    GeometricPoint* p = new GeometricPoint(10.0, 20.0, false);
+    IGeometricPoint* p = new GeometricPoint(10.0, 20.0, false);
     QCOMPARE(p->isLocked(), false);
 
     p->setLocked(true);
@@ -89,8 +89,8 @@ void TestGeometry::testGeometricPointLocking()
 
 void TestGeometry::testGeometricPointDistance()
 {
-    GeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
-    GeometricPoint* p2 = new GeometricPoint(3.0, 4.0);
+    IGeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
+    IGeometricPoint* p2 = new GeometricPoint(3.0, 4.0);
 
     // Distance should be 5.0 (Pythagorean triple 3-4-5)
     QCOMPARE(p1->distance(*p2), 5.0);
@@ -105,8 +105,8 @@ void TestGeometry::testGeometricPointDistance()
 
 void TestGeometry::testGeometricPointClone()
 {
-    GeometricPoint* original = new GeometricPoint(10.0, 20.0, true);
-    GeometricPoint* cloned = static_cast<GeometricPoint*>(original->clone());
+    IGeometricPoint* original = new GeometricPoint(10.0, 20.0, true);
+    IGeometricPoint* cloned = static_cast<IGeometricPoint*>(original->clone());
 
     QVERIFY(cloned != nullptr);
     QVERIFY(cloned != original);
@@ -132,7 +132,7 @@ void TestGeometry::testGeometricPointFactoryPattern()
     IGeometricElement* element = IGeometricElement::create(data);
     QVERIFY(element != nullptr);
 
-    GeometricPoint* point = dynamic_cast<GeometricPoint*>(element);
+    IGeometricPoint* point = dynamic_cast<IGeometricPoint*>(element);
     QVERIFY(point != nullptr);
     QCOMPARE(point->x(), 15.0);
     QCOMPARE(point->y(), 25.0);
@@ -147,10 +147,10 @@ void TestGeometry::testGeometricPointFactoryPattern()
 
 void TestGeometry::testGeometricSegmentConstruction()
 {
-    GeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
-    GeometricPoint* p2 = new GeometricPoint(10.0, 0.0);
+    IGeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
+    IGeometricPoint* p2 = new GeometricPoint(10.0, 0.0);
 
-    GeometricSegment* seg = new GeometricSegment(p1, p2);
+    IGeometricSegment* seg = new GeometricSegment(p1, p2);
     QVERIFY(seg->isValid());
     QCOMPARE(seg->startPoint(), p1);
     QCOMPARE(seg->endPoint(), p2);
@@ -162,10 +162,10 @@ void TestGeometry::testGeometricSegmentConstruction()
 
 void TestGeometry::testGeometricSegmentLength()
 {
-    GeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
-    GeometricPoint* p2 = new GeometricPoint(3.0, 4.0);
+    IGeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
+    IGeometricPoint* p2 = new GeometricPoint(3.0, 4.0);
 
-    GeometricSegment* seg = new GeometricSegment(p1, p2);
+    IGeometricSegment* seg = new GeometricSegment(p1, p2);
     QCOMPARE(seg->length(), 5.0);  // 3-4-5 triangle
 
     delete seg;
@@ -175,10 +175,10 @@ void TestGeometry::testGeometricSegmentLength()
 
 void TestGeometry::testGeometricSegmentAngle()
 {
-    GeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
-    GeometricPoint* p2 = new GeometricPoint(1.0, 0.0);  // Horizontal right
+    IGeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
+    IGeometricPoint* p2 = new GeometricPoint(1.0, 0.0);  // Horizontal right
 
-    GeometricSegment* seg = new GeometricSegment(p1, p2);
+    IGeometricSegment* seg = new GeometricSegment(p1, p2);
     QCOMPARE(seg->angle(), 0.0);  // 0° (East)
 
     p2->setPosition(0.0, 1.0);  // Vertical up
@@ -194,10 +194,10 @@ void TestGeometry::testGeometricSegmentAngle()
 
 void TestGeometry::testGeometricSegmentMidpoint()
 {
-    GeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
-    GeometricPoint* p2 = new GeometricPoint(10.0, 20.0);
+    IGeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
+    IGeometricPoint* p2 = new GeometricPoint(10.0, 20.0);
 
-    GeometricSegment* seg = new GeometricSegment(p1, p2);
+    IGeometricSegment* seg = new GeometricSegment(p1, p2);
     Point2D mid = seg->midpoint();
 
     QCOMPARE(mid.x, 5.0);
@@ -210,10 +210,10 @@ void TestGeometry::testGeometricSegmentMidpoint()
 
 void TestGeometry::testGeometricSegmentDistanceToPoint()
 {
-    GeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
-    GeometricPoint* p2 = new GeometricPoint(10.0, 0.0);  // Horizontal segment
+    IGeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
+    IGeometricPoint* p2 = new GeometricPoint(10.0, 0.0);  // Horizontal segment
 
-    GeometricSegment* seg = new GeometricSegment(p1, p2);
+    IGeometricSegment* seg = new GeometricSegment(p1, p2);
 
     // Point on the segment
     Point2D onSegment(5.0, 0.0);
@@ -230,11 +230,11 @@ void TestGeometry::testGeometricSegmentDistanceToPoint()
 
 void TestGeometry::testGeometricSegmentClone()
 {
-    GeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
-    GeometricPoint* p2 = new GeometricPoint(10.0, 20.0);
+    IGeometricPoint* p1 = new GeometricPoint(0.0, 0.0);
+    IGeometricPoint* p2 = new GeometricPoint(10.0, 20.0);
 
-    GeometricSegment* original = new GeometricSegment(p1, p2);
-    GeometricSegment* cloned = static_cast<GeometricSegment*>(original->clone());
+    IGeometricSegment* original = new GeometricSegment(p1, p2);
+    IGeometricSegment* cloned = static_cast<IGeometricSegment*>(original->clone());
 
     QVERIFY(cloned != nullptr);
     QVERIFY(cloned != original);
@@ -267,8 +267,8 @@ void TestGeometry::testGeometricSegmentFactoryPattern()
 
 void TestGeometry::testGeometricArcConstruction()
 {
-    GeometricPoint* center = new GeometricPoint(10.0, 10.0);
-    GeometricArc* arc = new GeometricArc(center, 5.0, 0.0, 90.0);
+    IGeometricPoint* center = new GeometricPoint(10.0, 10.0);
+    IGeometricArc* arc = new GeometricArc(center, 5.0, 0.0, 90.0);
 
     QVERIFY(arc->isValid());
     QCOMPARE(arc->center(), center);
@@ -282,8 +282,8 @@ void TestGeometry::testGeometricArcConstruction()
 
 void TestGeometry::testGeometricArcBoundingBox()
 {
-    GeometricPoint* center = new GeometricPoint(10.0, 10.0);
-    GeometricArc* arc = new GeometricArc(center, 5.0, 0.0, 360.0);
+    IGeometricPoint* center = new GeometricPoint(10.0, 10.0);
+    IGeometricArc* arc = new GeometricArc(center, 5.0, 0.0, 360.0);
 
     QRectF bbox = arc->getBoundingBox();
     QCOMPARE(bbox.x(), 5.0);
@@ -297,8 +297,8 @@ void TestGeometry::testGeometricArcBoundingBox()
 
 void TestGeometry::testGeometricArcPoints()
 {
-    GeometricPoint* center = new GeometricPoint(0.0, 0.0);
-    GeometricArc* arc = new GeometricArc(center, 10.0, 0.0, 90.0);
+    IGeometricPoint* center = new GeometricPoint(0.0, 0.0);
+    IGeometricArc* arc = new GeometricArc(center, 10.0, 0.0, 90.0);
 
     QList<Point2D> points = arc->getPoints(4);  // 5 points (0, 25%, 50%, 75%, 100%)
     QVERIFY(points.size() >= 2);
@@ -317,10 +317,10 @@ void TestGeometry::testGeometricArcPoints()
 
 void TestGeometry::testGeometricArcClone()
 {
-    GeometricPoint* center = new GeometricPoint(5.0, 5.0);
-    GeometricArc* original = new GeometricArc(center, 3.0, 0.0, 180.0);
+    IGeometricPoint* center = new GeometricPoint(5.0, 5.0);
+    IGeometricArc* original = new GeometricArc(center, 3.0, 0.0, 180.0);
 
-    GeometricArc* cloned = static_cast<GeometricArc*>(original->clone());
+    IGeometricArc* cloned = static_cast<IGeometricArc*>(original->clone());
 
     QVERIFY(cloned != nullptr);
     QVERIFY(cloned != original);

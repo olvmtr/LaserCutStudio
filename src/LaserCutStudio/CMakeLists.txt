@@ -27,6 +27,12 @@ qt_add_executable(appLaserCutStudio
     # Core Module - Models Geometry (NEW - Constraint-based)
     core/models/geometry/IGeometricElement.h
     core/models/geometry/IGeometricElement.cpp
+    core/models/geometry/IGeometricPoint.h
+    core/models/geometry/IGeometricPoint.cpp
+    core/models/geometry/IGeometricSegment.h
+    core/models/geometry/IGeometricSegment.cpp
+    core/models/geometry/IGeometricArc.h
+    core/models/geometry/IGeometricArc.cpp
     core/models/geometry/implementation/GeometricPoint.h
     core/models/geometry/implementation/GeometricPoint.cpp
     core/models/geometry/implementation/GeometricSegment.h
@@ -80,6 +86,7 @@ qt_add_qml_module(appLaserCutStudio
         Main.qml
         ConstraintEditorView.qml
         ConstraintPropertiesPanel.qml
+        ComponentPalette.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

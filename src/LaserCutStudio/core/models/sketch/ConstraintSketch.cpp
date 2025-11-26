@@ -1,7 +1,13 @@
+/**
+ * NOTE ARCHITECTURE : Ce fichier inclut les implémentations concrètes car
+ * ConstraintSketch agit comme Factory pour créer des éléments géométriques.
+ * C'est une exception acceptable au Dependency Inversion Principle (DIP).
+ * ALTERNATIVE FUTURE : Créer un GeometryFactory dédié pour isoler cette dépendance.
+ */
 #include "ConstraintSketch.h"
-#include "core/models/geometry/IGeometricPoint.h"
-#include "core/models/geometry/IGeometricSegment.h"
-#include "core/models/geometry/IGeometricArc.h"
+#include "core/models/geometry/implementation/GeometricPoint.h"
+#include "core/models/geometry/implementation/GeometricSegment.h"
+#include "core/models/geometry/implementation/GeometricArc.h"
 #include "core/models/constraints/DistanceConstraint.h"
 #include "core/models/constraints/LengthConstraint.h"
 #include "core/models/constraints/AngleConstraint.h"
@@ -225,28 +231,28 @@ void ConstraintSketch::clearConstraints()
     m_constraints.clear();
 }
 
-IConstraint* ConstraintSketch::addDistanceConstraint(GeometricPoint* p1, GeometricPoint* p2, double distance, bool locked)
+IConstraint* ConstraintSketch::addDistanceConstraint(IGeometricPoint* p1, IGeometricPoint* p2, double distance, bool locked)
 {
     DistanceConstraint* constraint = new DistanceConstraint(p1, p2, distance, locked);
     addConstraint(constraint);
     return constraint;
 }
 
-IConstraint* ConstraintSketch::addLengthConstraint(GeometricSegment* segment, double length, bool locked)
+IConstraint* ConstraintSketch::addLengthConstraint(IGeometricSegment* segment, double length, bool locked)
 {
     LengthConstraint* constraint = new LengthConstraint(segment, length, locked);
     addConstraint(constraint);
     return constraint;
 }
 
-IConstraint* ConstraintSketch::addAngleConstraint(GeometricSegment* s1, GeometricSegment* s2, double angleDegrees, bool locked)
+IConstraint* ConstraintSketch::addAngleConstraint(IGeometricSegment* s1, IGeometricSegment* s2, double angleDegrees, bool locked)
 {
     AngleConstraint* constraint = new AngleConstraint(s1, s2, angleDegrees, locked);
     addConstraint(constraint);
     return constraint;
 }
 
-IConstraint* ConstraintSketch::addFixedPointConstraint(GeometricPoint* point, double x, double y, bool locked)
+IConstraint* ConstraintSketch::addFixedPointConstraint(IGeometricPoint* point, double x, double y, bool locked)
 {
     FixedPointConstraint* constraint = new FixedPointConstraint(point, x, y, locked);
     addConstraint(constraint);

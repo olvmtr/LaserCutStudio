@@ -55,7 +55,7 @@ public:
     bool isSatisfied(double tolerance = 1e-6) const override;
     double error() const override;
     void apply() override;
-    QList<GeometricPoint*> affectedPoints() const override;
+    QList<IGeometricPoint*> affectedPoints() const override;
 
     // Clonage
     IConstraint* clone() const override;

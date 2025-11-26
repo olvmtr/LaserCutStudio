@@ -26,7 +26,7 @@ FixedPointConstraint::FixedPointConstraint(const FixedPointConstraint& other)
     : IConstraint(other.m_locked, other.m_priority), m_point(nullptr), m_x(other.m_x), m_y(other.m_y)
 {
     if (other.m_point) {
-        m_point = static_cast<GeometricPoint*>(other.m_point->clone());
+        m_point = static_cast<IGeometricPoint*>(other.m_point->clone());
     }
 }
 
@@ -62,10 +62,10 @@ void FixedPointConstraint::apply()
     m_point->setY(m_y);
 }
 
-QList<GeometricPoint*> FixedPointConstraint::affectedPoints() const
+QList<IGeometricPoint*> FixedPointConstraint::affectedPoints() const
 {
-    QList<GeometricPoint*> points;
-    if (m_point) points << qobject_cast<GeometricPoint*>(m_point);
+    QList<IGeometricPoint*> points;
+    if (m_point) points << m_point;
     return points;
 }
 

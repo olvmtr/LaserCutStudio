@@ -1,6 +1,9 @@
 #include "TestConstraintSketch.h"
 #include "core/models/sketch/ConstraintSolver.h"
 #include "core/models/sketch/ConstraintSketch.h"
+#include "core/models/geometry/implementation/GeometricPoint.h"
+#include "core/models/geometry/implementation/GeometricSegment.h"
+#include "core/models/geometry/implementation/GeometricArc.h"
 #include "core/models/constraints/DistanceConstraint.h"
 #include "core/models/constraints/LengthConstraint.h"
 #include "core/models/constraints/FixedPointConstraint.h"
@@ -39,8 +42,8 @@ void TestConstraintSketch::testSolverSimpleDistance()
 {
     ConstraintSolver solver;
 
-    GeometricPoint* p1 = new GeometricPoint(0, 0, true);   // Fixed
-    GeometricPoint* p2 = new GeometricPoint(5, 0, false);  // Free
+    IGeometricPoint* p1 = new GeometricPoint(0, 0, true);   // Fixed
+    IGeometricPoint* p2 = new GeometricPoint(5, 0, false);  // Free
 
     DistanceConstraint* constraint = new DistanceConstraint(p1, p2, 10.0, false);
 
@@ -67,9 +70,9 @@ void TestConstraintSketch::testSolverMultipleConstraints()
     ConstraintSolver solver;
 
     // Triangle with 3 fixed side lengths
-    GeometricPoint* p1 = new GeometricPoint(0, 0, true);
-    GeometricPoint* p2 = new GeometricPoint(10, 0, false);
-    GeometricPoint* p3 = new GeometricPoint(5, 5, false);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0, true);
+    IGeometricPoint* p2 = new GeometricPoint(10, 0, false);
+    IGeometricPoint* p3 = new GeometricPoint(5, 5, false);
 
     DistanceConstraint* c1 = new DistanceConstraint(p1, p2, 10.0, false);
     DistanceConstraint* c2 = new DistanceConstraint(p2, p3, 8.0, false);
@@ -96,8 +99,8 @@ void TestConstraintSketch::testSolverConvergence()
     ConstraintSolver solver;
     solver.setMaxIterations(5);  // Very few iterations
 
-    GeometricPoint* p1 = new GeometricPoint(0, 0, true);
-    GeometricPoint* p2 = new GeometricPoint(1, 1, false);
+    IGeometricPoint* p1 = new GeometricPoint(0, 0, true);
+    IGeometricPoint* p2 = new GeometricPoint(1, 1, false);
 
     DistanceConstraint* constraint = new DistanceConstraint(p1, p2, 100.0, false);
 
@@ -135,14 +138,14 @@ void TestConstraintSketch::testSketchAddElements()
 {
     ConstraintSketch sketch;
 
-    GeometricPoint* p1 = sketch.addPoint(0, 0, true);
-    GeometricPoint* p2 = sketch.addPoint(10, 0);
+    IGeometricPoint* p1 = sketch.addPoint(0, 0, true);
+    IGeometricPoint* p2 = sketch.addPoint(10, 0);
 
     QCOMPARE(sketch.elements().size(), 2);
     QVERIFY(p1->isLocked());
     QVERIFY(!p2->isLocked());
 
-    GeometricSegment* seg = sketch.addSegment(p1, p2);
+    IGeometricSegment* seg = sketch.addSegment(p1, p2);
 
     QCOMPARE(sketch.elements().size(), 3);
     QVERIFY(seg->isValid());
@@ -152,8 +155,8 @@ void TestConstraintSketch::testSketchAddConstraints()
 {
     ConstraintSketch sketch;
 
-    GeometricPoint* p1 = sketch.addPoint(0, 0, true);
-    GeometricPoint* p2 = sketch.addPoint(5, 0);
+    IGeometricPoint* p1 = sketch.addPoint(0, 0, true);
+    IGeometricPoint* p2 = sketch.addPoint(5, 0);
 
     IConstraint* constraint = sketch.addDistanceConstraint(p1, p2, 10.0, false);
 
@@ -166,16 +169,16 @@ void TestConstraintSketch::testSketchSolveRectangle()
     ConstraintSketch sketch("Rectangle");
 
     // 4 corners
-    GeometricPoint* p1 = sketch.addPoint(0, 0, true);
-    GeometricPoint* p2 = sketch.addPoint(10, 0);
-    GeometricPoint* p3 = sketch.addPoint(10, 5);
-    GeometricPoint* p4 = sketch.addPoint(0, 5);
+    IGeometricPoint* p1 = sketch.addPoint(0, 0, true);
+    IGeometricPoint* p2 = sketch.addPoint(10, 0);
+    IGeometricPoint* p3 = sketch.addPoint(10, 5);
+    IGeometricPoint* p4 = sketch.addPoint(0, 5);
 
     // 4 sides
-    GeometricSegment* s1 = sketch.addSegment(p1, p2);
-    GeometricSegment* s2 = sketch.addSegment(p2, p3);
-    GeometricSegment* s3 = sketch.addSegment(p3, p4);
-    GeometricSegment* s4 = sketch.addSegment(p4, p1);
+    IGeometricSegment* s1 = sketch.addSegment(p1, p2);
+    IGeometricSegment* s2 = sketch.addSegment(p2, p3);
+    IGeometricSegment* s3 = sketch.addSegment(p3, p4);
+    IGeometricSegment* s4 = sketch.addSegment(p4, p1);
 
     // Length constraints
     sketch.addLengthConstraint(s1, 20.0, true);
@@ -209,8 +212,8 @@ void TestConstraintSketch::testSketchExport()
 {
     ConstraintSketch sketch;
 
-    GeometricPoint* p1 = sketch.addPoint(0, 0);
-    GeometricPoint* p2 = sketch.addPoint(10, 0);
+    IGeometricPoint* p1 = sketch.addPoint(0, 0);
+    IGeometricPoint* p2 = sketch.addPoint(10, 0);
     sketch.addSegment(p1, p2);
 
     QList<Point2D> polyline = sketch.toPolyline();

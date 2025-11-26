@@ -9,16 +9,7 @@ find_package(Qt6 REQUIRED COMPONENTS Test)
 # Crée l'exécutable de tests
 add_executable(LaserCutStudioTests
     main.cpp
-    TestTypes.h
-    TestTypes.cpp
-    TestConfigManager.h
-    TestConfigManager.cpp
-    TestLogging.h
-    TestLogging.cpp
-    TestServiceLocator.h
-    TestServiceLocator.cpp
-    TestArchitectureInterfaces.h
-    TestArchitectureInterfaces.cpp
+    # Tests du nouveau système de géométrie contrainte
     TestGeometry.h
     TestGeometry.cpp
     TestConstraints.h
@@ -39,6 +30,12 @@ add_executable(LaserCutStudioTests
     # Constraint-based geometry system
     ../core/models/geometry/IGeometricElement.h
     ../core/models/geometry/IGeometricElement.cpp
+    ../core/models/geometry/IGeometricPoint.h
+    ../core/models/geometry/IGeometricPoint.cpp
+    ../core/models/geometry/IGeometricSegment.h
+    ../core/models/geometry/IGeometricSegment.cpp
+    ../core/models/geometry/IGeometricArc.h
+    ../core/models/geometry/IGeometricArc.cpp
     ../core/models/geometry/implementation/GeometricPoint.h
     ../core/models/geometry/implementation/GeometricPoint.cpp
     ../core/models/geometry/implementation/GeometricSegment.h

@@ -27,10 +27,10 @@ AngleConstraint::AngleConstraint(const AngleConstraint& other)
     : IConstraint(other.m_locked, other.m_priority), m_segment1(nullptr), m_segment2(nullptr), m_angleDegrees(other.m_angleDegrees)
 {
     if (other.m_segment1) {
-        m_segment1 = static_cast<GeometricSegment*>(other.m_segment1->clone());
+        m_segment1 = static_cast<IGeometricSegment*>(other.m_segment1->clone());
     }
     if (other.m_segment2) {
-        m_segment2 = static_cast<GeometricSegment*>(other.m_segment2->clone());
+        m_segment2 = static_cast<IGeometricSegment*>(other.m_segment2->clone());
     }
 }
 
@@ -45,8 +45,8 @@ IConstraint* AngleConstraint::clone() const
 
 bool AngleConstraint::isValid() const
 {
-    GeometricSegment* seg1 = qobject_cast<GeometricSegment*>(m_segment1);
-    GeometricSegment* seg2 = qobject_cast<GeometricSegment*>(m_segment2);
+    IGeometricSegment* seg1 = m_segment1;
+    IGeometricSegment* seg2 = m_segment2;
     return seg1 && seg2 && seg1->isValid() && seg2->isValid();
 }
 
@@ -76,8 +76,8 @@ void AngleConstraint::apply()
 {
     if (!isValid()) return;
 
-    GeometricSegment* seg1 = qobject_cast<GeometricSegment*>(m_segment1);
-    GeometricSegment* seg2 = qobject_cast<GeometricSegment*>(m_segment2);
+    IGeometricSegment* seg1 = m_segment1;
+    IGeometricSegment* seg2 = m_segment2;
     if (!seg1 || !seg2) return;
 
     double angle1 = seg1->angle();
@@ -122,25 +122,25 @@ void AngleConstraint::apply()
     }
 }
 
-QList<GeometricPoint*> AngleConstraint::affectedPoints() const
+QList<IGeometricPoint*> AngleConstraint::affectedPoints() const
 {
-    QList<GeometricPoint*> points;
+    QList<IGeometricPoint*> points;
     if (m_segment1) {
-        GeometricSegment* seg1 = qobject_cast<GeometricSegment*>(m_segment1);
+        IGeometricSegment* seg1 = m_segment1;
         if (seg1 && seg1->isValid()) {
             IGeometricPoint* start = seg1->startPoint();
             IGeometricPoint* end = seg1->endPoint();
-            if (start) points << qobject_cast<GeometricPoint*>(start);
-            if (end) points << qobject_cast<GeometricPoint*>(end);
+            if (start) points << start;
+            if (end) points << end;
         }
     }
     if (m_segment2) {
-        GeometricSegment* seg2 = qobject_cast<GeometricSegment*>(m_segment2);
+        IGeometricSegment* seg2 = m_segment2;
         if (seg2 && seg2->isValid()) {
             IGeometricPoint* start = seg2->startPoint();
             IGeometricPoint* end = seg2->endPoint();
-            if (start) points << qobject_cast<GeometricPoint*>(start);
-            if (end) points << qobject_cast<GeometricPoint*>(end);
+            if (start) points << start;
+            if (end) points << end;
         }
     }
     return points;

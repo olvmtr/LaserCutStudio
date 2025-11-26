@@ -177,17 +177,17 @@ void PerpendicularConstraint::apply()
     }
 }
 
-QList<GeometricPoint*> PerpendicularConstraint::affectedPoints() const
+QList<IGeometricPoint*> PerpendicularConstraint::affectedPoints() const
 {
-    QList<GeometricPoint*> points;
+    QList<IGeometricPoint*> points;
     if (m_segment2 && m_segment2->isValid()) {
         IGeometricPoint* start = m_segment2->startPoint();
         IGeometricPoint* end = m_segment2->endPoint();
         if (start && !start->isLocked()) {
-            points << qobject_cast<GeometricPoint*>(start);
+            points << start;
         }
         if (end && !end->isLocked()) {
-            points << qobject_cast<GeometricPoint*>(end);
+            points << end;
         }
     }
     return points;
